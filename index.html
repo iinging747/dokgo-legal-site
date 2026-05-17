@@ -1232,6 +1232,51 @@
     .card details summary:hover { color: var(--wine); }
     .card details p { margin: 6px 0 0; font-size: 13px; color: var(--ink); }
 
+    /* 절차 스텝 */
+    .procedure-steps { display: grid; gap: 12px; counter-reset: pstep; margin-left: 18px; }
+    .procedure-step { background: var(--white); border: 1px solid var(--line); border-left: 4px solid var(--wine); border-radius: 10px; padding: 14px 16px; counter-increment: pstep; position: relative; }
+    .procedure-step::before { content: counter(pstep); position: absolute; top: 12px; left: -18px; width: 32px; height: 32px; background: var(--wine); color: #fff; border-radius: 50%; font-weight: 800; display: flex; align-items: center; justify-content: center; font-size: 13px; box-shadow: 0 2px 6px rgba(142,25,24,.3); }
+    .procedure-step.green { border-left-color: var(--green); }
+    .procedure-step.green::before { background: var(--green); box-shadow: 0 2px 6px rgba(47,107,79,.3); }
+    .procedure-step.gold { border-left-color: var(--gold); }
+    .procedure-step.gold::before { background: var(--gold); box-shadow: 0 2px 6px rgba(168,134,66,.3); }
+    .procedure-step h5 { margin: 0 0 6px; font-size: 15px; color: var(--wine-dark); }
+    .procedure-step p { margin: 4px 0; font-size: 13.5px; line-height: 1.6; }
+    .procedure-step ul, .procedure-step ol { margin: 6px 0; padding-left: 20px; }
+    .procedure-step li { font-size: 13px; line-height: 1.55; margin: 3px 0; }
+    .procedure-step .tip { background: var(--soft); padding: 8px 10px; border-radius: 6px; margin-top: 8px; font-size: 12.5px; }
+    body.dark .procedure-step { background: var(--white); }
+
+    /* 심리지원 카드 */
+    .counsel-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(240px, 1fr)); gap: 12px; }
+    .counsel-card { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+    .counsel-card h5 { margin: 0 0 4px; font-size: 14px; color: var(--wine-dark); display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+    .counsel-card .cc-tag { font-size: 10.5px; padding: 2px 7px; background: var(--soft); border-radius: 999px; color: var(--muted); font-weight: 600; }
+    .counsel-card .cc-phone { font-family: var(--serif); font-size: 19px; font-weight: 700; color: var(--wine); margin: 4px 0; letter-spacing: 0.5px; }
+    .counsel-card p { font-size: 12.5px; line-height: 1.55; margin: 4px 0; color: var(--ink); }
+    .counsel-card .cc-legal { font-size: 11.5px; color: var(--muted); margin-top: 6px; padding-top: 6px; border-top: 1px dashed var(--line); }
+    .counsel-card a.cc-link { display: inline-block; margin-top: 6px; font-size: 12.5px; color: var(--wine); text-decoration: underline; }
+    body.dark .counsel-card { background: var(--white); }
+
+    /* 법률 종합 패키지 */
+    .lpkg { display: grid; gap: 12px; }
+    .lpkg-section { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
+    .lpkg-section h5 { margin: 0 0 6px; font-size: 14px; color: var(--wine-dark); display: flex; align-items: center; gap: 8px; justify-content: space-between; }
+    .lpkg-section h5 .lpkg-badge { font-size: 10.5px; padding: 3px 8px; background: var(--wine); color: #fff; border-radius: 999px; font-weight: 700; letter-spacing: 0.5px; }
+    .lpkg-section h5 .lpkg-badge.civil { background: var(--green); }
+    .lpkg-section h5 .lpkg-badge.admin { background: var(--gold); }
+    .lpkg-section h5 .lpkg-badge.preserve { background: var(--charcoal); }
+    .lpkg-section h5 .lpkg-badge.recovery { background: #6b4d8a; }
+    .lpkg-section ul { margin: 6px 0 0; padding-left: 18px; }
+    .lpkg-section li { font-size: 13px; line-height: 1.6; margin: 4px 0; }
+    .lpkg-section li b { color: var(--wine-dark); }
+    body.dark .lpkg-section { background: var(--white); }
+
+    /* 가독성 정리 — 카드 텍스트 압축 */
+    .cards .card { padding: 14px 16px; }
+    .cards .card strong { font-size: 14.5px; }
+    .cards .card p { font-size: 13px; line-height: 1.55; margin: 4px 0 0; }
+
     /* 인쇄 전용 */
     @media print {
       body { background: #fff !important; color: #000 !important; }
@@ -1376,6 +1421,36 @@
               <button class="chip" data-type="업체분쟁">업체분쟁</button>
               <button class="chip" data-type="표절·저작권">표절·저작권</button>
               <button class="chip priority" data-type="이커머스IP도용">이커머스 IP도용</button>
+              <button class="chip" data-type="가정폭력">가정폭력</button>
+              <button class="chip" data-type="데이트폭력">데이트폭력</button>
+              <button class="chip" data-type="아동학대">아동학대</button>
+              <button class="chip" data-type="노인학대">노인학대</button>
+              <button class="chip" data-type="학교폭력">학교폭력</button>
+              <button class="chip" data-type="직장내괴롭힘">직장 내 괴롭힘</button>
+              <button class="chip" data-type="보험사기">보험사기</button>
+              <button class="chip" data-type="결혼사기">결혼사기</button>
+              <button class="chip" data-type="취업사기">취업사기</button>
+              <button class="chip" data-type="다단계사기">다단계·유사수신</button>
+              <button class="chip" data-type="횡령·배임">횡령·배임</button>
+              <button class="chip" data-type="공갈·강요">공갈·강요</button>
+              <button class="chip" data-type="무고죄">무고죄</button>
+              <button class="chip" data-type="위증·증거인멸">위증·증거인멸</button>
+              <button class="chip" data-type="사문서위조">사문서위조</button>
+              <button class="chip" data-type="공정증서원본부실기재">공정증서 부실기재</button>
+              <button class="chip" data-type="업무방해">업무방해·리뷰테러</button>
+              <button class="chip" data-type="주거침입">주거침입</button>
+              <button class="chip" data-type="음주운전·뺑소니">음주운전·뺑소니</button>
+              <button class="chip" data-type="마약">마약 관련</button>
+              <button class="chip" data-type="도박">도박·도박개장</button>
+              <button class="chip" data-type="개인정보유출">개인정보 유출</button>
+              <button class="chip" data-type="신상유포">신상유포·신상털이</button>
+              <button class="chip" data-type="의료사고">의료사고</button>
+              <button class="chip" data-type="교통사고">교통사고</button>
+              <button class="chip" data-type="층간소음·누수">층간소음·누수</button>
+              <button class="chip" data-type="이혼·상간">이혼·상간</button>
+              <button class="chip" data-type="양육비미지급">양육비 미지급</button>
+              <button class="chip" data-type="상속분쟁">상속분쟁</button>
+              <button class="chip" data-type="반려동물피해">반려동물 피해</button>
               <button class="chip priority" data-type="기타법률">기타/직접입력</button>
             </div>
 
@@ -1484,6 +1559,8 @@
           <button class="tab" data-tab="notice">내용증명</button>
           <button class="tab" data-tab="payment">지급명령</button>
           <button class="tab" data-tab="procedure">고소절차</button>
+          <button class="tab" data-tab="counseling">💚 심리지원</button>
+          <button class="tab" data-tab="package">법률패키지</button>
           <button class="tab" data-tab="limitation">공소시효</button>
           <button class="tab" data-tab="deadline">기한·증거</button>
           <button class="tab" data-tab="precedent">판례·법령</button>
@@ -1886,18 +1963,134 @@
         <section class="view" data-view="procedure">
           <div class="cards">
             <div class="card red">
-              <strong>고소 절차를 처음 하는 사람용 순서</strong>
-              <p>고소는 완벽한 법률문장보다 “누가, 언제, 어디서, 무엇을, 어떻게 했고, 어떤 증거가 있는지”를 접수 가능한 형태로 내는 것부터 시작합니다.</p>
+              <strong>고소·고발 자가 절차 (변호사 없이 가능, 무료)</strong>
+              <p>아래 8단계 순서대로 진행하면 누구나 직접 접수할 수 있습니다. 접수 비용·인지대 모두 무료.</p>
             </div>
-            <div class="brief" id="procedureBrief"></div>
+            <div class="procedure-steps" id="procedureSteps"></div>
             <div class="card gold">
-              <strong>반려당할 때 방어 멘트</strong>
-              <p>“단순 상담이 아니라 고소장 접수를 요청드립니다. 부족한 부분은 보완 요구를 해주시면 보완하겠습니다. 접수 여부와 담당 부서를 확인 부탁드립니다.”</p>
+              <strong>⚠ 경찰서에서 "단순 상담입니다" 라며 미루면</strong>
+              <p>"<b>단순 상담이 아니라 고소장 접수를 요청드립니다.</b> 부족한 부분은 보완 요구로 주시면 보완하겠습니다. <b>접수 여부와 사건번호, 담당 부서</b>를 확인 부탁드립니다." — 이 한 줄을 그대로. 접수 거부는 위법(검찰사건사무규칙 제3조).</p>
             </div>
             <div class="card green">
-              <strong>성폭력·디지털성범죄는 혼자 가지 마세요</strong>
-              <p>해바라기센터, 성폭력상담소, 디지털성범죄피해자지원센터, 피해자 국선변호사 제도를 함께 확인하세요.</p>
+              <strong>📞 온라인 24시간 접수 가능한 사건</strong>
+              <p>사이버 사건(명예훼손·모욕·사이버스토킹·통매음·해킹·인터넷사기)·보이스피싱은 사이버범죄 신고시스템(ECRM)에서 24시간 접수 가능. 일반 고소는 형사사법포털 또는 경찰서 민원실 방문.</p>
+              <div class="law-links">
+                <a href="https://ecrm.police.go.kr" target="_blank" rel="noopener">사이버범죄 신고시스템 ECRM</a>
+                <a href="https://www.kics.go.kr" target="_blank" rel="noopener">형사사법포털 KICS</a>
+                <a href="https://www.police.go.kr" target="_blank" rel="noopener">경찰청 (관할 경찰서 검색)</a>
+              </div>
             </div>
+            <div class="brief" id="procedureBrief"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="counseling">
+          <div class="cards">
+            <div class="card red">
+              <strong>혼자 견디지 마세요 — 법으로 보장된 무료 지원</strong>
+              <p>대한민국은 <b>범죄피해자 보호법</b>(2005 제정)에 따라 피해자의 무료 심리상담·의료비·생계비·법률조력 권리를 보장합니다. 자존심·비용 걱정 없이 이용하세요.</p>
+            </div>
+            <div class="counsel-grid">
+              <div class="counsel-card">
+                <h5>여성긴급전화 <span class="cc-tag">24시간 무료</span></h5>
+                <p class="cc-phone">☎ 1366</p>
+                <p>가정폭력·성폭력·스토킹·데이트폭력 즉시 상담. 긴급 보호시설 연계. 익명 가능.</p>
+                <p class="cc-legal">근거: 여성폭력방지기본법 제18조</p>
+                <a class="cc-link" href="https://www.women1366.or.kr" target="_blank" rel="noopener">전국 1366센터</a>
+              </div>
+              <div class="counsel-card">
+                <h5>자살예방 상담 <span class="cc-tag">24시간 익명</span></h5>
+                <p class="cc-phone">☎ 1393</p>
+                <p>죽고 싶거나 살기 너무 힘들 때. 비밀 보장. 카톡 상담 가능.</p>
+                <p class="cc-legal">근거: 자살예방 및 생명존중문화 조성을 위한 법률</p>
+              </div>
+              <div class="counsel-card">
+                <h5>범죄피해자지원센터 <span class="cc-tag">전국 59곳</span></h5>
+                <p class="cc-phone">☎ 1577-1295</p>
+                <p>모든 범죄 피해자 대상. 심리·법률·경제·의료 통합 지원.</p>
+                <p class="cc-legal">근거: 범죄피해자 보호법 제7조·제16조의2</p>
+                <a class="cc-link" href="https://www.kcvc.or.kr" target="_blank" rel="noopener">중앙센터</a>
+              </div>
+              <div class="counsel-card">
+                <h5>스마일센터 <span class="cc-tag">강력범죄 전문</span></h5>
+                <p>검찰청 운영. 강력범죄 피해자 전문 심리치료. 정신과 의사·임상심리사 상주. 전액 무료.</p>
+                <p class="cc-legal">근거: 범죄피해자 보호법 시행령 제16조</p>
+                <a class="cc-link" href="https://resmile.or.kr" target="_blank" rel="noopener">전국 스마일센터</a>
+              </div>
+              <div class="counsel-card">
+                <h5>해바라기센터 <span class="cc-tag">성폭력 원스톱</span></h5>
+                <p>성폭력·가정폭력·성매매 피해자 의료·심리·법률·수사를 한 곳에서. 24시간 운영. 진술녹화실 구비.</p>
+                <p class="cc-legal">근거: 성폭력방지 및 피해자보호 등에 관한 법률 제18조</p>
+                <a class="cc-link" href="https://www.women1366.or.kr/sunflower" target="_blank" rel="noopener">전국 해바라기센터</a>
+              </div>
+              <div class="counsel-card">
+                <h5>정신건강복지센터 <span class="cc-tag">지역 무료</span></h5>
+                <p class="cc-phone">☎ 1577-0199</p>
+                <p>각 시·군·구 운영. 무료 심리상담·정신건강 평가. 일반 정신과보다 진입 부담 적음.</p>
+                <p class="cc-legal">근거: 정신건강증진 및 정신질환자 복지서비스 지원에 관한 법률</p>
+              </div>
+              <div class="counsel-card">
+                <h5>D4U 디지털성범죄지원 <span class="cc-tag">24시간 삭제</span></h5>
+                <p class="cc-phone">☎ 02-735-8994</p>
+                <p>불법촬영·딥페이크·유포 영상 삭제지원 + 법률·심리·의료 통합. 익명 신고 가능.</p>
+                <p class="cc-legal">근거: 성폭력방지법 / 여성가족부 운영</p>
+                <a class="cc-link" href="https://d4u.stop.or.kr" target="_blank" rel="noopener">D4U 사이트</a>
+              </div>
+              <div class="counsel-card">
+                <h5>청소년상담 <span class="cc-tag">19세 이하</span></h5>
+                <p class="cc-phone">☎ 1388</p>
+                <p>학교폭력·가출·우울·자살 충동. 본인 또는 보호자 모두 가능.</p>
+                <p class="cc-legal">근거: 청소년복지지원법</p>
+              </div>
+              <div class="counsel-card">
+                <h5>아동학대 신고 <span class="cc-tag">의무신고</span></h5>
+                <p class="cc-phone">☎ 112 / 1577-1391</p>
+                <p>아동 학대·방임 의심 시 누구나 신고 가능 (특정 직군은 신고 의무).</p>
+                <p class="cc-legal">근거: 아동학대처벌법 제10조</p>
+              </div>
+              <div class="counsel-card">
+                <h5>노인학대 신고 <span class="cc-tag">의무신고</span></h5>
+                <p class="cc-phone">☎ 1577-1389</p>
+                <p>요양시설·가정 내 노인 학대 신고. 신고자 신원 보호.</p>
+                <p class="cc-legal">근거: 노인복지법 제39조의6</p>
+              </div>
+              <div class="counsel-card">
+                <h5>근로자 마음건강 <span class="cc-tag">직장</span></h5>
+                <p class="cc-phone">☎ 1588-6497</p>
+                <p>직장 내 괴롭힘·성희롱·산업재해 후유증. 근로자지원프로그램(EAP).</p>
+                <p class="cc-legal">근거: 산업안전보건법 제4조의2</p>
+              </div>
+              <div class="counsel-card">
+                <h5>대한법률구조공단 <span class="cc-tag">무료 변호사</span></h5>
+                <p class="cc-phone">☎ 132</p>
+                <p>법률 상담 무료. 소득 일정 기준 이하면 변호사 무료 지원. 형사·민사·가사·노동 전 분야.</p>
+                <p class="cc-legal">근거: 법률구조법</p>
+                <a class="cc-link" href="https://www.klac.or.kr" target="_blank" rel="noopener">klac.or.kr</a>
+              </div>
+            </div>
+            <div class="card gold">
+              <strong>💰 범죄피해 구조금 — 국가가 직접 지급</strong>
+              <p>가해자로부터 배상받기 어려운 경우 국가가 일부 지급. <b>사망·중상해·장해</b> 시 검찰청에 신청. <b>치료비·생계비·이전비·심리치료비</b>는 범죄피해자지원센터를 통해 별도 신청.</p>
+              <p class="cc-legal" style="font-size:12px;color:var(--muted);margin-top:6px">근거: 범죄피해자 보호법 제16조 / 시행령 제13조</p>
+            </div>
+            <div class="card red">
+              <strong>🛡 신변 보호 요청</strong>
+              <p>경찰서에 신변보호 요청 시 <b>스마트워치 지급·맞춤형 순찰·CCTV 추가 설치·이전비 지원</b>. 보복범죄 우려가 있으면 <b>특정범죄신고자 보호법</b>으로 인적사항 비공개 가능.</p>
+            </div>
+            <div class="card green">
+              <strong>⚖ 피해자 국선변호인 — 무료 변호사 동행</strong>
+              <p>성폭력·아동 사건은 <b>의무 지정</b>(성폭력처벌법 제27조·아청법 제30조). 그 외 사건도 신청 가능. 수사·재판 전 과정 동행, 진술 조력, 합의 협상.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="package">
+          <div class="cards">
+            <div class="card green">
+              <strong>구제 종합 패키지 — 5개 트랙 동시 진행</strong>
+              <p>처벌만이 답이 아닙니다. 사건유형에 맞춰 <b>형사·민사·가처분·행정·회복</b> 5개 트랙의 모든 카드를 한 화면에. 죄명 칩을 바꾸면 자동 재구성.</p>
+            </div>
+            <div class="lpkg" id="legalPackageOutput"></div>
           </div>
         </section>
 
@@ -3028,6 +3221,8 @@
       buildNoticeDoc();
       buildPaymentDoc();
       buildPrecedentCards();
+      buildProcedureSteps();
+      buildLegalPackage();
       document.querySelector("#evidenceBrief").textContent = `[증거 체크]\n${modeAdvice()}\n\n원본 보관: 파일명, 생성일, 캡처일, 제출일을 함께 기록하세요.`;
       document.querySelector("#briefText").textContent = buildBrief();
       document.querySelector("#loanBrief").textContent = buildLoanBrief();
@@ -3585,6 +3780,265 @@
       setText("pdDate", formatKoreanDate(date));
       setText("pdSign", cn);
       set("pdAddressee", "<b>" + escHtml(court) + " 귀중</b>");
+    }
+
+    function buildProcedureSteps() {
+      const wrap = document.getElementById("procedureSteps");
+      if (!wrap) return;
+      const meta = categoryMeta[state.caseType] || categoryMeta["기타법률"];
+      const evHint = (meta.evidence || "관련 캡처·문서·녹취").split(/[,，、·]/).slice(0,4).map(s => s.trim()).filter(Boolean).join(", ");
+      const isCyber = /텔레그램|명예훼손|모욕|통매음|디지털성범죄|인터넷사기|보이스피싱|코인사기|중고거래사기|IP도용/.test(state.caseType);
+      const isLabor = /부당해고|해고예고수당|임금체불|성희롱/.test(state.caseType);
+      const isSex = /성폭력|디지털성범죄|통매음|텔레그램스토킹/.test(state.caseType);
+      const steps = [
+        { color: "red", title: "증거 보전 (가장 먼저)", body:
+          "<p>접수 전에 모든 원본을 보전합니다. 캡처 1장이 아니라 <b>대화 전체 + URL + 시각 + 본인 화면</b>이 같이 보이게 보관.</p>" +
+          "<ul><li>" + escHtml(evHint || "관련 자료") + "</li>" +
+          "<li>원본은 외장하드·클라우드에 백업 (1개라도 잃으면 끝)</li>" +
+          "<li>스크린샷에는 PC 시계 또는 폰 상단 시각이 같이 보이도록</li>" +
+          "<li>본 사이트 <b>자료 첨부</b>에 던지면 OCR로 자동 텍스트 추출됨</li></ul>" +
+          (isSex ? "<div class=\"tip\">💡 성폭력은 <b>해바라기센터</b>(24시간)에서 진술녹화·증거채취·진료를 한 곳에서. 본인이 직접 캡처하기 전에 먼저 전화하세요.</div>" : "")
+        },
+        { color: "red", title: "고소장 작성", body:
+          "<p>본 사이트 <b>고소장 탭</b>에서 자동 생성된 양식을 그대로 출력 또는 PDF 저장. A4 1~3장이면 충분합니다.</p>" +
+          "<div class=\"tip\"><b>들어가야 할 8요소</b>: 고소인 인적사항 / 피고소인 (모르면 '성명불상') / 죄명 / 범죄사실 (시간순) / 적용 법조 / 증거목록 / 처벌 의사 / 날짜·서명</div>" +
+          "<p>완벽한 법률문장보다 <b>6하 원칙</b>(누가·언제·어디서·무엇을·어떻게·왜)이 더 중요.</p>"
+        },
+        { color: "gold", title: "관할 결정", body:
+          "<p>다음 중 한 곳 선택:</p>" +
+          "<ul><li><b>피고소인 주소지</b> 관할 경찰서 (가장 일반적)</li>" +
+          "<li><b>사건 발생지</b> 관할 경찰서 (폭행·절도 등)</li>" +
+          "<li><b>피해자 주소지</b> 관할 (사이버범죄·일부 사건)</li></ul>" +
+          "<p>관할이 아니어도 접수는 받습니다 — 경찰이 알아서 관할로 이송. 거부당하면 위의 빨간 카드 멘트 그대로.</p>"
+        },
+        { color: "red", title: "접수 (3가지 방법 중 택1)", body:
+          "<ul>" +
+          "<li><b>방문 접수</b>: 경찰서 민원실 또는 사이버수사대. 신분증 + 고소장 + 증거 사본 들고 가서 \"고소장 접수 요청합니다\". <b>접수증과 사건번호</b>를 반드시 받기.</li>" +
+          "<li><b>우편 접수</b>: 등기우편으로 \"ㅇㅇ경찰서 수사과\" 앞으로. 추적번호 보관.</li>" +
+          (isCyber ? "<li><b>온라인 접수 ✅</b>: ECRM 사이버범죄 신고 — 24시간 가능 (본 사건유형 가능)</li>" : "<li>온라인 접수: 일부 사건만 가능 (사이버 사건 위주)</li>") +
+          "</ul>" +
+          "<div class=\"tip\">💰 비용: <b>무료</b>. 인지대·송달료 없음. 변호사 없어도 됨.</div>"
+        },
+        { color: "gold", title: "사건번호 부여 → 담당 수사관 배정", body:
+          "<p>접수 후 1~7일 내 <b>사건번호</b>(예: 2026형제ㅇㅇㅇㅇ호)가 부여되고 담당 수사관이 배정됩니다. 본인에게 문자·전화로 통보.</p>" +
+          "<p><b>중요</b>: 사건번호를 메모. 향후 모든 진행 문의·이의신청에 필요.</p>"
+        },
+        { color: "red", title: "피해자 진술 (조사)", body:
+          "<p>담당 수사관이 출석 요청. 신분증 + 추가 증거 들고 1~3시간 조서 작성.</p>" +
+          "<ul>" +
+          "<li>조사 전 <b>요점 정리</b>: 6하 원칙 + 시간순 메모</li>" +
+          "<li>모르거나 기억 안 나면 \"<b>기억나지 않습니다</b>\"라고 분명히 (추정으로 답하지 말기)</li>" +
+          "<li>조서는 <b>읽어보고 서명</b>. 다르면 정정 요청 (수정 가능)</li>" +
+          "<li><b>피해자 진술녹화 신청</b> 가능 (성폭력은 의무, 그 외도 요청 가능)</li>" +
+          "<li><b>피해자 국선변호인</b> 신청 가능 — 변호사 무료 동행</li>" +
+          "</ul>"
+        },
+        { color: "gold", title: "피의자 조사 → 송치 또는 불송치 결정", body:
+          "<p>수사관이 피의자(상대방) 조사 후 결정:</p>" +
+          "<ul><li><b>기소의견 송치</b> → 검찰로 이송 → 검사가 기소·불기소 판단</li>" +
+          "<li><b>불송치</b>(혐의없음·증거불충분 등) → 사건 종결되지만 피해자는 <b>이의신청</b> 가능</li></ul>" +
+          "<p>통상 접수 후 <b>2~6개월</b>. 처리 지연 시 사건번호로 진행상황 문의 가능.</p>"
+        },
+        { color: "green", title: "불송치 → 이의신청 → 검찰 항고·재정신청", body:
+          "<p>경찰 불송치 결정서가 송달되면 <b>7일 이내 이의신청</b> 가능 (같은 경찰서에 서면 제출). 이의 인용 시 검찰로 송치되어 재판단.</p>" +
+          "<p>검사가 불기소하면:</p>" +
+          "<ul><li><b>검찰 항고</b> — 고검에 30일 이내</li>" +
+          "<li><b>재정신청</b> — 고등법원에 30일 이내 (항고 기각 후 가능). 인용 시 공소제기 강제</li></ul>"
+        }
+      ];
+      if (isLabor) {
+        steps.unshift({ color: "green", title: "노동 사건은 별도 트랙 병행", body:
+          "<p>형사 고소와 별개로 <b>고용노동부 진정</b>(무료, 빠름)과 <b>노동위원회 구제신청</b>(부당해고 — 3개월 이내)을 동시 진행합니다.</p>" +
+          "<div class=\"law-links\"><a href=\"https://www.moel.go.kr\" target=\"_blank\" rel=\"noopener\">고용노동부 1350</a><a href=\"https://www.nlrc.go.kr\" target=\"_blank\" rel=\"noopener\">중앙노동위원회</a></div>"
+        });
+      }
+      wrap.innerHTML = steps.map(s => "<div class=\"procedure-step " + s.color + "\"><h5>" + escHtml(s.title) + "</h5>" + s.body + "</div>").join("");
+    }
+
+    // 사건유형별 종합 법률패키지 — 5트랙 동시
+    const legalPackageDefaults = {
+      criminal: ["관할 경찰서 또는 사이버범죄 신고시스템(ECRM)에 형사 고소", "공소시효 도과 전 신속 접수", "불송치 시 7일 이내 이의신청 → 검찰 송치"],
+      civil: ["불법행위 손해배상 청구 (민법 제750조) — 재산적 + 정신적(위자료)", "지급명령 신청 — 다툼 적을 때 빠름", "민사소송 + 재산 가압류 (본안 전 보전)"],
+      preserve: ["접근금지 가처분 + 1회당 100~500만원 간접강제금 (민사집행법 제261조)", "게시금지 가처분 — 명예훼손·디지털성범죄·신상 유추 게시", "스토킹처벌법 잠정조치(해당 시) — 위반 시 별건 처벌"],
+      admin: ["방송통신심의위원회 명예훼손·불법정보 심의 신청", "정보통신망법 임시조치 (제44조의2) — 플랫폼 30일 게시중단", "플랫폼 직접 신고 (각 SNS·메신저)"],
+      recovery: ["범죄피해자지원센터 ☎1577-1295 — 심리·법률·경제 통합 지원", "범죄피해 구조금 (보호법 제16조) — 사망·중상해 시 국가가 일부 지급", "신변보호 요청 — 스마트워치·맞춤형 순찰", "피해자 국선변호인 신청 (성폭력·아동 의무)"]
+    };
+    const legalPackageMap = {
+      "텔레그램스토킹": {
+        criminal: ["<b>스토킹처벌법 제18조</b> 위반 고소 (3년 이하 / 3천만원 이하)", "<b>통매음</b> 별건 고소 (성폭력처벌법 제13조 — 2년/2천)", "<b>정보통신망법 제70조</b> 명예훼손 (사실 3년 / 허위 7년)", "<b>개인정보보호법 제71조</b> 위반 (5년 / 5천만원) — 신상 무단 공개 시", "ECRM 24시간 온라인 접수 가능", "잠정조치 위반 시 제20조 별건 가중처벌"],
+        civil: ["<b>위자료</b> 청구 (민법 제750조) — 정신과 진료기록 핵심", "의료비·심리치료비·일실손해 청구", "가해자 재산 가압류"],
+        preserve: ["<b>접근·게시금지 가처분 + 1회당 300만원 간접강제금</b>", "스토킹처벌법 <b>잠정조치</b>(접근금지·전기통신 이용 접근금지·유치) — 제9조", "신청서: 본인 거명 아닌 <b>유추 가능 게시</b>까지 포함 (이니셜·외모·소속·인간관계 등)"],
+        admin: ["방심위 시정요구 (불법정보 심의)", "<b>D4U 디지털성범죄피해자지원센터 ☎02-735-8994</b> 24시간 삭제지원", "텔레그램 본사 통신자료 보전요청 (수사기관 경유)"],
+        recovery: ["<b>해바라기센터</b> 24시간 의료·심리·법률 원스톱", "<b>스마일센터</b> 무료 강력범죄 심리치료", "<b>신변보호 요청</b> 스마트워치·맞춤형 순찰·이전비", "<b>피해자 국선변호인</b> 신청 (성폭력처벌법 제27조)", "정신과 진료·심리상담 기록 확보 (위자료·가처분 핵심자료)"]
+      },
+      "부당해고": {
+        criminal: ["근로기준법 위반은 노동청 진정·고소 (형사 가능, 단 노동위 우선)"],
+        civil: ["<b>노동위원회 부당해고 구제신청</b> — 해고일로부터 <b>3개월 이내</b> (원직복직 또는 금전보상)", "민사 해고무효확인·임금청구 소송 (3년 시효)", "위자료 청구 (악의적 해고)"],
+        preserve: [],
+        admin: ["<b>고용노동부 진정 ☎1350</b> — 임금체불·해고예고수당 우선", "근로감독청 제보 (사업장 위법행위)"],
+        recovery: ["체당금 신청 (퇴직 후 3년) — 사업주 도산 시 국가가 일부 지급", "실업급여 (고용센터)", "노무사 무료 상담 (각 지청)"]
+      },
+      "임금체불": {
+        criminal: ["<b>근로기준법 제109조</b> — 3년 이하 / 3천만원 이하 (노동청 진정 후 고소)"],
+        civil: ["<b>지급명령 신청</b> — 가장 빠름 (2주 이의 없으면 확정)", "임금 청구 소송 (<b>3년 시효</b>, 퇴직 후 14일 경과 시 연 <b>20%</b> 지연이자)", "체불사업주 명단공개 신청 (제43조의2)"],
+        preserve: ["사업주 자산 가압류"],
+        admin: ["<b>고용노동부 진정</b> — 무료, 우선 (1350 또는 관할 지청)"],
+        recovery: ["<b>체당금(대지급금)</b> — 사업주 도산 시 국가가 최대 1,000만원 지급", "실업급여 (구직급여)", "긴급 생계지원"]
+      },
+      "대여금분쟁": {
+        criminal: ["처음부터 변제의사 없었던 경우만 사기 (형법 제347조). 일반 미변제는 형사 아님 — 민사로"],
+        civil: ["<b>① 내용증명 발송</b> — 시효중단 + 압박", "<b>② 지급명령 신청</b> — 다툼 적을 때 빠름 (2주 이의 없으면 확정)", "<b>③ 민사소송</b> — 대여금 반환청구 (10년 시효)", "<b>④ 가압류</b> 예금·부동산·임차보증금·가상자산 (본안 전)"],
+        preserve: ["재산명시 신청 (확정판결 후) — 채무자가 자기 재산을 강제로 신고", "재산조회 (가족·계좌·부동산 — 민사집행법 제74조)", "출국금지 요청 (거액 + 출국 우려)"],
+        admin: [],
+        recovery: ["<b>채무불이행자 명부등재</b> (확정 후 6개월 미이행) — 신용정보 등록", "<b>강제집행</b> — 예금·급여·부동산·차량 압류"]
+      },
+      "전세사기": {
+        criminal: ["형법 제347조 사기 (변제의사 부존재 입증)", "부동산실명법 위반 (바지임대인 구조)", "특경법 가중 (피해액 5억 이상)"],
+        civil: ["<b>임차권등기명령</b> — 점유 이전 후에도 대항력 유지 (주임법 제3조의3)", "<b>HUG/SGI 이행청구</b>(보증보험 가입 시) — 보증금 회수 최단경로", "보증금 반환청구 소송 + 가압류", "공인중개사 손해배상 청구 (설명의무 위반)"],
+        preserve: ["주민등록 유지 — 이사·전출 절대 금지 (대항력 상실)", "확정일자 유지 — 우선변제권", "강제경매 시 배당요구"],
+        admin: ["<b>전세사기피해자 결정 신청</b>(특별법) — 경공매 우선매수권 + 금융지원", "관할 지자체 / 전세사기피해자 지원관리시스템"],
+        recovery: ["<b>HUG 전세피해지원센터</b> — 임시거처·금융지원", "긴급주거지원 (LH·SH 매입임대)", "전세대출 만기연장·금리인하"]
+      },
+      "보이스피싱": {
+        criminal: ["형법 제347조의2 (컴퓨터등사용사기)", "전기통신금융사기 피해방지 특별법", "전자금융거래법 (인출책·전달책)"],
+        civil: ["피해금 환급 신청 (특별법) — 우선"],
+        preserve: ["<b>은행 지급정지 (송금 즉시 — 가장 중요)</b>"],
+        admin: ["<b>112 즉시 신고 + 은행 지급정지</b> (전기통신금융사기 특별법 제4조)", "금감원 ☎1332 신고", "악성앱 즉시 삭제 + 폰 초기화"],
+        recovery: ["피해환급 (송금 직후 차단 성공 시)", "범죄피해자지원센터"]
+      },
+      "인터넷사기": {
+        criminal: ["형법 제347조 (사기 — 10년 이하)", "특경법 (피해액 5억 이상)", "<b>ECRM 24시간 온라인 접수</b>"],
+        civil: ["지급명령 → 강제집행", "민사소송 + 가압류"],
+        preserve: ["계좌 가압류 (가장 우선)"],
+        admin: ["은행 지급정지 요청 (송금 직후)", "더치트·사이버캅 — 동일 가해자 피해자 결합"],
+        recovery: ["범죄피해자지원센터 ☎1577-1295"]
+      },
+      "성폭력": {
+        criminal: ["<b>112 즉시 신고</b> (사건 직후) — 증거 수집 우선", "강제추행·강간 (형법·성폭력처벌법)", "<b>친고죄 폐지</b> — 고소기간 제한 없음 (성폭력처벌법 제18조)", "수사·재판 진술녹화로 반복 진술 면제"],
+        civil: ["손해배상 청구 (위자료 포함)"],
+        preserve: ["접근금지 가처분 + 간접강제"],
+        admin: [],
+        recovery: ["<b>해바라기센터 24시간</b> — 의료·법률·심리·수사 원스톱", "<b>피해자 국선변호인 의무 지정</b> (제27조)", "<b>진술 녹화</b> 1회 (반복 진술 면제)", "신변보호·익명조사·증인보호", "범죄피해 구조금 (보호법 제16조)"]
+      },
+      "디지털성범죄": {
+        criminal: ["성폭력처벌법 제14조 (촬영 7년/5천)", "제14조의2 (딥페이크 5년/5천)", "제14조의3 (협박 1년 이상 유기징역)"],
+        civil: ["손해배상 + 위자료"],
+        preserve: ["게시금지 가처분 + 간접강제금"],
+        admin: ["<b>방심위 시정요구</b> — 24시간 내 삭제", "<b>D4U ☎02-735-8994</b> 24시간 삭제지원", "플랫폼 직접 신고 (인스타·텔레그램·트위터·텀블러)"],
+        recovery: ["해바라기센터 의료·심리", "D4U 24시간 모니터링·재유포 추적", "신변보호"]
+      },
+      "명예훼손·모욕": {
+        criminal: ["정보통신망법 제70조 (사실 3년/3천, 허위 7년/5천)", "형법 제307조 (명예훼손) / 제311조 (모욕)", "친고죄 — 안 날부터 <b>6개월</b> 고소기간"],
+        civil: ["손해배상 + 위자료", "명예회복 (정정보도·해명광고)"],
+        preserve: ["<b>게시금지 가처분 + 1회당 300만원 간접강제금</b>", "<b>유사 닉네임·신원 유추 게시</b>까지 차단 신청"],
+        admin: ["<b>정보통신망법 임시조치 (제44조의2)</b> — 플랫폼 30일 게시중단", "방심위 명예훼손 분쟁조정", "플랫폼 직접 신고"],
+        recovery: ["범죄피해자지원센터 ☎1577-1295 심리상담"]
+      },
+      "통매음": {
+        criminal: ["<b>성폭력처벌법 제13조</b> 통신매체이용음란 (2년/2천)", "1회 발언만으로도 처벌 가능", "ECRM 24시간 접수"],
+        civil: ["위자료 청구"],
+        preserve: ["접근금지 가처분 + 간접강제"],
+        admin: ["플랫폼·게임사 신고 + 계정 영구정지 요청"],
+        recovery: ["범죄피해자지원센터", "정신건강복지센터 ☎1577-0199"]
+      },
+      "협박·스토킹": {
+        criminal: ["스토킹처벌법 제18조 (3년/3천)", "형법 제283조 협박 / 제324조 강요", "잠정조치 위반 시 제20조 (2년/2천) 가중"],
+        civil: ["위자료 청구"],
+        preserve: ["<b>접근금지 가처분 + 간접강제금</b>", "<b>긴급응급조치</b>(48시간) → <b>잠정조치</b>(법원) — 스토킹처벌법 제9조"],
+        admin: ["신변보호 요청 (경찰서)"],
+        recovery: ["해바라기센터(가정폭력 포함)", "여성긴급전화 ☎1366 24시간"]
+      },
+      "성희롱": {
+        criminal: ["형법 모욕·강제추행(해당 시)", "남녀고용평등법 제14조 위반 (사업주 조치 의무)"],
+        civil: ["손해배상 (민법 제750조) — 사업주 사용자책임 병합", "위자료"],
+        preserve: [],
+        admin: ["<b>고용노동부 진정</b> ☎1350", "<b>국가인권위원회</b> 진정 — 차별·인권 침해", "회사 내부 신고 (취업규칙)"],
+        recovery: ["근로자지원프로그램(EAP) ☎1588-6497", "여성긴급전화 ☎1366"]
+      },
+      "폭행·상해": {
+        criminal: ["형법 제257조 상해 (7년 이하)", "제260조 폭행 (반의사불벌)", "특수폭행·특수상해 (위험한 물건)"],
+        civil: ["치료비·일실수익·위자료 손해배상", "보험사 구상금"],
+        preserve: ["접근금지 (스토킹·가정폭력 결합 시)"],
+        admin: [],
+        recovery: ["범죄피해 구조금 (중상해 시)", "범죄피해자지원센터"]
+      },
+      "코인사기": {
+        criminal: ["형법 제347조 사기", "유사수신행위 규제법", "자본시장법", "조직성 입증 시 범죄단체조직 (형법 제114조)"],
+        civil: ["지급명령·민사소송 + 가압류"],
+        preserve: ["가상자산 거래소 채권압류 (지갑이 거래소에 있을 때)"],
+        admin: ["<b>금감원 ☎1332</b> 신고", "FIU 의심거래보고", "거래소 KYC 자료 보전 요청"],
+        recovery: ["피해자 결집 (동일 리딩방·텔레그램방)"]
+      },
+      "중고거래사기": {
+        criminal: ["형법 제347조 사기", "ECRM 24시간 접수", "동일 계좌·ID·IP 결합 수사"],
+        civil: ["소액심판 또는 지급명령"],
+        preserve: ["계좌 가압류"],
+        admin: ["은행 지급정지", "플랫폼(당근·번개) 신고"],
+        recovery: ["더치트 등 피해자 결합"]
+      },
+      "이커머스IP도용": {
+        criminal: ["저작권법 제136조 (5년/5천)", "부정경쟁방지법 제18조"],
+        civil: ["법정손해배상 (저작권법 제125조의2)", "손해배상 + 위자료"],
+        preserve: ["판매중단·게시금지 가처분 + 간접강제금"],
+        admin: ["플랫폼 판매중단 요청 (스마트스토어·쿠팡·11번가)", "<b>특허청 부정경쟁행위 신고</b> — 시정권고", "표시광고법 위반 신고"],
+        recovery: ["한국저작권위원회 분쟁조정"]
+      },
+      "표절·저작권": {
+        criminal: ["저작권법 제136조"],
+        civil: ["법정손해배상 (제125조의2)", "손해배상 청구"],
+        preserve: ["복제·전송·배포 금지 가처분"],
+        admin: ["한국저작권위원회 분쟁조정"],
+        recovery: []
+      },
+      "업체분쟁": {
+        criminal: ["사기죄 (해당 시)"],
+        civil: ["소액심판·지급명령·민사소송", "환불·해제·손해배상"],
+        preserve: ["가압류"],
+        admin: ["<b>소비자상담 ☎1372</b>", "한국소비자원 피해구제·집단분쟁조정", "전자상거래법 위반 신고"],
+        recovery: []
+      },
+      "절도·손괴": {
+        criminal: ["형법 제329조 절도 / 제366조 손괴", "특수절도(흉기·합동) 가중"],
+        civil: ["수리비·시가 손해배상", "지급명령"],
+        preserve: [],
+        admin: ["CCTV 확보 요청"],
+        recovery: []
+      },
+      "해고예고수당": {
+        criminal: ["근로기준법 제110조 위반"],
+        civil: ["임금 청구 소송 (3년 시효)", "지급명령"],
+        preserve: [],
+        admin: ["<b>고용노동부 진정 ☎1350</b>"],
+        recovery: ["체당금", "실업급여"]
+      },
+      "게임욕설·모욕": {
+        criminal: ["형법 제311조 모욕 (특정성·공연성)", "통매음 결합 시 성폭력처벌법 제13조 별건"],
+        civil: ["위자료"],
+        preserve: [],
+        admin: ["게임사 채팅 로그 보전 요청 + 계정 영구정지"],
+        recovery: []
+      }
+    };
+
+    function buildLegalPackage() {
+      const wrap = document.getElementById("legalPackageOutput");
+      if (!wrap) return;
+      const t = state.caseType;
+      const enf = enforcementMap[t] || enforcementMap["기타법률"];
+      const over = legalPackageMap[t] || {};
+      const pickList = (key) => (over[key] && over[key].length) ? over[key] : legalPackageDefaults[key];
+      const sections = [
+        { kind: "criminal", badge: "형사", title: "① 형사처벌 (고소·고발)", items: pickList("criminal") },
+        { kind: "civil", badge: "민사", title: "② 민사 — 돈으로 회수·배상", items: pickList("civil") },
+        { kind: "preserve", badge: "보전", title: "③ 가처분·잠정조치 (재발 차단·간접강제금)", items: pickList("preserve") },
+        { kind: "admin", badge: "행정", title: "④ 행정 신고·삭제·중단 요청", items: pickList("admin") },
+        { kind: "recovery", badge: "회복", title: "⑤ 피해 회복·보호·심리지원", items: pickList("recovery") }
+      ];
+      wrap.innerHTML = sections.map(s => {
+        if (!s.items.length) return "";
+        return "<div class=\"lpkg-section\"><h5>" + escHtml(s.title) + " <span class=\"lpkg-badge " + s.kind + "\">" + s.badge + "</span></h5><ul>" +
+          s.items.map(i => "<li>" + i + "</li>").join("") + "</ul></div>";
+      }).join("");
     }
 
     function buildPrecedentCards() {
