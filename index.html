@@ -2,8 +2,19 @@
 <html lang="ko">
 <head>
   <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
   <title>독고다이 법률단 | 피해자 편 셀프 법률 무기</title>
+  <meta name="description" content="피해자 편 셀프 법률 무기 — 변호사 없이 브라우저에서 끝내는 형사·민사·노동 자가 구제 도구">
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#8e1918">
+  <meta name="application-name" content="독고다이 법률단">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+  <meta name="apple-mobile-web-app-title" content="독고다이">
+  <link rel="apple-touch-icon" sizes="192x192" href="icon-192.png">
+  <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
+  <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
+  <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
   <style>
     :root {
       color-scheme: light;
@@ -1266,6 +1277,59 @@
     .lpkg-section li b { color: var(--wine-dark); }
     body.dark .lpkg-section { background: var(--white); }
 
+    /* 증거 효력 판독기 */
+    .ev-cat { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; margin: 8px 0; }
+    .ev-cat h5 { margin: 0 0 6px; font-size: 14px; color: var(--wine-dark); display: flex; justify-content: space-between; gap: 8px; }
+    .ev-cat .ev-cat-score { font-size: 12px; padding: 2px 8px; border-radius: 999px; background: var(--soft); color: var(--muted); }
+    .ev-cat .ev-cat-score.good { background: rgba(47,107,79,.18); color: var(--green); }
+    .ev-cat .ev-cat-score.warn { background: rgba(168,134,66,.22); color: var(--gold); }
+    .ev-cat .ev-cat-score.bad { background: rgba(142,25,24,.18); color: var(--wine); }
+    .ev-item { display: flex; align-items: flex-start; gap: 8px; padding: 5px 0; font-size: 13px; line-height: 1.5; cursor: pointer; }
+    .ev-item input[type=checkbox] { margin-top: 3px; flex-shrink: 0; cursor: pointer; width: 16px; height: 16px; accent-color: var(--wine); }
+    .ev-item .ev-law { display: block; font-size: 11.5px; color: var(--muted); margin-top: 2px; }
+    body.dark .ev-cat { background: var(--white); }
+    .score-bar { height: 22px; background: var(--soft); border-radius: 11px; overflow: hidden; margin: 8px 0; position: relative; }
+    .score-bar-fill { height: 100%; background: linear-gradient(90deg, var(--wine), var(--gold), var(--green)); transition: width .3s; }
+    .score-bar-label { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-size: 12px; font-weight: 700; color: var(--ink); }
+
+    /* 합의금 내비게이터 */
+    .settlement-box { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+    body.dark .settlement-box { background: var(--white); }
+    .settlement-base, .settlement-aggr { display: grid; gap: 6px; }
+    .stl-item { display: flex; align-items: flex-start; gap: 8px; padding: 6px 0; font-size: 13px; line-height: 1.5; cursor: pointer; }
+    .stl-item input[type=checkbox] { margin-top: 3px; flex-shrink: 0; width: 16px; height: 16px; accent-color: var(--wine); cursor: pointer; }
+    .stl-item .stl-bonus { font-size: 11.5px; color: var(--muted); margin-left: 6px; }
+    .settlement-result { background: linear-gradient(135deg, rgba(142,25,24,.08), rgba(168,134,66,.08)); border-radius: 10px; padding: 14px 16px; margin-top: 12px; border: 1px solid var(--line); }
+    .settlement-result h5 { margin: 0 0 6px; font-size: 14px; color: var(--wine-dark); }
+    .settlement-result p { margin: 4px 0; font-size: 14px; }
+    .settlement-result #settlementRange { font-size: 22px; font-weight: 800; color: var(--wine); font-family: var(--serif); }
+    .settlement-result .hint { font-size: 12px; color: var(--muted); line-height: 1.55; }
+    .ultimatum-box { background: var(--soft); border-left: 4px solid var(--wine); padding: 12px 14px; border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.65; white-space: pre-wrap; font-family: var(--sans); }
+
+    /* 타임라인 */
+    .timeline-box { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
+    body.dark .timeline-box { background: var(--white); }
+    .tl-event { display: grid; grid-template-columns: 100px 1fr; gap: 10px; padding: 10px 0; border-bottom: 1px dashed var(--line); align-items: start; }
+    .tl-event:last-child { border-bottom: none; }
+    .tl-dday { font-family: var(--serif); font-size: 18px; font-weight: 700; color: var(--wine); }
+    .tl-dday.passed { color: var(--muted); }
+    .tl-dday.urgent { color: var(--wine-dark); background: rgba(142,25,24,.12); padding: 2px 8px; border-radius: 6px; display: inline-block; }
+    .tl-event h6 { margin: 0 0 3px; font-size: 14px; color: var(--ink); }
+    .tl-event p { margin: 0; font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+    @media (max-width: 720px) { .tl-event { grid-template-columns: 1fr; gap: 4px; } .tl-dday { font-size: 16px; } }
+
+    /* 시뮬레이터 */
+    .sim-scenario { background: var(--white); border: 1px solid var(--line); border-left: 4px solid var(--wine); border-radius: 0 10px 10px 0; padding: 12px 14px; margin: 10px 0; }
+    body.dark .sim-scenario { background: var(--white); }
+    .sim-scenario h5 { margin: 0 0 6px; font-size: 14px; color: var(--wine-dark); }
+    .sim-scenario .sim-they { background: rgba(0,0,0,.04); padding: 8px 12px; border-radius: 6px; margin: 6px 0; font-size: 13px; line-height: 1.5; font-style: italic; }
+    .sim-scenario .sim-you { background: rgba(47,107,79,.1); padding: 8px 12px; border-radius: 6px; margin: 6px 0; font-size: 13px; line-height: 1.55; border-left: 3px solid var(--green); }
+    .sim-scenario .sim-you b { color: var(--green); }
+    .sim-scenario .sim-dont { background: rgba(142,25,24,.08); padding: 8px 12px; border-radius: 6px; margin: 6px 0; font-size: 12.5px; line-height: 1.5; color: var(--muted); border-left: 3px solid var(--wine); }
+    .sim-check { display: grid; grid-template-columns: repeat(auto-fill, minmax(180px, 1fr)); gap: 8px; margin-top: 8px; }
+    .sim-check label { background: var(--soft); padding: 8px 10px; border-radius: 8px; font-size: 12.5px; display: flex; align-items: center; gap: 8px; cursor: pointer; }
+    .sim-check input[type=checkbox] { accent-color: var(--wine); width: 16px; height: 16px; cursor: pointer; }
+
     /* 빠른 시작 위저드 (첫 화면 단순화) */
     .quickstart { background: linear-gradient(180deg, #f8f6f1 0%, #ede9e2 100%); padding: 56px clamp(20px, 6vw, 100px); }
     body.dark .quickstart { background: linear-gradient(180deg, #1a1917 0%, #232220 100%); }
@@ -1724,6 +1788,10 @@
           <button class="tab" data-tab="counseling">💚 심리지원</button>
           <button class="tab" data-tab="package">법률패키지</button>
           <button class="tab" data-tab="collective">🤝 집단고소</button>
+          <button class="tab" data-tab="evidence-check">🔍 증거 효력</button>
+          <button class="tab" data-tab="settlement">💵 합의금</button>
+          <button class="tab" data-tab="timeline">⏰ 타임라인</button>
+          <button class="tab" data-tab="sim">🏛 현장 시뮬레이터</button>
           <button class="tab" data-tab="limitation">공소시효</button>
           <button class="tab" data-tab="deadline">기한·증거</button>
           <button class="tab" data-tab="precedent">판례·법령</button>
@@ -2384,6 +2452,85 @@
             <div class="card red">
               <strong>🛡 개인정보 안전</strong>
               <p>모든 데이터는 <b>본인 브라우저에서만</b> 처리되고 어떤 서버에도 저장되지 않습니다. 공유 링크에 정보가 포함되므로 <b>신뢰할 수 있는 피해자에게만</b> 전달하세요. 공개 게시판(트위터·페북 등)에는 절대 올리지 마세요 — 가해자가 보면 증거 인멸이 시작됩니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="evidence-check">
+          <div class="cards">
+            <div class="card red">
+              <strong>🔍 증거 효력 자가 판독</strong>
+              <p>제출 전에 본인이 가진 증거가 법정에서 인정될 수 있는지 체크. 점수가 낮으면 보강 포인트를 알려드립니다.</p>
+            </div>
+            <div id="evidenceChecker"></div>
+            <div class="card gold" id="evidenceScoreCard">
+              <strong>📊 종합 증거력 점수</strong>
+              <p id="evidenceScoreText">위 항목을 체크하면 점수가 자동 계산됩니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="settlement">
+          <div class="cards">
+            <div class="card red">
+              <strong>💵 합의금 내비게이터</strong>
+              <p>유사 판례·소액재판 시세 기준 현실적 합의금 범위. 가중요소를 체크하면 자동으로 ×1.3~×2.0 보정.</p>
+            </div>
+            <div class="settlement-box">
+              <div id="settlementBase"></div>
+              <h4 style="margin:14px 0 8px;font-size:14px;color:var(--wine-dark);border-bottom:1px solid var(--line);padding-bottom:4px">가중요소 (해당 시 체크 → 자동 가산)</h4>
+              <div id="settlementAggravation"></div>
+              <div class="settlement-result" id="settlementResult">
+                <h5>📌 권고 합의금 범위</h5>
+                <p id="settlementRange">사건유형을 칩으로 선택하면 자동 계산됩니다.</p>
+                <p class="hint" id="settlementBreakdown"></p>
+              </div>
+              <h4 style="margin:14px 0 8px;font-size:14px;color:var(--wine-dark);border-bottom:1px solid var(--line);padding-bottom:4px">📨 최후통첩 메시지</h4>
+              <div class="ultimatum-box" id="ultimatumBox"></div>
+              <button class="btn primary" id="copyUltimatum" type="button" style="margin-top:8px">📋 최후통첩 복사</button>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="timeline">
+          <div class="cards">
+            <div class="card red">
+              <strong>⏰ 소송 타임라인 알리미</strong>
+              <p>내용증명 발송일·고소장 접수일 등 단계 시작일을 입력하면 다음 단계 D-Day와 마감을 자동 표시. 본인 브라우저에만 저장.</p>
+            </div>
+            <div class="timeline-box">
+              <div class="fields two">
+                <label>내용증명 발송일
+                  <input id="tlNoticeDate" type="date">
+                </label>
+                <label>고소장 접수일
+                  <input id="tlComplaintDate" type="date">
+                </label>
+              </div>
+              <div class="fields two">
+                <label>지급명령 신청일
+                  <input id="tlPaymentDate" type="date">
+                </label>
+                <label>경찰 송치/불송치 통지일
+                  <input id="tlNoticeResultDate" type="date">
+                </label>
+              </div>
+              <button class="btn primary" id="tlSaveBtn" type="button" style="margin-top:6px">💾 저장 + 타임라인 재계산</button>
+              <div id="timelineRender" style="margin-top:14px"></div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="sim">
+          <div class="cards">
+            <div class="card red">
+              <strong>🏛 오프라인 공판장 시뮬레이터</strong>
+              <p>경찰서·검찰청·법원 가기 전 마지막 점검. 자주 마주치는 상황별 대응 멘트와 현장 지참물 체크리스트.</p>
+            </div>
+            <div id="simScenarios"></div>
+            <div class="card gold">
+              <strong>🎒 현장 지참물 최종 체크</strong>
+              <div id="simChecklist"></div>
             </div>
           </div>
         </section>
@@ -3493,6 +3640,8 @@
       buildPrecedentCards();
       buildProcedureSteps();
       buildLegalPackage();
+      buildSettlement();
+      renderTimeline();
       const cleanEl = document.getElementById("cleanPreviewText");
       if (cleanEl) {
         const raw = story.value.trim();
@@ -4661,6 +4810,326 @@
     }
     // ===== /집단고소 =====
 
+    // ===== 증거 효력 판독기 =====
+    const evidenceCategories = [
+      { id: "call", name: "📞 통화 녹음", items: [
+        { t: "본인이 대화에 직접 참여한 녹음", w: 30, law: "통신비밀보호법 §3·§14 — 대화 당사자 녹음은 합법" },
+        { t: "녹음 일시·발신/수신 번호 기록", w: 15, law: "법정 신빙성 강화" },
+        { t: "원본 파일 (편집·자른 부분 없음)", w: 15, law: "위·변조 의혹 차단" },
+        { t: "녹취록(speech-to-text) 정리본 보유", w: 10, law: "법원·검찰 제출 편의" },
+        { t: "(타인 간 대화 무단 녹음은 위법) — 해당 없음", w: 5, law: "통비법 §3 위반은 증거 배제 + 별건 처벌" }
+      ]},
+      { id: "chat", name: "💬 카톡/문자 캡처", items: [
+        { t: "상대 프로필명·사진·전화번호 노출", w: 20, law: "특정성 입증" },
+        { t: "날짜·시각이 캡처에 포함됨", w: 20, law: "시점 입증" },
+        { t: "대화 흐름이 끊김 없이 보존 (전후 맥락)", w: 20, law: "단편적 캡처 신빙성 약함" },
+        { t: "본인 화면 또는 PC 시계가 함께 보임", w: 10, law: "조작 의혹 차단" },
+        { t: "원본 대화방 백업 파일(.csv/.txt) 보유", w: 15, law: "포렌식 입증 가능" }
+      ]},
+      { id: "photo", name: "📷 사진·동영상", items: [
+        { t: "원본 파일 (압축·편집 없음)", w: 25, law: "EXIF·해시값 보존" },
+        { t: "촬영 일시·장소 메타데이터 살아있음", w: 20, law: "EXIF GPS·날짜 확인 가능" },
+        { t: "여러 각도·연속 촬영 (조작 의혹 차단)", w: 15, law: "단발 사진 약점 보완" },
+        { t: "CCTV 영상 보존 요청 완료", w: 20, law: "통상 7~30일 자동 삭제 — 즉시 요청 필요" },
+        { t: "촬영자/소유자 명확 (본인 또는 제3자 진술서)", w: 10, law: "출처 인증" }
+      ]},
+      { id: "med", name: "🏥 진단서·치료기록", items: [
+        { t: "정식 의료기관 발급 상해진단서 (소견서 X)", w: 30, law: "상해죄 인정의 결정적 증거" },
+        { t: "상해 정도·예상 치료기간 명시", w: 20, law: "양형·손해배상 산정" },
+        { t: "사건 직후 진료 (시간 지나면 인과관계 약화)", w: 20, law: "사건과의 인과관계 입증" },
+        { t: "사진(상처·멍 등) 동시 촬영", w: 15, law: "진단서 보강" },
+        { t: "후속 진료기록·심리상담 기록", w: 15, law: "후유증·정신적 손해 입증" }
+      ]},
+      { id: "money", name: "💳 계좌이체·송금", items: [
+        { t: "송금일시·금액 명확 (은행 거래내역서)", w: 25, law: "객관 입증" },
+        { t: "상대 계좌번호·예금주명 일치", w: 20, law: "동일성 입증" },
+        { t: "송금 사유·메모 기재", w: 15, law: "용도 입증 (사기죄 핵심)" },
+        { t: "이체 직전·직후 대화 캡처 보유", w: 25, law: "기망의사·약정 입증" },
+        { t: "일부 변제 내역도 보존 (있다면)", w: 15, law: "채무 승인 + 시효 중단" }
+      ]}
+    ];
+
+    function buildEvidenceChecker() {
+      const wrap = document.getElementById("evidenceChecker");
+      if (!wrap) return;
+      wrap.innerHTML = evidenceCategories.map(c => {
+        const items = c.items.map((it, i) =>
+          "<label class=\"ev-item\"><input type=\"checkbox\" data-ev=\"" + c.id + "-" + i + "\" data-w=\"" + it.w + "\">" +
+          "<span>" + escHtml(it.t) + "<span class=\"ev-law\">↳ " + escHtml(it.law) + "</span></span></label>"
+        ).join("");
+        return "<div class=\"ev-cat\" data-cat=\"" + c.id + "\">" +
+          "<h5>" + c.name + " <span class=\"ev-cat-score\" data-score=\"" + c.id + "\">0%</span></h5>" +
+          items + "</div>";
+      }).join("");
+      wrap.addEventListener("change", recomputeEvidence);
+      recomputeEvidence();
+    }
+
+    function recomputeEvidence() {
+      let totalGot = 0, totalMax = 0;
+      evidenceCategories.forEach(c => {
+        const max = c.items.reduce((s, it) => s + it.w, 0);
+        const got = c.items.reduce((s, it, i) => {
+          const cb = document.querySelector('[data-ev="' + c.id + "-" + i + '"]');
+          return s + ((cb && cb.checked) ? it.w : 0);
+        }, 0);
+        totalGot += got; totalMax += max;
+        const scoreEl = document.querySelector('[data-score="' + c.id + '"]');
+        if (scoreEl) {
+          const pct = max ? Math.round(got / max * 100) : 0;
+          scoreEl.textContent = pct + "%";
+          scoreEl.className = "ev-cat-score " + (pct >= 70 ? "good" : pct >= 40 ? "warn" : "bad");
+        }
+      });
+      const overall = totalMax ? Math.round(totalGot / totalMax * 100) : 0;
+      const t = document.getElementById("evidenceScoreText");
+      if (t) {
+        const grade = overall >= 75 ? "<b style='color:var(--green)'>법정 제출 가능</b> — 강한 증거 패키지" :
+          overall >= 50 ? "<b style='color:var(--gold)'>보강 권장</b> — 일부 항목 추가 확보 시 더 안전" :
+          overall >= 25 ? "<b style='color:var(--wine)'>보강 필요</b> — 핵심 증거가 부족합니다. 위에서 체크 안 된 항목부터 채우세요." :
+          "<b style='color:var(--wine)'>증거 부족</b> — 우선 증거 보전부터 시작하세요";
+        t.innerHTML = "<div class=\"score-bar\"><div class=\"score-bar-fill\" style=\"width:" + overall + "%\"></div><div class=\"score-bar-label\">" + overall + " / 100</div></div>" + grade;
+      }
+    }
+    // ===== /증거 효력 =====
+
+    // ===== 합의금 내비게이터 =====
+    const settlementBase = {
+      "명예훼손·모욕": { range: [500000, 5000000], note: "유사 판례 위자료 50~500만원 + 정정보도 청구" },
+      "게임욕설·모욕": { range: [300000, 2000000], note: "공연성·특정성 약하면 하한선" },
+      "통매음": { range: [1000000, 5000000], note: "1회당 100~300만원, 반복 시 가산" },
+      "텔레그램스토킹": { range: [3000000, 30000000], note: "수개월 반복+정신과 치료 시 1천만원↑" },
+      "협박·스토킹": { range: [2000000, 20000000], note: "잠정조치+간접강제금 별도 가능" },
+      "성희롱": { range: [3000000, 15000000], note: "직장 내 인사 불이익 결합 시 가산" },
+      "성폭력": { range: [10000000, 50000000], note: "강제추행 평균 500~2000만원, 강간은 별도" },
+      "디지털성범죄": { range: [10000000, 100000000], note: "유포 범위·삭제 완료 여부에 따라 변동" },
+      "폭행·상해": { range: [500000, 10000000], note: "진단주수×30만원 + 위자료 200~500만원" },
+      "절도·손괴": { range: [0, 0], note: "피해액 100% + 위자료 20~50만원 (피해액 입력 필요)" },
+      "인터넷사기": { range: [0, 0], note: "편취액 100% + 위자료 10~30% (피해액 입력 필요)" },
+      "중고거래사기": { range: [0, 0], note: "편취액 100% + 소액 위자료" },
+      "전세사기": { range: [0, 0], note: "보증금 100% + 정신적 위자료 200~1000만원" },
+      "코인사기": { range: [0, 0], note: "피해액 100% + 위자료 20~30%" },
+      "대여금분쟁": { range: [0, 0], note: "원금 + 변제기 다음날부터 연 12% 지연이자" },
+      "보이스피싱": { range: [0, 0], note: "피해액 환급이 우선 (특별법) + 위자료" },
+      "부당해고": { range: [0, 0], note: "해고기간 임금 + 위자료 300~1000만원" },
+      "임금체불": { range: [0, 0], note: "체불 임금 + 퇴직 후 14일 경과 시 연 20% 지연이자" },
+      "기타법률": { range: [0, 0], note: "사건별 검토" }
+    };
+    const settlementAggrs = [
+      { id: "rep", t: "반복성·상습성 (다회 범행)", mul: 1.4 },
+      { id: "many", t: "다수 피해자 발생", mul: 1.5 },
+      { id: "minor", t: "미성년자 피해", mul: 1.5 },
+      { id: "weapon", t: "위험한 물건·흉기 사용", mul: 1.4 },
+      { id: "rev", t: "보복·신고 협박", mul: 1.3 },
+      { id: "spread", t: "유포·공개로 2차 피해", mul: 1.5 },
+      { id: "trauma", t: "피해자 정신과 치료·진단서", mul: 1.3 },
+      { id: "weak", t: "취약 피해자 표적 (노인·장애·임산부)", mul: 1.4 }
+    ];
+
+    function buildSettlement() {
+      const baseWrap = document.getElementById("settlementBase");
+      const aggrWrap = document.getElementById("settlementAggravation");
+      if (!baseWrap || !aggrWrap) return;
+      const t = state.caseType;
+      const base = settlementBase[t] || settlementBase["기타법률"];
+      const dmg = parseInt(String(damage.value || "").replace(/[^\d]/g, ""), 10) || 0;
+      let baseHtml = "<div style=\"font-size:13px;line-height:1.6;padding:8px 10px;background:var(--soft);border-radius:6px\"><b>" + escHtml(t) + "</b> — " + escHtml(base.note) + "</div>";
+      baseWrap.innerHTML = baseHtml;
+      aggrWrap.innerHTML = settlementAggrs.map(a =>
+        "<label class=\"stl-item\"><input type=\"checkbox\" data-aggr=\"" + a.id + "\" data-mul=\"" + a.mul + "\">" +
+        "<span>" + escHtml(a.t) + "<span class=\"stl-bonus\">×" + a.mul + "</span></span></label>"
+      ).join("");
+      aggrWrap.addEventListener("change", recomputeSettlement);
+      recomputeSettlement();
+    }
+
+    function recomputeSettlement() {
+      const t = state.caseType;
+      const base = settlementBase[t] || settlementBase["기타법률"];
+      const dmg = parseInt(String(damage.value || "").replace(/[^\d]/g, ""), 10) || 0;
+      let lo = base.range[0], hi = base.range[1];
+      // 피해액 기반 사건유형
+      if (lo === 0 && hi === 0 && dmg > 0) {
+        if (t === "전세사기") { lo = dmg; hi = dmg + 5000000; }
+        else if (t === "대여금분쟁") { lo = dmg; hi = Math.round(dmg * 1.15); }
+        else if (t === "부당해고") { lo = dmg * 3; hi = dmg * 6 + 3000000; }
+        else { lo = dmg; hi = Math.round(dmg * 1.3); }
+      }
+      let mul = 1;
+      const checks = document.querySelectorAll('[data-aggr]');
+      const applied = [];
+      checks.forEach(cb => { if (cb.checked) { mul *= Number(cb.dataset.mul); applied.push(cb.nextElementSibling.firstChild.textContent.trim()); } });
+      lo = Math.round(lo * mul); hi = Math.round(hi * mul);
+      const rangeEl = document.getElementById("settlementRange");
+      const breakEl = document.getElementById("settlementBreakdown");
+      if (lo === 0 && hi === 0) {
+        rangeEl.textContent = "피해 금액을 입력하세요";
+        breakEl.textContent = "위 입력 폼의 '피해 금액'에 금액을 적으면 자동 계산됩니다.";
+      } else {
+        rangeEl.textContent = lo.toLocaleString("ko-KR") + " ~ " + hi.toLocaleString("ko-KR") + " 원";
+        breakEl.textContent = "기준: " + base.note + (applied.length ? " · 적용 가중: " + applied.join(", ") + " (×" + mul.toFixed(2) + ")" : "") +
+          " · 실제 합의금은 사건별 상황·증거력·가해자 자력에 따라 변동.";
+      }
+      buildUltimatum(lo, hi);
+    }
+
+    function buildUltimatum(lo, hi) {
+      const box = document.getElementById("ultimatumBox");
+      if (!box) return;
+      const cn = getPerson("pComplainantName") || "본인";
+      const an = opponent.value.trim() || "귀하";
+      const t = state.caseType;
+      const enf = enforcementMap[t] || enforcementMap["기타법률"];
+      const amt = (lo > 0 && hi > 0) ? lo.toLocaleString("ko-KR") + "원 ~ " + hi.toLocaleString("ko-KR") + "원" : "별도 산정";
+      box.textContent =
+"수신: " + an + "\n" +
+"제목: 형사·민사 절차 직전 최종 합의 제안\n\n" +
+"본인 " + cn + "은 귀하의 " + enf.crime + " 행위로 회복 곤란한 피해를 입었습니다.\n\n" +
+"본인은 이미 본 사건에 관하여 ① 고소장, ② 내용증명, ③ 지급명령 신청서를 작성 완료하였으며, " +
+"향후 7일 이내 귀하로부터 다음 사항이 이행되지 않을 경우 별도 통보 없이 즉시 일괄 접수합니다.\n\n" +
+"[합의 조건]\n" +
+"1. 합의금 " + amt + " 일시금 지급 (변제기 도래 시 연 12% 지연이자 가산)\n" +
+"2. 진정한 서면 사과 및 재발방지 서약\n" +
+"3. 본인 또는 본인을 특정·유추 가능한 일체의 표현 게시·언급 영구 금지 (위반 시 1회당 300만원 간접강제금)\n" +
+"4. 합의 시 본인이 보유한 모든 증거자료는 형사고소·민사청구에 즉시 활용될 수 있도록 원본 보존함\n\n" +
+"미이행 시 형사고소·민사 손해배상·가처분·집단 결합 수사를 동시 진행하며, " +
+"본 합의 제안은 양형 자료(반성·합의 시도)로 법원에 제출됩니다.\n\n" +
+"회신 기한: 본 메시지 수신일로부터 7일 이내\n" +
+"회신처: [본인 전화/이메일]\n\n" +
+cn + " 드림";
+    }
+    // ===== /합의금 =====
+
+    // ===== 소송 타임라인 알리미 =====
+    const TL_FIELDS = ["tlNoticeDate", "tlComplaintDate", "tlPaymentDate", "tlNoticeResultDate"];
+    function loadTimeline() {
+      TL_FIELDS.forEach(id => {
+        try { const v = localStorage.getItem("dok_" + id); if (v) document.getElementById(id).value = v; } catch (e) {}
+      });
+    }
+    function saveTimeline() {
+      TL_FIELDS.forEach(id => {
+        try { localStorage.setItem("dok_" + id, document.getElementById(id).value); } catch (e) {}
+      });
+      renderTimeline();
+    }
+    function addDays(iso, d) {
+      if (!iso) return null;
+      const dt = new Date(iso + "T00:00:00");
+      dt.setDate(dt.getDate() + d);
+      return dt;
+    }
+    function daysUntil(dt) {
+      if (!dt) return null;
+      const today = new Date(); today.setHours(0,0,0,0);
+      return Math.ceil((dt - today) / 86400000);
+    }
+    function ddayLabel(d) {
+      if (d === null) return "-";
+      if (d > 0) return "D-" + d;
+      if (d === 0) return "D-day";
+      return "D+" + Math.abs(d) + " 경과";
+    }
+    function renderTimeline() {
+      const wrap = document.getElementById("timelineRender");
+      if (!wrap) return;
+      const events = [];
+      const noticeD = document.getElementById("tlNoticeDate").value;
+      const complaintD = document.getElementById("tlComplaintDate").value;
+      const paymentD = document.getElementById("tlPaymentDate").value;
+      const resultD = document.getElementById("tlNoticeResultDate").value;
+      if (noticeD) {
+        events.push({ date: addDays(noticeD, 7), title: "내용증명 회신 기한", desc: noticeD + " 발송. 7일 내 무응답 시 다음 단계 즉시 진입" });
+        events.push({ date: addDays(noticeD, 14), title: "지급명령 신청 권장 시점", desc: "회신·이행이 없으면 본격 절차 시작" });
+        events.push({ date: addDays(noticeD, 180), title: "민법 §174 최고 시효중단 한계", desc: "본 통지 후 6개월 내 재판상 청구·지급명령·강제집행 착수 필요" });
+      }
+      if (complaintD) {
+        events.push({ date: addDays(complaintD, 7), title: "사건번호 부여 (보통)", desc: "사건번호 통보 받았는지 확인" });
+        events.push({ date: addDays(complaintD, 30), title: "1차 진행상황 문의 권장", desc: "사건번호로 담당 수사관 전화 확인" });
+        events.push({ date: addDays(complaintD, 180), title: "표준 수사 완료 시점", desc: "통상 2~6개월. 지연 시 진행상황 정식 문의" });
+      }
+      if (paymentD) {
+        events.push({ date: addDays(paymentD, 14), title: "지급명령 송달 + 이의 가능 기한", desc: "송달 후 2주 이의 없으면 확정" });
+        events.push({ date: addDays(paymentD, 28), title: "지급명령 확정 → 강제집행 가능", desc: "확정증명원·송달증명원 발급 가능" });
+        events.push({ date: addDays(paymentD, 180), title: "채무불이행자 명부등재 검토", desc: "확정 후 6개월 미이행 시 명부등재" });
+      }
+      if (resultD) {
+        events.push({ date: addDays(resultD, 7), title: "불송치 이의신청 기한 ⚠", desc: "결정서 송달일로부터 7일 내 같은 경찰서에 제출" });
+        events.push({ date: addDays(resultD, 30), title: "검찰 항고·재정신청 기한", desc: "검사 불기소 시 고검 항고 → 고법 재정신청 (각 30일)" });
+      }
+      events.sort((a, b) => a.date - b.date);
+      if (!events.length) {
+        wrap.innerHTML = "<p class=\"collective-hint\">위에서 날짜를 1개 이상 입력하고 저장하면 모든 단계의 D-Day가 자동 계산됩니다.</p>";
+        return;
+      }
+      wrap.innerHTML = events.map(e => {
+        const d = daysUntil(e.date);
+        const cls = d < 0 ? "passed" : (d <= 3 ? "urgent" : "");
+        return "<div class=\"tl-event\"><span class=\"tl-dday " + cls + "\">" + ddayLabel(d) + "</span>" +
+          "<div><h6>" + escHtml(e.title) + " <span style=\"color:var(--muted);font-size:11.5px;font-weight:400\">(" + e.date.toISOString().slice(0,10) + ")</span></h6>" +
+          "<p>" + escHtml(e.desc) + "</p></div></div>";
+      }).join("");
+    }
+    function setupTimeline() {
+      loadTimeline();
+      const btn = document.getElementById("tlSaveBtn");
+      if (btn) btn.addEventListener("click", saveTimeline);
+      renderTimeline();
+    }
+    // ===== /타임라인 =====
+
+    // ===== 오프라인 공판장 시뮬레이터 =====
+    const simScenarios = [
+      { title: "🚪 경찰서 접수 반려 — '단순 상담이시네요'",
+        they: "\"이건 형사가 아닌 것 같은데… 일단 상담만 받으시는 게 좋겠습니다.\"",
+        you: "<b>본인 답변</b>: \"단순 상담이 아니라 고소장 정식 접수를 요청드립니다. 부족한 부분은 보완 요구로 주시면 보완하겠습니다. 접수 여부와 사건번호, 담당 부서를 알려주시기 바랍니다.\"",
+        dont: "❌ 피하기: 화내거나 가버리지 마세요. 접수 거부는 위법(검찰사건사무규칙 §3)이며, 거부 시 검찰청에 직접 접수 가능합니다." },
+      { title: "📝 조사 — '기억 안 나는데 그냥 그랬을 거예요'",
+        they: "\"그날 정확히 몇 시였죠? 그 사람이 정확히 뭐라고 했나요?\"",
+        you: "<b>본인 답변</b>: \"<b>정확히 기억나지 않습니다.</b> 다만 ㅇㅇ시경에 ㅇㅇ장소에 있었고 ㅇㅇ증거(카톡·CCTV 등)에 시각이 나와 있습니다.\" — 추정·짐작 절대 금지. \"~인 것 같습니다\" 안 됨.",
+        dont: "❌ 피하기: 모르는 걸 '대충 그랬을 거예요'라고 답하면 진술 신빙성 자체가 흔들립니다. 기억 안 나면 정확히 \"기억나지 않습니다\"로." },
+      { title: "🤝 합의 회유 — 가해자측 변호인 전화",
+        they: "\"피해자분, 처벌 강하게 받으면 가해자도 인생이 망가져요. 적당히 합의하시죠.\"",
+        you: "<b>본인 답변</b>: \"합의 의사 없습니다. 모든 연락은 <b>서면</b>으로 본인 변호인 또는 수사기관을 통해 주십시오. 더 이상의 직접 연락은 2차 가해로 보고 별건 진정하겠습니다.\"",
+        dont: "❌ 피하기: 변호인과 직접 대화하지 마세요. 회유·압박·말꼬리 잡힘 위험. 모든 합의 협상은 서면으로만." },
+      { title: "📞 가해자 본인 또는 지인의 사적 연락",
+        they: "\"제발 한 번만 봐줘…\" / \"우리 형이 너 어디 사는지 안다\"",
+        you: "<b>본인 답변</b>: 즉시 <b>녹음/캡처</b>. 답장 하지 말고 보존. 본 사이트 '집단고소 + 가처분' 탭에서 <b>접근금지·게시금지 가처분 + 1회당 300만원 간접강제금</b>으로 별건 제출.",
+        dont: "❌ 피하기: 감정적 답장 금지. \"꺼져\" 같은 답장도 역으로 활용될 수 있어요. 무응답 + 증거 보존이 최선." },
+      { title: "⚖ 법정 (피해자 증인) — 변호인 반대신문",
+        they: "\"피해자분, 그날 술 드시지 않았나요? 평소 가해자와 사이가 좋지 않으셨죠?\"",
+        you: "<b>본인 답변</b>: 질문에만 답변. \"네/아니오\" 또는 \"기억나지 않습니다\". 추가 설명 금지. 변호인이 끼어들기 전에 길게 말하면 잘립니다. <b>천천히, 짧게, 사실만</b>.",
+        dont: "❌ 피하기: 흥분해서 길게 말하면 진술이 흔들립니다. 모르는 건 모른다, 기억 안 나는 건 기억 안 난다고만." }
+    ];
+
+    function buildSimulator() {
+      const sw = document.getElementById("simScenarios");
+      if (sw) {
+        sw.innerHTML = simScenarios.map(s =>
+          "<div class=\"sim-scenario\"><h5>" + escHtml(s.title) + "</h5>" +
+          "<div class=\"sim-they\">" + escHtml(s.they) + "</div>" +
+          "<div class=\"sim-you\">" + s.you + "</div>" +
+          "<div class=\"sim-dont\">" + escHtml(s.dont) + "</div></div>"
+        ).join("");
+      }
+      const cw = document.getElementById("simChecklist");
+      if (cw) {
+        const items = [
+          "신분증 (운전면허·주민증·여권 中 1)", "고소장 원본 2부 + 사본 1부",
+          "증거자료 사본 (URL·캡처·녹취록 등)", "사건 메모 (시간순 6하원칙)",
+          "필기구 + 메모지", "도장 (있으면)",
+          "본인 인적사항 (생년월일·주민번호 뒷자리 필요할 수 있음)",
+          "스마트폰 (충전 풀, 보조배터리 권장)", "현금 또는 카드 (교통비)",
+          "신뢰할 수 있는 동행인 (있으면 좋음)", "물 + 간식 (조사 길어질 수 있음)",
+          "녹음기 또는 폰 녹음 (수사관 발언 보존 — 단, 통비법 §3 본인 참여 대화만)"
+        ];
+        cw.innerHTML = "<div class=\"sim-check\">" + items.map(i =>
+          "<label><input type=\"checkbox\">" + escHtml(i) + "</label>"
+        ).join("") + "</div>";
+      }
+    }
+    // ===== /시뮬레이터 =====
+
     function buildComplaint3Step() {
       return "<div class=\"complaint-tip-3\">" +
         "<h4>💡 실무 고소장 작성 — 기소처분을 끌어내는 3단계 구조</h4>" +
@@ -4821,6 +5290,24 @@
     renderVictimList();
     refreshShareLink();
     loadCollectiveFromHash();
+    buildEvidenceChecker();
+    setupTimeline();
+    buildSimulator();
+    // 합의금 최후통첩 복사 버튼
+    const ultCopy = document.getElementById("copyUltimatum");
+    if (ultCopy) ultCopy.addEventListener("click", () => {
+      const txt = document.getElementById("ultimatumBox").textContent;
+      navigator.clipboard.writeText(txt).then(() => {
+        const o = ultCopy.textContent; ultCopy.textContent = "복사됨 ✓";
+        setTimeout(() => ultCopy.textContent = o, 1500);
+      }).catch(err => alert("복사 실패: " + err.message));
+    });
+    // Service Worker 등록 (PWA — 웹+앱 둘다 동작)
+    if ("serviceWorker" in navigator) {
+      window.addEventListener("load", () => {
+        navigator.serviceWorker.register("./service-worker.js").catch(() => {});
+      });
+    }
     // 빠른 시작 위저드 — 카드 클릭 시 죄명 자동 설정 + 앱으로 스크롤 + 적절한 탭 열기
     document.querySelectorAll(".qs-card").forEach(card => {
       card.addEventListener("click", () => {

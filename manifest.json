@@ -1,0 +1,45 @@
+{
+  "name": "독고다이 법률단",
+  "short_name": "독고다이",
+  "description": "피해자 편 셀프 법률 무기 — 변호사 없이 브라우저에서 끝내는 형사·민사·노동 자가 구제",
+  "lang": "ko",
+  "start_url": "./",
+  "scope": "./",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#f4f2ee",
+  "theme_color": "#8e1918",
+  "icons": [
+    {
+      "src": "icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
+  ],
+  "categories": ["legal", "productivity", "utilities"],
+  "shortcuts": [
+    {
+      "name": "고소장 작성",
+      "url": "./#quickstart",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    },
+    {
+      "name": "집단고소",
+      "url": "./#cls=",
+      "icons": [{ "src": "icon-192.png", "sizes": "192x192" }]
+    }
+  ]
+}
