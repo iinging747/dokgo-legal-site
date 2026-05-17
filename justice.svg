@@ -1,27 +1,99 @@
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 720 560" role="img" aria-label="정의의 여신 실루엣">
-  <rect width="720" height="560" fill="#e2e2df"/>
-  <g fill="#2d2d2d">
-    <path d="M342 177c-35 4-63 31-73 65 28-22 71-25 105-7 17 9 31 22 42 38-2-27-12-51-30-69-13-14-28-24-44-27z"/>
-    <path d="M330 245c-44 24-72 71-71 127 1 47 22 84 61 112-10-41-7-76 8-105 17-33 48-56 88-72-18-42-47-63-86-62z"/>
-    <path d="M399 301c-53 23-86 56-99 99-11 37-5 81 18 133 31-19 62-49 92-91 25-36 43-75 54-118-17-9-39-17-65-23z"/>
-    <path d="M407 162c-24-54-74-85-132-86-62-1-112 30-145 87 63-39 126-49 189-31 33 9 62 26 88 30z"/>
-    <path d="M155 169c42-26 94-43 147-40 54 3 99 25 135 67 18 20 29 43 37 70 15-41 13-81-6-120-23-49-66-79-128-90-75-14-138 17-185 113z"/>
-    <path d="M402 165c43 3 94 12 155 28 16 4 31 8 45 11 13 3 22 15 19 28-2 13-15 21-28 18-18-4-38-9-59-15-57-15-104-23-141-24-31-1-59 4-83 15-11 5-24 0-29-11-5-12 0-25 11-30 31-15 68-21 110-20z"/>
-    <path d="M320 128c-28 37-55 76-83 117-23 34-46 68-69 101-8 11-22 14-33 7-11-8-14-23-7-34 23-33 46-67 69-101 29-42 58-83 88-122 8-11 23-13 34-5 10 8 12 24 1 37z"/>
-    <path d="M449 139c9 12 18 25 27 39 37 58 67 120 91 185 5 13-2 26-15 31-12 5-26-2-31-15-23-62-51-120-86-175-8-13-17-26-26-38-8-11-5-26 6-34s26-5 34 7z"/>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 720" role="img" aria-label="정의의 여신과 저울">
+  <defs>
+    <linearGradient id="metal" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0%" stop-color="#8a847e"/>
+      <stop offset="50%" stop-color="#3d3a36"/>
+      <stop offset="100%" stop-color="#1c1b19"/>
+    </linearGradient>
+    <linearGradient id="metalLight" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0%" stop-color="#9c9690"/>
+      <stop offset="60%" stop-color="#4a4742"/>
+      <stop offset="100%" stop-color="#252320"/>
+    </linearGradient>
+  </defs>
+
+  <g stroke="#0e0d0c" stroke-width="0.9" stroke-linejoin="round">
+    <!-- 받침대 -->
+    <rect x="125" y="678" width="150" height="30" fill="#252320"/>
+    <rect x="110" y="652" width="180" height="28" fill="#3a3733"/>
+    <rect x="135" y="640" width="130" height="14" fill="#4a4742"/>
+
+    <!-- 로브(하체) -->
+    <path d="M 152 388 Q 148 480 142 600 L 130 645 L 270 645 L 258 600 Q 252 480 248 388 Q 226 365 200 365 Q 174 365 152 388 Z" fill="url(#metal)"/>
+    <!-- 세로 주름 -->
+    <g stroke="#0a0908" stroke-width="1.3" fill="none" opacity="0.85">
+      <path d="M 168 400 Q 164 510 158 640"/>
+      <path d="M 188 400 Q 187 510 184 640"/>
+      <path d="M 200 400 Q 200 510 200 642"/>
+      <path d="M 212 400 Q 213 510 216 640"/>
+      <path d="M 232 400 Q 236 510 242 640"/>
+    </g>
+
+    <!-- 허리/하체-상체 연결 -->
+    <path d="M 165 298 Q 200 314 235 298 L 248 388 Q 200 365 152 388 Z" fill="url(#metalLight)"/>
+
+    <!-- 상체(토가) -->
+    <path d="M 170 232 Q 200 220 230 232 L 240 300 Q 200 312 160 300 Z" fill="url(#metal)"/>
+    <!-- 가슴 가로 띠 -->
+    <path d="M 170 252 L 232 282" stroke="#0a0908" stroke-width="4" fill="none"/>
+
+    <!-- 목 -->
+    <path d="M 190 208 L 210 208 L 213 232 L 187 232 Z" fill="url(#metalLight)"/>
+
+    <!-- 머리 -->
+    <ellipse cx="200" cy="178" rx="32" ry="40" fill="url(#metalLight)"/>
+
+    <!-- 머리카락 -->
+    <path d="M 168 168 Q 168 130 200 122 Q 234 130 232 170 Q 240 210 232 234 Q 228 215 230 200 Q 234 175 222 158 Q 200 144 178 158 Q 166 175 170 200 Q 172 215 168 234 Q 160 210 168 168 Z" fill="#1c1a17"/>
+
+    <!-- 눈가리개 -->
+    <rect x="163" y="170" width="76" height="14" fill="#0a0908"/>
+    <rect x="163" y="170" width="76" height="2.5" fill="#3a3733"/>
+    <path d="M 235 177 Q 245 172 252 165" stroke="#0a0908" stroke-width="2" fill="none"/>
+
+    <!-- 오른팔 (들어올림, 저울 손잡이) -->
+    <path d="M 232 235 Q 254 215 274 175 Q 290 130 300 100 L 312 102 Q 302 132 286 180 Q 270 222 250 252 Q 240 258 226 252 Z" fill="url(#metal)"/>
+    <!-- 오른손 -->
+    <ellipse cx="306" cy="100" rx="11" ry="9" fill="url(#metalLight)"/>
+
+    <!-- 왼팔 (내려서 검) -->
+    <path d="M 168 235 Q 150 282 144 358 Q 142 392 148 410 L 160 410 Q 152 392 156 358 Q 162 282 176 254 Q 182 246 175 240 Z" fill="url(#metal)"/>
+    <!-- 왼손 -->
+    <ellipse cx="154" cy="414" rx="11" ry="8" fill="url(#metalLight)"/>
   </g>
-  <g fill="none" stroke="#2d2d2d" stroke-linecap="round" stroke-linejoin="round">
-    <path d="M209 139c63 47 143 49 218 8" stroke-width="18"/>
-    <path d="M429 146c44 2 95 11 153 27" stroke-width="12"/>
-    <path d="M210 139l-78 148" stroke-width="8"/>
-    <path d="M210 139l78 148" stroke-width="8"/>
-    <path d="M132 287h156" stroke-width="13"/>
-    <path d="M132 287c17 47 48 68 78 68s61-21 78-68" stroke-width="10"/>
-    <path d="M582 173l-67 142" stroke-width="8"/>
-    <path d="M582 173l67 142" stroke-width="8"/>
-    <path d="M515 315h134" stroke-width="13"/>
-    <path d="M515 315c15 39 42 58 67 58s52-19 67-58" stroke-width="10"/>
-    <path d="M396 79c10 42 13 83 10 124" stroke-width="11"/>
-    <path d="M378 62c23 10 41 28 55 52" stroke-width="11"/>
+
+  <!-- 저울 -->
+  <g stroke="#0a0908" stroke-linecap="round">
+    <!-- 가로 빔 -->
+    <line x1="225" y1="100" x2="385" y2="100" stroke="#2c2a27" stroke-width="3"/>
+    <line x1="225" y1="98" x2="385" y2="98" stroke="#4a4742" stroke-width="1"/>
+    <!-- 중앙 고리 -->
+    <circle cx="305" cy="100" r="4.5" fill="#0a0908"/>
+
+    <!-- 왼쪽 사슬 (지그재그) -->
+    <path d="M 232 100 L 230 115 L 235 130 L 228 145 L 232 158 L 226 172" stroke="#2c2a27" stroke-width="1.6" fill="none"/>
+    <!-- 오른쪽 사슬 -->
+    <path d="M 378 100 L 380 115 L 374 130 L 381 145 L 376 158 L 380 172" stroke="#2c2a27" stroke-width="1.6" fill="none"/>
+
+    <!-- 왼쪽 저울 접시 -->
+    <ellipse cx="226" cy="175" rx="38" ry="6" fill="#4a4742" stroke="#0a0908" stroke-width="1.2"/>
+    <path d="M 188 175 Q 226 210 264 175 Z" fill="#3a3733" stroke="#0a0908" stroke-width="1.2"/>
+    <!-- 오른쪽 저울 접시 -->
+    <ellipse cx="380" cy="175" rx="32" ry="5" fill="#4a4742" stroke="#0a0908" stroke-width="1.2"/>
+    <path d="M 348 175 Q 380 202 412 175 Z" fill="#3a3733" stroke="#0a0908" stroke-width="1.2"/>
+  </g>
+
+  <!-- 검 -->
+  <g stroke="#0a0908" stroke-width="1">
+    <!-- 둥근 끝 (pommel) -->
+    <circle cx="154" cy="410" r="6.5" fill="url(#metalLight)"/>
+    <!-- 손잡이 -->
+    <rect x="149" y="416" width="10" height="22" fill="#1c1a17"/>
+    <!-- 십자 가드 -->
+    <rect x="126" y="436" width="56" height="8" fill="#3a3733"/>
+    <rect x="126" y="436" width="56" height="2" fill="#5a5651"/>
+    <!-- 칼날 -->
+    <path d="M 146 444 L 162 444 L 159 628 L 154 638 L 149 628 Z" fill="url(#metalLight)"/>
+    <line x1="154" y1="446" x2="154" y2="626" stroke="#0a0908" stroke-width="0.7"/>
   </g>
 </svg>

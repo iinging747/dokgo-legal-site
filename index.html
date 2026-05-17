@@ -130,53 +130,53 @@
     .hotline b { font-size: 14px; }
 
     .hero {
-      min-height: 700px;
+      min-height: 620px;
       position: relative;
       overflow: hidden;
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
+      grid-template-areas: "copy image" "panel image";
+      gap: 32px 48px;
+      align-items: center;
+      padding: 96px clamp(20px, 6vw, 100px) 72px;
       background:
-        linear-gradient(90deg, rgba(244,243,240,.98) 0%, rgba(244,243,240,.9) 42%, rgba(244,243,240,.42) 72%, rgba(244,243,240,.86) 100%),
-        linear-gradient(180deg, #f5f4f1 0%, #d9d7d2 68%, #f2f1ee 68%, #d7d5d0 100%);
+        linear-gradient(180deg, #f5f4f1 0%, #e8e6e1 65%, #dad6cf 100%);
     }
 
     body.dark .hero {
       background:
-        linear-gradient(90deg, rgba(24,24,24,.98) 0%, rgba(24,24,24,.9) 42%, rgba(24,24,24,.42) 72%, rgba(24,24,24,.86) 100%),
-        linear-gradient(180deg, #202020 0%, #2a2927 68%, #181817 68%, #111 100%);
+        linear-gradient(180deg, #1c1b19 0%, #232220 65%, #161513 100%);
     }
 
     body.dark .justice {
-      opacity: .42;
-      filter: grayscale(1) invert(.92) contrast(1.05);
+      opacity: .92;
+      filter: invert(.85) contrast(1.04);
     }
 
     .hero::after {
       content: "";
       position: absolute;
       inset: auto 0 0;
-      height: 36%;
-      background:
-        linear-gradient(90deg, rgba(0,0,0,.08), transparent 26%, transparent 74%, rgba(0,0,0,.08)),
-        repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 8px);
-      opacity: .32;
+      height: 24%;
+      background: linear-gradient(0deg, rgba(0,0,0,.06), transparent);
+      pointer-events: none;
     }
 
     .justice {
-      position: absolute;
-      right: clamp(18px, 9vw, 140px);
-      bottom: 76px;
-      width: min(38vw, 520px);
-      min-width: 340px;
-      opacity: .9;
+      grid-area: image;
+      width: 100%;
+      max-width: 400px;
+      min-width: 0;
+      margin: 0 auto;
+      align-self: center;
       filter: grayscale(1) contrast(1.04);
       z-index: 2;
     }
 
     .hero-copy {
+      grid-area: copy;
       position: relative;
       z-index: 3;
-      width: min(720px, calc(100% - 32px));
-      padding-top: 190px;
-      margin-left: clamp(18px, 9vw, 120px);
       color: var(--charcoal);
     }
 
@@ -227,16 +227,17 @@
     }
 
     .hero-panel {
-      position: absolute;
+      grid-area: panel;
+      position: relative;
       z-index: 3;
-      left: clamp(18px, 9vw, 120px);
-      bottom: 62px;
-      width: min(520px, calc(100% - 36px));
+      width: 100%;
+      max-width: 560px;
       padding: 20px 22px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.76);
+      background: rgba(255,255,255,.82);
       color: var(--ink);
       backdrop-filter: blur(6px);
+      border-radius: 4px;
     }
 
     body.dark .hero-panel {
@@ -965,15 +966,19 @@
       .nav { position: static; background: #f8f6f2; height: auto; padding: 16px; }
       body.dark .nav { background: #211f1d; }
       .nav-links { display: none; }
-      .hero { min-height: 620px; }
-      .hero-copy { margin-left: 24px; padding-top: 90px; }
-      .justice { right: -160px; opacity: .26; }
+      .hero {
+        grid-template-columns: 1fr;
+        grid-template-areas: "image" "copy" "panel";
+        gap: 18px;
+        padding: 48px 20px 40px;
+        min-height: auto;
+      }
+      .justice { max-width: 260px; opacity: .9; }
       .app-head { display: grid; align-items: start; }
       .taxonomy-title { grid-template-columns: 1fr; }
       .intro, .workspace, .contact { grid-template-columns: 1fr; }
       .read-guide { grid-template-columns: repeat(2, 1fr); }
       .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-      .hero-panel { position: relative; left: auto; bottom: auto; margin: -120px 18px 0; }
     }
 
     @media (max-width: 860px) {
@@ -1004,28 +1009,13 @@
       .brand strong { font-size: 20px; }
       .brand span { font-size: 11px; letter-spacing: 2.4px; }
       .theme-toggle { min-height: 34px; padding: 0 10px; font-size: 12px; }
-      .hero { min-height: 560px; }
+      .hero { min-height: auto; padding: 36px 16px 28px; }
       .hotline { display: none; }
-      .hero-copy {
-        width: calc(100% - 28px);
-        margin-left: 14px;
-        padding-top: 56px;
-      }
-      h1 { font-size: clamp(38px, 12vw, 52px); }
+      h1 { font-size: clamp(34px, 10vw, 48px); }
       .hero-copy > p { font-size: 14px; line-height: 1.65; }
-      .justice {
-        min-width: 240px;
-        width: 72vw;
-        right: -90px;
-        bottom: 120px;
-        opacity: .18;
-      }
-      .hero-panel {
-        width: calc(100% - 28px);
-        margin: -92px 14px 0;
-        padding: 16px;
-      }
-      .hero-panel strong { font-size: 20px; }
+      .justice { max-width: 220px; opacity: .92; }
+      .hero-panel { padding: 14px 16px; }
+      .hero-panel strong { font-size: 18px; }
       .quick-jump, .module-grid, .footer { grid-template-columns: 1fr; }
       .read-guide { grid-template-columns: 1fr; }
       .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
@@ -1109,8 +1099,7 @@
       .nav { padding: 12px; }
       .chips { grid-template-columns: 1fr; }
       .btn { width: 100%; }
-      .hero-copy { padding-top: 44px; }
-      .hero-panel { margin-top: -72px; }
+      .justice { max-width: 180px; }
       .taxonomy { max-height: 260px; }
       .footer { padding: 28px 14px; }
     }
@@ -1384,9 +1373,13 @@
               </div>
             </div>
 
-            <label>있는 그대로 적기
-              <textarea id="story" placeholder="예: 회사가 갑자기 내일부터 나오지 말라고 했습니다. 해고 사유도 제대로 설명하지 않았고 서면 통지도 없었습니다. 30일 전에 예고한 적도 없고 해고예고수당도 못 받았습니다. 근로계약서, 급여명세서, 카톡 지시, 출퇴근 기록은 있습니다."></textarea>
+            <label>있는 그대로 적기 <span style="font-weight:400;font-size:12px;color:var(--muted);margin-left:6px">— 욕설·분노·날것 표현 모두 OK. 양식·고소장에는 자동으로 정제되어 들어갑니다.</span>
+              <textarea id="story" placeholder="예: 회사가 갑자기 내일부터 나오지 말라고 했습니다. 해고 사유도 제대로 설명하지 않았고 서면 통지도 없었습니다. 30일 전에 예고한 적도 없고 해고예고수당도 못 받았습니다. 근로계약서, 급여명세서, 카톡 지시, 출퇴근 기록은 있습니다.&#10;&#10;(욕이든 분노든 다 적어도 됩니다. 본인 정리 먼저, 정제는 자동.)"></textarea>
             </label>
+            <details class="person-block" id="cleanPreviewBlock" style="margin: 4px 0 8px;">
+              <summary>🧹 양식에 들어갈 정제 미리보기 (욕설·분노 자동 제거 + 법률 중립 표현)</summary>
+              <div class="person-foot" id="cleanPreviewText" style="padding: 12px 14px; font-size: 13px; line-height: 1.65; color: var(--ink); white-space: pre-wrap;">입력하면 정제된 결과가 여기에 표시됩니다.</div>
+            </details>
 
             <div class="taxonomy" aria-label="빠른 사건 분류">
               <div class="taxonomy-title">
@@ -2648,17 +2641,46 @@
     function rawFacts() {
       const raw = story.value.trim();
       if (!raw) return "피해자가 입력한 내용을 바탕으로 사건 경위, 회사 또는 상대방의 행위, 피해 발생, 보유 증거를 날짜순으로 정리합니다.";
-      return raw.replace(/\s+/g, " ").replace(/[!！?？]{2,}/g, ".").slice(0, 430);
+      return raw.replace(/\s+/g, " ").slice(0, 1200);
     }
 
+    // 양식·고소장용 정제 — 욕설 제거, 감정표현 중화, 사실관계는 그대로(이름·날짜·금액 보존)
+    function cleanForDoc(text) {
+      if (!text) return "";
+      let t = " " + text + " ";
+      // 1) 욕설·비속어 제거 (한국어·영어 주요 표현)
+      const profanity = /(씨\s*발|씨\s*바|시\s*발|시\s*바|ㅅㅂ|ㅆㅂ|개\s*새\s*끼|개\s*색\s*끼|개\s*새\s*기|개\s*색|ㄱㅅㄲ|좆|존\s*나|졸\s*라|병\s*신|븅\s*신|ㅂㅅ|미\s*친\s*놈|미\s*친\s*년|미\s*친\s*새\s*끼|새\s*끼들?|색\s*끼|색\s*기|지\s*랄|ㅈㄹ|엿\s*같이?|엿\s*먹|꺼\s*져|닥\s*쳐|뒤\s*져|뒤\s*지|호\s*로\s*새|개\s*같|fuck\w*|shit\w*|asshole|bitch|damn)/gi;
+      t = t.replace(profanity, "");
+      // 2) 감정 강조어 → 법률 중립 표현
+      t = t.replace(/(너무|진짜|정말|완전|매우|아주)\s*(너무|진짜|정말)?\s*화가?\s*나(서|고|는데|며|는다|네)?/g, "극심한 분노와 정신적 충격을 받았으며");
+      t = t.replace(/(죽이고|죽여\s*버리고|찢어\s*죽이고|쳐\s*죽이고)\s*싶/g, "극심한 정신적 충격을 받았");
+      t = t.replace(/짜증\s*나(서|고|는데)?/g, "심한 스트레스를 받았으며");
+      t = t.replace(/열\s*받(아서|고|는데)?/g, "극심한 분노를 느꼈으며");
+      t = t.replace(/빡\s*쳐(서|고)?/g, "극심한 분노를 느꼈으며");
+      t = t.replace(/어이\s*없(어서|고|는데)?/g, "납득하기 어려웠으며");
+      t = t.replace(/억울해\s*죽겠/g, "극심한 부당함을 호소하");
+      // 3) 다중 부호·공백 정리
+      t = t.replace(/[!！]{1,}/g, ".").replace(/[?？]{2,}/g, "?");
+      t = t.replace(/\.{3,}/g, ".").replace(/\s+([.,])/g, "$1").replace(/\s+/g, " ").trim();
+      // 4) 너무 짧으면 안내
+      if (t.length < 6) return rawFacts();
+      return t;
+    }
+
+    // 외부 상담용 — 정제 + PII 비식별화
     function safeSummary() {
-      return rawFacts()
+      return cleanForDoc(rawFacts())
         .replace(/\d{2,3}[-.\s]\d{3,4}[-.\s]\d{4}/g, "전화번호")
         .replace(/\d{2,3}\s?\d{3,4}\s?\d{4}/g, "전화번호")
         .replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, "이메일")
         .replace(/[가-힣]{2,4}(회사|업체|상사|대표|셀러)/g, "상대방")
         .replace(/[김이박최정강조윤장임한오서신권황안송전홍고문양손배백허남심노하곽성차주우구민류나진지엄채원천방공현함변염여추도소석선설마길연위표명기반왕금옥육인맹제모탁국어은편용예봉][가-힣]{1,2}/g, "상대방")
         .replace(/\d{1,3}(,\d{3})*만원|\d{1,3}(,\d{3})*원/g, "피해금액");
+    }
+
+    // 법적 문서용 — 정제만 (이름·금액 보존)
+    function docFacts() {
+      return cleanForDoc(rawFacts());
     }
 
     function renderTaxonomy() {
@@ -3223,6 +3245,11 @@
       buildPrecedentCards();
       buildProcedureSteps();
       buildLegalPackage();
+      const cleanEl = document.getElementById("cleanPreviewText");
+      if (cleanEl) {
+        const raw = story.value.trim();
+        cleanEl.textContent = raw ? docFacts() : "입력하면 정제된 결과가 여기에 표시됩니다.";
+      }
       document.querySelector("#evidenceBrief").textContent = `[증거 체크]\n${modeAdvice()}\n\n원본 보관: 파일명, 생성일, 캡처일, 제출일을 함께 기록하세요.`;
       document.querySelector("#briefText").textContent = buildBrief();
       document.querySelector("#loanBrief").textContent = buildLoanBrief();
@@ -3623,7 +3650,7 @@
     };
 
     function buildCrimeFacts() {
-      const summary = safeSummary();
+      const summary = docFacts();
       const opp = opponent.value.trim() || "피고소인";
       const place = getPerson("pPlace") || "사건 발생 장소";
       const dt = incidentDate.value || decisionDate.value;
@@ -3643,7 +3670,7 @@
     }
 
     function buildUrgentBlock(enf) {
-      const facts = safeSummary();
+      const facts = docFacts();
       let html = "<p><b>본 사건에서 엄벌이 필요한 이유</b></p><p>" + escHtml(enf.urgent || "") + "</p>";
       const checks = [
         { k: /반복|여러 ?번|계속|상습|수개월|수년/, t: "반복성·상습성 (다회 범행)" },
@@ -3733,7 +3760,7 @@
       setText("ndTitle", "법적 조치 직전 최종 통지 — " + state.caseType);
       const date = getPerson("pDate") || new Date().toISOString().slice(0,10);
       setText("ndDate", formatKoreanDate(date));
-      set("ndFacts", "<p>" + escHtml(safeSummary()) + "</p>");
+      set("ndFacts", "<p>" + escHtml(docFacts()) + "</p>");
       set("ndDemand", "<p>" + (enf.notice || enforcementMap["기타법률"].notice) + "</p>");
       set("ndWarn",
         "본 통지에서 정한 기한 내 회신·이행이 없을 경우 발신인은 다음 절차를 <b>지체 없이 동시 진행</b>합니다.<br>" +
@@ -3775,7 +3802,7 @@
         "<li>채무자는 일부 변제 또는 변제 약속(카카오톡·문자·이메일)을 통해 채무 존재를 승인하였습니다.</li>" +
         "<li>따라서 채권자는 청구취지 기재 금원의 지급을 구하기 위해 본 신청에 이르렀습니다.</li>" +
         "</ol>" +
-        "<p><b>피해 경위 요약</b>: " + escHtml(safeSummary()) + "</p>");
+        "<p><b>피해 경위 요약</b>: " + escHtml(docFacts()) + "</p>");
       const date = getPerson("pDate") || new Date().toISOString().slice(0,10);
       setText("pdDate", formatKoreanDate(date));
       setText("pdSign", cn);
