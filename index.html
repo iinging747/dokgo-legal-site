@@ -1357,6 +1357,33 @@
       .cd-evidence th:first-child { color: #c00 !important; }
     }
 
+    /* 탭 카테고리 필터 */
+    .tab-filter { display: flex; gap: 6px; flex-wrap: wrap; padding: 10px 14px 4px; border-bottom: 1px solid var(--line); background: var(--white); }
+    body.dark .tab-filter { background: var(--white); }
+    .tf-btn { padding: 7px 14px; border-radius: 999px; border: 1px solid var(--line); background: var(--paper); color: var(--muted); font-size: 12.5px; font-weight: 700; cursor: pointer; transition: all .15s; }
+    .tf-btn:hover { color: var(--wine); border-color: var(--wine); }
+    .tf-btn.active { background: var(--wine); color: #fff; border-color: var(--wine); }
+    .tab[data-cat-hidden] { display: none !important; }
+
+    /* AI 제공자 선택 */
+    .ai-provider-row { display: flex; gap: 8px; align-items: center; flex-wrap: wrap; margin-bottom: 6px; }
+    .ai-provider-row select { padding: 7px 10px; border: 1px solid var(--line); border-radius: 8px; background: var(--paper); color: var(--ink); font-size: 13px; cursor: pointer; }
+    .ai-provider-row label.mask-toggle { font-size: 12px; }
+
+    /* 카톡 대화록 자동 파서 */
+    .kakao-zone { margin-top: 12px; padding: 14px 16px; border: 2px dashed var(--gold); border-radius: 12px; background: rgba(168,134,66,.06); }
+    .kakao-zone h5 { margin: 0 0 6px; font-size: 14px; color: var(--wine-dark); }
+    .kakao-zone p { margin: 0 0 8px; font-size: 12.5px; line-height: 1.55; color: var(--muted); }
+    .kakao-zone .kakao-btn { display: inline-flex; align-items: center; gap: 6px; padding: 10px 14px; background: var(--wine); color: #fff; border-radius: 8px; cursor: pointer; font-weight: 700; font-size: 13.5px; border: none; }
+    .kakao-zone .kakao-btn:hover { background: var(--wine-dark); }
+    .kakao-zone input[type=file] { display: none; }
+    .kakao-result { margin-top: 12px; background: var(--white); border: 1px solid var(--line); border-radius: 8px; padding: 12px 14px; font-size: 13px; line-height: 1.65; max-height: 320px; overflow: auto; }
+    body.dark .kakao-result { background: var(--white); }
+    .kakao-stage { padding: 8px 10px; margin: 6px 0; border-left: 3px solid var(--wine); background: var(--soft); border-radius: 0 6px 6px 0; }
+    .kakao-stage h6 { margin: 0 0 4px; font-size: 13px; color: var(--wine-dark); }
+    .kakao-stage p { margin: 2px 0; font-size: 12.5px; color: var(--ink); }
+    .kakao-stage .kakao-quote { font-style: italic; color: var(--muted); font-size: 12px; padding-left: 8px; border-left: 2px solid var(--line); margin-left: 4px; }
+
     /* 비용 회수 탭 */
     .cost-row { display: grid; grid-template-columns: 1.5fr 1fr; gap: 10px; padding: 8px 0; border-bottom: 1px dashed var(--line); font-size: 13px; align-items: center; }
     .cost-row label { margin: 0; color: var(--muted); }
@@ -1611,6 +1638,11 @@
           <strong>전세 보증금 못 받아요</strong>
           <span>임대인 잠적·임차권등기·HUG·특별법</span>
         </button>
+        <button type="button" class="qs-card" data-qs-type="외주먹튀">
+          <div class="qs-emoji">💻</div>
+          <strong>개발·외주 받고 잠수</strong>
+          <span>카톡 견적·선금 입금 후 결과물 미인도·잠적</span>
+        </button>
         <button type="button" class="qs-card" data-qs-type="기타법률">
           <div class="qs-emoji">❓</div>
           <strong>잘 모르겠어요</strong>
@@ -1660,28 +1692,30 @@
                 <p class="ev-hint">파일을 끌어다 놓거나 여기를 클릭. 모든 처리는 본인 브라우저 안에서만 수행됩니다.</p>
               </label>
               <div class="evidence-list" id="evidenceList"></div>
+              <div class="kakao-zone">
+                <h5>카톡 대화록 통째 입력 — 4단계 사실관계 자동 재구성</h5>
+                <p>카카오톡에서 <b>"대화 내보내기 → 텍스트만"</b> 으로 받은 .txt 파일을 통째로 넣으면, AI가 <b>① 계약 성립 → ② 대금 지급 → ③ 채무 불이행 → ④ 독촉·거절</b> 4단계로 자동 추출해서 피해사실 칸에 6하원칙으로 채워줍니다. 외주먹튀·차용·중고거래·전세 등 메시지 기반 거래에 효과 만점.</p>
+                <label class="kakao-btn">📱 카톡 .txt 파일 선택<input type="file" id="kakaoFile" accept=".txt,text/plain"></label>
+                <div class="kakao-result" id="kakaoResult" style="display:none"></div>
+              </div>
               <div class="ai-row">
-                <p class="ai-hint">🤖 <b>Claude AI로 사실관계·증거 자동 정리</b> (선택). API 키는 본인 브라우저(localStorage)에만 저장되고 외부 서버로 전송되지 않습니다.</p>
-                <details class="api-guide">
-                  <summary>🔑 처음이면 클릭 — Claude API 키 5초 발급 가이드</summary>
-                  <div class="ag-body">
-                    <ol>
-                      <li><b>1.</b> <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a> 접속 → <b>Google로 로그인</b> (가입 3초)</li>
-                      <li><b>2.</b> 왼쪽 메뉴에서 <b>Settings → API Keys</b> 클릭</li>
-                      <li><b>3.</b> <b>Create Key</b> 버튼 → 이름 아무거나 입력 (예: "법률단")</li>
-                      <li><b>4.</b> 화면에 뜬 키(<code>sk-ant-…</code>로 시작) 복사 <em>(이 화면을 닫으면 다시 못 봄!)</em></li>
-                      <li><b>5.</b> 아래 키 입력칸에 붙여넣기 → <b>키 저장</b> 클릭</li>
-                    </ol>
-                    <div class="ag-cost">
-                      💰 <b>비용</b> — Anthropic은 결제수단 등록 + 최소 $5(약 7천원) 충전이 필요합니다. 분석 1회당 약 100~300원 정도 소모. 신규 가입 시 무료 크레딧을 받는 경우도 있어요. 충전 안 해도 사이트의 OCR·PDF 자동 추출은 그대로 작동합니다.
-                    </div>
-                    <div class="ag-warn">
-                      ⚠ 키는 본인 PC 브라우저에만 저장됩니다. 다른 사람에게 보여주거나 공용 PC에 저장하지 마세요. 키가 유출되면 즉시 console에서 <b>Revoke</b> 클릭.
-                    </div>
-                  </div>
+                <p class="ai-hint">AI 자동 정리 (선택) — Claude·ChatGPT·Gemini 중 본인이 쓰는 것 선택. 키는 본인 브라우저에만 저장되고 외부 서버로 안 갑니다.</p>
+                <div class="ai-provider-row">
+                  <select id="aiProvider" title="AI 제공자 선택">
+                    <option value="claude">Claude (Anthropic)</option>
+                    <option value="openai">ChatGPT (OpenAI)</option>
+                    <option value="gemini">Gemini (Google)</option>
+                  </select>
+                  <label class="mask-toggle" title="세션 종료(브라우저 닫기) 시 키 자동 삭제 — 공용/타인 PC에서 안전">
+                    <input type="checkbox" id="aiKeyVolatile"> 세션만 (자동 삭제)
+                  </label>
+                </div>
+                <details class="api-guide" id="apiGuide">
+                  <summary>처음이면 클릭 — API 키 5초 발급 가이드</summary>
+                  <div class="ag-body" id="apiGuideBody"></div>
                 </details>
                 <div class="ai-controls">
-                  <input type="password" id="aiKey" placeholder="sk-ant-... (없으면 비워두세요)" autocomplete="off" spellcheck="false">
+                  <input type="password" id="aiKey" placeholder="제공자 선택 후 키 붙여넣기 (없으면 비워두세요 — OCR/PDF는 작동)" autocomplete="off" spellcheck="false">
                   <button class="btn" id="aiKeySave" type="button">키 저장</button>
                   <button class="btn primary" id="aiAnalyzeBtn" type="button">AI로 사실·증거 정리</button>
                 </div>
@@ -1747,6 +1781,7 @@
               <button class="chip" data-type="결혼사기">결혼사기</button>
               <button class="chip" data-type="취업사기">취업사기</button>
               <button class="chip" data-type="다단계사기">다단계·유사수신</button>
+              <button class="chip priority" data-type="외주먹튀">개발·외주 먹튀</button>
               <button class="chip" data-type="횡령·배임">횡령·배임</button>
               <button class="chip" data-type="공갈·강요">공갈·강요</button>
               <button class="chip" data-type="무고죄">무고죄</button>
@@ -1861,34 +1896,42 @@
       </article>
 
       <article class="panel result-panel" id="resultPanel">
+        <div class="tab-filter" id="tabFilter">
+          <button class="tf-btn active" data-cat="all" type="button">전체</button>
+          <button class="tf-btn" data-cat="docs" type="button">서류</button>
+          <button class="tf-btn" data-cat="legal" type="button">법률</button>
+          <button class="tf-btn" data-cat="case" type="button">사건별</button>
+          <button class="tf-btn" data-cat="team" type="button">결집·방어</button>
+          <button class="tf-btn" data-cat="care" type="button">회복</button>
+        </div>
         <div class="tabs" role="tablist">
-          <button class="tab active" data-tab="labor">노동구제</button>
-          <button class="tab" data-tab="match">법률 매칭</button>
-          <button class="tab" data-tab="remedy">구제방안</button>
-          <button class="tab" data-tab="aggravation">가중·긴급</button>
-          <button class="tab" data-tab="platform">플랫폼 고소</button>
-          <button class="tab" data-tab="telegram">텔레그램 대응</button>
-          <button class="tab" data-tab="complaint">고소장</button>
-          <button class="tab" data-tab="loan">대여금 회수</button>
-          <button class="tab" data-tab="jeonse">전세사기 대응</button>
-          <button class="tab" data-tab="ip">IP도용 대응</button>
-          <button class="tab" data-tab="notice">내용증명</button>
-          <button class="tab" data-tab="payment">지급명령</button>
-          <button class="tab" data-tab="procedure">고소절차</button>
-          <button class="tab" data-tab="counseling">심리지원</button>
-          <button class="tab" data-tab="package">법률패키지</button>
-          <button class="tab" data-tab="collective">집단고소</button>
-          <button class="tab" data-tab="evidence-check">증거 효력</button>
-          <button class="tab" data-tab="settlement">합의금</button>
-          <button class="tab" data-tab="timeline">타임라인</button>
-          <button class="tab" data-tab="sim">현장 시뮬레이터</button>
-          <button class="tab" data-tab="counter">역공격 방어</button>
-          <button class="tab" data-tab="cost">비용회수·도주차단</button>
-          <button class="tab hidden-tab" data-tab="judgement" id="judgementTab">저승사자</button>
-          <button class="tab" data-tab="limitation">공소시효</button>
-          <button class="tab" data-tab="deadline">기한·증거</button>
-          <button class="tab" data-tab="precedent">판례·법령</button>
-          <button class="tab" data-tab="consult">상담 브리프</button>
+          <button class="tab active" data-tab="labor" data-cat="case">노동구제</button>
+          <button class="tab" data-tab="match" data-cat="legal">법률 매칭</button>
+          <button class="tab" data-tab="remedy" data-cat="legal">구제방안</button>
+          <button class="tab" data-tab="aggravation" data-cat="legal">가중·긴급</button>
+          <button class="tab" data-tab="platform" data-cat="case">플랫폼 고소</button>
+          <button class="tab" data-tab="telegram" data-cat="case">텔레그램 대응</button>
+          <button class="tab" data-tab="complaint" data-cat="docs">고소장</button>
+          <button class="tab" data-tab="loan" data-cat="case">대여금 회수</button>
+          <button class="tab" data-tab="jeonse" data-cat="case">전세사기 대응</button>
+          <button class="tab" data-tab="ip" data-cat="case">IP도용 대응</button>
+          <button class="tab" data-tab="notice" data-cat="docs">내용증명</button>
+          <button class="tab" data-tab="payment" data-cat="docs">지급명령</button>
+          <button class="tab" data-tab="procedure" data-cat="case">고소절차</button>
+          <button class="tab" data-tab="counseling" data-cat="care">심리지원</button>
+          <button class="tab" data-tab="package" data-cat="legal">법률패키지</button>
+          <button class="tab" data-tab="collective" data-cat="team">집단고소</button>
+          <button class="tab" data-tab="evidence-check" data-cat="case">증거 효력</button>
+          <button class="tab" data-tab="settlement" data-cat="case">합의금</button>
+          <button class="tab" data-tab="timeline" data-cat="team">타임라인</button>
+          <button class="tab" data-tab="sim" data-cat="team">현장 시뮬레이터</button>
+          <button class="tab" data-tab="counter" data-cat="team">역공격 방어</button>
+          <button class="tab" data-tab="cost" data-cat="docs">비용회수·도주차단</button>
+          <button class="tab" data-tab="limitation" data-cat="legal">공소시효</button>
+          <button class="tab" data-tab="deadline" data-cat="legal">기한·증거</button>
+          <button class="tab" data-tab="precedent" data-cat="legal">판례·법령</button>
+          <button class="tab" data-tab="consult" data-cat="care">상담 브리프</button>
+          <button class="tab hidden-tab" data-tab="judgement" id="judgementTab" data-cat="team">저승사자</button>
         </div>
 
         <div class="result-toolbar" id="resultToolbar">
@@ -2801,6 +2844,19 @@
               </details>
             </div>
 
+            <div class="card gold">
+              <strong>먹튀 개발자 무형자산 압류 — 깃허브·도메인·서버</strong>
+              <p>외주먹튀 가해자가 결과물·도메인·서비스를 다른 클라이언트에게 재판매하거나 운영 중이면, 다음 경로로 자산을 묶을 수 있습니다.</p>
+              <ul style="font-size:13px;line-height:1.65;margin:8px 0;padding-left:20px">
+                <li><b>도메인(.kr/.co.kr)</b>: <a href="https://xn--3e0bx5euxnjje69i70af08bea817g.한국" target="_blank" rel="noopener">한국인터넷진흥원(KISA) 분쟁조정위원회</a> — 가해자 명의 등록 도메인 이전·말소 가능</li>
+                <li><b>글로벌 도메인(.com/.net 등)</b>: <a href="https://www.icann.org/resources/pages/policy-2012-02-25-en" target="_blank" rel="noopener">ICANN UDRP 절차</a> — 사기·악의적 등록 입증 시 이전 가능</li>
+                <li><b>GitHub 계정·저장소</b>: 본인 코드·디자인 무단 사용 시 <a href="https://github.com/contact/dmca" target="_blank" rel="noopener">DMCA Takedown</a> 신고 → 24시간 내 저장소 비공개. 반복 시 계정 정지.</li>
+                <li><b>서버·호스팅</b>: AWS·가비아·카페24 등 가해자 사용 호스팅사에 채권압류 및 추심명령 (저승사자 탭 ②번 양식 활용)</li>
+                <li><b>가상자산 거래소 KYC 자산</b>: 업비트·빗썸 등 — 저승사자 탭 ②번 양식으로 한 번에</li>
+              </ul>
+              <p class="collective-hint">⚠ 가해자가 외주 결과물(코드)을 다른 클라이언트에게 재판매하면 별건 사기·저작권 침해 추가 고소 가능. 카톡 대화록에 "다른 클라이언트도 비슷한 거 만들어주고 있다" 류 발언 보존.</p>
+            </div>
+
             <div class="card red">
               <strong>채무불이행자명부 등재 (가해자 신용 마비)</strong>
               <p>확정 판결/지급명령 이후 <b>6개월 미이행</b>이면 명부 등재 신청 → 제1·2금융권 전산망 등록 → 신용카드·대출·금융거래 전면 마비. 합의 압박 최강 카드.</p>
@@ -3261,6 +3317,11 @@
         note: "이커머스 IP도용 모드: 상품명·썸네일·상세페이지·캘리그래피·사진 구도·최저가 카피를 저작권/부정경쟁/표시광고로 나눠 봅니다.",
         evidence: "원본 PSD/AI/프로크리에이트 파일, 작업 타임스탬프, 최초 게시일, 상대 상품 URL, 썸네일 비교, 가격 변경 이력, 매출·리뷰 자료를 모읍니다.",
         law: ["저작권법 제136조 제1항", "부정경쟁방지법 제2조 제1호 목목", "표시광고법 허위·기만 광고 검토", "플랫폼 지식재산권 신고", "특허청 부정경쟁행위 신고"]
+      },
+      "외주먹튀": {
+        note: "외주먹튀 모드: 카톡·메신저 견적·선금 입금 후 결과물 미인도·잠적 패턴 저격. 카톡 .txt 통째 입력 시 4단계 사실관계 자동 추출.",
+        evidence: "카카오톡 대화 전체(텍스트 내보내기), 견적·기획서, 송금/이체 내역, 약정 납기일, 결과물 인도 약속, 일부 인도 내역, 잠수·차단 시각, 동일 가해자 다른 피해자 제보, 가해자 운영 도메인·GitHub·SNS",
+        law: ["형법 제347조 사기", "민법 제548조 계약 해제 원상회복", "특정경제범죄가중처벌법 §3 (5억↑)", "전자상거래법 환불 의무"]
       },
       "기타법률": {
         note: "기타/직접입력 모드: 사건명이 애매해도 피해사실을 그대로 쓰면 형사·민사·행정·노동·가사·소비자·정보통신 쟁점을 넓게 훑습니다.",
@@ -4210,6 +4271,13 @@
         loopholes: ["<b>예고 예외 사유 주장</b>: 입증책임은 사용자에게, 막연한 주장은 불인정.", "<b>'3개월 미만 근무' 위장</b>: 실제 근무일·계약서로 반박."],
         notice: "발신인은 귀사로부터 30일 전 예고나 30일분 통상임금 지급 없이 즉시 해고되었습니다. 7일 이내 해고예고수당(통상임금 30일분 = 금 ㅇㅇㅇ원) 미지급 시 노동청 진정·근로기준법 제110조 형사고소·민사 지급명령을 진행합니다."
       },
+      "외주먹튀": {
+        crime: "형법 §347 사기 (개발·외주 미인도 편취)",
+        laws: ["형법 제347조 (사기 — 10년 이하 / 2천만원 이하)", "형법 제347조의2 (컴퓨터등사용사기 — 결과물 무단 사용 시)", "민법 제390조 (채무불이행 손해배상)", "민법 제548조 (계약 해제·원상회복)", "특정경제범죄가중처벌법 §3 (피해자 다수 합산 5억↑)"],
+        urgent: "피고소인은 카카오톡·이메일 등 비대면 채널로 개발·외주 계약을 체결하고 선금·중도금을 수령하였음에도, 처음부터 이행 의사·능력 없이 결과물을 인도하지 않고 잠적하여 고소인을 기망·편취하였습니다. 외주 개발 사기는 동일 가해자가 동일 수법으로 다수 피해자에게 반복하는 전형적 패턴이며, 가해자가 코드를 다른 클라이언트에게 재판매하거나 잠적 후 새 닉네임으로 영업하는 정황이 빈번합니다. 카카오톡 대화록·송금내역만으로도 사기 구성요건(기망행위·편취의사) 입증이 충분히 가능합니다.",
+        loopholes: ["<b>'단순 일정 지연' 위장</b>: 약속한 납기 이후 한참 지나도록 결과물 인도 없음 + 차단·잠수는 단순 지연이 아닌 편취 의사 입증.", "<b>'환불 의사 있다' 변명</b>: 환불 약속만 반복하고 실제 입금 없음 = 추가 기망. 모든 약속 메시지 보전.", "<b>차명 계정·새 닉네임 위장</b>: 동일 IP·동일 계좌·동일 문체로 다른 클라이언트에게 영업 → 동일 가해자 결합 수사 요청.", "<b>'발주자 책임' 떠넘기기</b>: 명세 부족·요구사항 변경 핑계로 책임 회피 시 → 최초 견적·약정 메시지가 결정타."],
+        notice: "발신인은 ㅇㅇ년 ㅇㅇ월 ㅇㅇ일 귀하와 카카오톡으로 ㅇㅇ개발 계약을 체결하고 합의된 대금 ㅇㅇㅇ원을 송금하였습니다. 그러나 귀하는 약정 납기일 ㅇㅇ년 ㅇㅇ월 ㅇㅇ일을 도과하였음에도 결과물을 인도하지 않고 본인의 카카오톡·전화·이메일에 응답하지 않고 있습니다. 본 통지를 수령한 날부터 7일 이내 ① 결과물의 즉시 인도 또는 ② 지급금 전액 환불을 이행하시기 바랍니다. 미이행 시 형법 §347 사기 고소·민사 손해배상·지급명령·계좌 가압류·채무불이행자명부 등재를 동시 진행하며, 본 통지 자체를 양형 자료로 제출합니다."
+      },
       "기타법률": {
         crime: "사안별 검토",
         laws: ["국가법령정보센터 법령검색", "대법원 판례검색", "형사·민사·행정·노동·가사·소비자·정보통신 쟁점 분류"],
@@ -4771,6 +4839,13 @@
         preserve: [],
         admin: ["게임사 채팅 로그 보전 요청 + 계정 영구정지"],
         recovery: []
+      },
+      "외주먹튀": {
+        criminal: ["형법 §347 사기 (이행 의사·능력 없이 편취)", "특경법 §3 (다수 피해자 결합 5억↑)", "ECRM 24시간 온라인 접수 가능"],
+        civil: ["<b>계약 해제 + 원상회복</b> (민법 §548) — 송금액 전액 반환", "지급명령 → 강제집행", "민사소송 + 가압류 (예금·계좌·가상자산)"],
+        preserve: ["계좌 가압류 (가장 우선 — 송금 추적)", "<b>도메인·서버 자산 압류</b> (가해자가 사용 중인 서비스 운영 자산)", "GitHub 저작권 침해 신고로 takedown"],
+        admin: ["한국소비자원 1372 (전자상거래 분쟁조정)", "더치트·디스인사이드 외주먹튀 갤러리 — 동일 피해자 결합", "프리랜서 플랫폼(크몽·숨고) 신고 + 계정 영구정지"],
+        recovery: ["집단고소 탭에서 동일 가해자 다수 피해자 결합 → 특경법 격상", "범죄피해자지원센터 ☎1577-1295"]
       }
     };
 
@@ -4801,7 +4876,7 @@
     // ===== 죄명 세부유형 (실무 4유형/3유형/2유형) =====
     const subtypeAlias = {
       "인터넷사기": "사기", "중고거래사기": "사기", "보이스피싱": "사기", "코인사기": "사기", "대여금분쟁": "사기", "전세사기": "사기",
-      "보험사기": "사기", "결혼사기": "사기", "취업사기": "사기", "다단계사기": "사기",
+      "보험사기": "사기", "결혼사기": "사기", "취업사기": "사기", "다단계사기": "사기", "외주먹튀": "사기",
       "명예훼손·모욕": "명예훼손", "게임욕설·모욕": "명예훼손", "신상유포": "명예훼손",
       "디지털성범죄": "디지털성범죄", "통매음": "디지털성범죄",
       "폭행·상해": "폭행", "가정폭력": "폭행", "데이트폭력": "폭행", "학교폭력": "폭행", "주거침입": "폭행",
@@ -5493,6 +5568,284 @@ cn + " 드림";
     }
     // ===== /시뮬레이터 =====
 
+    // ===== 탭 카테고리 필터 =====
+    function setupTabFilter() {
+      const filter = document.getElementById("tabFilter");
+      if (!filter) return;
+      filter.addEventListener("click", (e) => {
+        const b = e.target.closest(".tf-btn");
+        if (!b) return;
+        filter.querySelectorAll(".tf-btn").forEach(x => x.classList.toggle("active", x === b));
+        const cat = b.dataset.cat;
+        document.querySelectorAll(".tabs .tab").forEach(t => {
+          if (cat === "all" || t.dataset.cat === cat) t.removeAttribute("data-cat-hidden");
+          else t.setAttribute("data-cat-hidden", "");
+        });
+        // 만약 현재 활성 탭이 숨겨졌으면 첫 보이는 탭으로 이동
+        const active = document.querySelector(".tab.active");
+        if (active && active.hasAttribute("data-cat-hidden")) {
+          const firstVisible = document.querySelector(".tabs .tab:not([data-cat-hidden])");
+          if (firstVisible) firstVisible.click();
+        }
+      });
+    }
+
+    // ===== 멀티 AI 제공자 =====
+    const AI_PROVIDERS = {
+      claude: {
+        name: "Claude (Anthropic)",
+        prefix: "sk-ant-",
+        placeholder: "sk-ant-...",
+        guide: [
+          "<a href=\"https://console.anthropic.com\" target=\"_blank\" rel=\"noopener\">console.anthropic.com</a> 접속 → Google 로그인 (가입 3초)",
+          "왼쪽 메뉴 <b>Settings → API Keys</b>",
+          "<b>Create Key</b> 클릭 → 이름 아무거나 (예: \"법률단\")",
+          "키(<code>sk-ant-…</code>) 복사 <em>(화면 닫으면 다시 못 봄)</em>",
+          "아래 입력칸에 붙여넣기 → 키 저장"
+        ],
+        cost: "Anthropic은 결제수단 등록 + 최소 $5(약 7천원) 충전 필요. 분석 1회당 100~300원."
+      },
+      openai: {
+        name: "ChatGPT (OpenAI)",
+        prefix: "sk-",
+        placeholder: "sk-proj-... 또는 sk-...",
+        guide: [
+          "<a href=\"https://platform.openai.com/api-keys\" target=\"_blank\" rel=\"noopener\">platform.openai.com/api-keys</a> 접속 → 로그인",
+          "<b>Create new secret key</b> 클릭 → 이름 입력",
+          "키(<code>sk-…</code>) 복사 <em>(화면 닫으면 다시 못 봄)</em>",
+          "결제수단 등록 (<b>Settings → Billing → Payment methods</b>) — 최소 $5 충전",
+          "아래 입력칸에 붙여넣기 → 키 저장"
+        ],
+        cost: "GPT-4o-mini 기준 분석 1회당 약 10~50원으로 가장 저렴. 무료 크레딧 없음 (충전 필수)."
+      },
+      gemini: {
+        name: "Gemini (Google)",
+        prefix: "",
+        placeholder: "AIza... (Google AI Studio 키)",
+        guide: [
+          "<a href=\"https://aistudio.google.com/apikey\" target=\"_blank\" rel=\"noopener\">aistudio.google.com/apikey</a> 접속 → Google 로그인",
+          "<b>Create API key</b> 클릭 → 새 프로젝트 선택 또는 기본",
+          "키(<code>AIza…</code>) 복사",
+          "(선택) 결제 활성화 — 무료 한도 내에서는 그냥 사용 가능",
+          "아래 입력칸에 붙여넣기 → 키 저장"
+        ],
+        cost: "Gemini 2.5 Flash는 <b>무료 한도(분당 15회·일 1500회)</b>가 제공돼서 충전 안 해도 사용 가능. 가장 진입장벽 낮음."
+      }
+    };
+
+    function aiProvider() { return document.getElementById("aiProvider")?.value || "claude"; }
+    function aiVolatile() { return document.getElementById("aiKeyVolatile")?.checked || false; }
+    function aiKeyStorageKey(p) { return "dok_aiKey_" + p; }
+    function loadAiKey() {
+      const p = aiProvider();
+      const k = aiKeyStorageKey(p);
+      let v = "";
+      try { v = sessionStorage.getItem(k) || ""; if (!v && !aiVolatile()) v = localStorage.getItem(k) || ""; } catch (e) {}
+      const input = document.getElementById("aiKey");
+      if (input) {
+        input.value = v;
+        input.placeholder = (AI_PROVIDERS[p] && AI_PROVIDERS[p].placeholder) || "API 키 입력";
+      }
+      renderApiGuide();
+    }
+    function saveAiKey() {
+      const p = aiProvider();
+      const k = aiKeyStorageKey(p);
+      const v = document.getElementById("aiKey").value.trim();
+      try {
+        if (aiVolatile()) {
+          if (v) sessionStorage.setItem(k, v); else sessionStorage.removeItem(k);
+          localStorage.removeItem(k); // 휘발성 켜면 영구 저장본 제거
+        } else {
+          if (v) localStorage.setItem(k, v); else localStorage.removeItem(k);
+          sessionStorage.removeItem(k);
+        }
+        const btn = document.getElementById("aiKeySave");
+        if (btn) { const o = btn.textContent; btn.textContent = v ? "저장됨 ✓" : "삭제됨"; setTimeout(() => btn.textContent = "키 저장", 1500); }
+      } catch (e) { alert("저장 실패: " + e.message); }
+    }
+    function renderApiGuide() {
+      const p = aiProvider();
+      const cfg = AI_PROVIDERS[p];
+      const body = document.getElementById("apiGuideBody");
+      if (!body || !cfg) return;
+      body.innerHTML = "<p style=\"margin:0 0 8px;font-weight:700;color:var(--wine-dark)\">" + escHtml(cfg.name) + " 키 5단계</p>" +
+        "<ol>" + cfg.guide.map((s, i) => "<li><b>" + (i+1) + ".</b> " + s + "</li>").join("") + "</ol>" +
+        "<div class=\"ag-cost\">💰 " + cfg.cost + (p === "gemini" ? "" : " 충전 안 해도 사이트의 OCR·PDF 자동 추출은 그대로 작동.") + "</div>" +
+        "<div class=\"ag-warn\">⚠ 키는 본인 브라우저에만 저장. 다른 사람·공용 PC 금지. 유출 시 즉시 Revoke. <b>세션만</b> 토글을 켜면 브라우저 닫을 때 자동 삭제됩니다.</div>";
+    }
+
+    async function callAI(prompt) {
+      const p = aiProvider();
+      const k = document.getElementById("aiKey").value.trim();
+      if (!k) throw new Error("API 키를 먼저 입력하고 저장하세요.");
+      if (p === "claude") {
+        const res = await fetch("https://api.anthropic.com/v1/messages", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "x-api-key": k,
+            "anthropic-version": "2023-06-01",
+            "anthropic-dangerous-direct-browser-access": "true"
+          },
+          body: JSON.stringify({
+            model: "claude-sonnet-4-6",
+            max_tokens: 2500,
+            messages: [{ role: "user", content: prompt }]
+          })
+        });
+        if (!res.ok) throw new Error("Claude API " + res.status + ": " + (await res.text()).slice(0,300));
+        const d = await res.json();
+        return (d.content && d.content[0] && d.content[0].text) || "(응답 없음)";
+      } else if (p === "openai") {
+        const res = await fetch("https://api.openai.com/v1/chat/completions", {
+          method: "POST",
+          headers: {
+            "content-type": "application/json",
+            "Authorization": "Bearer " + k
+          },
+          body: JSON.stringify({
+            model: "gpt-4o-mini",
+            messages: [{ role: "user", content: prompt }],
+            max_tokens: 2500
+          })
+        });
+        if (!res.ok) throw new Error("OpenAI API " + res.status + ": " + (await res.text()).slice(0,300));
+        const d = await res.json();
+        return (d.choices && d.choices[0] && d.choices[0].message && d.choices[0].message.content) || "(응답 없음)";
+      } else if (p === "gemini") {
+        const res = await fetch("https://generativelanguage.googleapis.com/v1beta/models/gemini-2.5-flash:generateContent?key=" + encodeURIComponent(k), {
+          method: "POST",
+          headers: { "content-type": "application/json" },
+          body: JSON.stringify({
+            contents: [{ parts: [{ text: prompt }] }],
+            generationConfig: { maxOutputTokens: 2500 }
+          })
+        });
+        if (!res.ok) throw new Error("Gemini API " + res.status + ": " + (await res.text()).slice(0,300));
+        const d = await res.json();
+        const parts = d.candidates?.[0]?.content?.parts;
+        return parts ? parts.map(p => p.text || "").join("") : "(응답 없음)";
+      }
+      throw new Error("알 수 없는 AI 제공자: " + p);
+    }
+
+    // ===== 카톡 대화록 자동 파서 (4단계 사실관계 재구성) =====
+    function parseKakaoExport(text) {
+      const lines = text.split(/\r?\n/);
+      const msgs = [];
+      let curDate = null;
+      // 패턴 1: "------ 2025년 7월 1일 화요일 ------"
+      const datePat1 = /-{2,}\s*(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일/;
+      // 패턴 2: "2025년 7월 1일 오후 2:30, 박개발자 : 안녕"
+      const msgPat1 = /^(\d{4})년\s*(\d{1,2})월\s*(\d{1,2})일\s*(오전|오후)\s*(\d{1,2}):(\d{2}),\s*([^:]+?)\s*:\s*(.+)$/;
+      // 패턴 3: "[박개발자] [오후 2:30] 안녕"
+      const msgPat2 = /^\[([^\]]+)\]\s*\[(오전|오후)\s*(\d{1,2}):(\d{2})\]\s*(.+)$/;
+      for (const ln of lines) {
+        const d1 = ln.match(datePat1);
+        if (d1) { curDate = `${d1[1]}-${d1[2].padStart(2,"0")}-${d1[3].padStart(2,"0")}`; continue; }
+        const m1 = ln.match(msgPat1);
+        if (m1) {
+          let h = parseInt(m1[5], 10); if (m1[4] === "오후" && h !== 12) h += 12; if (m1[4] === "오전" && h === 12) h = 0;
+          msgs.push({ date: `${m1[1]}-${m1[2].padStart(2,"0")}-${m1[3].padStart(2,"0")}`, time: `${String(h).padStart(2,"0")}:${m1[6]}`, who: m1[7].trim(), text: m1[8].trim() });
+          continue;
+        }
+        const m2 = ln.match(msgPat2);
+        if (m2 && curDate) {
+          let h = parseInt(m2[3], 10); if (m2[2] === "오후" && h !== 12) h += 12; if (m2[2] === "오전" && h === 12) h = 0;
+          msgs.push({ date: curDate, time: `${String(h).padStart(2,"0")}:${m2[4]}`, who: m2[1].trim(), text: m2[5].trim() });
+        }
+      }
+      return msgs;
+    }
+
+    function extractContractTimeline(msgs) {
+      // 키워드 사전
+      const KW = {
+        contract: /(견적|개발|제작|계약|진행|일정|마감|납기|기한|만원|원에|원 ?받|보내드|보내주|입금하|착수|진행하|쓰겠|만들|제작 ?기간)/,
+        payment: /(보냈|입금|이체|송금|결제|받았|영수|확인했|들어왔)/,
+        silence: /(연락 ?안|답장 ?안|읽씹|잠수|차단|블락|연락 ?끊|왜 ?이래|언제 ?되|어디|왜 ?답이 ?없)/,
+        demand: /(환불|환급|취소|독촉|마무리|결과물|언제 ?끝|약속 ?안|기한 ?넘|법적|고소|소송|내용증명|돌려)/
+      };
+      const stages = { contract: [], payment: [], silence: [], demand: [] };
+      msgs.forEach(m => {
+        for (const k of Object.keys(KW)) {
+          if (KW[k].test(m.text)) stages[k].push(m);
+        }
+      });
+      return stages;
+    }
+
+    function timelineToNarrative(stages, parties) {
+      const dateRange = (arr) => {
+        if (!arr.length) return null;
+        const sorted = arr.slice().sort((a,b) => (a.date+a.time).localeCompare(b.date+b.time));
+        return { first: sorted[0], last: sorted[sorted.length-1], count: arr.length };
+      };
+      const formatDate = (d) => {
+        if (!d) return "";
+        const [y,m,dd] = d.split("-");
+        return `${y}.${m}.${dd}`;
+      };
+      const lines = [];
+      const c = dateRange(stages.contract);
+      const p = dateRange(stages.payment);
+      const s = dateRange(stages.silence);
+      const dm = dateRange(stages.demand);
+      const opp = parties.find(x => x !== "본인" && x !== "Me" && x !== "나") || parties[0] || "상대방";
+      lines.push(`피해사실(자동 추출 — ${parties.join(" / ")}):`);
+      lines.push("");
+      if (c) lines.push(`① 계약 성립 — ${formatDate(c.first.date)} ${opp}와(과) 카카오톡으로 ${stages.contract[0].text.slice(0,80).replace(/\s+/g," ")} 등의 내용으로 계약 체결.`);
+      if (p) lines.push(`② 대금 지급 — ${formatDate(p.first.date)} 본인이 ${opp}에게 금원 입금 (관련 메시지 ${p.count}건). 인용: "${stages.payment[0].text.slice(0,80)}".`);
+      if (s) lines.push(`③ 채무 불이행·잠수 — ${formatDate(s.first.date)}부터 ${formatDate(s.last.date)}까지 ${opp}의 답장 없음/연락 회피/잠수 정황 ${s.count}회. 인용: "${stages.silence[0].text.slice(0,80)}".`);
+      if (dm) lines.push(`④ 본인의 독촉·이행 요구 — ${formatDate(dm.first.date)}부터 ${dm.count}회 환불·이행·고소 의사 통지. 그러나 ${opp}는 결과물 인도 또는 환불을 거부함.`);
+      lines.push("");
+      lines.push(`처음부터 ${opp}가 이행 의사·능력 없이 본인을 기망하여 금원을 편취한 정황이 강하며, 본 대화록과 이체내역은 형법 §347 사기죄 및 민사 손해배상 청구의 객관 증거로 보존되어 있음.`);
+      return lines.join("\n");
+    }
+
+    function setupKakaoParser() {
+      const inp = document.getElementById("kakaoFile");
+      const out = document.getElementById("kakaoResult");
+      if (!inp || !out) return;
+      inp.addEventListener("change", async (e) => {
+        const f = e.target.files[0];
+        if (!f) return;
+        out.style.display = "block";
+        out.innerHTML = "<p>파일 읽는 중…</p>";
+        try {
+          const text = await f.text();
+          const msgs = parseKakaoExport(text);
+          if (!msgs.length) { out.innerHTML = "<p style=\"color:var(--wine)\">카카오톡 내보내기 형식을 인식하지 못했습니다. \"대화 내보내기 → 텍스트만\"으로 받은 .txt 파일인지 확인해주세요.</p>"; return; }
+          const parties = Array.from(new Set(msgs.map(m => m.who))).slice(0, 6);
+          const stages = extractContractTimeline(msgs);
+          const narrative = timelineToNarrative(stages, parties);
+          let html = `<p><b>인식 완료</b> — 메시지 ${msgs.length}건, 참여자 ${parties.length}명 (${escHtml(parties.join(", "))})</p>`;
+          const stageNames = { contract: "① 계약 성립", payment: "② 대금 지급", silence: "③ 채무 불이행·잠수", demand: "④ 독촉·이행 요구" };
+          for (const k of ["contract","payment","silence","demand"]) {
+            html += `<div class="kakao-stage"><h6>${stageNames[k]} — ${stages[k].length}건</h6>`;
+            stages[k].slice(0,3).forEach(m => {
+              html += `<p class="kakao-quote">${escHtml(m.date + " " + m.time + " " + m.who + ": " + m.text.slice(0,120))}</p>`;
+            });
+            if (!stages[k].length) html += `<p style="color:var(--muted);font-size:11.5px">해당 단계 매칭 없음</p>`;
+            html += `</div>`;
+          }
+          html += `<div style="margin-top:10px;padding:10px 12px;background:rgba(47,107,79,.1);border-left:3px solid var(--green);border-radius:0 6px 6px 0"><p style="margin:0 0 6px;font-weight:700">📝 피해사실 자동 채움 완료 (story textarea 확인)</p></div>`;
+          out.innerHTML = html;
+          // story textarea 자동 채움
+          if (story) {
+            story.value = narrative;
+            story.dispatchEvent(new Event("input", { bubbles: true }));
+            // 외주먹튀 칩 자동 선택 (기본 추론)
+            const chip = document.querySelector('.chip[data-type="외주먹튀"]') || document.querySelector('.chip[data-type="대여금분쟁"]') || document.querySelector('.chip[data-type="인터넷사기"]');
+            if (chip) chip.click();
+          }
+        } catch (err) {
+          out.innerHTML = "<p style=\"color:var(--wine)\">파일 읽기 실패: " + escHtml(err.message) + "</p>";
+        }
+      });
+    }
+
     // ===== 12% 법정이자 시뮬레이터 (소촉법 §3) =====
     function setupInterestCalc() {
       const btn = document.getElementById("calcInterest");
@@ -6122,6 +6475,13 @@ cn + " 드림";
     setupJudgementUnlock();
     setupInterestCalc();
     setupHashFile();
+    setupTabFilter();
+    setupKakaoParser();
+    // AI 제공자 변경 시 가이드·키 자동 전환
+    const aiProvSel = document.getElementById("aiProvider");
+    if (aiProvSel) aiProvSel.addEventListener("change", () => { loadAiKey(); renderApiGuide(); });
+    const aiVolCb = document.getElementById("aiKeyVolatile");
+    if (aiVolCb) aiVolCb.addEventListener("change", () => { saveAiKey(); });
     buildCostInputs();
     const costGenBtn = document.getElementById("genCostDoc");
     if (costGenBtn) costGenBtn.addEventListener("click", genCostDoc);
@@ -6279,28 +6639,25 @@ cn + " 드림";
       });
       input.addEventListener("change", (e) => handleFiles(e.target.files));
 
+      // 기존 단일키(dokAiKey)는 claude 마이그레이션
       try {
-        const saved = localStorage.getItem("dokAiKey");
-        if (saved) keyInput.value = saved;
+        const legacy = localStorage.getItem("dokAiKey");
+        if (legacy && !localStorage.getItem("dok_aiKey_claude")) {
+          localStorage.setItem("dok_aiKey_claude", legacy);
+          localStorage.removeItem("dokAiKey");
+        }
       } catch (e) {}
+      // 다중 제공자 키 로딩 — global loadAiKey 사용
+      if (typeof loadAiKey === "function") loadAiKey();
 
       keySaveBtn.addEventListener("click", () => {
-        try {
-          const v = keyInput.value.trim();
-          if (v) localStorage.setItem("dokAiKey", v);
-          else localStorage.removeItem("dokAiKey");
-          const orig = keySaveBtn.textContent;
-          keySaveBtn.textContent = v ? "저장됨 ✓" : "삭제됨";
-          setTimeout(() => { keySaveBtn.textContent = "키 저장"; }, 1500);
-        } catch (e) {
-          alert("저장 실패: " + e.message);
-        }
+        if (typeof saveAiKey === "function") saveAiKey();
       });
 
       analyzeBtn.addEventListener("click", async () => {
         const key = keyInput.value.trim();
         if (!key) {
-          alert("Anthropic API 키를 먼저 입력하세요.\n(console.anthropic.com → Settings → API Keys 에서 발급)");
+          alert("AI 제공자를 선택하고 API 키를 입력하세요.\n(상단 '처음이면 클릭 — 5초 발급 가이드' 참고)");
           return;
         }
         const docs = items.filter(i => i.status === "done" && i.text && i.text !== "(추출된 텍스트 없음)");
@@ -6311,10 +6668,11 @@ cn + " 드림";
         if (!checkAICooldown()) return;
         analyzeBtn.disabled = true;
         const origLabel = analyzeBtn.textContent;
-        analyzeBtn.textContent = "Claude 분석 중...";
+        const providerName = (AI_PROVIDERS[aiProvider()] && AI_PROVIDERS[aiProvider()].name) || "AI";
+        analyzeBtn.textContent = providerName + " 분석 중...";
         resultBox.classList.remove("show");
 
-        const allowedTypes = ["부당해고","해고예고수당","임금체불","인터넷사기","보이스피싱","중고거래사기","전세사기","코인사기","폭행·상해","협박·스토킹","텔레그램스토킹","명예훼손·모욕","게임욕설·모욕","통매음","성희롱","성폭력","디지털성범죄","절도·손괴","대여금분쟁","업체분쟁","표절·저작권","이커머스IP도용","기타법률"];
+        const allowedTypes = ["부당해고","해고예고수당","임금체불","인터넷사기","보이스피싱","중고거래사기","전세사기","코인사기","폭행·상해","협박·스토킹","텔레그램스토킹","명예훼손·모욕","게임욕설·모욕","통매음","성희롱","성폭력","디지털성범죄","절도·손괴","대여금분쟁","업체분쟁","표절·저작권","이커머스IP도용","외주먹튀","기타법률"];
 
         const prompt =
           "당신은 한국 형사·민사 사건 보조원입니다. 아래는 피해자가 첨부한 자료에서 추출한 텍스트입니다.\n" +
@@ -6329,31 +6687,12 @@ cn + " 드림";
           docs.map((d, i) => "[자료 " + (i + 1) + ": " + d.name + "]\n" + d.text).join("\n\n");
 
         try {
-          const res = await fetch("https://api.anthropic.com/v1/messages", {
-            method: "POST",
-            headers: {
-              "content-type": "application/json",
-              "x-api-key": key,
-              "anthropic-version": "2023-06-01",
-              "anthropic-dangerous-direct-browser-access": "true"
-            },
-            body: JSON.stringify({
-              model: "claude-sonnet-4-6",
-              max_tokens: 2500,
-              messages: [{ role: "user", content: prompt }]
-            })
-          });
-          if (!res.ok) {
-            const errBody = await res.text();
-            throw new Error("API " + res.status + ": " + errBody.slice(0, 300));
-          }
-          const data = await res.json();
-          const text = (data && data.content && data.content[0] && data.content[0].text) || "(응답 없음)";
+          const text = await callAI(prompt);
           resultText.textContent = text;
           resultBox.dataset.text = text;
           resultBox.classList.add("show");
         } catch (err) {
-          resultText.textContent = "오류: " + (err && err.message ? err.message : String(err)) + "\n\n(키가 잘못됐거나, 인터넷 차단, 또는 Anthropic API 잔액 부족일 수 있습니다.)";
+          resultText.textContent = "오류: " + (err && err.message ? err.message : String(err)) + "\n\n(키가 잘못됐거나, 인터넷 차단, 또는 API 잔액 부족일 수 있습니다. 제공자를 바꿔보세요 — Gemini는 무료 한도 있음.)";
           resultBox.classList.add("show");
         } finally {
           analyzeBtn.disabled = false;
