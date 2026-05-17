@@ -1571,6 +1571,176 @@
     .cards .card strong { font-size: 14.5px; }
     .cards .card p { font-size: 13px; line-height: 1.55; margin: 4px 0 0; }
 
+    /* =========================
+       반응형 + 가독성 종합 패스 (override layer)
+       ========================= */
+
+    /* 기본 타이포 키우기 + 한글 줄간격 안정화 */
+    body { font-size: 16px; line-height: 1.65; }
+    p { line-height: 1.7; margin: 8px 0; }
+    li { line-height: 1.65; margin: 5px 0; }
+    h1, h2, h3, h4, h5, h6 { line-height: 1.3; letter-spacing: -0.01em; }
+    h4 { font-size: 16px; margin: 12px 0 8px; }
+    h5 { font-size: 14.5px; margin: 8px 0 6px; }
+    ul, ol { padding-left: 22px; }
+
+    /* 다크모드 대비 보강 (한 번 더) */
+    body.dark { --paper: #15171a; --white: #1c1e22; --soft: #25272b; --line: #3a3d42; --ink: #f0ece5; --muted: #c4bcae; }
+    body.dark p, body.dark li, body.dark span, body.dark td { color: #e8e2d4; }
+    body.dark .card p, body.dark .card li { color: #ebe5d6; }
+    body.dark a { color: #f5b690; }
+
+    /* 터치 타겟 안전 영역 (모바일 최소 44px) */
+    button, .btn, .chip, .tab, .tax-btn, .qs-card, .hub-card { min-height: 44px; }
+    input:not([type="checkbox"]):not([type="radio"]), select, textarea {
+      min-height: 44px;
+      font-size: 16px; /* iOS 자동 줌 방지 */
+      padding: 10px 12px;
+      border-radius: 8px;
+    }
+    textarea { line-height: 1.6; }
+
+    /* 결과 패널 최대 폭 (큰 화면에서 가독성) */
+    .result-panel { max-width: 1100px; margin: 0 auto; }
+
+    /* 카드 일반 - 패딩·폰트 키움 */
+    .cards { display: grid; gap: 14px; }
+    .cards .card { padding: 18px 20px; line-height: 1.65; }
+    .cards .card strong { font-size: 15px; display: block; margin-bottom: 6px; }
+    .cards .card p { font-size: 14px; line-height: 1.7; margin: 4px 0 0; }
+    .cards .card ul, .cards .card ol { font-size: 14px; line-height: 1.7; }
+
+    /* Hero 본문 가독성 */
+    .hero-copy > p { font-size: 17px; line-height: 1.8; }
+    @media (max-width: 720px) { .hero-copy > p { font-size: 15px; line-height: 1.7; } }
+
+    /* 도구 허브 - 모바일에서도 시원하게 */
+    @media (max-width: 600px) {
+      .hub-grid { grid-template-columns: 1fr; gap: 8px; }
+      .hub-card { padding: 14px 16px; }
+      .hub-card strong { font-size: 15px; }
+      .hub-card span { font-size: 12.5px; }
+      .tool-hub-title { font-size: 22px; }
+      .tool-hub-sub { font-size: 13.5px; }
+    }
+
+    /* 빠른 시작 카드 - 모바일 가독성 */
+    @media (max-width: 480px) {
+      .qs-grid { grid-template-columns: 1fr; }
+      .qs-card { padding: 18px; flex-direction: row; align-items: center; gap: 12px; }
+      .qs-card .qs-emoji { font-size: 28px; }
+      .qs-card > div:not(.qs-emoji) { display: flex; flex-direction: column; gap: 2px; }
+      .qs-card strong { font-size: 15.5px; }
+      .qs-card span { font-size: 12.5px; }
+    }
+
+    /* 입력 폼 - 모바일 */
+    @media (max-width: 720px) {
+      .form { padding: 14px; gap: 14px; }
+      .form > label { font-size: 13.5px; }
+      .fields { gap: 10px; }
+      .fields.three, .fields.two { grid-template-columns: 1fr; }
+      textarea#story { min-height: 220px; font-size: 15px; }
+      .person-block .person-body { padding: 6px 14px 14px; }
+    }
+
+    /* 결과 패널 안 view 패딩 (모바일) */
+    @media (max-width: 720px) {
+      .view { padding: 16px 14px !important; }
+    }
+
+    /* 문서 양식 (고소장·내용증명·지급명령) - 모바일 가독성 */
+    .complaint-doc, .notice-doc, .payment-doc {
+      padding: 24px 26px;
+      line-height: 1.75;
+    }
+    .complaint-doc h3 { font-size: 24px; }
+    .complaint-doc h4, .notice-doc h4, .payment-doc h4 { font-size: 15.5px; margin: 18px 0 10px; }
+    .complaint-doc p, .notice-doc p, .payment-doc p,
+    .complaint-doc li, .notice-doc li, .payment-doc li { font-size: 14.5px; line-height: 1.8; }
+    @media (max-width: 720px) {
+      .complaint-doc, .notice-doc, .payment-doc { padding: 18px 16px; line-height: 1.7; }
+      .complaint-doc h3 { font-size: 21px; letter-spacing: 4px; }
+      .complaint-doc h4, .notice-doc h4, .payment-doc h4 { font-size: 14.5px; }
+      .cd-row, .nd-row, .pd-row { grid-template-columns: 1fr; gap: 2px 8px; padding: 6px 0; }
+      .cd-row > b, .nd-row > b, .pd-row > b { font-size: 12.5px; color: var(--muted); }
+      .complaint-doc p, .notice-doc p, .payment-doc p,
+      .complaint-doc li, .notice-doc li, .payment-doc li { font-size: 14px; }
+    }
+
+    /* 표 가로 스크롤 (작은 화면) */
+    .complaint-doc table, .payment-doc table, .notice-doc table { width: 100%; border-collapse: collapse; }
+    @media (max-width: 720px) {
+      .complaint-doc table, .payment-doc table, .notice-doc table {
+        display: block; overflow-x: auto; white-space: nowrap;
+      }
+      .complaint-doc table td, .payment-doc table td { white-space: normal; }
+    }
+
+    /* 절차 단계 스텝 - 모바일 패딩 */
+    @media (max-width: 720px) {
+      .procedure-steps { margin-left: 22px; gap: 10px; }
+      .procedure-step { padding: 12px 14px; }
+      .procedure-step h5 { font-size: 14.5px; }
+      .procedure-step li, .procedure-step p { font-size: 13.5px; }
+    }
+
+    /* 심리지원·법률패키지 그리드 모바일 */
+    @media (max-width: 480px) {
+      .counsel-grid, .precedent-grid { grid-template-columns: 1fr; }
+    }
+
+    /* AI 컨트롤 - 모바일에서 줄바꿈 깔끔 */
+    @media (max-width: 720px) {
+      .ai-controls { flex-direction: column; }
+      .ai-controls input, .ai-controls .btn { width: 100%; }
+      .ai-provider-row { flex-wrap: wrap; }
+      .ai-provider-row select { width: 100%; }
+    }
+
+    /* 결과 툴바 - 모바일 압축 */
+    @media (max-width: 720px) {
+      .result-toolbar { padding: 10px 12px; flex-wrap: wrap; }
+      .result-toolbar .rt-label { display: none; }
+      .result-toolbar button { padding: 8px 10px; font-size: 12px; flex: 1 1 calc(50% - 4px); min-width: 0; }
+      .mask-toggle { width: 100%; justify-content: flex-start; padding: 8px; }
+    }
+
+    /* 집단고소 박스 모바일 */
+    @media (max-width: 720px) {
+      .collective-box { padding: 14px 16px; }
+      .collective-box .fields { grid-template-columns: 1fr; gap: 8px; }
+      .share-area input { min-width: 0; width: 100%; }
+      .share-area .btn { flex: 1 1 auto; }
+    }
+
+    /* 도구 nav bar 모바일 — sticky 안전 영역 */
+    @media (max-width: 720px) {
+      .tool-nav { padding: 12px 14px; gap: 8px; }
+      .tool-nav-title { font-size: 14px; }
+      .tool-nav-back { padding: 7px 12px; font-size: 12.5px; min-height: 38px; }
+      .tool-nav-crumb { font-size: 12px; }
+    }
+
+    /* 정의여신 그림 모바일 균형 */
+    @media (max-width: 1080px) and (min-width: 721px) {
+      .hero-right { width: 280px; }
+    }
+
+    /* 빠른시작 섹션 패딩 */
+    .quickstart { padding: 52px clamp(18px, 5vw, 100px) 56px; }
+    @media (max-width: 480px) { .quickstart { padding: 32px 14px 36px; } }
+
+    /* 일반 색상 링크 가독성 */
+    a { word-break: break-all; }
+    .law-links a { display: inline-block; margin: 4px 8px 4px 0; padding: 6px 10px; background: var(--soft); border-radius: 6px; font-size: 13px; text-decoration: none; color: var(--wine); }
+    .law-links a:hover { background: var(--wine); color: #fff; }
+    body.dark .law-links a { color: #f5b690; }
+    body.dark .law-links a:hover { color: #fff; }
+
+    /* 디테일/접기 항상 클릭 영역 충분히 */
+    details summary { padding: 8px 0; min-height: 32px; }
+
     /* 인쇄 전용 */
     @media print {
       body { background: #fff !important; color: #000 !important; }
