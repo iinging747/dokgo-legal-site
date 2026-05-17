@@ -133,14 +133,27 @@
       min-height: 620px;
       position: relative;
       overflow: hidden;
-      display: grid;
-      grid-template-columns: minmax(0, 1.15fr) minmax(0, 0.85fr);
-      grid-template-areas: "copy image" "panel image";
-      gap: 32px 48px;
+      display: flex;
+      flex-direction: row;
       align-items: center;
+      gap: 48px;
       padding: 96px clamp(20px, 6vw, 100px) 72px;
       background:
         linear-gradient(180deg, #f5f4f1 0%, #e8e6e1 65%, #dad6cf 100%);
+    }
+    .hero-left {
+      flex: 1 1 auto;
+      min-width: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 28px;
+    }
+    .hero-right {
+      flex: 0 0 auto;
+      width: clamp(220px, 30vw, 380px);
+      display: flex;
+      justify-content: center;
+      align-items: center;
     }
 
     body.dark .hero {
@@ -149,8 +162,7 @@
     }
 
     body.dark .justice {
-      opacity: .92;
-      filter: invert(.85) contrast(1.04);
+      filter: drop-shadow(0 12px 28px rgba(0,0,0,.55)) brightness(1.1) contrast(1.05);
     }
 
     .hero::after {
@@ -163,20 +175,14 @@
     }
 
     .justice {
-      grid-area: image;
+      display: block;
       width: 100%;
-      max-width: 400px;
-      min-width: 0;
-      margin: 0 auto;
-      align-self: center;
-      filter: grayscale(1) contrast(1.04);
-      z-index: 2;
+      height: auto;
+      filter: drop-shadow(0 12px 28px rgba(58, 46, 34, 0.35)) contrast(1.05);
     }
 
     .hero-copy {
-      grid-area: copy;
       position: relative;
-      z-index: 3;
       color: var(--charcoal);
     }
 
@@ -227,21 +233,19 @@
     }
 
     .hero-panel {
-      grid-area: panel;
       position: relative;
-      z-index: 3;
       width: 100%;
       max-width: 560px;
       padding: 20px 22px;
       border: 1px solid var(--line);
-      background: rgba(255,255,255,.82);
+      background: #ffffff;
       color: var(--ink);
-      backdrop-filter: blur(6px);
-      border-radius: 4px;
+      border-radius: 6px;
+      box-shadow: 0 4px 16px rgba(0,0,0,.04);
     }
 
     body.dark .hero-panel {
-      background: rgba(20,20,20,.72);
+      background: #22201e;
       border-color: #504942;
     }
 
@@ -967,13 +971,13 @@
       body.dark .nav { background: #211f1d; }
       .nav-links { display: none; }
       .hero {
-        grid-template-columns: 1fr;
-        grid-template-areas: "image" "copy" "panel";
-        gap: 18px;
+        flex-direction: column;
+        gap: 24px;
         padding: 48px 20px 40px;
         min-height: auto;
       }
-      .justice { max-width: 260px; opacity: .9; }
+      .hero-right { order: -1; width: 240px; }
+      .justice { opacity: .9; }
       .app-head { display: grid; align-items: start; }
       .taxonomy-title { grid-template-columns: 1fr; }
       .intro, .workspace, .contact { grid-template-columns: 1fr; }
@@ -1261,6 +1265,31 @@
     .lpkg-section li b { color: var(--wine-dark); }
     body.dark .lpkg-section { background: var(--white); }
 
+    /* 죄명 세부유형 카드 */
+    .subtype-block { margin-top: 14px; background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; }
+    .subtype-block > h4 { margin: 0 0 4px; font-size: 15px; color: var(--wine-dark); }
+    .subtype-block > p.st-note { margin: 0 0 12px; font-size: 12.5px; color: var(--muted); line-height: 1.6; }
+    .subtype-grid { display: grid; gap: 10px; }
+    .subtype-item { border-left: 3px solid var(--wine); background: var(--soft); padding: 10px 14px; border-radius: 0 8px 8px 0; }
+    .subtype-item.green { border-left-color: var(--green); }
+    .subtype-item.gold { border-left-color: var(--gold); }
+    .subtype-item.charcoal { border-left-color: var(--charcoal); }
+    .subtype-item h5 { margin: 0 0 6px; font-size: 13.5px; color: var(--wine-dark); }
+    .subtype-item .st-row { display: grid; grid-template-columns: 80px 1fr; gap: 4px 10px; font-size: 12.5px; line-height: 1.55; margin: 3px 0; }
+    .subtype-item .st-row b { color: var(--muted); font-weight: 700; font-size: 11.5px; align-self: start; padding-top: 1px; }
+    .subtype-item .st-row span { color: var(--ink); }
+    @media (max-width: 720px) { .subtype-item .st-row { grid-template-columns: 1fr; gap: 2px; } .subtype-item .st-row b { color: var(--wine-dark); } }
+    body.dark .subtype-block { background: var(--white); }
+    body.dark .subtype-item { background: var(--soft); }
+
+    /* 고소장 3단계 팁 */
+    .complaint-tip-3 { background: linear-gradient(135deg, rgba(142,25,24,.06), rgba(168,134,66,.06)); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; margin-top: 12px; }
+    .complaint-tip-3 h4 { margin: 0 0 10px; font-size: 14.5px; color: var(--wine-dark); }
+    .complaint-tip-3 .ct3-steps { display: grid; gap: 10px; }
+    .complaint-tip-3 .ct3-step { background: var(--white); border-radius: 8px; padding: 10px 14px; font-size: 13px; line-height: 1.6; }
+    .complaint-tip-3 .ct3-step b { color: var(--wine); }
+    body.dark .complaint-tip-3 .ct3-step { background: var(--white); }
+
     /* 가독성 정리 — 카드 텍스트 압축 */
     .cards .card { padding: 14px 16px; }
     .cards .card strong { font-size: 14.5px; }
@@ -1303,16 +1332,20 @@
   </header>
 
   <section class="hero" id="top">
-    <img class="justice" src="justice.svg" alt="정의의 여신과 저울">
-    <div class="hero-copy">
-      <p class="eyebrow">SELF LITIGATION GUIDE FOR VICTIMS</p>
-      <h1>대형 로펌 없이도<br>절차는 밟게 만든다.</h1>
-      <p>피해자가 말하듯 쏟아낸 사실을 고소장, 내용증명, 노동위원회 구제신청, 항고·항소 브리프로 정리합니다. 감정은 당신 편에 두고, 문서는 기관이 읽는 형식으로 냅니다.</p>
-      <a class="btn primary" href="#app">지금 서식 만들기</a>
+    <div class="hero-left">
+      <div class="hero-copy">
+        <p class="eyebrow">SELF LITIGATION GUIDE FOR VICTIMS</p>
+        <h1>대형 로펌 없이도<br>절차는 밟게 만든다.</h1>
+        <p>피해자가 말하듯 쏟아낸 사실을 고소장, 내용증명, 노동위원회 구제신청, 항고·항소 브리프로 정리합니다. 감정은 당신 편에 두고, 문서는 기관이 읽는 형식으로 냅니다.</p>
+        <a class="btn primary" href="#app">지금 서식 만들기</a>
+      </div>
+      <div class="hero-panel">
+        <strong>피해자 편에서 먼저 정리합니다.</strong>
+        <p>억울함을 바로 서류로 밀어붙이지 않습니다. 법률 매칭, 구제방안, 플랫폼 고소 가능성, 증거 보전부터 차례대로 잡아줍니다.</p>
+      </div>
     </div>
-    <div class="hero-panel">
-      <strong>피해자 편에서 먼저 정리합니다.</strong>
-      <p>억울함을 바로 서류로 밀어붙이지 않습니다. 법률 매칭, 구제방안, 플랫폼 고소 가능성, 증거 보전부터 차례대로 잡아줍니다.</p>
+    <div class="hero-right">
+      <img class="justice" src="justice.svg" alt="정의의 여신과 저울">
     </div>
   </section>
 
@@ -4061,11 +4094,169 @@
         { kind: "admin", badge: "행정", title: "④ 행정 신고·삭제·중단 요청", items: pickList("admin") },
         { kind: "recovery", badge: "회복", title: "⑤ 피해 회복·보호·심리지원", items: pickList("recovery") }
       ];
-      wrap.innerHTML = sections.map(s => {
+      let html = sections.map(s => {
         if (!s.items.length) return "";
         return "<div class=\"lpkg-section\"><h5>" + escHtml(s.title) + " <span class=\"lpkg-badge " + s.kind + "\">" + s.badge + "</span></h5><ul>" +
           s.items.map(i => "<li>" + i + "</li>").join("") + "</ul></div>";
       }).join("");
+      html += buildSubtypeCard(t);
+      html += buildComplaint3Step();
+      wrap.innerHTML = html;
+    }
+
+    // ===== 죄명 세부유형 (실무 4유형/3유형/2유형) =====
+    const subtypeAlias = {
+      "인터넷사기": "사기", "중고거래사기": "사기", "보이스피싱": "사기", "코인사기": "사기", "대여금분쟁": "사기", "전세사기": "사기",
+      "보험사기": "사기", "결혼사기": "사기", "취업사기": "사기", "다단계사기": "사기",
+      "명예훼손·모욕": "명예훼손", "게임욕설·모욕": "명예훼손", "신상유포": "명예훼손",
+      "디지털성범죄": "디지털성범죄", "통매음": "디지털성범죄",
+      "폭행·상해": "폭행", "가정폭력": "폭행", "데이트폭력": "폭행", "학교폭력": "폭행", "주거침입": "폭행",
+      "횡령·배임": "횡령배임"
+    };
+    const subtypeMap = {
+      "사기": {
+        title: "사기죄 (형법 제347조) 실무 4유형",
+        note: "사기는 한국 전체 형사 사건의 약 20%. 단순 채무불이행과 구별하려면 '용도'와 '기망 방식'을 매우 꼼꼼히 분리해야 합니다.",
+        items: [
+          { color: "wine", title: "① 중고거래·먹튀 사기 (소액·다수)",
+            nature: "일상 최다 발생. 피해액은 작아도 피해자 수가 수백~수천 명.",
+            core: "입금 계좌가 대포통장인지, 동일 물품으로 다수에게 동시 입금받았는지(돌려막기) 입증",
+            proof: "판매 게시글 캡처, 입금내역, 동일 피해자 결합 자료 (더치트·사이버캅)",
+            prison: "10년 이하 징역 / 2천만원 이하 (피해액 5억↑ 시 특경법 가중 3년~무기)",
+            limit: "공소시효 10년 (특경법은 15년)" },
+          { color: "wine", title: "② 투자 리딩방·로맨스 스캠 (조직·지능형)",
+            nature: "SNS·카톡 오픈채팅으로 고수익 보장 또는 호감 표시 후 금원 편취",
+            core: "원금·수익 보장 약정(유사수신법 동시 성립), 바람잡이 대화, 가짜 HTS 화면으로 조직적 기망 입증",
+            proof: "리딩방 대화 전체, 입금주소·TXID, 가짜 사이트 URL, 수익률 보장 캡처",
+            prison: "사기 10년 + 유사수신 5년 + 자본시장법 검토 (조직성 시 범죄단체조직 추가)",
+            limit: "공소시효 10년 (특경법 시 15년)" },
+          { color: "gold", title: "③ 용도사기 (차용금 사기)",
+            nature: "\"사업자금 필요\"·\"빚 갚는다\"라며 빌려놓고 도박·유흥에 쓴 경우",
+            core: "\"도박·유흥에 쓸 줄 알았다면 안 빌려줬을 것\"이라는 점 강조 + 계좌추적으로 실제 사용처(용도 유용) 입증이 승패",
+            proof: "차용 당시 메시지, 계좌 추적 자료, 변제기 약정, 실제 사용 내역",
+            prison: "10년 이하 / 2천만원 이하",
+            limit: "공소시효 10년" },
+          { color: "gold", title: "④ 변제능력·의사 사기",
+            nature: "빌릴 당시 이미 채무 초과로 현실적으로 갚을 능력 자체가 없었던 경우",
+            core: "당시 신용 상태, 타인에게 진 채무 총액, 수입 유무로 \"처음부터 갚을 능력 없음\" 입증",
+            proof: "신용정보, 다중 채무 자료, 소득 자료, 잠적·연락두절 정황",
+            prison: "10년 이하 / 2천만원 이하",
+            limit: "공소시효 10년" }
+        ]
+      },
+      "명예훼손": {
+        title: "명예훼손·모욕 실무 3유형",
+        note: "인터넷 전파 속도가 빨라 피해가 순식간에 커집니다. '사실 여부'와 '비방 목적'에 따라 죄명이 완전히 갈립니다.",
+        items: [
+          { color: "wine", title: "① 사실 적시 명예훼손 (정보통신망법 §70①)",
+            nature: "인터넷에 타인의 사생활·잘못을 사실 그대로 올려 명예가 실추된 경우",
+            core: "사실이라도 '비방 목적' 여부가 핵심. 공익(악덕업체 고발·공공안전) 목적이면 위법성 조각 가능",
+            proof: "URL·캡처시각·게시자 계정, 비방 목적 정황(부수 발언·전후 맥락)",
+            prison: "3년 이하 징역 / 3천만원 이하 벌금",
+            limit: "공소시효 5년 (반의사불벌죄, 고소기간 제한 없음)" },
+          { color: "charcoal", title: "② 허위사실 적시 명예훼손 (정보통신망법 §70②) ⚠ 가장 무거움",
+            nature: "가짜뉴스·악성 루머를 인터넷에 퍼뜨려 누군가를 매장",
+            core: "행위자가 '허위임을 알고도' 고의로 유포했다는 점을 메신저·정황 증거로 입증",
+            proof: "원본 게시물, 출처 추적, 가해자 사전 인지 정황(다른 게시물·메시지)",
+            prison: "7년 이하 징역 / 1천만원 이하 자격정지 / 5천만원 이하 벌금",
+            limit: "공소시효 7년 (반의사불벌죄)" },
+          { color: "gold", title: "③ 모욕죄 (형법 §311) — 단순 욕설·비하",
+            nature: "\"바보\"·\"쓰레기\"·\"사기꾼 새끼\" 등 추상적 평가·욕설 (구체 사실 없음)",
+            core: "<b>공연성</b>(남들이 보는 앞·단톡방) + <b>특정성</b>(누구인지 제3자가 알 수 있음) 충족. 게임 ID·닉네임은 현실 인적사항 연결 단서 필요",
+            proof: "공개 채팅·댓글 캡처, 목격자(같은 방 이용자), 닉네임-실명 연결 단서",
+            prison: "1년 이하 징역 / 200만원 이하 벌금",
+            limit: "공소시효 5년 (친고죄, 안 날부터 6개월 내 고소)" }
+        ]
+      },
+      "디지털성범죄": {
+        title: "디지털 성범죄 (성폭력처벌법) 실무 2유형",
+        note: "피해자가 인지하지 못한 사이 불법 촬영물이 유포되거나 온라인 대화 중 성적 수치심이 발생. 피해의 영구성이 가장 큰 범죄군.",
+        items: [
+          { color: "wine", title: "① 통신매체이용음란죄 — 통매음 (§13)",
+            nature: "게임·DM·소개팅앱에서 성적 욕설·성기 사진 등 전송",
+            core: "<b>공연성·특정성 불필요</b> — 1:1 대화방도 성립. 단, 판례는 '자신 또는 타인의 성적 욕망을 만족시키려는 목적'을 엄격히 따짐",
+            proof: "메시지 원문, 계정ID, 전송 시각, 차단 후 재전송 시 가중",
+            prison: "2년 이하 징역 / 2천만원 이하 벌금",
+            limit: "공소시효 5년 (친고죄 아님 — 안 날부터 즉시 고소 가능)" },
+          { color: "charcoal", title: "② 카메라 등 이용 촬영·유포죄 — 카촬죄 (§14)",
+            nature: "연인·공공장소에서 동의 없는 신체 촬영, 또는 동의 촬영이라도 무단 유포·협박",
+            core: "촬영 당시 '의사에 반함' 입증. 촬영 동의했어도 <b>유포 동의 없으면</b> 유포죄로 강력 처벌. 디지털 포렌식 증거 확보가 핵심",
+            proof: "원본·메타데이터, 유포 URL, 협박 메시지, 디지털 포렌식 분석",
+            prison: "촬영: 7년 이하 / 5천만원 이하. 유포: 7년 이하. 영리 목적 유포: 3년 이상~ 무기 (특별가중)",
+            limit: "공소시효 10년 (피해자 13세 미만 또는 영리 유포 등 가중 시 더 김)" }
+        ]
+      },
+      "폭행": {
+        title: "폭행·상해 (형법 §260·§257) 실무 3유형",
+        note: "유형력 행사 방식과 피해 정도에 따라 단순 폭행에서 특수·상해까지 완전히 갈립니다.",
+        items: [
+          { color: "gold", title: "① 단순 폭행죄 (§260)",
+            nature: "뺨 때림·멱살·밀침 등 신체에 물리력 가함 (상해 미발생)",
+            core: "<b>반의사불벌죄</b> — 피해자가 합의·처벌불원 시 공소권 없음으로 종결. CCTV·목격자가 결정적",
+            proof: "현장 CCTV, 112 신고 시각, 목격자 진술, 직후 메시지·녹취",
+            prison: "2년 이하 징역 / 500만원 이하 벌금 / 구류·과료",
+            limit: "공소시효 5년 (반의사불벌)" },
+          { color: "wine", title: "② 상해죄 (§257) — 합의해도 처벌 ⚠",
+            nature: "신체 기능에 장해 발생 (치아 파절·고막 파열·일상 곤란한 타박상 등)",
+            core: "<b>반의사불벌 아님</b> — 합의해도 처벌 면제 안 됨. <b>상해진단서</b>가 고소 성립의 결정타",
+            proof: "정식 상해진단서, 진료기록, 치료비, 사진, 후유증 기록",
+            prison: "7년 이하 징역 / 10년 이하 자격정지 / 1천만원 이하 벌금",
+            limit: "공소시효 7년" },
+          { color: "charcoal", title: "③ 특수폭행·특수상해 (§261·§258의2)",
+            nature: "다중 위력 또는 <b>위험한 물건</b> 휴대 폭행·상해",
+            core: "칼·벽돌뿐 아니라 <b>스마트폰·우산·가위·달리는 차(보복운전)</b>도 실무상 '위험한 물건'. 휴대 사실만으로 가중 + 합의해도 처벌",
+            proof: "위험물건 영상·사진, 사용 정황, 다중 합동 정황",
+            prison: "특수폭행 5년 이하 / 1천만원 이하. 특수상해 1~10년",
+            limit: "특수폭행 7년 / 특수상해 10년" }
+        ]
+      },
+      "횡령배임": {
+        title: "횡령·배임 (형법 §355·§356) 실무 2유형",
+        note: "주로 동업자 정산 분쟁·직원 회사자금 유용 — 신뢰관계를 깨고 재산상 이익을 취한 경우. 액수에 따라 처벌 수위 극단적으로 변동.",
+        items: [
+          { color: "wine", title: "① 업무상 횡령 (§356)",
+            nature: "회사 자금 관리 직원·대표가 회사 돈을 개인 용도로 인출·전용",
+            core: "<b>'불법영득의사'</b>(회사 돈을 내 것처럼 쓰겠다) 입증. 사후 채워 넣었어도 <b>인출 사용 순간 범죄 성립</b>. 자금일지·회계장부가 결정적",
+            proof: "법인 계좌 거래내역, 영수증, 회계장부, 결재라인, 개인 사용 내역 매칭",
+            prison: "10년 이하 징역 / 30년 이하 자격정지 / 3천만원 이하 벌금. 특경법: 5억↑ 3년 이상~/ 50억↑ 5년 이상~ 무기",
+            limit: "공소시효 10년 (특경법 15년)" },
+          { color: "charcoal", title: "② 업무상 배임 (§356)",
+            nature: "회사 이익을 지킬 의무자가 회사에 손해를 끼치고 자기·제3자에게 이익을 준 경우 (기밀 유출·헐값 매각 등)",
+            core: "<b>'임무 위배'</b> + <b>'회사의 구체적 손해 발생'</b> 서류 입증. 경영판단의 원칙 vs 고의적 배임 구별이 핵심 법리 싸움",
+            proof: "거래 관련 서류, 시세 비교, 의사결정 자료, 손해 산정 자료",
+            prison: "10년 이하 / 30년 이하 자격정지 / 3천만원 이하 벌금. 특경법 가중 동일",
+            limit: "공소시효 10년" }
+        ]
+      }
+    };
+
+    function buildSubtypeCard(caseType) {
+      const key = subtypeAlias[caseType];
+      if (!key) return "";
+      const data = subtypeMap[key];
+      if (!data) return "";
+      const items = data.items.map(it =>
+        "<div class=\"subtype-item " + escHtml(it.color) + "\"><h5>" + escHtml(it.title) + "</h5>" +
+        "<div class=\"st-row\"><b>법적성격</b><span>" + it.nature + "</span></div>" +
+        "<div class=\"st-row\"><b>실무핵심</b><span>" + it.core + "</span></div>" +
+        "<div class=\"st-row\"><b>입증포인트</b><span>" + it.proof + "</span></div>" +
+        "<div class=\"st-row\"><b>처벌범위</b><span>" + it.prison + "</span></div>" +
+        "<div class=\"st-row\"><b>공소시효</b><span>" + it.limit + "</span></div>" +
+        "</div>"
+      ).join("");
+      return "<div class=\"subtype-block\"><h4>📚 " + escHtml(data.title) + "</h4>" +
+        "<p class=\"st-note\">" + escHtml(data.note) + "</p>" +
+        "<div class=\"subtype-grid\">" + items + "</div></div>";
+    }
+
+    function buildComplaint3Step() {
+      return "<div class=\"complaint-tip-3\">" +
+        "<h4>💡 실무 고소장 작성 — 기소처분을 끌어내는 3단계 구조</h4>" +
+        "<div class=\"ct3-steps\">" +
+        "<div class=\"ct3-step\"><b>① 범죄사실 특정</b> — '언제·어디서·누가·누구에게·어떻게·왜' 6하 원칙으로 기술. 시간순으로 한 줄씩.</div>" +
+        "<div class=\"ct3-step\"><b>② 성립요건 매칭</b> — 죄명별 법적 알맹이를 증거와 1:1 매칭. (사기 → <i>기망·편취의사</i> / 모욕 → <i>공연성·특정성</i> / 횡령 → <i>불법영득의사</i> / 카촬 → <i>의사에 반함·유포 동의 부존재</i>)</div>" +
+        "<div class=\"ct3-step\"><b>③ 입증자료 구체화</b> — 말뿐인 주장 선언 X. 대화록·계좌내역·진단서·PDF 캡처를 별지로 첨부, 본문에서 '증○호'로 인용.</div>" +
+        "</div></div>";
     }
 
     function buildPrecedentCards() {
