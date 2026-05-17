@@ -1,0 +1,2777 @@
+<!doctype html>
+<html lang="ko">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>독고다이 법률단 | 피해자 편 셀프 법률 무기</title>
+  <style>
+    :root {
+      color-scheme: light;
+      --paper: #f4f2ee;
+      --white: #fff;
+      --ink: #292827;
+      --muted: #6e6a66;
+      --line: #ddd7ce;
+      --wine: #8e1918;
+      --wine-dark: #5f1111;
+      --charcoal: #333231;
+      --soft: #ebe7e0;
+      --gold: #a88642;
+      --green: #2f6b4f;
+      --shadow: 0 24px 70px rgba(34, 32, 29, .16);
+      --serif: Georgia, "Times New Roman", "Noto Serif KR", serif;
+      --sans: "Pretendard", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+    }
+
+    body.dark {
+      color-scheme: dark;
+      --paper: #151515;
+      --white: #22201e;
+      --ink: #f3eee8;
+      --muted: #beb5aa;
+      --line: #3f3933;
+      --wine: #b63333;
+      --wine-dark: #f0c9c4;
+      --charcoal: #f2eee8;
+      --soft: #2b2825;
+      --gold: #d5b36a;
+      --green: #72bd91;
+      --shadow: 0 24px 70px rgba(0, 0, 0, .34);
+    }
+
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    html, body { max-width: 100%; overflow-x: hidden; }
+    body {
+      margin: 0;
+      background: var(--paper);
+      color: var(--ink);
+      font-family: var(--sans);
+      letter-spacing: 0;
+      font-size: 16px;
+    }
+
+    button, textarea, input, select { font: inherit; }
+    button, a, .chip, .tab, .btn { cursor: pointer; }
+    button { border: 0; }
+    a { color: inherit; text-decoration: none; }
+    img, svg { max-width: 100%; height: auto; }
+    p, h1, h2, h3, h4, .brief, .document, .card, .legal-block { overflow-wrap: anywhere; }
+    textarea, input { cursor: text; caret-color: var(--wine); }
+    select { cursor: pointer; }
+
+    .nav {
+      position: absolute;
+      z-index: 5;
+      top: 0;
+      left: 0;
+      right: 0;
+      height: 82px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 0 clamp(18px, 6vw, 92px);
+      color: var(--charcoal);
+    }
+
+    .brand {
+      font-family: Georgia, "Times New Roman", serif;
+      line-height: .9;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+    }
+
+    .brand strong {
+      display: block;
+      font-size: clamp(21px, 2vw, 30px);
+      font-weight: 500;
+    }
+
+    .brand span {
+      display: block;
+      margin-top: 7px;
+      font-size: 13px;
+      letter-spacing: 4px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+      color: #4d4945;
+      font-size: 12px;
+      font-weight: 800;
+      text-transform: uppercase;
+    }
+
+    .hotline {
+      align-self: stretch;
+      min-width: 172px;
+      padding: 12px 16px;
+      background: var(--wine);
+      color: white;
+      display: grid;
+      align-content: center;
+      gap: 4px;
+      font-size: 12px;
+      box-shadow: 0 10px 22px rgba(95, 17, 17, .24);
+    }
+
+    .theme-toggle {
+      min-height: 38px;
+      padding: 0 12px;
+      border: 1px solid rgba(255,255,255,.32);
+      background: rgba(255,255,255,.08);
+      color: inherit;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .hotline b { font-size: 14px; }
+
+    .hero {
+      min-height: 700px;
+      position: relative;
+      overflow: hidden;
+      background:
+        linear-gradient(90deg, rgba(244,243,240,.98) 0%, rgba(244,243,240,.9) 42%, rgba(244,243,240,.42) 72%, rgba(244,243,240,.86) 100%),
+        linear-gradient(180deg, #f5f4f1 0%, #d9d7d2 68%, #f2f1ee 68%, #d7d5d0 100%);
+    }
+
+    body.dark .hero {
+      background:
+        linear-gradient(90deg, rgba(24,24,24,.98) 0%, rgba(24,24,24,.9) 42%, rgba(24,24,24,.42) 72%, rgba(24,24,24,.86) 100%),
+        linear-gradient(180deg, #202020 0%, #2a2927 68%, #181817 68%, #111 100%);
+    }
+
+    body.dark .justice {
+      opacity: .42;
+      filter: grayscale(1) invert(.92) contrast(1.05);
+    }
+
+    .hero::after {
+      content: "";
+      position: absolute;
+      inset: auto 0 0;
+      height: 36%;
+      background:
+        linear-gradient(90deg, rgba(0,0,0,.08), transparent 26%, transparent 74%, rgba(0,0,0,.08)),
+        repeating-linear-gradient(0deg, rgba(255,255,255,.04) 0 1px, transparent 1px 8px);
+      opacity: .32;
+    }
+
+    .justice {
+      position: absolute;
+      right: clamp(18px, 9vw, 140px);
+      bottom: 76px;
+      width: min(38vw, 520px);
+      min-width: 340px;
+      opacity: .9;
+      filter: grayscale(1) contrast(1.04);
+      z-index: 2;
+    }
+
+    .hero-copy {
+      position: relative;
+      z-index: 3;
+      width: min(720px, calc(100% - 32px));
+      padding-top: 190px;
+      margin-left: clamp(18px, 9vw, 120px);
+      color: var(--charcoal);
+    }
+
+    .eyebrow {
+      margin: 0 0 12px;
+      color: var(--wine);
+      font-size: 13px;
+      font-weight: 900;
+      letter-spacing: 1px;
+    }
+
+    h1 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(42px, 5vw, 76px);
+      font-weight: 400;
+      line-height: 1.03;
+      letter-spacing: 0;
+    }
+
+    .hero-copy > p {
+      max-width: 650px;
+      margin: 18px 0 28px;
+      color: #625d58;
+      line-height: 1.75;
+      font-size: 16px;
+    }
+
+    .btn {
+      min-height: 46px;
+      border-radius: 4px;
+      padding: 0 18px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--ink);
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: 0 8px 20px rgba(0,0,0,.06);
+    }
+
+    .btn.primary {
+      color: white;
+      background: var(--wine);
+      border-color: var(--wine);
+      box-shadow: 0 10px 22px rgba(142, 25, 24, .24);
+      font-weight: 800;
+    }
+
+    .hero-panel {
+      position: absolute;
+      z-index: 3;
+      left: clamp(18px, 9vw, 120px);
+      bottom: 62px;
+      width: min(520px, calc(100% - 36px));
+      padding: 20px 22px;
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.76);
+      color: var(--ink);
+      backdrop-filter: blur(6px);
+    }
+
+    body.dark .hero-panel {
+      background: rgba(20,20,20,.72);
+      border-color: #504942;
+    }
+
+    .hero-panel strong {
+      display: block;
+      margin-bottom: 8px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: 24px;
+      font-weight: 400;
+    }
+
+    .hero-panel p {
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.58;
+      font-size: 14px;
+    }
+
+    .section {
+      padding: 74px clamp(18px, 10vw, 180px);
+      background: var(--white);
+    }
+
+    .intro {
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: clamp(28px, 6vw, 80px);
+      align-items: start;
+    }
+
+    .drop {
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(34px, 3vw, 50px);
+      line-height: 1.05;
+      margin: 0;
+      color: var(--charcoal);
+    }
+
+    .drop::first-letter {
+      float: left;
+      font-size: 76px;
+      line-height: .8;
+      margin-right: 6px;
+      color: #77716a;
+    }
+
+    .intro p, .copy {
+      color: #68635d;
+      line-height: 1.78;
+      margin: 0 0 14px;
+    }
+
+    .app-section {
+      padding: 72px clamp(18px, 6vw, 92px);
+      background: #eeece8;
+    }
+
+    .app-head {
+      display: flex;
+      justify-content: space-between;
+      gap: 24px;
+      align-items: end;
+      margin: 0 auto 18px;
+      max-width: 1260px;
+    }
+
+    .app-head h2 {
+      margin: 0;
+      font-family: var(--serif);
+      font-size: clamp(34px, 3.5vw, 54px);
+      font-weight: 400;
+    }
+
+    .app-head p {
+      max-width: 520px;
+      margin: 0;
+      color: var(--muted);
+      line-height: 1.65;
+    }
+
+    .read-guide {
+      max-width: 1260px;
+      margin: 0 auto 18px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 10px;
+    }
+
+    .read-step {
+      padding: 12px 14px;
+      background: rgba(255,255,255,.62);
+      border: 1px solid var(--line);
+      color: #5e5650;
+      font-size: 13px;
+      line-height: 1.5;
+      border-radius: 8px;
+    }
+
+    .read-step b {
+      display: block;
+      margin-bottom: 4px;
+      color: var(--wine);
+    }
+
+    .workspace {
+      max-width: 1260px;
+      margin: 0 auto;
+      display: grid;
+      grid-template-columns: minmax(320px, .88fr) minmax(0, 1.12fr);
+      gap: 24px;
+      align-items: start;
+    }
+
+    .workspace > *,
+    .intro > *,
+    .contact > *,
+    .app-head > * {
+      min-width: 0;
+    }
+
+    .panel {
+      background: var(--white);
+      border: 1px solid var(--line);
+      box-shadow: var(--shadow);
+      border-radius: 10px;
+      overflow: hidden;
+    }
+
+    .panel.result-panel {
+      scroll-margin-top: 18px;
+    }
+
+    .panel-head {
+      padding: 18px 20px;
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      align-items: center;
+      border-bottom: 1px solid var(--line);
+      background: #f8f6f2;
+    }
+
+    .panel-head h3 { margin: 0; font-size: 17px; }
+    .panel-head span { color: var(--muted); font-size: 13px; line-height: 1.4; }
+
+    .form {
+      display: grid;
+      gap: 18px;
+      padding: 20px;
+    }
+
+    label {
+      display: grid;
+      gap: 8px;
+      color: var(--muted);
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    textarea, input, select {
+      width: 100%;
+      border: 1px solid var(--line);
+      border-radius: 6px;
+      background: #fffdf9;
+      color: var(--ink);
+      outline: none;
+      transition: border-color .18s ease, box-shadow .18s ease, background .18s ease;
+    }
+
+    textarea {
+      min-height: 300px;
+      padding: 16px;
+      resize: vertical;
+      line-height: 1.75;
+      caret-color: var(--wine);
+    }
+
+    input, select {
+      min-height: 42px;
+      padding: 0 12px;
+    }
+
+    textarea:focus, input:focus, select:focus {
+      border-color: var(--wine);
+      box-shadow: 0 0 0 4px rgba(142, 25, 24, .11);
+      background: #fff;
+    }
+
+    textarea::placeholder, input::placeholder {
+      color: #9a9288;
+    }
+
+    .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 10px;
+    }
+
+    .fields.three {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .chips {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
+      gap: 8px;
+    }
+
+    .chip {
+      min-height: 38px;
+      padding: 0 10px;
+      border-radius: 999px;
+      color: var(--muted);
+      background: #fffdf9;
+      border: 1px solid var(--line);
+      font-size: 14px;
+      white-space: nowrap;
+    }
+
+    .chip.active {
+      color: white;
+      background: var(--wine);
+      border-color: var(--wine);
+    }
+
+    .chip.priority {
+      border-color: var(--wine);
+      color: var(--wine);
+      font-weight: 900;
+    }
+
+    .chip.priority.active {
+      color: white;
+    }
+
+    .quick-jump {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(148px, 1fr));
+      gap: 8px;
+      padding-top: 2px;
+    }
+
+    .quick-jump .btn {
+      min-height: 38px;
+      box-shadow: none;
+      font-size: 13px;
+      font-weight: 800;
+    }
+
+    .category-note {
+      padding: 14px 16px;
+      background: #f6f1e8;
+      border-left: 4px solid var(--wine);
+      color: #5e5650;
+      line-height: 1.65;
+      font-size: 14px;
+    }
+
+    .taxonomy {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      background: #f9f6f1;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      max-height: 420px;
+      overflow: auto;
+    }
+
+    body.dark .taxonomy,
+    body.dark .taxonomy-group,
+    body.dark .app-section,
+    body.dark .panel,
+    body.dark .panel-head,
+    body.dark .tabs,
+    body.dark textarea,
+    body.dark input,
+    body.dark select,
+    body.dark .chip,
+    body.dark .tax-btn,
+    body.dark .tab.active,
+    body.dark .card,
+    body.dark .brief,
+    body.dark .document,
+    body.dark .section,
+    body.dark .contact,
+    body.dark .footer-main,
+    body.dark .footer-bottom {
+      background: #211f1d;
+      color: var(--ink);
+    }
+
+    body.dark .category-note,
+    body.dark .read-step,
+    body.dark .law-links a,
+    body.dark .pill,
+    body.dark textarea:focus,
+    body.dark input:focus,
+    body.dark select:focus {
+      background: #292520;
+      color: var(--muted);
+    }
+
+    body.dark .tab,
+    body.dark .tax-btn,
+    body.dark .chip {
+      border-color: #4b433b;
+    }
+
+    body.dark .tab.active,
+    body.dark .chip.active,
+    body.dark .tax-btn.active,
+    body.dark .tax-btn:hover {
+      background: var(--wine);
+      color: #fff;
+      border-color: var(--wine);
+    }
+
+    body.dark .document {
+      border-color: #50483f;
+      box-shadow: none;
+    }
+
+    .taxonomy-title {
+      display: grid;
+      grid-template-columns: 160px minmax(0, 1fr);
+      gap: 12px;
+      align-items: center;
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.45;
+    }
+
+    .taxonomy-title b {
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .taxonomy-groups {
+      display: grid;
+      gap: 9px;
+    }
+
+    .taxonomy-group {
+      border: 1px solid #e4ddd3;
+      background: #fffdf9;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .taxonomy-group summary {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 10px;
+      padding: 0 12px;
+      cursor: pointer;
+      color: var(--wine-dark);
+      font-weight: 900;
+      list-style: none;
+    }
+
+    .taxonomy-group summary::-webkit-details-marker {
+      display: none;
+    }
+
+    .taxonomy-items {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      padding: 0 12px 12px;
+    }
+
+    .tax-btn {
+      min-height: 32px;
+      padding: 0 10px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: #f7f2ea;
+      color: #5d554e;
+      font-size: 13px;
+      font-weight: 800;
+      cursor: pointer;
+    }
+
+    .tax-btn.active,
+    .tax-btn:hover {
+      color: white;
+      background: var(--wine);
+      border-color: var(--wine);
+    }
+
+    .tabs {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(92px, 1fr));
+      gap: 8px;
+      padding: 12px 14px;
+      background: #f8f6f2;
+      border-bottom: 1px solid var(--line);
+    }
+
+    .tab {
+      min-height: 38px;
+      padding: 0 10px;
+      color: var(--muted);
+      background: transparent;
+      border: 1px solid transparent;
+      white-space: normal;
+      line-height: 1.25;
+      font-size: 13px;
+    }
+
+    .tab.active {
+      color: var(--ink);
+      background: var(--white);
+      border-color: var(--line);
+      font-weight: 900;
+    }
+
+    .view { display: none; padding: 20px; }
+    .view.active { display: block; }
+
+    .document {
+      min-height: 590px;
+      padding: clamp(20px, 3vw, 38px);
+      background: #fffdf8;
+      color: #171717;
+      border: 1px solid #e7ded1;
+      line-height: 1.82;
+      font-size: 15.5px;
+      max-width: 820px;
+      margin: 0 auto;
+    }
+
+    .document h3 {
+      margin: 0 0 22px;
+      text-align: center;
+      font-size: 24px;
+    }
+
+    .document h4 { margin: 22px 0 8px; font-size: 16px; }
+    .document p { margin: 0 0 10px; }
+    .stamp {
+      display: inline-flex;
+      margin-bottom: 14px;
+      padding: 4px 9px;
+      border: 1px solid #222;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .cards {
+      display: grid;
+      gap: 12px;
+    }
+
+    .card {
+      padding: 16px;
+      background: #fffdf9;
+      border: 1px solid var(--line);
+      line-height: 1.66;
+      border-radius: 8px;
+    }
+
+    .card strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+    }
+
+    .card p { margin: 0; color: var(--muted); }
+    .card.red { border-left: 4px solid var(--wine); }
+    .card.gold { border-left: 4px solid var(--gold); }
+    .card.green { border-left: 4px solid var(--green); }
+
+    .law-links {
+      display: grid;
+      gap: 8px;
+      margin-top: 10px;
+    }
+
+    .law-links a {
+      display: block;
+      padding: 10px 12px;
+      background: #f8f5ef;
+      border: 1px solid var(--line);
+      color: var(--wine-dark);
+      font-weight: 800;
+    }
+
+    .brief {
+      white-space: pre-wrap;
+      padding: 16px;
+      background: #fffdf9;
+      border: 1px solid var(--line);
+      color: var(--ink);
+      line-height: 1.7;
+      border-radius: 8px;
+      font-size: 14.5px;
+    }
+
+    .legal-output {
+      display: grid;
+      gap: 12px;
+    }
+
+    .legal-block {
+      padding: 16px;
+      background: #fffdf9;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      line-height: 1.68;
+    }
+
+    .legal-block h4 {
+      margin: 0 0 8px;
+      font-size: 16px;
+      color: var(--wine);
+    }
+
+    .legal-block p {
+      margin: 0;
+      color: var(--muted);
+    }
+
+    body.dark .legal-block {
+      background: #211f1d;
+      color: var(--ink);
+    }
+
+    .score-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+    }
+
+    .score-card {
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8f5ef;
+    }
+
+    .score-card b {
+      display: block;
+      color: var(--wine);
+      margin-bottom: 6px;
+    }
+
+    .score-card strong {
+      font-size: 24px;
+      color: var(--ink);
+    }
+
+    .capture-frame {
+      display: grid;
+      gap: 10px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      background: #f8f5ef;
+    }
+
+    .browser-mock {
+      border: 2px solid #3c3936;
+      background: #fff;
+      color: #2c2b2a;
+      border-radius: 8px;
+      overflow: hidden;
+    }
+
+    .browser-bar {
+      display: grid;
+      grid-template-columns: 1fr auto;
+      gap: 8px;
+      align-items: center;
+      padding: 8px;
+      background: #e8e3dc;
+      border-bottom: 2px solid #3c3936;
+      font-size: 12px;
+      color: #6b635b;
+    }
+
+    .browser-body {
+      position: relative;
+      min-height: 150px;
+      padding: 18px;
+      display: grid;
+      gap: 12px;
+      place-items: center;
+      text-align: center;
+      color: #6a625a;
+    }
+
+    .overlay-label {
+      display: inline-flex;
+      padding: 6px 10px;
+      background: var(--wine);
+      color: white;
+      border-radius: 999px;
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .shield-box {
+      display: grid;
+      gap: 10px;
+    }
+
+    .shield-box textarea {
+      min-height: 120px;
+    }
+
+    .shield-result {
+      min-height: 88px;
+      padding: 14px;
+      border-radius: 8px;
+      border: 1px solid var(--line);
+      background: #fffdf9;
+      color: var(--ink);
+      line-height: 1.65;
+      white-space: pre-wrap;
+    }
+
+    body.dark .score-card,
+    body.dark .capture-frame,
+    body.dark .shield-result,
+    body.dark .browser-mock,
+    body.dark .browser-bar {
+      background: #211f1d;
+      color: var(--ink);
+    }
+
+    body.dark .browser-body,
+    body.dark .legal-block,
+    body.dark .score-card,
+    body.dark .capture-frame,
+    body.dark .shield-result {
+      border-color: #4b433b;
+    }
+
+    body.dark .legal-block p,
+    body.dark .browser-body,
+    body.dark .browser-bar,
+    body.dark .card p {
+      color: var(--muted);
+    }
+
+    .pill-list {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 7px;
+      margin-top: 10px;
+    }
+
+    .pill {
+      padding: 6px 9px;
+      border-radius: 999px;
+      background: #f5efe6;
+      border: 1px solid var(--line);
+      color: var(--wine-dark);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .module-grid {
+      max-width: 1260px;
+      margin: 22px auto 0;
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 12px;
+    }
+
+    .module small {
+      display: block;
+      margin-bottom: 7px;
+      color: var(--wine);
+      font-weight: 900;
+    }
+
+    .contact {
+      padding: 88px clamp(18px, 12vw, 220px);
+      background:
+        linear-gradient(90deg, rgba(238,236,232,.9), rgba(238,236,232,.74)),
+        linear-gradient(180deg, #ddd8cf, #f4f2ee);
+      display: grid;
+      grid-template-columns: .9fr 1.1fr;
+      gap: clamp(28px, 6vw, 88px);
+      align-items: center;
+    }
+
+    .scale {
+      min-height: 360px;
+      background:
+        linear-gradient(90deg, transparent 49%, #333 49% 51%, transparent 51%),
+        radial-gradient(circle at 50% 88%, #333 0 18%, transparent 19%),
+        linear-gradient(180deg, transparent 12%, #333 12% 14%, transparent 14%);
+      opacity: .62;
+      filter: grayscale(1);
+    }
+
+    .contact h2 {
+      margin: 0 0 10px;
+      font-family: Georgia, "Times New Roman", serif;
+      font-size: clamp(36px, 4vw, 58px);
+      font-weight: 400;
+    }
+
+    .footer {
+      padding: 38px clamp(18px, 12vw, 220px);
+      background: #343332;
+      color: #d5d0ca;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 26px;
+      font-size: 13px;
+      line-height: 1.7;
+    }
+
+    @media (max-width: 1080px) {
+      .nav { position: static; background: #f8f6f2; height: auto; padding: 16px; }
+      body.dark .nav { background: #211f1d; }
+      .nav-links { display: none; }
+      .hero { min-height: 620px; }
+      .hero-copy { margin-left: 24px; padding-top: 90px; }
+      .justice { right: -160px; opacity: .26; }
+      .app-head { display: grid; align-items: start; }
+      .taxonomy-title { grid-template-columns: 1fr; }
+      .intro, .workspace, .contact { grid-template-columns: 1fr; }
+      .read-guide { grid-template-columns: repeat(2, 1fr); }
+      .module-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .hero-panel { position: relative; left: auto; bottom: auto; margin: -120px 18px 0; }
+    }
+
+    @media (max-width: 860px) {
+      .fields,
+      .fields.three {
+        grid-template-columns: 1fr;
+      }
+
+      .workspace {
+        gap: 16px;
+      }
+
+      .panel {
+        border-radius: 8px;
+      }
+
+      .score-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 720px) {
+      body { font-size: 15px; }
+      .nav {
+        gap: 12px;
+        align-items: flex-start;
+      }
+      .brand strong { font-size: 20px; }
+      .brand span { font-size: 11px; letter-spacing: 2.4px; }
+      .theme-toggle { min-height: 34px; padding: 0 10px; font-size: 12px; }
+      .hero { min-height: 560px; }
+      .hotline { display: none; }
+      .hero-copy {
+        width: calc(100% - 28px);
+        margin-left: 14px;
+        padding-top: 56px;
+      }
+      h1 { font-size: clamp(38px, 12vw, 52px); }
+      .hero-copy > p { font-size: 14px; line-height: 1.65; }
+      .justice {
+        min-width: 240px;
+        width: 72vw;
+        right: -90px;
+        bottom: 120px;
+        opacity: .18;
+      }
+      .hero-panel {
+        width: calc(100% - 28px);
+        margin: -92px 14px 0;
+        padding: 16px;
+      }
+      .hero-panel strong { font-size: 20px; }
+      .quick-jump, .module-grid, .footer { grid-template-columns: 1fr; }
+      .read-guide { grid-template-columns: 1fr; }
+      .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
+      .chip {
+        min-height: 36px;
+        font-size: 12.5px;
+        padding: 0 8px;
+        white-space: normal;
+        line-height: 1.25;
+      }
+      .quick-jump .btn { min-height: 42px; }
+      .section, .app-section, .contact { padding: 42px 12px; }
+      .app-head { gap: 10px; margin-bottom: 12px; }
+      .app-head h2 { font-size: clamp(30px, 10vw, 40px); }
+      .read-step { padding: 12px; }
+      .form, .view { padding: 14px; }
+      .panel-head {
+        padding: 14px;
+        align-items: start;
+        display: grid;
+      }
+      textarea {
+        min-height: 220px;
+        padding: 13px;
+      }
+      .taxonomy {
+        max-height: 300px;
+        padding: 10px;
+      }
+      .taxonomy-group summary {
+        min-height: 40px;
+        padding: 0 10px;
+      }
+      .taxonomy-items { padding: 0 10px 10px; }
+      .tax-btn { font-size: 12px; }
+      .tabs {
+        display: flex;
+        gap: 8px;
+        overflow-x: auto;
+        overscroll-behavior-x: contain;
+        scrollbar-width: thin;
+        padding: 10px 12px;
+        position: sticky;
+        top: 0;
+        z-index: 4;
+      }
+      .tab {
+        flex: 0 0 auto;
+        min-width: 104px;
+        min-height: 40px;
+        font-size: 12px;
+        padding: 0 9px;
+      }
+      .document {
+        min-height: 0;
+        padding: 18px;
+        font-size: 14px;
+        line-height: 1.72;
+      }
+      .document h3 { font-size: 21px; }
+      .card,
+      .brief,
+      .legal-block,
+      .capture-frame,
+      .score-card {
+        padding: 13px;
+      }
+      .browser-bar {
+        grid-template-columns: 1fr;
+      }
+      .overlay-label {
+        white-space: normal;
+        line-height: 1.35;
+        border-radius: 8px;
+      }
+      .contact { gap: 18px; }
+      .scale { min-height: 220px; }
+    }
+
+    @media (max-width: 420px) {
+      .nav { padding: 12px; }
+      .chips { grid-template-columns: 1fr; }
+      .btn { width: 100%; }
+      .hero-copy { padding-top: 44px; }
+      .hero-panel { margin-top: -72px; }
+      .taxonomy { max-height: 260px; }
+      .footer { padding: 28px 14px; }
+    }
+  </style>
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="#top">
+      <strong>DOK-GO-DIE</strong>
+      <span>LEGAL ARMORY</span>
+    </a>
+    <nav class="nav-links" aria-label="주요 메뉴">
+      <a href="#about">개요</a>
+      <a href="#app">작성도구</a>
+      <a href="#labor">노동구제</a>
+      <a href="#contact">검수연결</a>
+    </nav>
+    <div class="hotline">
+      <span>피해자 우선 모드</span>
+      <b>서류는 차갑게, 편은 확실히</b>
+    </div>
+    <button class="theme-toggle" id="themeToggle">다크 모드</button>
+  </header>
+
+  <section class="hero" id="top">
+    <img class="justice" src="justice.svg" alt="정의의 여신과 저울">
+    <div class="hero-copy">
+      <p class="eyebrow">SELF LITIGATION GUIDE FOR VICTIMS</p>
+      <h1>대형 로펌 없이도<br>절차는 밟게 만든다.</h1>
+      <p>피해자가 말하듯 쏟아낸 사실을 고소장, 내용증명, 노동위원회 구제신청, 항고·항소 브리프로 정리합니다. 감정은 당신 편에 두고, 문서는 기관이 읽는 형식으로 냅니다.</p>
+      <a class="btn primary" href="#app">지금 서식 만들기</a>
+    </div>
+    <div class="hero-panel">
+      <strong>피해자 편에서 먼저 정리합니다.</strong>
+      <p>억울함을 바로 서류로 밀어붙이지 않습니다. 법률 매칭, 구제방안, 플랫폼 고소 가능성, 증거 보전부터 차례대로 잡아줍니다.</p>
+    </div>
+  </section>
+
+  <section class="section" id="about">
+    <div class="intro">
+      <p class="drop">독고다이 법률단은 피해자 편에서 시작합니다.</p>
+      <div>
+        <p>부당해고를 당했거나, 해고예고수당을 못 받았거나, 사기 피해를 입었는데 변호사 선임비부터 막히는 사람을 위한 셀프 절차 가이드입니다.</p>
+        <p>이 앱은 상대를 협박하라고 부추기지 않습니다. 대신 날짜, 증거, 법적 쟁점, 제출 서류, 기한을 흐트러뜨리지 않게 잡아줍니다. 혼자 싸워야 한다면 최소한 빈손으로는 가지 않게 만드는 것이 목표입니다.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="app-section" id="app">
+    <div class="app-head">
+      <div>
+        <p class="eyebrow">DOCUMENT BUILDER</p>
+        <h2>피해사실을 쓰면 서류가 됩니다.</h2>
+      </div>
+      <p>범죄·노동·주거·온라인 피해 항목을 누르면 서류, 증거 체크, 판례 검색 키워드가 바로 바뀝니다. 가짜 판례는 쓰지 않고 출처 확인을 전제로 설계합니다.</p>
+    </div>
+
+    <div class="read-guide" aria-label="사용 순서">
+      <div class="read-step"><b>1. 사건 선택</b>가장 가까운 피해 유형을 먼저 누릅니다.</div>
+      <div class="read-step"><b>2. 사실 입력</b>욕설보다 날짜, 금액, 상대 말, 증거를 적습니다.</div>
+      <div class="read-step"><b>3. 결과 확인</b>법률 매칭, 구제방안, 고소절차를 나눠 봅니다.</div>
+      <div class="read-step"><b>4. 검수 준비</b>브리프를 들고 상담·접수·보완으로 갑니다.</div>
+    </div>
+
+    <div class="workspace">
+      <article class="panel">
+        <div class="panel-head">
+          <h3>피해사실 입력</h3>
+          <span>편하게 쓰고, 정식으로 출력</span>
+        </div>
+          <div class="form">
+            <label>있는 그대로 적기
+              <textarea id="story" placeholder="예: 회사가 갑자기 내일부터 나오지 말라고 했습니다. 해고 사유도 제대로 설명하지 않았고 서면 통지도 없었습니다. 30일 전에 예고한 적도 없고 해고예고수당도 못 받았습니다. 근로계약서, 급여명세서, 카톡 지시, 출퇴근 기록은 있습니다."></textarea>
+            </label>
+
+            <div class="taxonomy" aria-label="빠른 사건 분류">
+              <div class="taxonomy-title">
+                <b>빠른 사건 분류</b>
+                <span>무슨 죄인지 몰라도 가까운 항목을 누르면 죄명·증거·절차·기한을 잡습니다.</span>
+              </div>
+              <div class="taxonomy-groups" id="taxonomyGroups"></div>
+            </div>
+
+            <div class="category-note" id="categoryNote">부당해고 모드: 해고일, 해고 사유, 서면통지, 계속 근로 의사, 사직 강요 여부를 먼저 잡습니다.</div>
+
+          <div class="chips" aria-label="사건 유형">
+              <button class="chip active" data-type="부당해고">부당해고</button>
+              <button class="chip" data-type="해고예고수당">해고예고수당</button>
+              <button class="chip" data-type="임금체불">임금체불</button>
+              <button class="chip" data-type="인터넷사기">인터넷사기</button>
+              <button class="chip" data-type="보이스피싱">보이스피싱</button>
+              <button class="chip" data-type="중고거래사기">중고거래사기</button>
+              <button class="chip" data-type="전세사기">전세사기</button>
+              <button class="chip" data-type="코인사기">코인사기</button>
+              <button class="chip" data-type="폭행·상해">폭행·상해</button>
+              <button class="chip" data-type="협박·스토킹">협박·스토킹</button>
+              <button class="chip priority" data-type="텔레그램스토킹">텔레그램 스토킹</button>
+              <button class="chip" data-type="명예훼손·모욕">명예훼손·모욕</button>
+              <button class="chip" data-type="게임욕설·모욕">게임욕설·모욕</button>
+              <button class="chip" data-type="통매음">통매음</button>
+              <button class="chip" data-type="성희롱">성희롱</button>
+              <button class="chip" data-type="성폭력">성폭력</button>
+              <button class="chip" data-type="디지털성범죄">디지털성범죄</button>
+              <button class="chip" data-type="절도·손괴">절도·손괴</button>
+              <button class="chip priority" data-type="대여금분쟁">돈 빌려주고 못받음</button>
+              <button class="chip" data-type="업체분쟁">업체분쟁</button>
+              <button class="chip" data-type="표절·저작권">표절·저작권</button>
+              <button class="chip priority" data-type="이커머스IP도용">이커머스 IP도용</button>
+              <button class="chip priority" data-type="기타법률">기타/직접입력</button>
+            </div>
+
+            <div class="quick-jump" aria-label="결과 바로가기">
+              <button class="btn" data-open-result="match">법률 매칭 보기</button>
+              <button class="btn" data-open-result="remedy">구제방안 보기</button>
+              <button class="btn" data-open-result="aggravation">가중·긴급 보기</button>
+              <button class="btn" data-open-result="platform">플랫폼 고소 보기</button>
+              <button class="btn" data-open-result="telegram">텔레그램 대응 보기</button>
+              <button class="btn" data-open-result="jeonse">전세사기 대응 보기</button>
+              <button class="btn" data-open-result="procedure">고소절차 보기</button>
+              <button class="btn" data-open-result="limitation">공소시효 보기</button>
+            </div>
+
+          <div class="fields three">
+            <label>상대방/회사
+              <input id="opponent" value="OO회사">
+            </label>
+            <label>피해 금액/월급
+              <input id="damage" value="월 2,800,000원">
+            </label>
+            <label>발생 플랫폼
+              <select id="platform">
+                <option>오프라인/직장</option>
+                <option>인스타그램</option>
+                <option>페이스북</option>
+                <option>텔레그램</option>
+                <option>카카오톡</option>
+                <option>당근/중고거래</option>
+                <option>네이버 카페/블로그</option>
+                <option>유튜브</option>
+                <option>온라인 게임</option>
+                <option>거래소/코인사이트</option>
+              </select>
+            </label>
+            <label>해고일·처분일
+              <input id="decisionDate" type="date">
+            </label>
+            <label>피해 발생일
+              <input id="incidentDate" type="date">
+            </label>
+            <label>현재 목표
+              <select id="stage">
+                <option>노동위원회 부당해고 구제신청</option>
+                <option>해고예고수당 청구</option>
+                <option>임금체불 진정</option>
+                <option>고소장 작성</option>
+                <option>내용증명 발송</option>
+                <option>항고·항소 검토</option>
+              </select>
+            </label>
+          </div>
+
+          <button class="btn primary" id="sampleBtn">선택 항목 샘플 넣기</button>
+        </div>
+      </article>
+
+      <article class="panel result-panel" id="resultPanel">
+        <div class="tabs" role="tablist">
+          <button class="tab active" data-tab="labor">노동구제</button>
+          <button class="tab" data-tab="match">법률 매칭</button>
+          <button class="tab" data-tab="remedy">구제방안</button>
+          <button class="tab" data-tab="aggravation">가중·긴급</button>
+          <button class="tab" data-tab="platform">플랫폼 고소</button>
+          <button class="tab" data-tab="telegram">텔레그램 대응</button>
+          <button class="tab" data-tab="complaint">고소장</button>
+          <button class="tab" data-tab="loan">대여금 회수</button>
+          <button class="tab" data-tab="jeonse">전세사기 대응</button>
+          <button class="tab" data-tab="ip">IP도용 대응</button>
+          <button class="tab" data-tab="notice">내용증명</button>
+          <button class="tab" data-tab="procedure">고소절차</button>
+          <button class="tab" data-tab="limitation">공소시효</button>
+          <button class="tab" data-tab="deadline">기한·증거</button>
+          <button class="tab" data-tab="precedent">판례·법령</button>
+          <button class="tab" data-tab="consult">상담 브리프</button>
+        </div>
+
+        <section class="view active" data-view="labor" id="labor">
+          <div class="document">
+            <span class="stamp">노동자 구제신청 초안</span>
+            <h3>부당해고 등 구제신청서</h3>
+            <p><b>신청인</b>: 근로자 본인</p>
+            <p><b>피신청인</b>: <span data-fill="opponent">OO회사</span></p>
+            <p><b>신청 취지</b>: 부당해고 인정, 원직복직 또는 금전보상, 해고예고수당 및 미지급 임금 지급을 구합니다.</p>
+            <h4>1. 사건 경위</h4>
+            <p id="laborFacts"></p>
+            <h4>2. 피해자 편 핵심 주장</h4>
+            <p id="laborClaims"></p>
+            <h4>3. 제출할 증거</h4>
+            <p>근로계약서, 급여명세서, 출퇴근 기록, 업무지시 대화, 해고 통보 메시지, 녹취, 사직서 강요 정황, 4대보험 또는 원천징수 자료를 날짜순으로 정리합니다.</p>
+          </div>
+        </section>
+
+        <section class="view" data-view="match">
+          <div class="cards">
+            <div class="card red">
+              <strong>중복 법률 자동 매칭</strong>
+              <p>피해사실 한 덩어리 안에 형사, 민사, 노동, 정보통신, 주거, 금융 쟁점이 겹칠 수 있습니다. 아래는 선택 항목과 입력 문장에서 우선 검토할 법률 묶음입니다.</p>
+            </div>
+            <div class="brief" id="matchBrief"></div>
+            <div class="pill-list" id="lawPills"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="remedy">
+          <div class="cards">
+            <div class="card green">
+              <strong>구제방안 라우팅</strong>
+              <p>처벌만이 답이 아닐 때가 많습니다. 돈을 돌려받는 길, 삭제시키는 길, 노동위원회로 복직·보상을 받는 길, 민사로 압박하는 길을 분리합니다.</p>
+            </div>
+            <div class="brief" id="remedyBrief"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="aggravation">
+          <div class="cards">
+            <div class="card red">
+              <strong>공통 가중·긴급 요소 체크</strong>
+              <p>앱이 처벌을 세게 만들 수는 없습니다. 대신 수사기관과 법원이 중요하게 볼 수 있는 반복성, 다수 피해자, 미성년자 피해, 보복협박, 조직성, 유포 위험 같은 요소를 빠뜨리지 않게 정리합니다.</p>
+            </div>
+            <div class="brief" id="aggravationBrief"></div>
+            <div class="card gold">
+              <strong>피해자 연대·상습범 제보 메모</strong>
+              <p>같은 업체, 같은 플랫폼 ID, 같은 계좌, 같은 전화번호로 피해가 반복되면 단독 사건보다 훨씬 선명해집니다. 이 프로토타입은 개인정보를 서버에 저장하지 않고, 수사기관·플랫폼 신고 전에 묶어볼 항목만 정리합니다.</p>
+              <div class="fields two">
+                <label>사업자번호/플랫폼 ID/계좌 끝자리
+                  <input id="repeatTarget" placeholder="예: smartstore-OOO, 사업자번호 일부, 계좌 끝 4자리">
+                </label>
+                <label>반복 정황
+                  <input id="repeatPattern" placeholder="예: 여러 셀러 상세페이지 도용, 같은 계좌 사기">
+                </label>
+              </div>
+              <button class="btn primary" id="repeatCheckBtn">상습성 제보 메모 만들기</button>
+              <div class="brief" id="repeatCheckResult">상대방 식별 단서와 반복 정황을 넣으면, 고소장에 붙일 “상습성·다수 피해자 확인 요청” 문장으로 정리합니다.</div>
+            </div>
+            <div class="card gold">
+              <strong>성범죄자 알림e 공식 확인</strong>
+              <p>공개명령이 확정된 성범죄자 정보는 공식 공개 범위 안에서만 확인해야 합니다. 임의로 개인정보를 수집·유포하거나 사적 보복에 쓰면 안 됩니다.</p>
+              <div class="law-links">
+                <a href="https://www.sexoffender.go.kr" target="_blank" rel="noopener">성범죄자 알림e 공식 사이트 열기</a>
+                <a href="https://www.law.go.kr/lsSc.do?query=%EC%84%B1%ED%8F%AD%EB%A0%A5%EC%B2%98%EB%B2%8C%EB%B2%95" target="_blank" rel="noopener">성폭력처벌법 검색</a>
+              </div>
+            </div>
+            <div class="card green">
+              <strong>범죄자 정보 확인 원칙</strong>
+              <p>이 앱은 공개 사이트, 판결문, 수사기관 절차처럼 합법적인 출처만 안내합니다. 상대의 주민번호, 주소, 가족정보, 사생활을 불법적으로 캐는 기능은 넣지 않습니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="platform">
+          <div class="cards">
+            <div class="card red">
+              <strong>인스타·페북·텔레그램도 고소 가능한가?</strong>
+              <p>가능성은 있습니다. 핵심은 “플랫폼을 고소”하는 게 아니라, 계정 뒤의 사람을 성명불상 피고소인으로 특정해 수사를 요청하고 URL·계정·시간·원본 증거를 보전하는 것입니다.</p>
+            </div>
+            <div class="brief" id="platformBrief"></div>
+            <div class="card gold">
+              <strong>삭제·차단 루트</strong>
+              <p>명예훼손·모욕·사생활 침해 게시물은 플랫폼 신고, 임시조치, 방송통신심의위원회 심의, 법원 가처분을 병행 검토합니다. 디지털성범죄는 삭제지원센터 연계가 우선입니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="telegram">
+          <div class="cards">
+            <div class="card red">
+              <strong>텔레그램 스토킹·통매음 특화 대응</strong>
+              <p>텔레그램은 익명성이 강하지만, 고유 숫자 ID, 대화 내보내기, 링크 클릭 흔적, 타 플랫폼 ID, 전화번호·계좌·거래소 단서가 연결되면 수사기관이 특정 수사에 들어갈 명분이 생깁니다.</p>
+            </div>
+            <div class="legal-output" id="telegramOutput"></div>
+            <div class="brief" id="telegramComplaint"></div>
+            <div class="capture-frame">
+              <strong>텔레그램 증거 채증 프레임</strong>
+              <div class="browser-mock">
+                <div class="browser-bar">
+                  <span>Telegram Desktop / Exported chat history</span>
+                  <b>URL·시각·계정 단서 포함</b>
+                </div>
+                <div class="browser-body">
+                  <span class="overlay-label">프로필 화면 + 숫자 User ID + 대화 원문 + PC 시계가 같이 보여야 합니다</span>
+                  <p>닉네임(@username)은 바뀔 수 있으니, 고정 숫자 ID와 대화방 내보내기 파일을 별도로 보관하세요.</p>
+                </div>
+              </div>
+            </div>
+            <div class="card gold">
+              <strong>안전 주의</strong>
+              <p>UserInfoBot 같은 외부 봇은 편리하지만 민감한 대화 원문이나 개인정보를 함부로 전달하지 마세요. 고유 ID 확인에는 프로필/전달 정보만 최소한으로 쓰고, 원본 증거는 내 기기에 보관합니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="complaint">
+          <div class="document">
+            <span class="stamp">제출 전 검수용 초안</span>
+            <h3>고소장</h3>
+            <p><b>고소인</b>: 피해자 본인</p>
+            <p><b>피고소인</b>: <span data-fill="opponent">OO회사</span></p>
+            <p><b>사건 유형</b>: <span data-fill="caseType">부당해고</span></p>
+            <h4>1. 고소 취지</h4>
+            <p>피고소인의 행위로 고소인에게 피해가 발생하였으므로 관련 사실관계와 증거를 조사하여 주시기 바랍니다.</p>
+            <h4>2. 범죄사실 또는 위법 사실</h4>
+            <p id="complaintFacts"></p>
+            <h4>3. 증거자료</h4>
+            <p>대화 캡처, 녹취, 송금·급여 내역, 계약서, 통지서, 출퇴근 기록 등 객관 자료를 제출합니다.</p>
+          </div>
+        </section>
+
+        <section class="view" data-view="loan">
+          <div class="cards">
+            <div class="card red">
+              <strong>돈 빌려주고 못받은 사건의 갈림길</strong>
+              <p>단순히 돈을 못 갚은 것만으로는 형사 사기가 어려울 수 있습니다. 대신 처음부터 갚을 능력이나 의사가 없었는지, 용도를 속였는지, 돈 받은 뒤 바로 잠적했는지를 따져야 합니다.</p>
+            </div>
+            <div class="legal-output" id="debtRecoveryOutput"></div>
+            <div class="brief" id="loanBrief"></div>
+            <div class="card gold">
+              <strong>차용증 없어도 볼 증거</strong>
+              <p>송금내역 하나만으로 끝내지 말고, “빌려줘”, “언제까지 갚겠다”, “조금만 기다려달라” 같은 대화와 일부 변제 내역을 같이 묶어야 합니다.</p>
+            </div>
+            <div class="card green">
+              <strong>형사 불송치 뒤집어 쓰는 민사 루트</strong>
+              <p>불송치 결정서에 “빌린 사실은 인정된다”는 취지의 문장이 있으면, 민사에서는 대여 사실을 입증하는 강한 자료가 됩니다. 사기는 안 되어도 대여금 반환청구는 별개의 싸움입니다.</p>
+            </div>
+            <div class="brief" id="debtorListBrief"></div>
+            <div class="card gold">
+              <strong>채무불이행자 명부등재 주의</strong>
+              <p>집행권원 확정 후에도 일정 기간 변제하지 않는 경우 등 법정 요건이 맞아야 신청합니다. 상대를 괴롭히기 위한 불법 추심이 아니라, 법원 절차 안에서 압박하는 합법적 집행 루트로 써야 합니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="jeonse">
+          <div class="cards">
+            <div class="card red">
+              <strong>전세사기 생존 체크</strong>
+              <p>보증금 회수 전에는 대항력과 우선변제권을 지키는 게 최우선입니다. 전입신고를 빼거나 짐을 먼저 빼는 선택은 반드시 임차권등기명령을 먼저 검토한 뒤 움직입니다.</p>
+            </div>
+            <div class="legal-output" id="jeonseOutput"></div>
+            <div class="brief" id="jeonseNotice"></div>
+            <div class="card gold">
+              <strong>전세사기피해지원센터 우선 연결</strong>
+              <p>전세사기피해자 결정은 주거·금융·경공매 지원의 문을 여는 절차입니다. 관할 지자체 또는 전세사기피해자 지원관리시스템, HUG 전세피해지원센터 안내를 함께 확인하세요.</p>
+              <div class="law-links">
+                <a href="https://www.khug.or.kr" target="_blank" rel="noopener">HUG 주택도시보증공사 열기</a>
+                <a href="https://www.law.go.kr/lsSc.do?query=%EC%A0%84%EC%84%B8%EC%82%AC%EA%B8%B0%ED%94%BC%ED%95%B4%EC%9E%90%20%EC%A7%80%EC%9B%90%20%EB%B0%8F%20%EC%A3%BC%EA%B1%B0%EC%95%88%EC%A0%95%EC%97%90%20%EA%B4%80%ED%95%9C%20%ED%8A%B9%EB%B3%84%EB%B2%95" target="_blank" rel="noopener">전세사기 특별법 법령 검색</a>
+                <a href="https://www.easylaw.go.kr/CSP/CnpClsMain.laf?csmSeq=629" target="_blank" rel="noopener">주택임대차 생활법령 열기</a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="ip">
+          <div class="cards">
+            <div class="card red">
+              <strong>이커머스 IP·부정경쟁 대응</strong>
+              <p>상품명, 썸네일, 상세페이지, 캘리그래피, 사진 구도, 최저가 카피가 겹치면 저작권·부정경쟁·표시광고 이슈를 함께 봅니다.</p>
+            </div>
+            <div class="legal-output" id="ipLegalOutput"></div>
+            <div class="brief" id="ipBrief"></div>
+            <div class="shield-box">
+              <label>상대방 협박 텍스트 분석기
+                <textarea id="threatText" placeholder="예: 너희가 폰트 저작권 위반한 거다. 우리한테 신고하면 너희도 맞고소한다."></textarea>
+              </label>
+              <button class="btn primary" id="shieldBtn">역공작 팩트체크</button>
+              <div class="shield-result" id="shieldResult">상대방의 역고소·폰트·상표권·명예훼손 협박 문구를 넣으면 법적 리스크와 방어 포인트를 분리해 보여줍니다.</div>
+            </div>
+            <div class="card gold">
+              <strong>폰트 역공격 방어 포인트</strong>
+              <p>폰트 파일 자체와 글자 모양, 그리고 디자이너가 직접 만든 캘리그래피는 구분해야 합니다. 원본 PSD/AI/프로크리에이트 파일과 작업 이력은 방어의 핵심입니다.</p>
+            </div>
+            <div class="capture-frame">
+              <strong>증거 캡처 프레임 오버레이</strong>
+              <div class="browser-mock">
+                <div class="browser-bar">
+                  <span>https://platform.example.com/product/도용상품-url</span>
+                  <b>2026-05-16 14:30</b>
+                </div>
+                <div class="browser-body">
+                  <span class="overlay-label">주소창 + 날짜/시간 + 상품명 + 가격 + 판매자명이 한 화면에 보여야 합니다</span>
+                  <p>상품 썸네일, 상세페이지 핵심 카피, 상대 판매자명, 리뷰 수, 가격 영역을 함께 캡처하세요.</p>
+                </div>
+              </div>
+            </div>
+            <div class="score-grid">
+              <div class="score-card"><b>플랫폼 블라인드</b><strong>95%</strong><p>가장 빠른 임시 구제</p></div>
+              <div class="score-card"><b>내용증명</b><strong>80%</strong><p>합의·중단 압박</p></div>
+              <div class="score-card"><b>형사고소</b><strong>60%</strong><p>압박용, 증거가 관건</p></div>
+            </div>
+            <div class="brief" id="platformReportBrief"></div>
+            <div class="card green">
+              <strong>손해배상·합의금 추정 입력값</strong>
+              <p>도용 기간, 상대 리뷰 수, 예상 판매가, 내 디자인 제작비, 광고비, 매출 감소 자료를 모으면 손해액 산정의 출발점이 됩니다. 금액은 단정하지 말고 범위로 검토합니다.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="notice">
+          <div class="document">
+            <span class="stamp">발송 전 검토용</span>
+            <h3>내용증명</h3>
+            <p><b>수신인</b>: <span data-fill="opponent">OO회사</span></p>
+            <p><b>제목</b>: 피해 회복 및 법적 조치 전 최종 통지</p>
+            <h4>1. 통지 내용</h4>
+            <p id="noticeText"></p>
+            <h4>2. 요구사항</h4>
+            <p>수신인은 본 통지를 받은 날부터 7일 이내에 피해 회복 방안과 지급 일정을 서면으로 회신하시기 바랍니다.</p>
+            <h4>3. 후속 조치</h4>
+            <p>기한 내 회신 또는 이행이 없으면 노동위원회 구제신청, 노동청 진정, 민사 청구, 형사 절차 등 가능한 법적 조치를 검토하겠습니다.</p>
+          </div>
+        </section>
+
+        <section class="view" data-view="procedure">
+          <div class="cards">
+            <div class="card red">
+              <strong>고소 절차를 처음 하는 사람용 순서</strong>
+              <p>고소는 완벽한 법률문장보다 “누가, 언제, 어디서, 무엇을, 어떻게 했고, 어떤 증거가 있는지”를 접수 가능한 형태로 내는 것부터 시작합니다.</p>
+            </div>
+            <div class="brief" id="procedureBrief"></div>
+            <div class="card gold">
+              <strong>반려당할 때 방어 멘트</strong>
+              <p>“단순 상담이 아니라 고소장 접수를 요청드립니다. 부족한 부분은 보완 요구를 해주시면 보완하겠습니다. 접수 여부와 담당 부서를 확인 부탁드립니다.”</p>
+            </div>
+            <div class="card green">
+              <strong>성폭력·디지털성범죄는 혼자 가지 마세요</strong>
+              <p>해바라기센터, 성폭력상담소, 디지털성범죄피해자지원센터, 피해자 국선변호사 제도를 함께 확인하세요.</p>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="limitation">
+          <div class="cards">
+            <div class="card red">
+              <strong>공소시효·소멸시효 체크</strong>
+              <p>형사는 죄명과 법정형에 따라 공소시효가 달라지고, 민사·노동은 별도 소멸시효나 신청기간이 있습니다. 아래 결과는 기한 위험을 놓치지 않기 위한 1차 체크입니다.</p>
+            </div>
+            <div class="brief" id="limitationBrief"></div>
+            <div class="card gold">
+              <strong>기산점 주의</strong>
+              <p>공소시효는 보통 범죄행위가 종료한 때부터, 민사 손해배상은 손해와 가해자를 안 때부터, 부당해고 구제신청은 해고일 등부터 문제됩니다. 사건별 예외가 있으니 최종 제출 전 확인하세요.</p>
+            </div>
+            <div class="law-links">
+              <a href="https://www.law.go.kr/lsSc.do?query=%ED%98%95%EC%82%AC%EC%86%8C%EC%86%A1%EB%B2%95%20%EC%A0%9C249%EC%A1%B0" target="_blank" rel="noopener">형사소송법 제249조 공소시효 검색</a>
+              <a href="https://www.law.go.kr/lsSc.do?query=%EB%AF%BC%EB%B2%95%20%EC%A0%9C766%EC%A1%B0" target="_blank" rel="noopener">민법 제766조 불법행위 소멸시효 검색</a>
+              <a href="https://www.law.go.kr/lsSc.do?query=%EA%B7%BC%EB%A1%9C%EA%B8%B0%EC%A4%80%EB%B2%95%20%EC%A0%9C28%EC%A1%B0" target="_blank" rel="noopener">근로기준법 제28조 부당해고 구제신청 검색</a>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="deadline">
+          <div class="cards">
+            <div class="card red">
+              <strong>부당해고 구제신청 기한</strong>
+              <p id="deadlineText">해고일을 입력하면 노동위원회 구제신청 3개월 기한을 계산합니다.</p>
+            </div>
+            <div class="card gold">
+              <strong>해고예고수당 체크</strong>
+              <p>사용자가 30일 전에 해고를 예고하지 않았다면, 원칙적으로 30일분 이상의 통상임금 쟁점을 검토합니다. 예외 사유가 있는지 회사가 주장할 수 있으니 증거로 막아야 합니다.</p>
+            </div>
+            <div class="card green">
+              <strong>피해자 증거 타임캡슐</strong>
+              <p>원본 파일, 캡처 시각, 대화 상대, 파일명, 제출 이력을 한 묶음으로 보관합니다. 나중에 “조작 아니냐”는 말을 줄이기 위한 방어선입니다.</p>
+            </div>
+            <div class="brief" id="evidenceBrief"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="precedent">
+          <div class="cards">
+            <div class="card red">
+              <strong>검증된 판례·법령만 쓰기</strong>
+              <p>AI가 만들어낸 사건번호나 판례명은 바로 폐기합니다. 아래 키워드로 국가법령정보센터·대법원 판례검색에서 직접 확인한 자료만 문서에 넣는 구조입니다.</p>
+            </div>
+            <div class="card gold">
+              <strong id="precedentTitle">부당해고 판례 검색 키워드</strong>
+              <p id="precedentText"></p>
+              <div class="law-links" id="lawLinks"></div>
+            </div>
+            <div class="brief" id="precedentBrief"></div>
+          </div>
+        </section>
+
+        <section class="view" data-view="consult">
+          <div class="cards">
+            <div class="card green">
+              <strong>15분 검수 상담용</strong>
+              <p>돈이 부족해도 짧은 상담으로 기한, 서류명, 증거 순서, 위험한 표현만 먼저 잡습니다.</p>
+            </div>
+            <div class="brief" id="briefText"></div>
+            <button class="btn primary" id="copyBtn">브리프 복사</button>
+          </div>
+        </section>
+      </article>
+    </div>
+
+    <div class="module-grid">
+      <div class="card module red"><small>LABOR</small><strong>부당해고 모드</strong><p>해고 사유, 서면통지, 절차 위반, 원직복직·금전보상 주장을 피해자 편에서 정리합니다.</p></div>
+      <div class="card module gold"><small>ALLOWANCE</small><strong>해고예고수당</strong><p>30일 전 예고 여부, 통상임금, 예외 주장 가능성을 체크해 청구 문장으로 바꿉니다.</p></div>
+      <div class="card module red"><small>CRIME TOP</small><strong>한국형 피해 다발 범죄</strong><p>사기, 폭행, 성폭력, 절도, 사이버 명예훼손처럼 통계와 체감 피해가 큰 항목부터 배치합니다.</p></div>
+      <div class="card module green"><small>COURT SIM</small><strong>AI 법정 시뮬레이션</strong><p>회사 측 반박, 노동위원회 질문, 판사 질문을 미리 맞아보고 답변을 다듬습니다.</p></div>
+      <div class="card module red"><small>LEASE</small><strong>전세사기 특화</strong><p>등기부, 계약서, 보증금 송금, 중개인 설명, 임차권등기명령 흐름을 정리합니다.</p></div>
+      <div class="card module gold"><small>CRYPTO</small><strong>코인사기 추적</strong><p>입금주소, 거래소, 리딩방 대화, 수익 보장 문구를 수사 의뢰용 타임라인으로 압축합니다.</p></div>
+      <div class="card module green"><small>CIVIL</small><strong>민사 자동 일정관리</strong><p>답변서, 준비서면, 항소, 강제집행 기한을 사건 캘린더로 놓치지 않게 관리합니다.</p></div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="scale" aria-hidden="true"></div>
+    <div>
+      <p class="eyebrow">FINAL CHECK</p>
+      <h2>검수는 짧게, 준비는 빡세게.</h2>
+      <p class="copy">완성된 서류는 로톡식 15분 상담, 노무사 상담, 대한법률구조공단, 노동위원회 상담에 들고 갈 수 있는 브리프로 압축됩니다. 피해자가 말문 막히지 않도록 질문까지 같이 만듭니다.</p>
+      <a class="btn primary" href="#app">브리프 만들러 가기</a>
+    </div>
+  </section>
+
+  <footer class="footer">
+    <div class="brand"><strong>DOK-GO-DIE</strong><span>LEGAL ARMORY</span></div>
+    <div>피해자 중심 셀프 소송 가이드<br>고소장 · 내용증명 · 노동구제 · 항고/항소</div>
+    <div>주의: 이 도구는 서류 초안과 절차 준비를 돕습니다. 최종 제출 전 최신 법령과 전문가 검수를 권장합니다.</div>
+  </footer>
+
+  <script>
+    const state = {
+      caseType: "부당해고",
+      sample: "회사가 2026년 5월 1일 갑자기 내일부터 나오지 말라고 했습니다. 해고 사유를 제대로 설명하지 않았고 서면 해고통지서도 받지 못했습니다. 30일 전에 예고한 적도 없고 해고예고수당도 안 줬습니다. 저는 계속 출근할 의사가 있었고 사직서를 쓴 적도 없습니다. 근로계약서, 급여명세서, 카톡 업무지시, 출퇴근 기록이 있습니다.",
+      taxonomyNote: ""
+    };
+
+    const samples = {
+      "부당해고": {
+        story: "회사가 2026년 5월 1일 갑자기 내일부터 나오지 말라고 했습니다. 해고 사유를 제대로 설명하지 않았고 서면 해고통지서도 받지 못했습니다. 30일 전에 예고한 적도 없고 해고예고수당도 안 줬습니다. 저는 계속 출근할 의사가 있었고 사직서를 쓴 적도 없습니다. 근로계약서, 급여명세서, 카톡 업무지시, 출퇴근 기록이 있습니다.",
+        opponent: "OO회사",
+        damage: "월 2,800,000원",
+        platform: "오프라인/직장",
+        stage: "노동위원회 부당해고 구제신청"
+      },
+      "해고예고수당": {
+        story: "2026년 4월 30일 퇴근 직전에 팀장이 내일부터 나오지 말라고 했습니다. 30일 전에 예고받은 적이 없고 해고예고수당도 지급하지 않았습니다. 급여명세서와 해고 통보 카톡, 마지막 출근 기록이 있습니다.",
+        opponent: "OO회사",
+        damage: "30일분 통상임금",
+        platform: "오프라인/직장",
+        stage: "해고예고수당 청구"
+      },
+      "임금체불": {
+        story: "3월과 4월 월급을 일부만 받았고 나머지는 계속 미루고 있습니다. 사장은 다음 주에 준다고만 하고 지급일을 넘겼습니다. 근로계약서, 급여명세서, 출퇴근 기록, 계좌 입금내역, 카톡 대화가 있습니다.",
+        opponent: "OO회사",
+        damage: "미지급 임금 4,600,000원",
+        platform: "오프라인/직장",
+        stage: "임금체불 진정"
+      },
+      "인터넷사기": {
+        story: "온라인 판매글을 보고 노트북을 구매하려고 85만원을 입금했습니다. 판매자는 오늘 바로 택배를 보낸다고 했는데 운송장을 주지 않았고 이후 연락을 피했습니다. 판매글 캡처, 채팅 내역, 계좌이체 내역, 상대 계정 프로필이 있습니다.",
+        opponent: "성명불상 판매자",
+        damage: "850,000원",
+        platform: "네이버 카페/블로그",
+        stage: "고소장 작성"
+      },
+      "보이스피싱": {
+        story: "검찰 수사관이라고 전화가 와서 제 계좌가 범죄에 연루됐다고 했습니다. 시키는 대로 앱을 설치하고 1,200만원을 이체했습니다. 나중에 보이스피싱인 걸 알았고 은행에 지급정지를 요청했습니다. 통화녹음, 문자, 악성앱 화면, 송금내역, 은행 신고시각이 있습니다.",
+        opponent: "성명불상 보이스피싱 조직",
+        damage: "12,000,000원",
+        platform: "카카오톡",
+        stage: "고소장 작성"
+      },
+      "중고거래사기": {
+        story: "당근에서 카메라를 판다는 글을 보고 42만원을 보냈습니다. 판매자는 택배를 보냈다고 했지만 운송장이 가짜였고 이후 계정을 탈퇴했습니다. 거래글, 채팅, 송금내역, 닉네임, 전화번호 일부가 있습니다.",
+        opponent: "성명불상 중고거래 판매자",
+        damage: "420,000원",
+        platform: "당근/중고거래",
+        stage: "고소장 작성"
+      },
+      "전세사기": {
+        story: "전세계약 당시 임대인과 중개사가 안전한 집이라고 했고 보증금 1억 2천만원을 보냈습니다. 전입신고와 확정일자는 했고 지금도 거주 중입니다. 만기가 다가오는데 임대인이 보증금을 못 돌려준다고 하거나 연락을 피하고, 등기부를 다시 보니 선순위 권리와 체납 문제가 있었습니다. 임대차계약서, 등기부등본, 확정일자, 전입신고, 송금내역, 중개인 설명 녹취, 계약해지 문자 캡처가 있습니다.",
+        opponent: "임대인 김OO",
+        damage: "보증금 120,000,000원",
+        platform: "오프라인/직장",
+        stage: "내용증명 발송"
+      },
+      "코인사기": {
+        story: "텔레그램 코인 리딩방에서 원금보장과 월 30% 수익을 약속했습니다. 운영자가 알려준 거래소와 지갑주소로 500만원을 보냈는데 출금하려면 세금 명목으로 추가 입금하라고 했고 이후 방에서 강퇴당했습니다. 텔레그램 대화, 입금주소, 거래소 입출금내역, 수익 보장 문구가 있습니다.",
+        opponent: "성명불상 리딩방 운영자",
+        damage: "5,000,000원",
+        platform: "텔레그램",
+        stage: "고소장 작성"
+      },
+      "폭행·상해": {
+        story: "술집 앞에서 상대방이 먼저 밀치고 얼굴을 때렸습니다. 병원에서 전치 2주 진단을 받았고 치료비가 나왔습니다. 사건 직후 사진, 상해진단서, 112 신고내역, 주변 CCTV 위치, 목격자 연락처가 있습니다.",
+        opponent: "김OO",
+        damage: "치료비 및 위자료",
+        platform: "오프라인/직장",
+        stage: "고소장 작성"
+      },
+      "협박·스토킹": {
+        story: "헤어진 뒤 상대가 계속 전화와 DM을 보내고 집 앞에 찾아왔습니다. 답하지 않으면 직장에 찾아가 망신 주겠다고 했고 무서워서 경찰에 신고했습니다. 통화기록, DM 캡처, 집 앞 사진, 신고내역, 차단 후 다른 계정으로 연락한 기록이 있습니다.",
+        opponent: "전 연인 박OO",
+        damage: "반복 협박·스토킹 피해",
+        platform: "인스타그램",
+        stage: "고소장 작성"
+      },
+      "텔레그램스토킹": {
+        story: "텔레그램에서 성명불상 사용자가 수개월 동안 반복적으로 메시지를 보내고 차단하면 다른 계정으로 다시 연락했습니다. 성적 모욕 표현과 음란한 링크를 보낸 적도 있고, 신고하면 더 퍼뜨리겠다고 협박했습니다. 텔레그램 대화 캡처, 프로필 화면, 사용자명, 방 링크, 메시지 시간, PC 대화 내보내기 파일, 정신과 상담 기록이 있습니다.",
+        opponent: "성명불상 텔레그램 이용자",
+        damage: "수개월 반복 스토킹·통매음 피해",
+        platform: "텔레그램",
+        stage: "고소장 작성"
+      },
+      "명예훼손·모욕": {
+        story: "인스타그램 공개 계정에서 제 실명과 직장을 언급하면서 허위사실을 올렸고 댓글로 욕설도 달았습니다. 지인들이 그 글을 봤다고 연락했습니다. 게시글 URL, 캡처 시각, 댓글, 계정 프로필, 지인 진술이 있습니다.",
+        opponent: "성명불상 인스타그램 계정",
+        damage: "명예훼손 및 정신적 피해",
+        platform: "인스타그램",
+        stage: "고소장 작성"
+      },
+      "게임욕설·모욕": {
+        story: "온라인 게임 채팅에서 상대가 제 닉네임을 부르면서 심한 욕설을 반복했습니다. 같은 팀원 여러 명이 채팅을 봤고 게임이 끝난 뒤에도 귓속말로 욕을 했습니다. 매치 시간, 상대 닉네임, 채팅 스크린샷, 리플레이, 같이 게임한 사람 닉네임이 있습니다.",
+        opponent: "성명불상 게임 이용자",
+        damage: "게임 채팅 모욕 피해",
+        platform: "온라인 게임",
+        stage: "고소장 작성"
+      },
+      "통매음": {
+        story: "게임 중 상대가 제게 성적인 표현을 여러 차례 보냈고, 거부했는데도 계속 성적 수치심이 드는 말을 했습니다. 채팅 캡처, 상대 닉네임, 매치 시간, 게임ID, 같이 있던 유저 정보가 있습니다. 이게 통신매체이용음란으로 고소 가능한지 확인하고 싶습니다.",
+        opponent: "성명불상 게임 이용자",
+        damage: "통신매체이용음란 피해",
+        platform: "온라인 게임",
+        stage: "고소장 작성"
+      },
+      "디지털성범죄": {
+        story: "동의 없이 촬영된 사진이 텔레그램 방에 올라갔다는 제보를 받았습니다. 게시물 URL과 방 링크 일부, 유포 협박 메시지, 상대 계정 정보를 확보했습니다. 빨리 삭제지원과 고소를 같이 진행하고 싶습니다.",
+        opponent: "성명불상 유포자",
+        damage: "불법촬영물 유포 피해",
+        platform: "텔레그램",
+        stage: "고소장 작성"
+      },
+      "절도·손괴": {
+        story: "상대방이 제 자전거를 가져갔고 돌려달라고 하자 모른다고 했습니다. 나중에 CCTV에서 가져가는 장면을 확인했고 자전거 일부가 파손된 상태로 발견됐습니다. 구매영수증, CCTV 위치, 파손 사진, 수리견적서가 있습니다.",
+        opponent: "김OO",
+        damage: "자전거 및 수리비 650,000원",
+        platform: "오프라인/직장",
+        stage: "고소장 작성"
+      },
+      "대여금분쟁": {
+        story: "상대가 급하다고 해서 현금과 코인을 빌려줬고, 카톡으로 언제까지 갚겠다고 여러 번 말했습니다. 차용증은 없지만 송금내역, 거래소 출금내역, 지갑주소, TXID, 갚겠다는 메시지, 일부 변제 내역이 있습니다. 형사 고소는 증거부족 불송치가 나왔지만 결정서에 돈을 빌린 사실 자체는 인정된다는 취지의 문장이 있습니다.",
+        opponent: "이OO",
+        damage: "5,000,000원 상당",
+        platform: "가상자산 거래소",
+        stage: "채권추심/강제집행"
+      },
+      "성희롱": {
+        story: "직장 상사가 회식과 업무 중에 반복적으로 성적인 농담을 하고 제 외모와 몸에 대해 말했습니다. 불쾌하다고 했지만 계속됐고, 이후 업무에서 불이익을 주는 것 같습니다. 카톡, 녹취 일부, 회식 참석자, 업무 배제 메시지가 있습니다.",
+        opponent: "직장 상사 박OO",
+        damage: "직장 내 성희롱 및 인사상 불이익",
+        platform: "오프라인/직장",
+        stage: "고소장 작성"
+      },
+      "성폭력": {
+        story: "상대방이 동의 없이 제 몸을 만졌고 저는 즉시 거부했습니다. 사건 이후 너무 힘들어 상담을 받았고, 당시 주고받은 메시지와 CCTV가 있을 만한 장소, 목격자 정보가 있습니다. 해바라기센터나 피해자 국선변호사 지원도 같이 알고 싶습니다.",
+        opponent: "김OO",
+        damage: "성폭력 피해",
+        platform: "오프라인/직장",
+        stage: "고소장 작성"
+      },
+      "업체분쟁": {
+        story: "인테리어 업체에 계약금과 중도금 700만원을 지급했는데 공사가 계속 지연되고 하자도 심합니다. 환불을 요구했지만 업체는 연락을 피하고 있습니다. 계약서, 견적서, 결제내역, 하자 사진, 카톡 대화, 사업자등록번호가 있습니다.",
+        opponent: "OO인테리어",
+        damage: "7,000,000원",
+        platform: "오프라인/직장",
+        stage: "내용증명 발송"
+      },
+      "표절·저작권": {
+        story: "제가 만든 디자인과 글을 다른 업체가 거의 그대로 베껴서 인스타그램과 홈페이지에 올렸습니다. 제 원본 파일 생성일과 작업 과정, 먼저 올린 게시물 링크가 있고, 상대 게시물 캡처와 유사 부분 비교도 가능합니다.",
+        opponent: "OO업체",
+        damage: "저작권 침해 및 영업상 피해",
+        platform: "인스타그램",
+        stage: "고소장 작성"
+      },
+      "이커머스IP도용": {
+        story: "제가 운영하는 상품 상세페이지와 썸네일, 상품명, 직접 손으로 쓴 캘리그래피 이미지를 경쟁 셀러가 거의 그대로 복사했습니다. 상대는 가격 수정이 어려운 기간을 악용해서 같은 이미지로 최저가 판매를 했고, 고객이 상대 상품으로 빠져나갔습니다. 상대는 정식 폰트를 쓴 것이라며 오히려 폰트 저작권 문제를 제기하겠다고 합니다. 우리 쪽에는 디자이너가 직접 작업한 PSD/AI 원본 파일, 레이어, 작업 날짜, 최초 게시일, 상대 상품 URL, 이미지 비교 캡처, 가격과 리뷰 자료가 있습니다.",
+        opponent: "경쟁 셀러/업체",
+        damage: "상품페이지·캘리그래피 도용 및 매출 피해",
+        platform: "네이버 카페/블로그",
+        stage: "고소장 작성"
+      },
+      "기타법률": {
+        story: "어떤 법에 해당하는지 모르겠습니다. 상대방이 제 개인정보를 동의 없이 단체방에 올렸고, 허위신고와 리뷰테러까지 해서 영업에 피해가 생겼습니다. 게시글 URL, 캡처, 매출 감소 자료, 상대방 계정, 삭제 요청 내역이 있습니다.",
+        opponent: "성명불상 상대방",
+        damage: "개인정보 유출 및 영업상 피해",
+        platform: "네이버 카페/블로그",
+        stage: "고소장 작성"
+      }
+    };
+
+    const story = document.querySelector("#story");
+    const opponent = document.querySelector("#opponent");
+    const damage = document.querySelector("#damage");
+    const platform = document.querySelector("#platform");
+    const decisionDate = document.querySelector("#decisionDate");
+    const incidentDate = document.querySelector("#incidentDate");
+    const stage = document.querySelector("#stage");
+    const tabs = document.querySelectorAll(".tab");
+    const views = document.querySelectorAll(".view");
+    const chips = document.querySelectorAll(".chip");
+    const categoryNote = document.querySelector("#categoryNote");
+    const resultPanel = document.querySelector("#resultPanel");
+    const themeToggle = document.querySelector("#themeToggle");
+    const threatText = document.querySelector("#threatText");
+    const shieldBtn = document.querySelector("#shieldBtn");
+    const shieldResult = document.querySelector("#shieldResult");
+    const repeatTarget = document.querySelector("#repeatTarget");
+    const repeatPattern = document.querySelector("#repeatPattern");
+    const repeatCheckBtn = document.querySelector("#repeatCheckBtn");
+    const repeatCheckResult = document.querySelector("#repeatCheckResult");
+
+    const taxonomyGroups = [
+      { title: "형사 재산범죄", items: ["사기죄", "컴퓨터등사용사기", "횡령죄", "배임죄", "절도죄", "장물죄", "공갈죄", "강도죄", "손괴죄", "점유이탈물횡령"] },
+      { title: "사이버·정보통신 범죄", items: ["텔레그램 스토킹", "정보통신망법상 명예훼손", "사이버모욕", "개인정보보호법 위반", "불법촬영물 유포", "통신매체이용음란", "해킹", "계정도용", "전자금융사기", "보이스피싱", "스미싱", "피싱범죄", "딥페이크 성범죄"] },
+      { title: "폭력·신체 관련", items: ["폭행죄", "상해죄", "특수폭행", "특수상해", "협박죄", "스토킹범죄", "감금죄", "강요죄", "주거침입죄", "재물손괴", "업무방해죄"] },
+      { title: "성범죄", items: ["강간", "강제추행", "준강간", "준강제추행", "카메라등이용촬영죄", "성적목적다중이용장소침입", "디지털성범죄", "아동·청소년성보호법 위반"] },
+      { title: "노동·직장 관련", items: ["임금체불", "퇴직금 미지급", "부당해고", "직장내괴롭힘", "산업재해", "근로계약 위반", "최저임금 위반", "연차수당 미지급"] },
+      { title: "민사·계약 분쟁", items: ["대여금 반환청구", "손해배상청구", "계약해제·해지", "부당이득반환", "보증금 반환", "매매계약 분쟁", "임대차 분쟁", "하자담보책임", "채무불이행", "지연손해금"] },
+      { title: "IP·이커머스 도용", items: ["상품페이지 도용", "썸네일 카피", "캘리그래피 도용", "부정경쟁 성과물 도용", "폰트 역공격 방어", "플랫폼 판매중단 요청", "저작권 침해 내용증명"] },
+      { title: "형사 절차", items: ["고소", "고발", "진정", "탄원서", "합의서", "불기소 이의신청", "항고", "재정신청", "항소", "상고"] },
+      { title: "민사 절차", items: ["내용증명", "지급명령", "민사소송", "가압류", "가처분", "강제집행", "채권압류", "추심명령", "재산명시신청", "소액심판"] },
+      { title: "신고기관 연결", items: ["경찰", "검찰", "고용노동부", "금융감독원", "대한법률구조공단", "소비자원", "개인정보보호위원회", "방송통신심의위원회", "디지털성범죄지원센터"] }
+    ];
+
+    const taxonomyMeta = {
+      "사기죄": { type: "인터넷사기", crimes: ["형법 사기죄"], evidence: ["기망 발언", "송금내역", "약속 불이행", "연락 회피"], procedures: ["경찰 고소", "피해금 민사청구", "지급명령 검토"], limits: ["공소시효 10년 후보", "민사청구 별도 검토"] },
+      "컴퓨터등사용사기": { type: "전자금융사기", crimes: ["컴퓨터등사용사기", "전자금융거래법 위반"], evidence: ["접속기록", "이체내역", "인증문자", "악성앱"], procedures: ["경찰 고소", "금융기관 신고", "지급정지"], limits: ["죄명별 공소시효 확인"] },
+      "횡령죄": { type: "기타법률", crimes: ["형법 횡령", "업무상횡령"], evidence: ["위탁관계", "보관물", "처분내역", "회계자료"], procedures: ["경찰 고소", "손해배상청구"], limits: ["법정형별 공소시효 확인"] },
+      "배임죄": { type: "기타법률", crimes: ["형법 배임", "업무상배임"], evidence: ["임무위배", "손해액", "이익 취득", "의사결정 자료"], procedures: ["형사 고소", "민사 손해배상"], limits: ["법정형별 공소시효 확인"] },
+      "절도죄": { type: "절도·손괴", crimes: ["형법 절도"], evidence: ["CCTV", "소유 증빙", "목격자", "반환 요구"], procedures: ["경찰 고소", "손해배상청구"], limits: ["공소시효 7년 후보"] },
+      "공갈죄": { type: "협박·스토킹", crimes: ["형법 공갈", "협박"], evidence: ["요구 금액", "협박 문구", "송금내역", "녹취"], procedures: ["경찰 고소", "접근금지 검토"], limits: ["공소시효 확인"] },
+      "정보통신망법상 명예훼손": { type: "명예훼손·모욕", crimes: ["정보통신망법 명예훼손"], evidence: ["URL", "캡처시각", "게시자 계정", "허위성/비방성"], procedures: ["경찰 고소", "게시중단/임시조치", "방심위 검토"], limits: ["공소시효·고소기간 확인"] },
+      "사이버모욕": { type: "게임욕설·모욕", crimes: ["형법 모욕"], evidence: ["채팅 로그", "공연성", "특정성", "목격자"], procedures: ["경찰 고소", "플랫폼 신고"], limits: ["공소시효 5년 후보"] },
+      "개인정보보호법 위반": { type: "기타법률", crimes: ["개인정보보호법 위반"], evidence: ["유출 화면", "유출 범위", "동의 여부", "삭제요청"], procedures: ["개인정보보호위원회 신고", "경찰 고소", "손해배상"], limits: ["위반유형별 확인"] },
+      "통신매체이용음란": { type: "통매음", crimes: ["성폭력처벌법 통신매체이용음란"], evidence: ["성적 발언 원문", "전송 매체", "계정ID", "수신 시각"], procedures: ["경찰 고소", "플랫폼 신고"], limits: ["공소시효 5년 후보"] },
+      "텔레그램 스토킹": { type: "텔레그램스토킹", crimes: ["스토킹처벌법", "성폭력처벌법 통신매체이용음란", "형법 협박"], evidence: ["텔레그램 숫자 User ID", "대화 내보내기 HTML", "프로필 화면", "차단 후 우회 연락", "성적 발언 원문", "정신과 상담 기록"], procedures: ["경찰 고소", "긴급응급조치 요청", "잠정조치 신청", "디지털성범죄 삭제지원"], limits: ["보호조치 즉시 신청"] },
+      "보이스피싱": { type: "보이스피싱", crimes: ["사기", "전자금융거래법 위반"], evidence: ["통화녹음", "문자", "송금계좌", "지급정지 시각"], procedures: ["은행 지급정지", "경찰 신고", "피해구제 신청"], limits: ["신속 신고 우선"] },
+      "폭행죄": { type: "폭행·상해", crimes: ["형법 폭행"], evidence: ["사진", "CCTV", "112 신고", "목격자"], procedures: ["경찰 고소", "합의/손해배상"], limits: ["공소시효 5년 후보"] },
+      "상해죄": { type: "폭행·상해", crimes: ["형법 상해"], evidence: ["상해진단서", "치료비", "CCTV", "목격자"], procedures: ["경찰 고소", "손해배상"], limits: ["법정형 기준 7년 이상 검토"] },
+      "협박죄": { type: "협박·스토킹", crimes: ["형법 협박"], evidence: ["협박 원문", "통화녹음", "반복성", "공포심"], procedures: ["경찰 고소", "접근금지 검토"], limits: ["공소시효 확인"] },
+      "스토킹범죄": { type: "협박·스토킹", crimes: ["스토킹처벌법"], evidence: ["반복 연락", "접근 기록", "차단 후 우회", "신고내역"], procedures: ["긴급응급조치", "잠정조치", "고소"], limits: ["즉시 보호조치 우선"] },
+      "강제추행": { type: "성폭력", crimes: ["형법 강제추행"], evidence: ["피해 직후 기록", "CCTV", "메시지", "상담/진료 기록"], procedures: ["경찰 고소", "해바라기센터", "피해자 국선변호사"], limits: ["성범죄 특례 확인"] },
+      "카메라등이용촬영죄": { type: "디지털성범죄", crimes: ["성폭력처벌법 카메라등이용촬영"], evidence: ["촬영물", "URL", "기기/계정", "유포 정황"], procedures: ["경찰 고소", "삭제지원센터", "플랫폼 신고"], limits: ["죄명별 공소시효 확인"] },
+      "딥페이크 성범죄": { type: "디지털성범죄", crimes: ["허위영상물 편집·반포 등"], evidence: ["URL", "게시 계정", "원본/합성 비교", "유포 범위"], procedures: ["삭제지원", "경찰 고소", "플랫폼 신고"], limits: ["신속 삭제 우선"] },
+      "임금체불": { type: "임금체불", crimes: ["근로기준법 임금체불"], evidence: ["근로계약서", "급여명세서", "계좌내역", "출퇴근 기록"], procedures: ["고용노동부 진정", "체불임금 청구"], limits: ["임금채권 3년 후보"] },
+      "부당해고": { type: "부당해고", crimes: ["근로기준법 부당해고"], evidence: ["해고통보", "서면통지", "사직 강요", "출근 의사"], procedures: ["노동위원회 구제신청"], limits: ["3개월 이내 핵심"] },
+      "직장내괴롭힘": { type: "성희롱", crimes: ["근로기준법 직장 내 괴롭힘", "모욕/협박 등 병합"], evidence: ["업무지시", "녹취", "메신저", "목격자", "인사 불이익"], procedures: ["회사 신고", "노동청 진정", "손해배상"], limits: ["사안별 기간 확인"] },
+      "산업재해": { type: "기타법률", crimes: ["산업재해보상보험법", "산업안전보건법"], evidence: ["재해 경위", "진단서", "작업지시", "안전조치 미비"], procedures: ["산재 신청", "노동청 신고", "손해배상"], limits: ["산재 신청기간 확인"] },
+      "대여금 반환청구": { type: "대여금분쟁", crimes: ["민사 대여금"], evidence: ["송금내역", "변제약속", "독촉", "일부 변제"], procedures: ["내용증명", "지급명령", "민사소송"], limits: ["일반채권 10년 후보"] },
+      "보증금 반환": { type: "전세사기", crimes: ["임대차보증금 반환", "사기 검토"], evidence: ["계약서", "등기부", "전입/확정일자", "송금내역"], procedures: ["내용증명", "임차권등기명령", "민사소송", "고소 검토"], limits: ["채권/불법행위 별도 확인"] },
+      "내용증명": { type: "기타법률", crimes: ["절차 문서"], evidence: ["요구사항", "기한", "상대 주소", "증거목록"], procedures: ["우체국 발송", "후속 지급명령/고소"], limits: ["시효 중단 효과는 제한적이므로 확인"] },
+      "지급명령": { type: "대여금분쟁", crimes: ["민사 독촉절차"], evidence: ["채권 발생 증거", "상대 주소", "청구금액"], procedures: ["법원 지급명령", "이의 시 소송 전환"], limits: ["채권 소멸시효 확인"] },
+      "가압류": { type: "대여금분쟁", crimes: ["보전처분"], evidence: ["채권 소명", "보전 필요성", "상대 재산 단서"], procedures: ["법원 가압류 신청"], limits: ["본안소송 연계"] },
+      "경찰": { type: "기타법률", crimes: ["형사 신고기관"], evidence: ["고소장", "증거목록", "신분증", "상대 특정자료"], procedures: ["경찰서 민원실", "사이버범죄 신고"], limits: ["공소시효 전 접수"] },
+      "고용노동부": { type: "임금체불", crimes: ["노동 진정기관"], evidence: ["근로계약서", "급여자료", "출퇴근 기록"], procedures: ["노동청 진정", "출석조사"], limits: ["임금채권 3년 후보"] },
+      "금융감독원": { type: "보이스피싱", crimes: ["금융피해 신고"], evidence: ["송금내역", "계좌", "신고시각"], procedures: ["피해구제/분쟁조정", "은행 신고 병행"], limits: ["신속 신고 우선"] },
+      "소비자원": { type: "업체분쟁", crimes: ["소비자 피해구제"], evidence: ["계약/결제/하자/환불자료"], procedures: ["1372 상담", "피해구제/분쟁조정"], limits: ["청약철회·분쟁기간 확인"] },
+      "디지털성범죄지원센터": { type: "디지털성범죄", crimes: ["삭제지원/상담"], evidence: ["URL", "계정", "캡처", "유포정황"], procedures: ["삭제지원", "수사연계", "상담"], limits: ["신속 삭제 우선"] }
+    };
+    ["상품페이지 도용", "썸네일 카피", "캘리그래피 도용", "부정경쟁 성과물 도용", "폰트 역공격 방어", "플랫폼 판매중단 요청", "저작권 침해 내용증명"].forEach(item => {
+      taxonomyMeta[item] = {
+        type: "이커머스IP도용",
+        crimes: ["저작권법 위반", "부정경쟁방지법 성과물 무단사용", "표시광고법 검토"],
+        evidence: ["원본 작업파일", "최초 게시일", "상대 URL", "비교표", "가격·판매 이력", "타임스탬프"],
+        procedures: ["플랫폼 판매중단 요청", "특허청 부정경쟁 신고", "형사 고소", "내용증명", "손해배상청구"],
+        limits: ["저작권·부정경쟁·민사청구 기간 별도 확인"]
+      };
+    });
+
+    const categoryMeta = {
+      "부당해고": {
+        note: "부당해고 모드: 해고일, 해고 사유, 서면통지, 계속 근로 의사, 사직 강요 여부를 먼저 잡습니다.",
+        evidence: "해고통보 문자, 서면통지서 유무, 근로계약서, 출퇴근 기록, 사직서 강요 정황, 5인 이상 사업장 여부를 확인합니다.",
+        law: ["근로기준법 제23조 정당한 이유 없는 해고", "근로기준법 제27조 해고사유 서면통지", "근로기준법 제28조 3개월 구제신청", "부당해고 원직복직 금전보상 판례"]
+      },
+      "해고예고수당": {
+        note: "해고예고수당 모드: 30일 전 예고가 있었는지, 통상임금 얼마인지, 예외 사유가 있는지부터 봅니다.",
+        evidence: "해고 통보일, 실제 마지막 근무일, 급여명세서, 통상임금 산정자료, 3개월 미만 근무 여부, 회사의 예외 주장 가능성을 확인합니다.",
+        law: ["근로기준법 제26조 해고의 예고", "30일분 이상 통상임금", "해고예고수당 통상임금 판례", "해고예고 예외 사유"]
+      },
+      "임금체불": {
+        note: "임금체불 모드: 미지급 기간, 약정 임금, 실제 받은 금액, 사업주 인적사항을 표로 만듭니다.",
+        evidence: "근로계약서, 급여명세서, 계좌 입금내역, 출퇴근 기록, 업무지시 대화, 퇴직금 산정 자료를 모읍니다.",
+        law: ["근로기준법 제43조 임금 지급", "임금체불 진정", "체불임금 지연이자", "퇴직금 미지급 판례"]
+      },
+      "인터넷사기": {
+        note: "인터넷사기 모드: 입금 전 약속, 판매글, 계좌, 배송 회피, 잠적 정황을 시간순으로 묶습니다.",
+        evidence: "판매글 캡처, 채팅 원본, 계좌이체 내역, 운송장 허위 여부, 동일 피해자 제보, 상대방 계정 정보를 보관합니다.",
+        law: ["형법 제347조 사기죄 기망행위", "인터넷 물품거래 사기 판례", "편취의사 판단", "계좌명의자 사기 방조"]
+      },
+      "보이스피싱": {
+        note: "보이스피싱 모드: 전화·문자·앱 설치·송금 경로와 지급정지 시점을 바로 정리합니다.",
+        evidence: "통화녹음, 문자, 악성앱 설치 내역, 송금계좌, 은행 신고시각, 지급정지 접수번호, 경찰 신고확인원을 모읍니다.",
+        law: ["전기통신금융사기 피해구제", "보이스피싱 손해배상 판례", "전자금융거래법 접근매체", "사기방조 미필적 고의"]
+      },
+      "중고거래사기": {
+        note: "중고거래사기 모드: 물건 상태·발송 약속·환불 거부·잠적 정황을 압축합니다.",
+        evidence: "상품 게시글, 채팅 원본, 입금 내역, 택배 접수 여부, 상대방 계정·전화번호·계좌를 보관합니다.",
+        law: ["중고거래 사기 기망행위", "물품거래 편취의사", "소액사기 고소장", "피해자 다수 병합"]
+      },
+      "전세사기": {
+        note: "전세사기 모드: 이사·전입 변경보다 대항력 유지, 임차권등기명령, 특별법 신청, HUG 이행청구 타이밍을 먼저 봅니다.",
+        evidence: "임대차계약서, 등기부등본, 전입신고, 확정일자, 실거주 자료, 보증보험 가입증서, 계약해지 통보, 중개대상물 확인설명서, 송금내역, 경매 통지 우편을 모읍니다.",
+        law: ["주택임대차보호법 대항력·우선변제권", "임차권등기명령", "전세사기피해자 특별법", "HUG 보증금 반환 이행청구", "보증금 반환청구 소송"]
+      },
+      "코인사기": {
+        note: "코인사기 모드: 수익 보장 말, 입금주소, 리딩방 운영자, 출금 거부를 증거화합니다.",
+        evidence: "거래소 입출금 내역, 지갑주소, 리딩방 대화, 수익 보장 문구, 추가 입금 요구, 사이트 접속 기록을 보관합니다.",
+        law: ["코인 투자사기 기망행위", "원금보장 투자사기 판례", "유사수신행위", "전자지갑 추적 수사요청"]
+      },
+      "폭행·상해": {
+        note: "폭행·상해 모드: 맞은 사실보다 진단서, CCTV, 목격자, 신고시각이 힘입니다.",
+        evidence: "상해진단서, 사진, CCTV 위치, 112 신고내역, 목격자 연락처, 치료비 영수증, 사건 직후 메시지를 모읍니다.",
+        law: ["형법 폭행죄 상해죄", "상해진단서 증명력", "정당방위 판례", "치료비 손해배상"]
+      },
+      "협박·스토킹": {
+        note: "협박·스토킹 모드: 반복성, 공포심, 접근·연락 패턴, 긴급조치 필요성을 정리합니다.",
+        evidence: "문자·통화·DM 원본, 접근 사진, 위치기록, 주변인 진술, 경찰 신고내역, 차단 후 우회 연락을 모읍니다.",
+        law: ["협박죄 해악의 고지", "스토킹처벌법 반복성", "긴급응급조치", "접근금지 잠정조치"]
+      },
+      "텔레그램스토킹": {
+        note: "텔레그램 스토킹 모드: 수개월 반복성, 성적 메시지 도달, 계정 특정 단서, 잠정조치 필요성을 한 번에 잡습니다.",
+        evidence: "텔레그램 숫자 User ID, 사용자명, 프로필 화면, 대화방 내보내기 HTML, 메시지 원문, 성적 표현, 음란물 링크, 차단 후 우회 계정, 타 플랫폼 ID 일치, 정신과 상담·진료 기록을 보관합니다.",
+        law: ["스토킹처벌법 제9조 잠정조치", "성폭력처벌법 제13조 통신매체이용음란", "형법 협박죄", "성명불상 피고소인 특정수사"]
+      },
+      "명예훼손·모욕": {
+        note: "명예훼손·모욕 모드: 누가 봤는지, 어디에 올라왔는지, 사실 적시인지 욕설인지 구분합니다.",
+        evidence: "게시글 URL, 캡처 시각, 댓글, 조회 가능 범위, 계정 정보, 제3자가 본 정황을 보관합니다.",
+        law: ["정보통신망법 명예훼손", "형법 모욕죄 공연성", "사실적시 명예훼손", "의견표명 위법성 조각"]
+      },
+      "게임욕설·모욕": {
+        note: "게임욕설·모욕 모드: 게임 채팅 욕설은 공연성, 특정성, 모욕 표현, 대화 로그 보전이 핵심입니다.",
+        evidence: "게임 닉네임, 채팅 로그, 스크린샷, 리플레이, 같은 방 이용자, 상대 계정, 발생 시간, 게임사 신고 내역을 보관합니다.",
+        law: ["형법 모욕죄 공연성", "게임 채팅 특정성 판례", "정보통신망 이용 모욕", "닉네임 특정 가능성"]
+      },
+      "통매음": {
+        note: "통매음 모드: 성적 수치심이나 혐오감을 일으키는 말·사진·DM이 통신매체로 도달했는지부터 봅니다.",
+        evidence: "성적 발언 원문, DM·채팅 캡처, 계정ID, 전송 시간, 대화 맥락, 차단 후 재전송 여부, 게임/메신저 로그를 보관합니다.",
+        law: ["성폭력처벌법 통신매체이용음란", "성적 수치심 유발 발언", "통매음 고의 판단", "게임 채팅 통매음 사례"]
+      },
+      "성희롱": {
+        note: "성희롱 모드: 직장·학교·온라인에서 성적 언동, 반복성, 거부 의사, 증인, 인사상 불이익을 나눠 봅니다.",
+        evidence: "문자·DM·녹취·메일, 목격자, 회식/업무 지시 맥락, 거부 의사 표시, 인사 불이익 자료, 상담 기록을 보관합니다.",
+        law: ["남녀고용평등법 직장 내 성희롱", "국가인권위원회 진정", "직장 내 괴롭힘 병합", "손해배상 청구"]
+      },
+      "성폭력": {
+        note: "성폭력 모드: 안전 확보, 의료·상담 지원, 증거 보전, 고소장 작성 순서로 갑니다. 혼자 버티지 않게 지원 루트까지 연결합니다.",
+        evidence: "피해 직후 기록, 진료기록, 상담기록, CCTV 위치, 통화·문자·DM, 목격자, 의복·물건 보존, 신고 시각을 정리합니다.",
+        law: ["성폭력처벌법", "형법 강제추행·강간", "피해자 국선변호사", "해바라기센터 원스톱 지원"]
+      },
+      "디지털성범죄": {
+        note: "디지털성범죄 모드: 삭제 요청보다 증거 보전과 신고 루트를 먼저 확보합니다.",
+        evidence: "URL, 계정, 캡처, 게시시각, 유포 협박 메시지, 원본 파일 존재 여부, 플랫폼 신고내역을 보관합니다.",
+        law: ["성폭력처벌법 촬영물 유포", "불법촬영물 삭제지원", "유포협박 판례", "디지털성범죄 피해자 지원"]
+      },
+      "절도·손괴": {
+        note: "절도·손괴 모드: 물건의 소유, 점유 이전, 파손 전후 상태, 수리비를 증거로 묶습니다.",
+        evidence: "CCTV, 구매영수증, 사진, 수리견적서, 목격자, 출입기록, 상대방 인정 메시지를 모읍니다.",
+        law: ["형법 절도죄", "재물손괴죄", "불법영득의사 판례", "수리비 손해배상"]
+      },
+      "대여금분쟁": {
+        note: "돈 빌려주고 못받음 모드: 차용증이 없어도 포기하지 않습니다. 송금, 갚겠다는 카톡, 변제기, 일부 변제 내역이 핵심입니다.",
+        evidence: "계좌이체 내역, 갚겠다는 문자·카톡, 변제기 약속, 일부 변제, 독촉 메시지, 상대방 인적사항, 돈을 빌려간 이유를 모읍니다.",
+        law: ["대여금 반환청구", "지급명령 신청", "차용증 없는 대여금 판례", "민사 채무불이행과 사기죄 구별", "변제기 약정 입증"]
+      },
+      "업체분쟁": {
+        note: "업체분쟁 모드: 계약, 견적, 결제, 하자, 환불 거부, AS 약속 불이행을 한 줄씩 정리합니다.",
+        evidence: "계약서, 견적서, 결제내역, 광고·상담 문구, 하자 사진, AS 대화, 환불 요청, 사업자등록정보를 모읍니다.",
+        law: ["민법 채무불이행", "소비자분쟁조정", "전자상거래법 청약철회", "사기죄 기망행위 검토", "소액사건·지급명령"]
+      },
+      "표절·저작권": {
+        note: "표절·저작권 모드: 내 원본이 먼저 존재했다는 점, 상대 결과물의 실질적 유사성, 접근 가능성을 나눠 봅니다.",
+        evidence: "원본 파일 생성일, 작업 과정, 게시일, 원본 링크, 상대방 게시물, 유사 부분 비교표, 무단 사용 범위를 보관합니다.",
+        law: ["저작권법 복제권·전송권", "저작권 침해 금지청구", "손해배상청구", "한국저작권위원회 분쟁조정", "형사 고소 검토"]
+      },
+      "이커머스IP도용": {
+        note: "이커머스 IP도용 모드: 상품명·썸네일·상세페이지·캘리그래피·사진 구도·최저가 카피를 저작권/부정경쟁/표시광고로 나눠 봅니다.",
+        evidence: "원본 PSD/AI/프로크리에이트 파일, 작업 타임스탬프, 최초 게시일, 상대 상품 URL, 썸네일 비교, 가격 변경 이력, 매출·리뷰 자료를 모읍니다.",
+        law: ["저작권법 제136조 제1항", "부정경쟁방지법 제2조 제1호 목목", "표시광고법 허위·기만 광고 검토", "플랫폼 지식재산권 신고", "특허청 부정경쟁행위 신고"]
+      },
+      "기타법률": {
+        note: "기타/직접입력 모드: 사건명이 애매해도 피해사실을 그대로 쓰면 형사·민사·행정·노동·가사·소비자·정보통신 쟁점을 넓게 훑습니다.",
+        evidence: "날짜, 상대방, 장소, 금액, 대화 원문, 계약서, 사진, 녹취, URL, 계좌, 병원기록, 신고내역처럼 객관 자료를 최대한 적습니다.",
+        law: ["대한민국 현행법 전체 검색", "국가법령정보센터 법령검색", "대법원 판례검색", "형사·민사·행정·가사·노동 쟁점 분류"]
+      }
+    };
+
+    const legalRules = [
+      { keys: ["해고", "부당해고", "사직서", "권고사직"], law: "근로기준법 제23조·제27조·제28조", action: "노동위원회 부당해고 구제신청", evidence: "해고통보, 서면통지, 사직 강요 정황, 출퇴근 기록" },
+      { keys: ["해고예고", "30일", "예고수당"], law: "근로기준법 제26조", action: "해고예고수당 청구·노동청 진정", evidence: "해고 통보일, 마지막 근무일, 급여명세서" },
+      { keys: ["월급", "임금", "퇴직금", "체불"], law: "근로기준법 제43조·근로자퇴직급여보장법", action: "노동청 임금체불 진정·지급명령", evidence: "근로계약서, 급여명세서, 계좌내역, 출퇴근 기록" },
+      { keys: ["속", "사기", "입금", "보냈", "환불", "잠적"], law: "형법 제347조 사기", action: "사기 고소·피해금 민사청구", evidence: "기망 발언, 입금내역, 환불 약속, 연락 회피" },
+      { keys: ["보이스피싱", "피싱", "스미싱", "악성앱"], law: "전기통신금융사기 피해방지 특별법·형법 사기", action: "지급정지·경찰 신고·피해구제 신청", evidence: "통화녹음, 문자, 앱 설치내역, 송금계좌, 신고시각" },
+      { keys: ["전세", "보증금", "임대인", "중개사", "깡통", "전입신고", "확정일자", "임차권등기", "HUG", "경매"], law: "주택임대차보호법 대항력·우선변제권, 전세사기피해자 특별법, 보증금 반환청구, 형법 사기 검토", action: "대항력 유지 → 계약해지 통보 → 임차권등기명령/HUG 이행청구 → 특별법 피해자 신청 → 보증금 반환소송·경매 대응", evidence: "임대차계약서, 등기부등본, 전입신고, 확정일자, 실거주 자료, 보증보험 가입증서, 계약해지 통보, 경매 통지, 중개대상물 확인설명서" },
+      { keys: ["코인", "리딩방", "수익", "원금보장", "거래소"], law: "형법 사기·유사수신행위법·자본시장법 검토", action: "투자사기 고소·지갑주소 추적 요청", evidence: "입금주소, 거래소 내역, 리딩방 대화, 수익보장 문구" },
+      { keys: ["욕", "모욕", "명예훼손", "허위사실", "게시글", "댓글"], law: "형법 모욕·명예훼손, 정보통신망법 명예훼손", action: "형사 고소·게시물 임시조치·삭제 가처분", evidence: "URL, 캡처시각, 공개범위, 제3자 열람 정황" },
+      { keys: ["게임", "채팅", "닉네임", "롤", "리그오브레전드", "피파", "발로란트", "오버워치"], law: "형법 모욕죄·정보통신망상 권리침해 검토", action: "모욕 고소·게임사 로그 보존 요청·계정 특정 요청", evidence: "채팅 로그, 닉네임, 게임ID, 매치 시간, 리플레이, 함께 본 유저" },
+      { keys: ["통매음", "성적", "수치심", "음란", "성희롱", "섹", "자위", "몸"], law: "성폭력처벌법 통신매체이용음란", action: "통매음 고소·플랫폼 신고·증거보전", evidence: "성적 발언 원문, 전송 매체, 계정ID, 수신 시각, 대화 맥락" },
+      { keys: ["텔레그램", "telegram", "User ID", "userinfobot", "대화 내보내기", "계정 폭파", "차단 후", "음란 링크"], law: "스토킹처벌법·성폭력처벌법 제13조 통신매체이용음란·형법 협박", action: "성명불상 고소·긴급응급조치·잠정조치·계정 특정수사 요청", evidence: "숫자 User ID, 사용자명, 프로필, 대화 내보내기 HTML, 링크 클릭 기록, 타 플랫폼 ID, 정신과 상담 기록" },
+      { keys: ["성희롱", "회식", "성적 농담", "몸매", "상사", "불쾌"], law: "남녀고용평등법 직장 내 성희롱·민법 불법행위", action: "회사 신고·노동청/인권위 진정·손해배상 검토", evidence: "발언 원문, 녹취, 목격자, 거부 의사, 인사 불이익 자료" },
+      { keys: ["성폭력", "강제추행", "추행", "강간", "만졌", "성폭행"], law: "형법·성폭력처벌법", action: "112/경찰 신고·해바라기센터·피해자 국선변호사·고소", evidence: "진료기록, 상담기록, CCTV, 메시지, 목격자, 피해 직후 기록" },
+      { keys: ["협박", "죽", "찾아가", "스토킹", "계속 연락"], law: "형법 협박·스토킹처벌법", action: "고소·긴급응급조치·잠정조치 요청", evidence: "반복 연락, 접근 정황, 공포심 발생, 신고내역" },
+      { keys: ["때렸", "폭행", "상해", "다쳤", "진단서"], law: "형법 폭행·상해", action: "폭행/상해 고소·치료비 손해배상", evidence: "진단서, 사진, CCTV, 목격자, 112 신고내역" },
+      { keys: ["불법촬영", "유포", "몸캠", "성적", "사진 뿌"], law: "성폭력처벌법·정보통신망법", action: "디지털성범죄 신고·삭제지원·고소", evidence: "URL, 계정, 게시시각, 원본, 유포협박 메시지" },
+      { keys: ["훔", "절도", "부쉈", "파손", "손괴"], law: "형법 절도·재물손괴", action: "형사 고소·수리비 손해배상", evidence: "CCTV, 구매영수증, 수리견적, 전후 사진" },
+      { keys: ["빌려", "차용", "돈 안 갚", "대여금", "갚겠다", "빌려줬", "못 받", "안 갚", "불송치", "TXID", "지갑주소", "코인"], law: "민법 대여금 반환·지급명령·민사집행법 채무불이행자 명부등재", action: "내용증명 → 지급명령/대여금 소송 → 집행권원 확보 → 채권압류·재산명시 → 채무불이행자 명부등재 검토", evidence: "차용증, 송금내역, TXID, 거래소 출금증명, 변제약속, 독촉 메시지, 일부 변제 내역, 불송치 결정서의 차용 인정 문구" },
+      { keys: ["업체", "환불", "하자", "AS", "계약", "시공", "예약", "위약금"], law: "민법 채무불이행·전자상거래법·소비자기본법", action: "내용증명·소비자분쟁조정·소액소송·사기 고소 검토", evidence: "계약서, 견적서, 결제내역, 광고문구, 하자 사진, 환불 거부 대화" },
+      { keys: ["표절", "저작권", "무단 사용", "도용", "카피", "복붙"], law: "저작권법·민법 불법행위", action: "게시중단 요청·저작권 분쟁조정·손해배상·형사 고소 검토", evidence: "원본 생성일, 작업파일, 게시일, 상대 게시물, 유사 부분 비교표" },
+      { keys: ["상품페이지", "썸네일", "상세페이지", "캘리그래피", "최저가", "스마트스토어", "쿠팡", "상품명", "디자인 도용"], law: "저작권법 제136조·부정경쟁방지법 성과물 무단사용·표시광고법 검토", action: "플랫폼 판매중단 요청 → 특허청 부정경쟁 신고 → 형사 고소/내용증명/손해배상 검토", evidence: "원본 작업파일, 최초 게시일, 상대 URL, 이미지 비교표, 가격/판매 이력, 리뷰·매출 추정자료" },
+      { keys: ["개인정보", "유출", "주민번호", "전화번호", "주소 공개", "신상털이"], law: "개인정보보호법·정보통신망법·민법 불법행위", action: "개인정보침해 신고·게시중단·손해배상·형사 고소 검토", evidence: "유출 화면, URL, 유출 시각, 유출 범위, 피해 연락, 삭제요청 내역" },
+      { keys: ["의료사고", "오진", "수술", "병원", "진료", "부작용"], law: "의료법·민법 손해배상·업무상과실치상 검토", action: "진료기록 확보·의료분쟁조정·손해배상·형사 고소 검토", evidence: "진료기록, 검사결과, 처방전, 동의서, 후유증 기록, 다른 병원 소견" },
+      { keys: ["학교폭력", "학폭", "왕따", "괴롭힘", "학생", "담임"], law: "학교폭력예방법·민법 손해배상·형법 폭행/협박/모욕", action: "학교폭력 신고·학폭위 절차·고소·손해배상 검토", evidence: "메시지, 녹취, 진단서, 상담기록, 목격자, 학교 신고내역" },
+      { keys: ["교통사고", "뺑소니", "음주운전", "보험", "후유장해"], law: "교통사고처리특례법·도로교통법·민법 손해배상", action: "경찰 신고·보험 청구·합의·손해배상·형사처벌 의견 제출", evidence: "블랙박스, 진단서, 사고확인원, 보험 접수번호, 수리견적, 현장사진" },
+      { keys: ["층간소음", "누수", "관리사무소", "아파트", "하자보수"], law: "공동주택관리법·민법 방해배제/손해배상", action: "관리주체 신고·내용증명·조정·손해배상 검토", evidence: "소음측정, 누수사진, 관리사무소 민원, 수리견적, 대화기록" },
+      { keys: ["이혼", "상간", "외도", "양육권", "재산분할"], law: "민법 가사소송·가사비송·손해배상", action: "가사조정·이혼소송·상간 손해배상·양육권/재산분할 검토", evidence: "메시지, 사진, 카드내역, 재산자료, 자녀 양육자료" },
+      { keys: ["양육비", "양육비 안 줌", "면접교섭"], law: "양육비이행법·가사소송법", action: "양육비 이행명령·직접지급명령·감치·강제집행 검토", evidence: "판결/조정조서, 미지급 내역, 계좌내역, 연락기록" },
+      { keys: ["상속", "유류분", "유언", "부모님 재산", "상속재산"], law: "민법 상속·유류분·상속회복청구", action: "상속재산 조회·유류분 반환청구·상속분쟁 조정/소송", evidence: "가족관계증명서, 부동산/예금자료, 증여내역, 유언장, 사망진단서" },
+      { keys: ["횡령", "배임", "회사돈", "공금", "법인카드"], law: "형법 횡령·배임·업무상횡령", action: "형사 고소·회계자료 확보·손해배상 검토", evidence: "계좌내역, 회계장부, 결재라인, 법인카드 내역, 내부대화" },
+      { keys: ["공갈", "돈 내놔", "약점", "폭로하겠다"], law: "형법 공갈·협박·강요", action: "공갈/협박 고소·접근금지·증거보전", evidence: "요구 금액, 협박 문구, 송금내역, 통화녹음, 반복 연락" },
+      { keys: ["주거침입", "집에 들어", "무단침입", "문 따고", "퇴거불응"], law: "형법 주거침입·퇴거불응", action: "형사 고소·접근금지·CCTV 확보", evidence: "CCTV, 출입기록, 현장사진, 목격자, 경고 메시지" },
+      { keys: ["사문서", "위조", "도장", "서명", "계약서 조작"], law: "형법 사문서위조·위조사문서행사", action: "문서위조 고소·감정·민사 무효 주장", evidence: "원본 문서, 서명 비교, 작성 경위, 행사된 문서, 상대방 대화" },
+      { keys: ["업무방해", "리뷰테러", "허위신고", "영업방해"], law: "형법 업무방해·정보통신망법·민법 손해배상", action: "업무방해 고소·게시중단·손해배상 검토", evidence: "허위게시물, 매출피해, 신고내역, 반복 계정, 고객 문의" },
+      { keys: ["반려견", "개물림", "동물", "펫", "물림"], law: "동물보호법·민법 손해배상·형법 과실치상 검토", action: "치료비 청구·신고·손해배상·과실치상 검토", evidence: "진단서, 현장사진, 목격자, 견주 정보, 치료비 영수증" }
+    ];
+
+    const platformRules = {
+      "인스타그램": "게시물 URL, 계정 ID, 프로필 URL, 스토리 캡처 시각, DM 원본을 확보하세요. 익명이어도 성명불상으로 고소 가능성을 검토하고, 수사기관을 통해 접속기록·가입정보 확인을 요청하는 구조입니다.",
+      "페이스북": "게시물 고유 URL, 작성자 프로필, 댓글 스레드, 공개범위, 캡처 시각을 보전하세요. 명예훼손·모욕·협박이면 형사 고소와 플랫폼 신고를 병행합니다.",
+      "텔레그램": "대화방 링크, 사용자명, 고유 숫자 User ID, 전화번호 연동 흔적, 메시지 원본, 대화 내보내기 HTML, 파일 해시, 초대링크를 보전하세요. 해외 플랫폼이라 특정이 어려울 수 있어 타 플랫폼 ID, 계좌, 전화번호, 링크 클릭 로그 같은 국내 단서가 중요합니다.",
+      "카카오톡": "대화방 내보내기, 상대 프로필, 전화번호, 송금내역, 통화녹음 등 국내 특정 단서가 강합니다. 사이버·사기·협박 사건에서 핵심 증거가 됩니다.",
+      "당근/중고거래": "거래글, 채팅, 송금계좌, 닉네임, 약속 장소, 운송장 자료를 묶으세요. 중고거래사기 고소와 소액 민사청구를 함께 검토합니다.",
+      "네이버 카페/블로그": "게시글 URL, 작성자 ID, 댓글, 검색 노출 화면, 삭제 전 캡처를 보전하세요. 명예훼손·모욕·업무방해·임시조치가 함께 문제될 수 있습니다.",
+      "유튜브": "영상 URL, 채널명, 댓글, 업로드 시각, 문제 구간 타임스탬프를 기록하세요. 명예훼손·모욕·저작권·초상권 침해를 나눠 검토합니다.",
+      "온라인 게임": "게임명, 서버, 매치ID, 발생 시간, 상대 닉네임, 채팅 로그, 리플레이, 함께 본 유저를 확보하세요. 닉네임만 있어도 게임사 로그와 수사기관 조회로 특정 가능성을 검토합니다.",
+      "거래소/코인사이트": "거래소 입출금내역, 지갑주소, TXID, 리딩방 대화, 사이트 도메인, 고객센터 답변을 모으세요. 투자사기와 자금흐름 추적 요청이 핵심입니다.",
+      "오프라인/직장": "상대 인적사항, 사업장 정보, CCTV 위치, 녹취, 서면통지, 계약서, 급여자료처럼 사람과 장소를 특정할 수 있는 자료가 핵심입니다."
+    };
+
+    const aggravationRules = [
+      { keys: ["반복", "계속", "여러 번", "상습"], title: "반복성·상습성", detail: "한 번의 다툼이 아니라 반복된 행위라면 날짜별 목록과 증거번호를 붙입니다." },
+      { keys: ["여러 명", "피해자들", "단체방", "다수", "피해자 모임"], title: "다수 피해자", detail: "같은 수법의 피해자가 여럿이면 공동자료, 피해자별 피해액, 공통 계좌·계정을 정리합니다." },
+      { keys: ["미성년", "청소년", "아동", "학생"], title: "미성년자 피해", detail: "미성년자 대상 사건은 보호자, 학교, 상담기관, 해바라기센터 등 보호 루트를 함께 확인합니다." },
+      { keys: ["협박", "보복", "신고하면", "죽", "찾아가"], title: "보복협박·2차 가해", detail: "신고나 증언을 막기 위한 협박은 별도 범죄 또는 가중요소가 될 수 있어 원문을 그대로 보전합니다." },
+      { keys: ["텔레그램", "User ID", "계정 폭파", "대화 내보내기", "차단 후", "다른 계정"], title: "텔레그램 특정수사 필요성", detail: "닉네임은 바뀔 수 있으므로 숫자 User ID, 대화 내보내기 파일, 프로필 화면, 타 플랫폼 ID와의 연결 단서를 고소장에 따로 적습니다." },
+      { keys: ["정신과", "불안", "불면", "상담", "진단서", "공황"], title: "피해자 보호 필요성", detail: "불면, 불안, 치료·상담 기록은 잠정조치와 피해자 보호 필요성을 설명하는 핵심 자료가 됩니다." },
+      { keys: ["조직", "리딩방", "총책", "팀장", "상선", "대포통장"], title: "조직적 범행", detail: "역할 분담, 계좌, 지시자, 모집책, 대화방 구조를 표시해 단순 개인분쟁이 아님을 보여줍니다." },
+      { keys: ["유포", "퍼뜨", "올리", "게시", "공개", "협박"], title: "유포·공개 피해", detail: "URL, 게시시각, 조회 가능 범위, 삭제요청 내역, 재유포 정황을 따로 묶습니다." },
+      { keys: ["흉기", "칼", "위험한 물건", "때렸", "다쳤"], title: "위험한 수단·상해", detail: "진단서, 사진, CCTV, 위험한 물건 사용 정황은 별도 증거로 강조합니다." },
+      { keys: ["장애", "취약", "노인", "임산부"], title: "취약 피해자", detail: "피해자가 취약한 상태였거나 상대가 이를 이용했다면 상담기록과 상황 설명을 보강합니다." },
+      { keys: ["접근금지", "집 앞", "직장", "따라", "스토킹"], title: "긴급 보호 필요", detail: "접근금지, 긴급응급조치, 잠정조치가 필요한지 별도 요청사항으로 분리합니다." }
+    ];
+
+    const limitationMeta = {
+      "부당해고": { type: "노동 구제신청", years: 0, months: 3, basis: "해고일 등 부당해고가 있었던 날부터 3개월 이내", note: "노동위원회 구제신청은 3개월이 핵심입니다." },
+      "해고예고수당": { type: "임금채권", years: 3, basis: "임금채권은 통상 3년 소멸시효 검토", note: "정확한 기산점은 지급의무 발생일을 확인하세요." },
+      "임금체불": { type: "임금채권", years: 3, basis: "임금채권은 통상 3년 소멸시효 검토", note: "노동청 진정은 빠를수록 유리합니다." },
+      "대여금분쟁": { type: "민사 대여금", years: 10, basis: "일반 민사채권 10년 소멸시효 기준 검토", note: "변제기, 일부 변제, 채무 승인으로 달라질 수 있습니다." },
+      "업체분쟁": { type: "민사/소비자", years: 3, basis: "불법행위 손해배상 3년/10년, 계약책임은 별도 검토", note: "계약상 청구와 불법행위 청구를 나눠 봅니다." },
+      "표절·저작권": { type: "저작권/민사·형사", years: 7, basis: "저작권 침해 형사 고소와 민사 손해배상 기간 별도 검토", note: "침해를 안 날, 침해행위일, 고소기간 쟁점을 확인하세요." },
+      "성폭력": { type: "성범죄", years: 10, basis: "성범죄는 죄명·피해자 연령·법정형에 따라 공소시효가 크게 달라짐", note: "미성년자·중대 성범죄는 특례가 있을 수 있어 즉시 확인하세요." },
+      "디지털성범죄": { type: "디지털 성범죄", years: 7, basis: "촬영·유포·협박 등 죄명별 법정형 기준으로 공소시효 검토", note: "삭제지원과 고소를 동시에 서두르세요." },
+      "통매음": { type: "통신매체이용음란", years: 5, basis: "법정형 기준 공소시효 5년 가능성 검토", note: "정확한 죄명 적용에 따라 달라질 수 있습니다." },
+      "텔레그램스토킹": { type: "스토킹/통매음", years: 5, basis: "스토킹·통매음·협박은 죄명별 법정형 기준으로 공소시효를 각각 검토", note: "공소시효보다 계정 폭파 전 증거보전과 잠정조치 신청이 더 급합니다." },
+      "명예훼손·모욕": { type: "명예훼손/모욕", years: 5, basis: "벌금형 또는 5년 미만 징역 범죄는 5년 기준 검토", note: "친고죄/반의사불벌죄 여부와 고소기간도 별도 확인하세요." },
+      "게임욕설·모욕": { type: "모욕/통매음 검토", years: 5, basis: "모욕·통매음 모두 대체로 5년 기준 가능성 검토", note: "통매음이면 성폭력처벌법 쟁점으로 별도 봅니다." },
+      "인터넷사기": { type: "사기", years: 10, basis: "사기죄는 장기 10년 이하 징역으로 10년 공소시효 검토", note: "피해액과 특경법 적용 여부에 따라 달라질 수 있습니다." },
+      "중고거래사기": { type: "사기", years: 10, basis: "사기죄 10년 공소시효 검토", note: "소액이어도 포기하지 말고 계좌·계정 증거를 보관하세요." },
+      "보이스피싱": { type: "사기/전자금융", years: 10, basis: "사기 및 전자금융 관련 죄명별 공소시효 검토", note: "지급정지와 신고가 우선입니다." },
+      "전세사기": { type: "사기/민사", years: 10, basis: "형사 사기 10년, 보증금 반환 민사청구는 별도 검토", note: "보증금 반환청구와 형사 고소를 분리해 봅니다." },
+      "코인사기": { type: "투자사기", years: 10, basis: "사기 10년, 유사수신·자본시장법은 죄명별 검토", note: "지갑주소와 거래소 기록 보전이 중요합니다." },
+      "폭행·상해": { type: "폭행/상해", years: 5, basis: "폭행은 5년, 상해는 법정형에 따라 7년 이상 가능성 검토", note: "진단서가 있으면 상해죄 검토가 필요합니다." },
+      "협박·스토킹": { type: "협박/스토킹", years: 5, basis: "협박·스토킹은 죄명별 법정형 기준으로 5년 이상 검토", note: "접근금지 등 긴급조치가 더 먼저일 수 있습니다." },
+      "절도·손괴": { type: "절도/손괴", years: 7, basis: "절도·손괴는 법정형에 따라 7년 또는 5년 검토", note: "CCTV 확보가 늦으면 입증이 약해집니다." },
+      "성희롱": { type: "성희롱/민사·노동", years: 3, basis: "직장 내 성희롱은 진정·손해배상·노동절차별 기간 검토", note: "형사 범죄가 함께 있으면 별도 공소시효를 봅니다." },
+      "기타법률": { type: "직접입력", years: null, basis: "입력문에서 매칭된 법률별로 공소시효·소멸시효를 별도 확인", note: "법령검색과 전문가 검수로 최종 확인이 필요합니다." }
+    };
+
+    function rawFacts() {
+      const raw = story.value.trim();
+      if (!raw) return "피해자가 입력한 내용을 바탕으로 사건 경위, 회사 또는 상대방의 행위, 피해 발생, 보유 증거를 날짜순으로 정리합니다.";
+      return raw.replace(/\s+/g, " ").replace(/[!！?？]{2,}/g, ".").slice(0, 430);
+    }
+
+    function safeSummary() {
+      return rawFacts()
+        .replace(/\d{2,3}[-.\s]\d{3,4}[-.\s]\d{4}/g, "전화번호")
+        .replace(/\d{2,3}\s?\d{3,4}\s?\d{4}/g, "전화번호")
+        .replace(/[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/g, "이메일")
+        .replace(/[가-힣]{2,4}(회사|업체|상사|대표|셀러)/g, "상대방")
+        .replace(/[김이박최정강조윤장임한오서신권황안송전홍고문양손배백허남심노하곽성차주우구민류나진지엄채원천방공현함변염여추도소석선설마길연위표명기반왕금옥육인맹제모탁국어은편용예봉][가-힣]{1,2}/g, "상대방")
+        .replace(/\d{1,3}(,\d{3})*만원|\d{1,3}(,\d{3})*원/g, "피해금액");
+    }
+
+    function renderTaxonomy() {
+      const target = document.querySelector("#taxonomyGroups");
+      target.innerHTML = taxonomyGroups.map((group, index) => `
+        <details class="taxonomy-group" ${index === 0 ? "open" : ""}>
+          <summary>${group.title}<span>${group.items.length}</span></summary>
+          <div class="taxonomy-items">
+            ${group.items.map(item => `<button class="tax-btn" data-taxonomy-item="${item}">${item}</button>`).join("")}
+          </div>
+        </details>
+      `).join("");
+      document.querySelectorAll("[data-taxonomy-item]").forEach(button => {
+        button.addEventListener("click", () => selectTaxonomy(button.dataset.taxonomyItem));
+      });
+    }
+
+    function selectTaxonomy(item) {
+      document.querySelectorAll("[data-taxonomy-item]").forEach(button => {
+        button.classList.toggle("active", button.dataset.taxonomyItem === item);
+      });
+      const meta = taxonomyMeta[item] || {
+        type: "기타법률",
+        crimes: [item],
+        evidence: ["사실관계", "대화", "계약서", "송금내역", "사진", "녹취"],
+        procedures: ["관련 기관 상담", "고소/진정/민사청구 검토"],
+        limits: ["법령별 기한 확인"]
+      };
+      state.caseType = meta.type;
+      chips.forEach(chip => chip.classList.toggle("active", chip.dataset.type === state.caseType));
+      state.taxonomyNote = `${item}: 관련 죄명 ${meta.crimes.join(", ")} / 절차 ${meta.procedures.join(", ")}`;
+      categoryNote.textContent = state.taxonomyNote;
+      if (!story.value.trim()) {
+        story.value = `${item} 관련 피해입니다. 상대방이 어떤 행동을 했는지, 언제 어디서 발생했는지, 피해금액이나 피해내용이 무엇인지, 가진 증거가 무엇인지 정리하려고 합니다.`;
+      }
+      update();
+      showResult("match");
+    }
+
+    function matchedRules() {
+      const text = `${state.caseType} ${stage.value} ${platform.value} ${rawFacts()}`;
+      const matches = legalRules.filter(rule => rule.keys.some(key => text.includes(key)));
+      const taxonomyMatches = Object.entries(taxonomyMeta)
+        .filter(([item]) => text.includes(item))
+        .map(([item, meta]) => ({
+          law: meta.crimes.join(" · "),
+          action: meta.procedures.join(" → "),
+          evidence: meta.evidence.join(", ")
+        }));
+      const categoryLaw = categoryMeta[state.caseType] ? {
+        law: categoryMeta[state.caseType].law.slice(0, 3).join(" · "),
+        action: "선택한 사건유형 기준 서류 작성·증거 보강·판례 검색",
+        evidence: categoryMeta[state.caseType].evidence
+      } : null;
+      const merged = categoryLaw ? [categoryLaw, ...taxonomyMatches, ...matches] : [...taxonomyMatches, ...matches];
+      const unique = [];
+      merged.forEach(item => {
+        if (!unique.some(prev => prev.law === item.law)) unique.push(item);
+      });
+      return unique.length ? unique : [{ law: "사실관계 추가 필요", action: "피해사실, 날짜, 상대방, 증거를 더 입력", evidence: "대화·계약·송금·사진·녹취 원본" }];
+    }
+
+    function laborClaims() {
+      if (state.caseType === "해고예고수당") {
+        return "사용자가 30일 전에 해고를 예고하지 않았고 해고예고수당도 지급하지 않았다는 점을 중심으로, 해고 통보 시점과 임금 자료를 대조합니다.";
+      }
+      if (state.caseType === "임금체불") {
+        return "약정 임금, 실제 지급액, 미지급액, 근무 기간, 사용자 지시 자료를 기준으로 노동청 진정과 민사 청구 가능성을 함께 정리합니다.";
+      }
+      return "해고 사유와 시기, 서면통지 여부, 절차 준수 여부, 계속 근로 의사, 사직 강요 여부를 중심으로 부당해고 구제신청 주장을 세웁니다.";
+    }
+
+    function modeAdvice() {
+      return (categoryMeta[state.caseType] && categoryMeta[state.caseType].evidence) || "사건별 필수 증거와 기한을 먼저 확인합니다.";
+    }
+
+    function lawSearchUrl(keyword) {
+      return `https://www.law.go.kr/precSc.do?menuId=7&subMenuId=47&tabMenuId=213&query=${encodeURIComponent(keyword)}`;
+    }
+
+    function externalCaseLinks(keyword) {
+      const encoded = encodeURIComponent(keyword);
+      return [
+        `<a href="https://glaw.scourt.go.kr/wsjo/intesrch/sjo022.do" target="_blank" rel="noopener">대법원 종합법률정보에서 직접 검색: ${keyword}</a>`,
+        `<a href="https://casenote.kr/search/?q=${encoded}" target="_blank" rel="noopener">케이스노트 검색: ${keyword}</a>`,
+        `<a href="https://lbox.kr/search?keyword=${encoded}" target="_blank" rel="noopener">엘박스 검색: ${keyword}</a>`
+      ];
+    }
+
+    function updatePrecedents() {
+      const meta = categoryMeta[state.caseType] || categoryMeta["부당해고"];
+      const goldenKeywords = [
+        state.caseType,
+        ...meta.law,
+        "요건사실",
+        "실질적 유사성 의거성",
+        "상습성 반복 범행 다수 피해자"
+      ].slice(0, 6);
+      document.querySelector("#precedentTitle").textContent = `${state.caseType} 판례·법령 검색 키워드`;
+      document.querySelector("#precedentText").textContent = meta.law.join(" · ");
+      document.querySelector("#lawLinks").innerHTML = [
+        `<a href="https://www.law.go.kr/lsSc.do?menuId=1&subMenuId=15&query=${encodeURIComponent(state.caseType)}" target="_blank" rel="noopener">국가법령정보센터 법령검색: ${state.caseType}</a>`,
+        `<a href="https://www.law.go.kr/precSc.do?menuId=7&subMenuId=47&tabMenuId=213&query=${encodeURIComponent(state.caseType)}" target="_blank" rel="noopener">국가법령정보센터 판례검색: ${state.caseType}</a>`,
+        ...meta.law.map(keyword => `<a href="${lawSearchUrl(keyword)}" target="_blank" rel="noopener">판례 키워드 검색: ${keyword}</a>`),
+        ...externalCaseLinks(goldenKeywords.join(" "))
+      ].join("");
+      document.querySelector("#precedentBrief").textContent = [
+        "[판례 리서치 메모]",
+        `선택 항목: ${state.caseType}`,
+        "원칙: 앱이 판례번호를 지어내지 않습니다. 법원·국가법령정보센터·판례 검색 사이트에서 실제 검색되는 판례만 서류에 남깁니다.",
+        "쓸 수 있는 판례만 남기는 기준:",
+        "1. 사건번호와 법원/선고일이 확인되는가",
+        "2. 내 사건의 사실관계와 쟁점이 닮았는가",
+        "3. 결론만 비슷한 게 아니라 판단 이유가 내 주장에 맞는가",
+        "4. AI가 말한 판례가 실제 검색되는가",
+        "",
+        "황금 검색식:",
+        goldenKeywords.map((item, index) => `${index + 1}. ${item}`).join("\n"),
+        "",
+        "IP·이커머스 도용 참고 법리:",
+        "1. 성과물 무단사용은 '상당한 투자나 노력', '공정한 상거래 관행 위반', '경제적 이익 침해'를 중심으로 검색합니다.",
+        "2. 서체 분쟁은 글자체 도안, 폰트 파일, 직접 창작 캘리그래피를 구분해서 검색합니다.",
+        "3. 특정 판례번호는 공식 사이트에서 확인된 경우에만 문서에 넣습니다.",
+        "",
+        "검색 키워드:",
+        meta.law.map((item, index) => `${index + 1}. ${item}`).join("\n")
+      ].join("\n");
+    }
+
+    function legalFacts() {
+      return `신청인 또는 고소인은 상대방의 행위로 인하여 피해를 입었습니다. 구체적 경위는 다음과 같습니다. ${safeSummary()} 위 사실은 보유 증거와 대조하여 제출 가능한 문장으로 정리할 필요가 있습니다.`;
+    }
+
+    function updateDeadline() {
+      const target = document.querySelector("#deadlineText");
+      if (!decisionDate.value) {
+        target.textContent = "해고일을 입력하면 노동위원회 구제신청 3개월 기한을 계산합니다.";
+        return;
+      }
+      const start = new Date(`${decisionDate.value}T00:00:00`);
+      const due = new Date(start);
+      due.setMonth(due.getMonth() + 3);
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const left = Math.ceil((due - today) / 86400000);
+      target.textContent = `부당해고 구제신청 기준 마감일은 ${due.toISOString().slice(0, 10)} 전후입니다. 오늘 기준 ${left >= 0 ? `${left}일 남음` : `${Math.abs(left)}일 경과`} 상태입니다. 실제 기산점은 사건별로 확인하세요.`;
+    }
+
+    function addYearsMonths(date, years = 0, months = 0) {
+      const next = new Date(date);
+      next.setFullYear(next.getFullYear() + years);
+      next.setMonth(next.getMonth() + months);
+      return next;
+    }
+
+    function formatLocalDate(date) {
+      const year = date.getFullYear();
+      const month = String(date.getMonth() + 1).padStart(2, "0");
+      const day = String(date.getDate()).padStart(2, "0");
+      return `${year}-${month}-${day}`;
+    }
+
+    function ddayText(targetDate) {
+      const today = new Date();
+      today.setHours(0, 0, 0, 0);
+      const left = Math.ceil((targetDate - today) / 86400000);
+      return left >= 0 ? `D-${left}` : `D+${Math.abs(left)} 경과`;
+    }
+
+    function updateLimitation() {
+      const meta = limitationMeta[state.caseType] || limitationMeta["기타법률"];
+      const baseDateValue = incidentDate.value || decisionDate.value;
+      let deadlineLine = "피해 발생일 또는 해고일을 입력하면 예상 마감일을 계산합니다.";
+      if (baseDateValue && (meta.years !== null || meta.months)) {
+        const due = addYearsMonths(new Date(`${baseDateValue}T00:00:00`), meta.years || 0, meta.months || 0);
+        deadlineLine = `기준일 ${baseDateValue}로 보면 예상 마감 후보는 ${formatLocalDate(due)} (${ddayText(due)}) 입니다.`;
+      }
+      document.querySelector("#limitationBrief").textContent = [
+        "[공소시효·소멸시효 1차 체크]",
+        `사건 유형: ${state.caseType}`,
+        `분류: ${meta.type}`,
+        `기준: ${meta.basis}`,
+        deadlineLine,
+        "",
+        "주의:",
+        meta.note,
+        "공소시효는 죄명과 법정형, 범행 종료시점, 공범·국외도피·미성년 피해 등 특례에 따라 달라질 수 있습니다.",
+        "민사 소멸시효는 청구권 종류, 손해와 가해자를 안 날, 변제 승인, 내용증명, 소 제기 여부에 따라 달라질 수 있습니다.",
+        "",
+        "지금 할 일:",
+        "1. 피해 발생일과 마지막 행위일을 모두 적기",
+        "2. 상대가 일부 변제·사과·인정한 날짜가 있는지 적기",
+        "3. 형사 고소와 민사 청구 기한을 따로 보기",
+        "4. 오늘이 위험해 보이면 접수기관 또는 전문가에게 즉시 확인"
+      ].join("\n");
+    }
+
+    function updateMatchSections() {
+      const rules = matchedRules();
+      document.querySelector("#matchBrief").textContent = [
+        "[겹치는 법률 후보]",
+        ...rules.map((rule, index) => [
+          `${index + 1}. ${rule.law}`,
+          `   구제/절차: ${rule.action}`,
+          `   필요한 증거: ${rule.evidence}`
+        ].join("\n"))
+      ].join("\n\n");
+      document.querySelector("#lawPills").innerHTML = rules.map(rule => `<span class="pill">${rule.law}</span>`).join("");
+      document.querySelector("#remedyBrief").textContent = [
+        "[구제방안 우선순위]",
+        ...rules.map((rule, index) => `${index + 1}. ${rule.action}`).join("\n").split("\n"),
+        "",
+        "실전 순서:",
+        "1. 증거 원본 보관",
+        "2. 상대방 특정 단서 확보",
+        "3. 긴급 삭제·지급정지·접근금지처럼 시간 민감한 조치 먼저 실행",
+        "4. 고소장/진정서/내용증명/민사청구 중 가장 압박이 큰 루트 선택",
+        "5. 판례·법령은 실제 검색되는 출처만 문서에 인용"
+      ].join("\n");
+      document.querySelector("#platformBrief").textContent = [
+        `[${platform.value} 대응 메모]`,
+        platformRules[platform.value] || platformRules["오프라인/직장"],
+        "",
+        "고소 가능성 판단:",
+        "1. 상대가 실명인지 몰라도 성명불상 피고소인 형태로 시작할 수 있습니다.",
+        "2. 다만 URL, 계정ID, 게시시각, 대화 원본, 금전흐름 같은 특정 단서가 약하면 수사가 막힐 수 있습니다.",
+        "3. 해외 플랫폼은 회신·자료보존이 늦거나 제한될 수 있어 국내 단서와 피해자 측 증거 보전이 더 중요합니다.",
+        "4. 삭제가 급한 사건은 고소와 별개로 플랫폼 신고, 임시조치, 방심위, 디지털성범죄 삭제지원 루트를 병행합니다."
+      ].join("\n");
+    }
+
+    function updateAggravation() {
+      const text = `${state.caseType} ${stage.value} ${platform.value} ${rawFacts()}`;
+      const hits = aggravationRules.filter(rule => rule.keys.some(key => text.includes(key)));
+      const base = hits.length ? hits : [{ title: "가중요소 추가 입력 필요", detail: "반복성, 다수 피해자, 미성년자, 보복협박, 조직성, 유포 위험, 상해 여부가 있으면 피해사실에 더 적어주세요." }];
+      const repeated = /반복|상습|여러 번|계속|장기간|다수|여러 명|피해자들|조직|공모|협박|맞고소|공갈|도용|복제|판매/i.test(text);
+      document.querySelector("#aggravationBrief").textContent = [
+        "[상습성·경합범·긴급 체크 결과]",
+        ...base.map((item, index) => `${index + 1}. ${item.title}\n   ${item.detail}`),
+        "",
+        "[추가 죄명·경합 구조 검토]",
+        repeated
+          ? "반복성·다수 피해·협박·도용 정황이 보입니다. 고소장에는 단순 감정 표현이 아니라 각 행위의 날짜, 대상, 증거번호를 나눠 '연속적 불법행위', '다수 피해자 존재 가능성', '추가 죄명 검토 필요'로 정리합니다."
+          : "아직 반복성·다수 피해·협박 정황이 뚜렷하지 않습니다. 같은 상대의 추가 피해자, 같은 계좌/ID, 같은 문구, 같은 상품페이지 도용 패턴이 있으면 따로 적어주세요.",
+        "형법 제37조 경합범, 개별 법률의 상습범·가중처벌 규정, 협박·공갈미수·업무방해 등 추가 죄명은 사실관계와 증거가 맞을 때만 검토합니다. 앱은 과장해서 처벌을 약속하지 않고, 수사기관이 확인해야 할 쟁점을 빠뜨리지 않게 만듭니다.",
+        "부정경쟁·IP 사건은 영리 목적, 고객 흡수, 반복 판매, 상대 매출, 플랫폼 노출 기간이 손해배상과 위법성 판단에 중요합니다.",
+        "",
+        "문서에 넣는 방식:",
+        "가중요소는 과장하지 말고 날짜, 원문, 증거번호와 함께 씁니다. 처벌 수위를 단정하지 않고 '수사 필요성'과 '보호 필요성'으로 정리합니다.",
+        "",
+        "공식 정보 확인:",
+        "성범죄자 신상정보는 성범죄자 알림e 등 법정 공개 범위 안에서만 확인합니다. 비공개 개인정보 추적이나 사적 유포는 하지 않습니다."
+      ].join("\n");
+    }
+
+    function buildBrief() {
+      return [
+        "[피해자 편 상담 브리프]",
+        `사건 유형: ${state.caseType}`,
+        `상대방/회사: ${opponent.value || "미입력"}`,
+        `피해 금액/월급: ${damage.value || "미입력"}`,
+        `현재 목표: ${stage.value}`,
+        `해고일·처분일: ${decisionDate.value || "미입력"}`,
+        "",
+        "익명화된 피해 요약:",
+        safeSummary(),
+        "",
+        "정리된 주장:",
+        legalFacts(),
+        "",
+        "특화 체크:",
+        modeAdvice(),
+        "",
+        "전문가에게 바로 물을 질문:",
+        "1. 지금 절차는 노동위원회 구제신청, 노동청 진정, 민사청구 중 무엇을 먼저 해야 하나요?",
+        "2. 부당해고 또는 해고예고수당에서 회사가 내세울 반박은 무엇이고, 어떤 증거로 막아야 하나요?",
+        "3. 기한상 오늘 바로 접수해야 하는 서류가 있나요?"
+      ].join("\n");
+    }
+
+    function buildLoanBrief() {
+      return [
+        "[대여금·코인대여 회수 전략]",
+        `상대방: ${opponent.value || "미입력"}`,
+        `못 받은 돈: ${damage.value || "미입력"}`,
+        `플랫폼/증거 출처: ${platform.value}`,
+        "",
+        "1. 형사 불송치 팩트체크",
+        "경찰이 증거부족·혐의없음으로 불송치했다고 해서 돈을 안 갚아도 된다는 뜻은 아닙니다. 사기죄는 '처음부터 속여서 편취했는지'가 핵심이고, 민사 대여금은 '빌려준 사실과 반환 약정'이 핵심이라 판단 구조가 다릅니다.",
+        "",
+        "2. 불송치 결정서 역이용",
+        "불송치 이유서에 '코인 또는 돈을 빌린 사실은 인정되나 변제 의사가 없었다고 단정하기 어렵다'는 취지의 문장이 있으면, 이는 민사에서 대여 사실을 뒷받침하는 강한 증거가 됩니다. 정보공개청구로 불송치 결정서와 필요한 수사기록을 확보하세요.",
+        "",
+        "3. 차용증 없는 코인대여 증거 체인",
+        "TXID, 지갑주소, 거래소 출금확인서, 카톡·문자의 '빌려달라/언제까지 갚겠다' 문장, 일부 변제 기록, 상대의 지갑 소유 정황, 형사 불송치 결정서의 피의자 진술 요약을 날짜순으로 묶습니다.",
+        "",
+        "4. 회수 압박 순서",
+        "내용증명 발송 → 지급명령 신청 또는 대여금 반환청구 소송 → 확정된 집행권원 확보 → 예금·급여·가상자산 거래소 채권압류 검토 → 재산명시 → 요건 충족 시 채무불이행자 명부등재 신청",
+        "",
+        "5. 지금 문서에 넣을 피해사실",
+        safeSummary()
+      ].join("\n");
+    }
+
+    function buildDebtRecoveryOutput() {
+      const blocks = [
+        ["1. 형사 불송치 팩트체크", "불송치는 무죄 확정이 아니라 형사처벌 요건을 못 채웠다는 판단일 수 있습니다. 민사에서는 대여 사실, 변제기, 미변제, 손해액을 중심으로 다시 싸웁니다. 특히 불송치 결정서의 '빌린 사실은 인정' 취지는 대여금 반환청구의 출발점이 됩니다."],
+        ["2. 민사 소멸시효·D-day", "일반 민사채권은 통상 10년 소멸시효를 검토합니다. 빌려준 날이 아니라 변제기일이 따로 있으면 기산점이 달라질 수 있으므로, 피해 발생일 또는 변제기일을 입력해 공소시효/소멸시효 탭에서 예상 마감일을 먼저 봅니다."],
+        ["3. 집행권원 확보", "상대가 돈을 빌린 사실을 부인하기 어렵고 주소를 알면 지급명령이 빠를 수 있습니다. 다툼이 크거나 이의 가능성이 높으면 대여금 반환청구 소송으로 가서 판결을 받아 집행권원을 확보합니다."],
+        ["4. 채무불이행자 명부등재", "민사집행법 제70조는 금전 지급을 명한 집행권원이 확정된 뒤에도 채무자가 이행하지 않는 경우 등 일정 요건에서 명부등재 신청을 허용합니다. 일반적으로 확정 후 6개월이 중요한 기준이 되며, 재산명시절차 불응 등은 별도 사유가 될 수 있습니다."],
+        ["5. 집행 압박 카드", "집행권원을 확보하면 통장압류, 급여압류, 거래처 채권압류, 재산명시, 채무불이행자 명부등재를 순서대로 검토합니다. 목적은 불법 보복이 아니라 법원 절차를 통해 자진 변제 압박과 회수를 만드는 것입니다."]
+      ];
+      return blocks.map(([title, body]) => `<div class="legal-block"><h4>${title}</h4><p>${body}</p></div>`).join("");
+    }
+
+    function buildDebtorListBrief() {
+      return [
+        "[채무불이행자 명부등재 신청 안내 문구]",
+        "",
+        "1. 신청 전제",
+        "판결, 지급명령, 화해권고결정, 조정조서 등 금전 지급을 명한 집행권원이 확정되어야 합니다. 아직 판결이나 지급명령이 없으면 먼저 집행권원을 만드는 단계입니다.",
+        "",
+        "2. 6개월 기준",
+        "집행권원 확정 후 채무자가 일정 기간 이행하지 않는 경우 민사집행법 제70조에 따른 채무불이행자 명부등재 신청을 검토합니다. 구체적 요건은 사건별로 다를 수 있으므로 확정일, 송달일, 일부 변제 여부를 확인합니다.",
+        "",
+        "3. 신청서 초안 문구",
+        `신청인은 채무자 ${opponent.value || "상대방"}에 대하여 확정된 집행권원에 따른 금전채권을 보유하고 있으나, 채무자는 확정 후 상당한 기간이 지나도록 채무를 이행하지 않고 있습니다. 이에 민사집행법 제70조에 따라 채무자를 채무불이행자 명부에 등재하여 주시기 바랍니다.`,
+        "",
+        "4. 첨부자료",
+        "확정판결문 또는 지급명령 정본, 확정증명원, 송달증명원, 채무 미변제 내역, 일부 변제 내역, 채무자 주소 자료, 신청서, 인지·송달료 납부자료.",
+        "",
+        "5. 불송치 결정서 활용",
+        "형사 불송치 결정서에 상대방의 차용 사실 인정 취지가 있으면, 지급명령 또는 민사소송의 증거목록에 '수사기관 결정서'로 넣습니다."
+      ].join("\n");
+    }
+
+    function buildJeonseOutput() {
+      const text = `${rawFacts()} ${damage.value} ${stage.value}`;
+      const hasInsurance = /HUG|보증보험|SGI|HF|보증 가입|보증서/i.test(text);
+      const wantsMove = /이사|퇴거|전출|전입.*옮|짐.*빼/i.test(text);
+      const depositLine = damage.value || "보증금 미입력";
+      const blocks = [
+        ["1. 긴급 금지 행동", wantsMove
+          ? "이사·전출을 고민 중인 정황이 보입니다. 보증금을 받기 전 전입신고를 옮기거나 점유를 포기하면 대항력·우선변제권에 치명적일 수 있으니, 임차권등기명령을 먼저 검토해야 합니다."
+          : "보증금 회수 전에는 전입신고를 빼거나 짐을 전부 빼는 행동을 피합니다. 전입신고, 확정일자, 실제 거주 자료를 유지하고 계약해지 통보 기록을 남깁니다."],
+        ["2. 전세사기피해자 특별법 자가진단", `보증금: ${depositLine}. 체크할 4대 축은 주택 인도·전입신고·확정일자, 보증금 규모, 다수 피해 또는 조직적 갭투자 정황, 임대인의 반환 불능·기망 의심 정황입니다. 결정 신청은 관할 지자체 또는 지원관리시스템 안내를 확인합니다.`],
+        ["3. 보증보험 유무별 회수 루트", hasInsurance
+          ? "보증보험 가입 정황이 있습니다. 계약 종료·해지 통보를 문자/카톡/내용증명으로 남기고, HUG·SGI 등 보증기관의 이행청구 요건과 접수 시점을 확인합니다. 임차권등기명령 필요 여부도 함께 봅니다."
+          : "보증보험 미가입 또는 불명확한 상태입니다. 전세사기피해지원센터 상담, 임차권등기명령, 보증금 반환청구 소송, 지급명령 가능성, 강제경매·배당요구·우선매수권 지원을 순서대로 검토합니다."],
+        ["4. 경매·소송 생존 루트", "경매 통지를 받았다면 배당요구 종기, 선순위 권리, 확정일자, 소액임차인 최우선변제 가능성, 조세채권 여부를 즉시 확인합니다. 소송은 보증금 반환청구로 집행권원을 확보하고, 경매에서는 배당요구와 특별법 지원을 병행합니다."],
+        ["5. 판례·법령 검색식", "전세사기 기망 보증금 반환 의사, 임차권등기명령 대항력 유지, 주택임대차보호법 우선변제권 확정일자, 공인중개사 설명의무 손해배상, 깡통전세 임대인 사기 고의"]
+      ];
+      return blocks.map(([title, body]) => `<div class="legal-block"><h4>${title}</h4><p>${body}</p></div>`).join("");
+    }
+
+    function buildJeonseNotice() {
+      return [
+        "[전세사기 계약해지·보증금 반환 내용증명 초안]",
+        `수신인: ${opponent.value || "임대인"}`,
+        `보증금: ${damage.value || "미입력"}`,
+        "",
+        "1. 계약해지 및 반환 요구",
+        "발신인은 귀하와 체결한 임대차계약에 관하여 계약을 갱신하지 않거나 해지 의사를 명확히 통지하며, 계약 종료일에 임대차보증금 전액을 반환할 것을 요구합니다.",
+        "",
+        "2. 대항력·우선변제권 보전",
+        "발신인은 주택의 인도, 전입신고, 확정일자 등 임차인 보호 요건을 갖추고 있으며, 보증금 반환 전까지 대항력과 우선변제권 보전을 위한 모든 법적 조치를 취할 예정입니다.",
+        "",
+        "3. 미반환 시 조치",
+        "귀하가 보증금을 반환하지 않거나 연락을 회피할 경우, 발신인은 임차권등기명령, 보증기관 이행청구, 전세사기피해자 결정 신청, 보증금 반환청구 소송, 강제집행 및 형사 고소를 순차적으로 진행할 예정입니다.",
+        "",
+        "4. 첨부·준비 자료",
+        "임대차계약서, 등기부등본, 확정일자, 전입신고 내역, 보증금 송금내역, 계약해지 통보 캡처, 중개대상물 확인설명서, 경매·압류 관련 우편물.",
+        "",
+        "5. 현재 피해 요약",
+        safeSummary()
+      ].join("\n");
+    }
+
+    function buildIpBrief() {
+      return [
+        "[이커머스 IP·부정경쟁 대응 브리프]",
+        `상대방: ${opponent.value || "미입력"}`,
+        `피해 내용: ${damage.value || "미입력"}`,
+        `플랫폼: ${platform.value}`,
+        "",
+        "1. 법률 매칭",
+        "저작권법 위반: 디자이너가 직접 창작한 캘리그래피, 상품 이미지, 상세페이지 구성의 무단 복제·전송·배포 여부를 봅니다.",
+        "부정경쟁방지법: 상당한 투자나 노력으로 만든 상품페이지·이미지·카피를 경쟁자가 무단 사용해 고객을 빼앗았는지 봅니다.",
+        "표시광고법: 최저가 표시나 상품 설명이 소비자를 오인시킨 경우 허위·기만 광고 여부를 검토합니다.",
+        "",
+        "2. 폰트 역공격 방어 문구",
+        "상대방은 정당한 폰트를 사용했다고 주장하나, 문제 되는 목적물은 디자이너가 직접 창작한 캘리그래피와 상품 이미지 배치입니다. 글자의 삐침, 필압, 궤적, 확대 사진과의 위치·구도가 상대 상품 페이지와 현저히 일치한다면 이는 단순 폰트 사용이 아니라 이미지 무단 복제 또는 도용 정황으로 정리합니다.",
+        "",
+        "3. 반드시 보전할 증거",
+        "원본 PSD/AI/프로크리에이트 파일, 레이어 분리 상태, 생성·수정 시각, 최초 게시 URL, 상대 상품 URL, 썸네일/상세페이지 비교표, 가격 변경 이력, 리뷰 수, 예상 판매량, 플랫폼 신고 내역.",
+        "",
+        "4. 전문가 질문",
+        "상대가 특정 폰트를 사용했다고 주장하며 역고소를 운운하는데, 디자이너의 원본 작업 파일과 타임스탬프가 있으면 저작권/부정경쟁 주장을 방어하고 상대의 도용을 입증하는 데 충분한지 확인하고 싶습니다.",
+        "",
+        "5. 현재 피해사실",
+        safeSummary()
+      ].join("\n");
+    }
+
+    function buildIpLegalOutput() {
+      const blocks = [
+        ["1. 사건의 법적 본질", "상품페이지·썸네일·캘리그래피·상세페이지 구성이 경쟁 셀러에게 무단 사용된 사건입니다. 핵심은 창작물성, 의거성, 실질적 유사성, 경쟁관계, 고객 흡수, 손해 발생입니다."],
+        ["2. 역공작 방어 쉴드", "상대가 폰트 저작권을 들고 나와도, 쟁점은 폰트 파일 복제가 아니라 직접 창작한 캘리그래피 이미지와 상세페이지 성과물의 무단 사용입니다. 원본 작업파일과 타임스탬프가 있으면 방어력이 커집니다."],
+        ["3. 상습·경합 분석", "같은 상세페이지, 같은 썸네일, 같은 문구를 여러 상품·여러 판매자에게 반복 사용했다면 단발 실수가 아니라 영업상 성과물 편승 패턴으로 정리합니다. 맞고소 협박, 허위 라이선스 주장, 판매 방해가 있으면 협박·업무방해·공갈미수 검토 포인트를 별도 증거로 분리합니다."],
+        ["4. 증거 수집 체크", "URL 주소창, 시스템 날짜/시간, 판매자명, 상품명, 가격, 리뷰 수, 썸네일, 상세페이지 핵심 카피가 한 화면에 보이게 캡처합니다. 원본 PSD/AI 파일은 복사본이 아니라 원본 보관이 우선입니다."],
+        ["5. 구제방안 로드맵", "1순위는 플랫폼 지식재산권 신고 및 블라인드 요청, 2순위는 내용증명으로 자발적 중단·합의 유도, 3순위는 저작권법·부정경쟁방지법 위반 고소 및 손해배상 청구입니다."],
+        ["6. 손해배상 산정", "도용 기간, 상대 예상 판매량, 리뷰 수, 판매가, 내 디자인 제작비, 광고비, 매출 감소를 기준으로 손해액 범위를 잡습니다. 합의금은 단정하지 않고 증거 강도별 범위로 협상합니다."],
+        ["7. 판례 검색 키워드", "부정경쟁방지법 성과물 무단사용, 상세페이지 도용, 캘리그래피 저작물성, 폰트 파일 저작권, 실질적 유사성, 의거성, 이커머스 상품 이미지 도용. 성과물 도용은 대법원 2020. 3. 26.자 2019마6525 결정 등 공식 판례속보에서 확인되는 법리를 우선 검색합니다."],
+        ["8. 고소장/내용증명 문장", "피고소인은 정당한 폰트를 사용하였다고 주장하나, 본 건 목적물은 디자이너가 직접 창작한 캘리그래피와 상품 이미지 구성이며, 글자의 궤적·필압·배치 구도가 현저히 일치하므로 이미지 무단 복제 및 성과물 도용에 해당합니다."],
+        ["9. 전문가 1분 브리프", "원본 PSD/AI 파일, 레이어, 생성·수정 시각, 최초 게시일, 상대 상품 URL, 비교표가 있는 상태에서 저작권법·부정경쟁방지법·표시광고법을 함께 주장할 수 있는지 확인합니다."]
+      ];
+      return blocks.map(([title, body]) => `<div class="legal-block"><h4>${title}</h4><p>${body}</p></div>`).join("");
+    }
+
+    function analyzeThreatText() {
+      const text = threatText.value.trim();
+      if (!text) {
+        shieldResult.textContent = "상대방 협박 문구를 넣어주세요. 폰트, 상표권, 명예훼손, 역고소 협박을 법적 쟁점별로 나눠봅니다.";
+        return;
+      }
+      const lines = ["[역공작 팩트체크]"];
+      if (/폰트|서체|글꼴/i.test(text)) {
+        lines.push("1. 폰트 협박: 글자체 도안 자체와 폰트 파일은 구분됩니다. 상대가 실제 폰트 파일 무단복제 증거를 제시하지 못하고, 우리 쪽 직접 창작 캘리그래피 원본이 있다면 방어 가능성이 큽니다.");
+      }
+      if (/맞고소|고소|명예훼손|허위/i.test(text)) {
+        lines.push("2. 맞고소 협박: 사실관계와 증거에 근거해 플랫폼 신고·내용증명·고소를 진행하는 것은 권리행사입니다. 다만 공개 게시물로 상대를 단정 비난하는 행동은 피하세요.");
+      }
+      if (/상표|브랜드|로고/i.test(text)) {
+        lines.push("3. 상표권 주장: 상품 이미지·상세페이지 도용과 상표권은 별도 쟁점입니다. 상대가 등록상표와 지정상품을 특정하는지 확인해야 합니다.");
+      }
+      if (/돈|합의|배상|손해/i.test(text)) {
+        lines.push("4. 금전 요구: 금액을 바로 수락하지 말고 도용 기간, 매출, 증거 강도, 플랫폼 제재 가능성을 기준으로 협상 범위를 잡아야 합니다.");
+      }
+      if (lines.length === 1) {
+        lines.push("법적 협박 문구가 명확하지 않습니다. 원문, 날짜, 발신자, 플랫폼, 전후 대화를 함께 보관하세요.");
+      }
+      lines.push("");
+      lines.push("지금 하지 말 것: 감정적 맞대응, 공개 저격, 신상 공개, 협박성 메시지.");
+      lines.push("지금 할 것: 원문 캡처, URL/시간 포함 저장, 원본 작업파일 보전, 플랫폼 신고문 준비.");
+      shieldResult.textContent = lines.join("\n");
+    }
+
+    function buildRepeatMemo() {
+      const target = repeatTarget.value.trim() || "상대방 식별 단서 미입력";
+      const pattern = repeatPattern.value.trim() || "반복 정황 미입력";
+      repeatCheckResult.textContent = [
+        "[상습성·다수 피해자 제보 메모]",
+        `식별 단서: ${target}`,
+        `반복 정황: ${pattern}`,
+        "",
+        "고소장/신고서에 넣을 문장:",
+        `피고소인 또는 동일한 식별 단서를 사용하는 상대방은 본 건과 유사한 방식의 피해를 반복적으로 발생시킨 정황이 있습니다. 수사기관은 위 식별 단서(${target})와 플랫폼 거래내역, 계좌 흐름, 동일 문구·이미지 사용 내역을 확인하여 다수 피해자 존재 여부와 상습성·공모 가능성을 수사하여 주시기 바랍니다.`,
+        "",
+        "주의:",
+        "다른 피해자 정보를 모을 때는 실명, 주민번호, 주소 같은 민감정보를 공개 게시판에 올리지 말고, 사건번호·플랫폼 ID·사업자번호 일부·증거 URL처럼 필요한 범위만 정리하세요."
+      ].join("\n");
+    }
+
+    function buildTelegramOutput() {
+      const blocks = [
+        ["1. 적용 가능한 죄명 및 경합범 진단", "수개월 반복 연락, 차단 후 우회 연락, 공포심 유발은 스토킹처벌법 검토 대상입니다. 성적 표현·음란 링크·성적 비하가 포함되면 성폭력처벌법 제13조 통신매체이용음란을 함께 검토하고, 신고하면 유포하겠다는 식의 문구는 형법상 협박까지 분리합니다."],
+        ["2. 긴급 응급조치·잠정조치", "경찰 신고 단계에서 추가 연락, 접근, 메시지 전송을 막기 위한 응급조치와 법원의 잠정조치 신청 필요성을 함께 말합니다. 스토킹처벌법 제9조 잠정조치는 피해자 보호를 위해 접근금지·전기통신을 이용한 접근금지 등으로 연결될 수 있습니다."],
+        ["3. 텔레그램 증거 채증", "닉네임(@username)은 변경될 수 있으므로 고유 숫자 User ID, 프로필 화면, 사용자명 변경 전후, 대화방 링크, 메시지 시간, PC 대화 기록 내보내기 HTML, 첨부파일 원본을 보관합니다. 화면 캡처에는 PC 시계와 프로필 정보가 함께 보이게 합니다."],
+        ["4. 특정수사 요청 포인트", "가해자가 보낸 링크, 결제·계좌·전화번호, 타 플랫폼 ID, 동일 닉네임, 국내 커뮤니티 계정, 거래소·오픈채팅 흔적을 모두 연결해 성명불상 피고소인의 가입정보·접속기록·계정 연계 단서 확인을 요청합니다."],
+        ["5. 경찰서 방문 1분 브리프", "몇 개월 동안, 어떤 계정이, 어떤 방식으로, 얼마나 반복했고, 성적 메시지와 협박이 있었으며, 지금도 추가 접근 위험이 있다는 순서로 말합니다. 대화 원본과 내보내기 파일, 정신과 상담 기록, 차단 후 우회 계정 자료를 한 폴더로 가져갑니다."]
+      ];
+      return blocks.map(([title, body]) => `<div class="legal-block"><h4>${title}</h4><p>${body}</p></div>`).join("");
+    }
+
+    function buildTelegramComplaint() {
+      return [
+        "[텔레그램 스토킹·통매음 고소장 초안]",
+        `고소인: 피해자 본인`,
+        `피고소인: ${opponent.value || "성명불상 텔레그램 이용자"}`,
+        `피해 플랫폼: ${platform.value || "텔레그램"}`,
+        "",
+        "1. 고소 취지",
+        "피고소인을 스토킹범죄의 처벌 등에 관한 법률 위반, 성폭력범죄의 처벌 등에 관한 특례법 제13조 통신매체이용음란, 형법상 협박 등으로 철저히 수사하여 처벌하여 주시기 바랍니다.",
+        "",
+        "2. 범죄사실 요지",
+        `${safeSummary()} 피고소인은 텔레그램의 익명성을 악용하여 반복적으로 연락하고, 차단 이후에도 다른 계정 또는 우회 수단으로 접근하였으며, 성적 수치심 또는 혐오감을 일으키는 표현과 협박성 메시지를 도달하게 한 정황이 있습니다.`,
+        "",
+        "3. 특정수사 요청",
+        "피고소인의 텔레그램 사용자명, 고유 숫자 User ID, 프로필 화면, 대화방 링크, 첨부파일, 링크 클릭 또는 타 플랫폼 이동 단서, 전화번호·계좌·거래소·커뮤니티 계정 연결 가능성을 확인하여 성명불상 피고소인의 인적사항을 특정하여 주시기 바랍니다.",
+        "",
+        "4. 잠정조치 신청 요청",
+        "피고소인이 추가 메시지 전송, 우회 계정 접근, 유포 협박, 보복 연락을 계속할 위험이 있으므로, 피해자 보호를 위하여 접근금지 및 전기통신을 이용한 접근금지 등 스토킹처벌법상 잠정조치를 신속히 신청하여 주시기 바랍니다.",
+        "",
+        "5. 첨부 예정 증거",
+        "텔레그램 대화 내보내기 HTML, 메시지 캡처, 프로필 화면, 숫자 User ID 확인 자료, 사용자명·링크·방 정보, 차단 후 우회 연락 자료, 성적 표현 원문, 협박 원문, 정신과 진료·상담 기록, 112 신고내역."
+      ].join("\n");
+    }
+
+    function buildPlatformReport() {
+      return [
+        "[플랫폼 신고 접수용 문안]",
+        "제목: 지식재산권 침해 및 부정경쟁행위 의심 상품 판매중단 요청",
+        "",
+        `신고 대상: ${opponent.value || "상대 판매자"}의 상품 페이지`,
+        "",
+        "본인은 해당 상품 이미지, 썸네일, 상품명, 상세페이지 카피 및 캘리그래피를 직접 제작·게시한 권리자 또는 권리자의 대리인입니다. 신고 대상 상품은 본인이 상당한 시간과 비용을 들여 제작한 상품 이미지와 캘리그래피, 상세페이지 구성을 무단으로 복제하거나 실질적으로 유사하게 사용하고 있습니다.",
+        "",
+        "특히 문제 되는 캘리그래피는 정형 폰트 출력물이 아니라 디자이너가 직접 손으로 제작한 창작 이미지입니다. 상대방 상품 페이지는 글자의 궤적, 필압, 배치 구도, 확대 사진과의 위치 관계가 본인 자료와 현저히 일치하여 단순 참고나 우연한 유사성이 아니라 무단 복제 또는 도용 정황이 강합니다.",
+        "",
+        "이에 저작권 침해 및 부정경쟁행위 의심 사유로 해당 상품의 판매중단, 블라인드, 노출 제한, 판매자 소명 요청을 요청드립니다.",
+        "",
+        "첨부 예정 자료:",
+        "1. 원본 작업파일 캡처 및 생성/수정 시각",
+        "2. 최초 게시일 자료",
+        "3. 신고 대상 상품 URL",
+        "4. 원본과 상대 상품 비교표",
+        "5. 가격 및 판매 정황 자료"
+      ].join("\n");
+    }
+
+    function buildProcedureBrief() {
+      const urgent = ["성폭력", "디지털성범죄", "스토킹", "협박·스토킹", "텔레그램스토킹", "보이스피싱"].some(item => state.caseType.includes(item));
+      return [
+        "[고소·구제 절차 로드맵]",
+        `선택 사건: ${state.caseType}`,
+        `상대방: ${opponent.value || "미입력"}`,
+        `플랫폼/장소: ${platform.value}`,
+        "",
+        urgent ? "0. 긴급 조치" : "0. 먼저 할 일",
+        urgent
+          ? "신변위험, 유포, 지급정지처럼 시간이 중요한 사건이면 112, 은행 지급정지, 해바라기센터/삭제지원센터 등 긴급 루트를 먼저 씁니다."
+          : "감정적으로 연락을 더 주고받기보다 원본 증거부터 보관하고 사건 흐름을 날짜순으로 정리합니다.",
+        "",
+        "1. 증거 묶기",
+        "원본 파일, 캡처, URL, 계정ID, 송금내역, 계약서, 녹취, 목격자 정보를 한 폴더에 날짜순으로 넣습니다.",
+        "",
+        "2. 고소장 뼈대 작성",
+        "고소인/피고소인, 범죄사실, 피해내용, 증거목록, 처벌 요청 취지를 씁니다. 상대가 누군지 모르면 성명불상으로 시작할 수 있습니다.",
+        "",
+        "3. 접수 장소 선택",
+        "오프라인 피해는 관할 경찰서 민원실, 온라인 피해는 사이버범죄 신고시스템 또는 경찰서를 검토합니다. 성폭력은 해바라기센터 연계를 우선 확인합니다.",
+        "",
+        "4. 조사 대비",
+        "수사관에게 설명할 3문장을 준비합니다: 무엇을 당했는지, 어떤 증거가 있는지, 어떤 처벌 또는 구제를 원하는지.",
+        "",
+        "5. 접수 후 추적",
+        "사건번호, 담당 수사관, 보완 요청, 출석 일정, 불송치/불기소 통지일을 기록합니다. 결과가 나오면 이의신청·항고·민사절차를 검토합니다.",
+        "",
+        "이 사건의 핵심 증거:",
+        modeAdvice()
+      ].join("\n");
+    }
+
+    function update() {
+      document.querySelectorAll('[data-fill="opponent"]').forEach(el => el.textContent = opponent.value || "상대방");
+      document.querySelectorAll('[data-fill="caseType"]').forEach(el => el.textContent = state.caseType);
+      document.querySelector("#laborFacts").textContent = legalFacts();
+      document.querySelector("#laborClaims").textContent = laborClaims();
+      document.querySelector("#complaintFacts").textContent = legalFacts();
+      document.querySelector("#noticeText").textContent = `발신인은 상대방의 행위로 피해를 입었습니다. ${safeSummary()} 본 통지는 향후 법적 절차를 대비한 정식 최고이며, 기한 내 회신과 피해 회복을 요구합니다.`;
+      document.querySelector("#evidenceBrief").textContent = `[증거 체크]\n${modeAdvice()}\n\n원본 보관: 파일명, 생성일, 캡처일, 제출일을 함께 기록하세요.`;
+      document.querySelector("#briefText").textContent = buildBrief();
+      document.querySelector("#loanBrief").textContent = buildLoanBrief();
+      document.querySelector("#debtRecoveryOutput").innerHTML = buildDebtRecoveryOutput();
+      document.querySelector("#debtorListBrief").textContent = buildDebtorListBrief();
+      document.querySelector("#jeonseOutput").innerHTML = buildJeonseOutput();
+      document.querySelector("#jeonseNotice").textContent = buildJeonseNotice();
+      document.querySelector("#ipBrief").textContent = buildIpBrief();
+      document.querySelector("#ipLegalOutput").innerHTML = buildIpLegalOutput();
+      document.querySelector("#telegramOutput").innerHTML = buildTelegramOutput();
+      document.querySelector("#telegramComplaint").textContent = buildTelegramComplaint();
+      document.querySelector("#platformReportBrief").textContent = buildPlatformReport();
+      document.querySelector("#procedureBrief").textContent = buildProcedureBrief();
+      categoryNote.textContent = state.taxonomyNote || (categoryMeta[state.caseType] && categoryMeta[state.caseType].note) || "선택한 항목에 맞춰 서류와 증거 체크를 바꿉니다.";
+      updatePrecedents();
+      updateMatchSections();
+      updateAggravation();
+      updateLimitation();
+      updateDeadline();
+    }
+
+    function openTab(name) {
+      tabs.forEach(tab => tab.classList.toggle("active", tab.dataset.tab === name));
+      views.forEach(view => view.classList.toggle("active", view.dataset.view === name));
+    }
+
+    function showResult(name, shouldScroll = true) {
+      update();
+      openTab(name);
+      if (shouldScroll) {
+        resultPanel.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
+    }
+
+    function defaultResultTab() {
+      if (["부당해고", "해고예고수당", "임금체불"].includes(state.caseType)) return "labor";
+      if (state.caseType === "텔레그램스토킹") return "telegram";
+      if (state.caseType === "전세사기") return "jeonse";
+      if (["인터넷사기", "보이스피싱", "중고거래사기", "전세사기", "코인사기", "폭행·상해", "협박·스토킹", "명예훼손·모욕", "게임욕설·모욕", "통매음", "성희롱", "성폭력", "디지털성범죄", "절도·손괴", "업체분쟁", "표절·저작권"].includes(state.caseType)) return "match";
+      if (state.caseType === "대여금분쟁") return "loan";
+      if (state.caseType === "이커머스IP도용") return "ip";
+      return "remedy";
+    }
+
+    tabs.forEach(tab => tab.addEventListener("click", () => showResult(tab.dataset.tab, false)));
+    document.querySelectorAll("[data-open-result]").forEach(button => {
+      button.addEventListener("click", () => showResult(button.dataset.openResult));
+    });
+    chips.forEach(chip => {
+      chip.addEventListener("click", () => {
+        chips.forEach(item => item.classList.remove("active"));
+        chip.classList.add("active");
+        state.caseType = chip.dataset.type;
+        state.taxonomyNote = "";
+        update();
+        showResult(defaultResultTab());
+      });
+    });
+
+    document.querySelector("#sampleBtn").addEventListener("click", () => {
+      const sample = samples[state.caseType] || samples["부당해고"];
+      story.value = sample.story;
+      opponent.value = sample.opponent;
+      damage.value = sample.damage;
+      platform.value = sample.platform;
+      stage.value = sample.stage;
+      showResult(defaultResultTab());
+    });
+
+    document.querySelector("#copyBtn").addEventListener("click", async () => {
+      try {
+        await navigator.clipboard.writeText(document.querySelector("#briefText").textContent);
+        document.querySelector("#copyBtn").textContent = "복사 완료";
+      } catch (error) {
+        document.querySelector("#copyBtn").textContent = "직접 선택해서 복사";
+      }
+    });
+
+    [story, opponent, damage, decisionDate, incidentDate].forEach(el => el.addEventListener("input", update));
+    platform.addEventListener("change", update);
+    stage.addEventListener("change", update);
+    themeToggle.addEventListener("click", () => {
+      document.body.classList.toggle("dark");
+      const isDark = document.body.classList.contains("dark");
+      themeToggle.textContent = isDark ? "라이트 모드" : "다크 모드";
+      try {
+        localStorage.setItem("dokTheme", isDark ? "dark" : "light");
+      } catch (error) {}
+    });
+    shieldBtn.addEventListener("click", analyzeThreatText);
+    repeatCheckBtn.addEventListener("click", buildRepeatMemo);
+    try {
+      if (localStorage.getItem("dokTheme") === "dark") {
+        document.body.classList.add("dark");
+        themeToggle.textContent = "라이트 모드";
+      }
+    } catch (error) {}
+    renderTaxonomy();
+    update();
+  </script>
+</body>
+</html>
