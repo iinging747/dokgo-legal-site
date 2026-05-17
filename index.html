@@ -15,6 +15,8 @@
   <link rel="apple-touch-icon" sizes="512x512" href="icon-512.png">
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
+  <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
   <style>
     :root {
       color-scheme: light;
@@ -30,8 +32,8 @@
       --gold: #a88642;
       --green: #2f6b4f;
       --shadow: 0 24px 70px rgba(34, 32, 29, .16);
-      --serif: Georgia, "Times New Roman", "Noto Serif KR", serif;
-      --sans: "Pretendard", "Apple SD Gothic Neo", "Segoe UI", sans-serif;
+      --serif: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, sans-serif;
+      --sans: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, "Segoe UI", sans-serif;
     }
 
     body.dark {
@@ -53,6 +55,16 @@
     * { box-sizing: border-box; }
     html { scroll-behavior: smooth; }
     html, body { max-width: 100%; overflow-x: hidden; }
+    /* 한글 가독성 — 단어 중간 자르기 방지, 줄간격 안정 */
+    body, p, li, h1, h2, h3, h4, h5, h6, button, label, span, td, th, summary, div {
+      word-break: keep-all;
+      overflow-wrap: anywhere;
+      letter-spacing: -0.005em;
+    }
+    body { font-feature-settings: "ss06","ss07"; font-variant-numeric: tabular-nums; -webkit-font-smoothing: antialiased; }
+    /* 다크모드 글자 대비 보강 */
+    body.dark { --ink: #f0ebe3; --muted: #d4cabb; --line: #4a4339; --soft: #2a2724; }
+    body.dark .card p, body.dark .card li, body.dark p, body.dark li { color: #e8e2d6; }
     body {
       margin: 0;
       background: var(--paper);
@@ -1519,6 +1531,7 @@
   <script src="https://cdn.jsdelivr.net/npm/tesseract.js@5.1.0/dist/tesseract.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/pdfjs-dist@3.11.174/build/pdf.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/lz-string@1.5.0/libs/lz-string.min.js" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/pako@2.1.0/dist/pako.min.js" defer></script>
 </head>
 <body>
   <header class="nav">
@@ -1862,16 +1875,16 @@
           <button class="tab" data-tab="notice">내용증명</button>
           <button class="tab" data-tab="payment">지급명령</button>
           <button class="tab" data-tab="procedure">고소절차</button>
-          <button class="tab" data-tab="counseling">💚 심리지원</button>
+          <button class="tab" data-tab="counseling">심리지원</button>
           <button class="tab" data-tab="package">법률패키지</button>
-          <button class="tab" data-tab="collective">🤝 집단고소</button>
-          <button class="tab" data-tab="evidence-check">🔍 증거 효력</button>
-          <button class="tab" data-tab="settlement">💵 합의금</button>
-          <button class="tab" data-tab="timeline">⏰ 타임라인</button>
-          <button class="tab" data-tab="sim">🏛 현장 시뮬레이터</button>
-          <button class="tab" data-tab="counter">🛡 역공격 방어</button>
-          <button class="tab" data-tab="cost">⚖ 비용회수·도주차단</button>
-          <button class="tab hidden-tab" data-tab="judgement" id="judgementTab">🪦 저승사자</button>
+          <button class="tab" data-tab="collective">집단고소</button>
+          <button class="tab" data-tab="evidence-check">증거 효력</button>
+          <button class="tab" data-tab="settlement">합의금</button>
+          <button class="tab" data-tab="timeline">타임라인</button>
+          <button class="tab" data-tab="sim">현장 시뮬레이터</button>
+          <button class="tab" data-tab="counter">역공격 방어</button>
+          <button class="tab" data-tab="cost">비용회수·도주차단</button>
+          <button class="tab hidden-tab" data-tab="judgement" id="judgementTab">저승사자</button>
           <button class="tab" data-tab="limitation">공소시효</button>
           <button class="tab" data-tab="deadline">기한·증거</button>
           <button class="tab" data-tab="precedent">판례·법령</button>
@@ -2572,8 +2585,15 @@
             </div>
             <div id="evidenceChecker"></div>
             <div class="card gold" id="evidenceScoreCard">
-              <strong>📊 종합 증거력 점수</strong>
+              <strong>종합 증거력 점수</strong>
               <p id="evidenceScoreText">위 항목을 체크하면 점수가 자동 계산됩니다.</p>
+            </div>
+
+            <div class="card gold">
+              <strong>SHA-256 증거 무결성 기록장</strong>
+              <p>파일을 올리면 브라우저에서 직접 해시값을 계산. 고소장 부록에 "증거 무결성 목록"으로 첨부 — 위·변조 의혹 차단.</p>
+              <input type="file" id="hashFile" multiple style="margin:8px 0;font-size:13px">
+              <div id="hashList" class="collective-hint">파일 선택 시 SHA-256 해시 자동 표시.</div>
             </div>
           </div>
         </section>
@@ -2646,7 +2666,7 @@
         <section class="view" data-view="counter">
           <div class="cards">
             <div class="card red">
-              <strong>🛡 가해자 역공격 무력화 — 3대 악질 역고소 + 협박·공갈 맞고소</strong>
+              <strong>가해자 역공격 무력화 — 3대 악질 역고소 + 협박·공갈 맞고소</strong>
               <p>가해자들이 피해자를 위축시키려 자주 쓰는 <b>무고죄·사실적시 명예훼손·모욕죄</b> 협박과 합의 압박에 대한 선제 방어 + 협박·공갈 맞고소 프레임.</p>
             </div>
 
@@ -2699,7 +2719,7 @@
         <section class="view" data-view="cost">
           <div class="cards">
             <div class="card red">
-              <strong>⚖ 소송비용 회수 + 가해자 도주·은닉 차단</strong>
+              <strong>소송비용 회수 + 가해자 도주·은닉 차단</strong>
               <p>승소·지급명령 확정 후 본인이 쓴 돈을 가해자에게 끝까지 회수 + 가해자가 주소·재산·해외로 튀는 것을 선제 차단.</p>
             </div>
 
@@ -2735,8 +2755,54 @@
               </details>
             </div>
 
+            <div class="card gold">
+              <strong>법정이자 12% 복리 시뮬레이터 (소촉법 §3)</strong>
+              <p>소장·지급명령 송달 다음날부터 다 갚는 날까지 연 12%. 시간이 갈수록 가해자 빚이 눈덩이.</p>
+              <div class="cost-row">
+                <label>원금 (원)</label>
+                <input type="number" id="interestPrincipal" placeholder="예: 5000000">
+              </div>
+              <div class="cost-row">
+                <label>송달일 (이자 기산일)</label>
+                <input type="date" id="interestStart">
+              </div>
+              <div class="cost-row">
+                <label>기준일 (오늘 또는 청구일)</label>
+                <input type="date" id="interestEnd">
+              </div>
+              <button class="btn primary" id="calcInterest" type="button" style="margin-top:6px">계산</button>
+              <div class="cost-total" id="interestResult" style="display:none">
+                <span>총 청구금 (원금 + 지연이자)</span><b id="interestTotal">0원</b>
+              </div>
+            </div>
+
+            <div class="card gold">
+              <strong>정보공개청구서 (수사기관 압박)</strong>
+              <p>고소 접수 후 수사관이 미적거리면 「공공기관의 정보공개에 관한 법률」 §10으로 진행 상황 강제 공개 요구.</p>
+              <details>
+                <summary>정보공개청구서 자동 생성</summary>
+                <pre id="foiaT"></pre>
+                <button class="btn" data-defense-copy="foiaT" type="button">복사</button>
+              </details>
+            </div>
+
+            <div class="card gold">
+              <strong>엄벌탄원서 — 검사·판사에게 직접 호소</strong>
+              <p>가해자가 기습 공탁·반성문으로 감형 노릴 때 차단. 본인 사실관계 자동 반영.</p>
+              <details>
+                <summary>엄벌탄원서 본인 명의 (자동 생성)</summary>
+                <pre id="petitionSelf"></pre>
+                <button class="btn" data-defense-copy="petitionSelf" type="button">복사</button>
+              </details>
+              <details>
+                <summary>연대 탄원서 팩 (지인·다른 피해자 N명 일괄)</summary>
+                <pre id="petitionGroup"></pre>
+                <button class="btn" data-defense-copy="petitionGroup" type="button">복사 (서명란 인쇄용)</button>
+              </details>
+            </div>
+
             <div class="card red">
-              <strong>📛 채무불이행자명부 등재 (가해자 신용 마비)</strong>
+              <strong>채무불이행자명부 등재 (가해자 신용 마비)</strong>
               <p>확정 판결/지급명령 이후 <b>6개월 미이행</b>이면 명부 등재 신청 → 제1·2금융권 전산망 등록 → 신용카드·대출·금융거래 전면 마비. 합의 압박 최강 카드.</p>
               <details>
                 <summary>📄 채무불이행자명부 등재신청서 템플릿</summary>
@@ -2750,7 +2816,7 @@
         <section class="view" data-view="judgement">
           <div class="cards">
             <div class="judgement-card">
-              <h4>🪦 합법적 저승사자 — Judgement Room</h4>
+              <h4>합법적 저승사자 — Judgement Room</h4>
               <p>승소·확정 후에도 배째라는 가해자의 숨통을 합법적으로 조이는 3대 무기. <b>모두 법원 절차 안</b>에서 작동합니다.</p>
               <div class="jd-note">⚠ 이 메뉴는 <b>확정 판결·지급명령·조정조서</b> 등 집행권원이 있는 경우에만 의미가 있습니다. 사건 종결 전에는 가처분·가압류부터.</div>
             </div>
@@ -3903,6 +3969,7 @@
       buildSettlement();
       renderTimeline();
       fillDefenseTemplates();
+      buildPetitionAndFOIA();
       checkPerjuryRisk();
       checkEscalation();
       const cleanEl = document.getElementById("cleanPreviewText");
@@ -4879,17 +4946,49 @@
     // ===== 집단고소 모듈 =====
     const collective = { victims: [] };
 
+    // URL-safe Base64
+    function b64UrlEncode(bytes) {
+      let s = "";
+      for (let i = 0; i < bytes.length; i += 0x8000) s += String.fromCharCode.apply(null, bytes.subarray(i, i + 0x8000));
+      return btoa(s).replace(/\+/g, "-").replace(/\//g, "_").replace(/=+$/, "");
+    }
+    function b64UrlDecode(str) {
+      str = str.replace(/-/g, "+").replace(/_/g, "/");
+      while (str.length % 4) str += "=";
+      const bin = atob(str);
+      const out = new Uint8Array(bin.length);
+      for (let i = 0; i < bin.length; i++) out[i] = bin.charCodeAt(i);
+      return out;
+    }
     function encodeCollective() {
-      if (!window.LZString) return "";
+      const json = JSON.stringify(collective.victims);
+      // Pako gzip 우선 (작음), 없으면 LZString 폴백
       try {
-        return LZString.compressToEncodedURIComponent(JSON.stringify(collective.victims));
-      } catch (e) { return ""; }
+        if (window.pako) {
+          const compressed = pako.deflate(json);
+          return "z:" + b64UrlEncode(compressed);
+        }
+      } catch (e) {}
+      if (window.LZString) {
+        try { return LZString.compressToEncodedURIComponent(json); } catch (e) {}
+      }
+      return "";
     }
     function decodeCollective(hashPart) {
-      if (!window.LZString) return null;
       try {
-        return JSON.parse(LZString.decompressFromEncodedURIComponent(hashPart) || "[]");
-      } catch (e) { return null; }
+        if (hashPart && hashPart.startsWith("z:") && window.pako) {
+          const bytes = b64UrlDecode(hashPart.slice(2));
+          const json = pako.inflate(bytes, { to: "string" });
+          return JSON.parse(json);
+        }
+      } catch (e) {}
+      if (window.LZString) {
+        try {
+          const out = LZString.decompressFromEncodedURIComponent(hashPart);
+          return out ? JSON.parse(out) : null;
+        } catch (e) {}
+      }
+      return null;
     }
     function refreshShareLink() {
       const input = document.getElementById("shareLink");
@@ -5394,12 +5493,135 @@ cn + " 드림";
     }
     // ===== /시뮬레이터 =====
 
+    // ===== 12% 법정이자 시뮬레이터 (소촉법 §3) =====
+    function setupInterestCalc() {
+      const btn = document.getElementById("calcInterest");
+      if (!btn) return;
+      btn.addEventListener("click", () => {
+        const p = parseInt(document.getElementById("interestPrincipal").value, 10) || 0;
+        const s = document.getElementById("interestStart").value;
+        const e = document.getElementById("interestEnd").value || new Date().toISOString().slice(0,10);
+        const out = document.getElementById("interestResult");
+        const tot = document.getElementById("interestTotal");
+        if (!p || !s) { alert("원금과 송달일을 입력하세요."); return; }
+        const days = Math.max(0, Math.round((new Date(e) - new Date(s)) / 86400000));
+        // 단리 (실무 일반)
+        const interest = Math.round(p * 0.12 * days / 365);
+        const total = p + interest;
+        out.style.display = "flex";
+        tot.innerHTML = total.toLocaleString("ko-KR") + "원 <span style='font-size:12px;font-weight:400;color:var(--muted);margin-left:8px'>(원금 " + p.toLocaleString("ko-KR") + " + 지연이자 " + interest.toLocaleString("ko-KR") + " · " + days + "일)</span>";
+      });
+    }
+
+    // ===== SHA-256 증거 무결성 =====
+    function setupHashFile() {
+      const inp = document.getElementById("hashFile");
+      const list = document.getElementById("hashList");
+      if (!inp || !list) return;
+      inp.addEventListener("change", async (e) => {
+        const files = Array.from(e.target.files);
+        if (!files.length || !window.crypto?.subtle) { list.textContent = "파일이 없거나 브라우저가 SHA-256을 지원하지 않습니다."; return; }
+        list.innerHTML = "<p class=\"collective-hint\">계산 중…</p>";
+        const rows = [];
+        for (let i = 0; i < files.length; i++) {
+          const f = files[i];
+          try {
+            const buf = await f.arrayBuffer();
+            const hashBuf = await window.crypto.subtle.digest("SHA-256", buf);
+            const hex = Array.from(new Uint8Array(hashBuf)).map(b => b.toString(16).padStart(2, "0")).join("");
+            rows.push("<div style=\"font-family:ui-monospace,Consolas,monospace;font-size:11px;line-height:1.55;padding:6px 0;border-bottom:1px dashed var(--line)\"><b style=\"font-family:var(--sans);font-size:13px\">증제 " + (i+1) + "호증 — " + escHtml(f.name) + "</b> (" + (f.size/1024).toFixed(1) + " KB)<br>SHA-256: " + hex + "</div>");
+          } catch (err) {
+            rows.push("<div style=\"color:var(--wine)\">오류: " + escHtml(f.name) + " — " + escHtml(err.message) + "</div>");
+          }
+        }
+        list.innerHTML = rows.join("") + "<p class=\"collective-hint\" style=\"margin-top:8px\">위 해시값을 고소장 부록 \"증거 무결성 목록\"에 그대로 첨부. 향후 파일이 동일함을 객관 입증.</p>";
+      });
+    }
+
+    // ===== 엄벌탄원서 + 정보공개청구 =====
+    function buildPetitionAndFOIA() {
+      const cn = getPerson("pComplainantName") || "[고소인]";
+      const an = opponent.value.trim() || "[피고소인]";
+      const enf = enforcementMap[state.caseType] || enforcementMap["기타법률"];
+      const N = collective.victims.length;
+      const petSelf = "[엄 벌 탄 원 서]\n\n" +
+        "수신: ㅇㅇ지방검찰청 검사장 / ㅇㅇ지방법원 형사 ㅇㅇ단독·합의부 재판장\n사건번호: ㅇㅇㅇㅇ형제ㅇㅇㅇㅇ / ㅇㅇㅇㅇ고단(합)ㅇㅇㅇㅇ\n피고인: " + an + "\n탄원인: " + cn + "\n\n" +
+        "본 탄원인은 위 사건의 피해자로서 다음과 같이 엄벌을 호소합니다.\n\n" +
+        "1. 본 사건 범행은 " + enf.crime + "에 해당하며, 피고인은 다음과 같은 악질적 수법으로 본인에게 회복 곤란한 피해를 입혔습니다.\n   " + cleanForDoc(rawFacts()).slice(0, 400) + "\n\n" +
+        "2. 피고인은 범행 후에도 진정한 반성·피해회복 의사를 보이지 않았으며, 형식적인 사과와 합의 회유로 본인에게 추가적인 정신적 고통을 가하고 있습니다.\n\n" +
+        "3. 피고인이 재판 직전 형사공탁을 하더라도, 그것은 양형 감경을 위한 형식적 면피일 뿐이며 본 사건의 죄질을 가볍게 보아서는 안 됩니다. 본 탄원인은 어떠한 합의·고소취하 의사도 없음을 분명히 합니다.\n\n" +
+        "4. 본 사건과 같은 수법의 피해자가 추가로 발생하고 있는 정황이 있어, 사회적 위협 차단을 위해서도 엄정한 처벌이 절실합니다.\n\n" +
+        "5. 이에 본 탄원인은 피고인에게 법이 허용하는 가장 엄정한 처벌이 내려지기를 간곡히 호소합니다. 선처는 결코 정의가 아닙니다.\n\n" +
+        formatKoreanDate(new Date().toISOString().slice(0,10)) + "\n탄원인 " + cn + " (인)";
+      const petGroup = "[연대 엄벌탄원서 — 피해자 일동]\n\n" +
+        "수신: ㅇㅇ지방검찰청 검사장 / ㅇㅇ지방법원 재판장\n사건번호: ㅇㅇㅇㅇ형제ㅇㅇㅇㅇ\n피고인: " + an + "\n\n" +
+        "아래 서명한 피해자 " + (N > 0 ? N + "명" : "ㅇㅇ명") + "은 동일 피고인에게 동일·유사 수법으로 피해를 입은 자들로서, 본 사건의 엄정한 처벌을 공동으로 호소합니다.\n\n" +
+        "1. 본 피해자들은 각각 독립적인 피해자이나, 피고인의 범행이 단발적이 아닌 반복·조직적임을 입증합니다.\n2. 피고인의 형식적 합의 시도·형사공탁은 양형 감경 사유로 채택되어서는 안 됩니다.\n3. 본 피해자들은 그 누구도 합의 의사가 없으며, 법정 최고형을 요청합니다.\n\n" +
+        "[피해자 명단 — 별지에 서명·날인]\n" +
+        "  1. ____________________  (인)  연락처: __________\n" +
+        "  2. ____________________  (인)  연락처: __________\n" +
+        "  3. ____________________  (인)  연락처: __________\n" +
+        "  4. ____________________  (인)  연락처: __________\n" +
+        "  5. ____________________  (인)  연락처: __________\n" +
+        "  ... (인쇄해서 각자 자필 서명·날인)\n\n" +
+        formatKoreanDate(new Date().toISOString().slice(0,10)) + "\n위 피해자 일동";
+      const foia = "[정보공개청구서]\n\n" +
+        "수신: ㅇㅇ경찰서장 / ㅇㅇ지방검찰청 검사장\n청구인: " + cn + "\n\n" +
+        "「공공기관의 정보공개에 관한 법률」 제10조에 따라 다음 정보의 공개를 청구합니다.\n\n" +
+        "1. 청구 대상 정보:\n   - 사건번호 ㅇㅇㅇㅇ형제ㅇㅇㅇㅇ호 사건의 수사 진행 상황 (조사 일정·송치 여부·결정 예정일 등)\n" +
+        "   - 본 사건과 관련하여 본 청구인이 제출한 고소장에 대한 처리 결과 통지서\n" +
+        "   - 본 사건 담당 수사관 및 부서·연락처\n\n" +
+        "2. 청구 사유: 본 청구인은 위 사건의 피해자(고소인)로서 형사사법절차 전자화 촉진법 및 피해자 통지 의무에 따른 권리 행사를 위해 위 정보의 공개를 청구합니다.\n\n" +
+        "3. 공개 방법: 전자우편 / 서면 / 정보통신망 (택일)\n\n" +
+        formatKoreanDate(new Date().toISOString().slice(0,10)) + "\n청구인 " + cn + " (인)";
+      const set = (id, v) => { const el = document.getElementById(id); if (el) el.textContent = v; };
+      set("petitionSelf", petSelf); set("petitionGroup", petGroup); set("foiaT", foia);
+    }
+
+    // ===== Zero-Trace Shredder (안티-포렌식 7회 덮어쓰기) =====
+    async function zeroTraceShred() {
+      try {
+        // 1) localStorage·sessionStorage 모든 키에 무작위 garbage 7회 덮어쓰기
+        for (let pass = 0; pass < 7; pass++) {
+          const ks = Object.keys(localStorage);
+          for (const k of ks) {
+            const len = (localStorage.getItem(k) || "").length;
+            let garbage = "";
+            for (let i = 0; i < Math.max(len, 64); i++) garbage += String.fromCharCode(Math.floor(Math.random() * 94) + 33);
+            try { localStorage.setItem(k, garbage); } catch (e) {}
+          }
+          const sk = Object.keys(sessionStorage);
+          for (const k of sk) {
+            try { sessionStorage.setItem(k, Math.random().toString(36)); } catch (e) {}
+          }
+        }
+        // 2) 최종 삭제
+        localStorage.clear(); sessionStorage.clear();
+        // 3) IndexedDB 모두 삭제
+        if (window.indexedDB && indexedDB.databases) {
+          const dbs = await indexedDB.databases();
+          dbs.forEach(d => { if (d.name) indexedDB.deleteDatabase(d.name); });
+        }
+        // 4) SW 캐시 삭제 + SW 등록 해제
+        if ("caches" in window) {
+          const ks = await caches.keys();
+          await Promise.all(ks.map(k => caches.delete(k)));
+        }
+        if ("serviceWorker" in navigator) {
+          const regs = await navigator.serviceWorker.getRegistrations();
+          await Promise.all(regs.map(r => r.unregister()));
+        }
+        // 5) URL hash 비움 + history 흔적
+        history.replaceState({}, "", location.pathname);
+      } catch (e) {}
+    }
+
     // ===== Panic Button =====
     function setupPanic() {
       const btn = document.getElementById("panicBtn");
       if (!btn) return;
       let armed = false, timer = null;
-      btn.addEventListener("click", () => {
+      btn.addEventListener("click", async () => {
         if (!armed) {
           armed = true;
           btn.classList.add("armed");
@@ -5409,13 +5631,7 @@ cn + " 드림";
           return;
         }
         clearTimeout(timer);
-        try {
-          localStorage.clear();
-          sessionStorage.clear();
-          // SW 캐시도 비움
-          if ("caches" in window) caches.keys().then(ks => ks.forEach(k => caches.delete(k)));
-          if ("serviceWorker" in navigator) navigator.serviceWorker.getRegistrations().then(rs => rs.forEach(r => r.unregister()));
-        } catch (e) {}
+        await zeroTraceShred();
         // 히스토리 흔적 최소화 + 구글로
         location.replace("https://www.google.com");
       });
@@ -5904,6 +6120,8 @@ cn + " 드림";
     buildSimulator();
     setupPanic();
     setupJudgementUnlock();
+    setupInterestCalc();
+    setupHashFile();
     buildCostInputs();
     const costGenBtn = document.getElementById("genCostDoc");
     if (costGenBtn) costGenBtn.addEventListener("click", genCostDoc);
