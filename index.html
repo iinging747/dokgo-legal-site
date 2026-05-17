@@ -1266,6 +1266,44 @@
     .lpkg-section li b { color: var(--wine-dark); }
     body.dark .lpkg-section { background: var(--white); }
 
+    /* 빠른 시작 위저드 (첫 화면 단순화) */
+    .quickstart { background: linear-gradient(180deg, #f8f6f1 0%, #ede9e2 100%); padding: 56px clamp(20px, 6vw, 100px); }
+    body.dark .quickstart { background: linear-gradient(180deg, #1a1917 0%, #232220 100%); }
+    .quickstart .qs-inner { max-width: 1100px; margin: 0 auto; }
+    .quickstart h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); margin: 0 0 8px; color: var(--ink); }
+    .quickstart .qs-sub { font-size: 15px; color: var(--muted); margin: 0 0 26px; line-height: 1.55; }
+    .qs-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); gap: 14px; }
+    .qs-card { background: var(--white); border: 2px solid var(--line); border-radius: 14px; padding: 22px 20px; cursor: pointer; text-align: left; transition: all .15s; display: flex; flex-direction: column; gap: 8px; font: inherit; color: var(--ink); }
+    .qs-card:hover { border-color: var(--wine); transform: translateY(-2px); box-shadow: 0 10px 24px rgba(142,25,24,.12); }
+    .qs-card:focus { outline: 2px solid var(--wine); outline-offset: 2px; }
+    .qs-card .qs-emoji { font-size: 38px; line-height: 1; }
+    .qs-card strong { font-size: 17px; font-weight: 800; color: var(--wine-dark); }
+    .qs-card span { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
+    body.dark .qs-card { background: var(--white); }
+    @media (max-width: 720px) {
+      .quickstart { padding: 36px 14px; }
+      .qs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
+      .qs-card { padding: 16px 14px; }
+      .qs-card .qs-emoji { font-size: 30px; }
+      .qs-card strong { font-size: 14.5px; }
+      .qs-card span { font-size: 11.5px; }
+    }
+
+    /* API 키 5초 가이드 */
+    .api-guide { background: var(--paper); border: 1px solid var(--line); border-radius: 10px; margin-top: 8px; overflow: hidden; }
+    .api-guide summary { padding: 11px 14px; cursor: pointer; font-weight: 700; color: var(--wine-dark); font-size: 13px; list-style: none; display: flex; justify-content: space-between; align-items: center; user-select: none; }
+    .api-guide summary::after { content: "▾"; font-size: 13px; color: var(--muted); }
+    .api-guide[open] summary::after { content: "▴"; }
+    .api-guide summary::-webkit-details-marker { display: none; }
+    .api-guide .ag-body { padding: 4px 16px 14px; border-top: 1px solid var(--line); font-size: 13px; line-height: 1.65; }
+    .api-guide .ag-body ol { padding-left: 22px; margin: 8px 0; }
+    .api-guide .ag-body li { margin: 5px 0; }
+    .api-guide .ag-body b { color: var(--wine-dark); }
+    .api-guide .ag-body code { background: var(--soft); padding: 1px 6px; border-radius: 4px; font-size: 12px; font-family: ui-monospace, "Cascadia Code", Consolas, monospace; }
+    .api-guide .ag-body .ag-cost { background: rgba(168,134,66,.12); border-left: 3px solid var(--gold); padding: 8px 12px; margin: 10px 0; font-size: 12.5px; border-radius: 0 6px 6px 0; }
+    .api-guide .ag-body .ag-warn { background: rgba(142,25,24,.08); border-left: 3px solid var(--wine); padding: 8px 12px; margin: 6px 0; font-size: 12.5px; border-radius: 0 6px 6px 0; }
+    .api-guide .ag-body a { color: var(--wine); font-weight: 700; text-decoration: underline; }
+
     /* 집단고소 박스 */
     .collective-box { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
     .collective-box h4 { margin: 14px 0 8px; font-size: 14px; color: var(--wine-dark); border-bottom: 1px solid var(--line); padding-bottom: 4px; }
@@ -1368,7 +1406,7 @@
         <p class="eyebrow">SELF LITIGATION GUIDE FOR VICTIMS</p>
         <h1>대형 로펌 없이도<br>절차는 밟게 만든다.</h1>
         <p>피해자가 말하듯 쏟아낸 사실을 고소장, 내용증명, 노동위원회 구제신청, 항고·항소 브리프로 정리합니다. 감정은 당신 편에 두고, 문서는 기관이 읽는 형식으로 냅니다.</p>
-        <a class="btn primary" href="#app">지금 서식 만들기</a>
+        <a class="btn primary" href="#quickstart">지금 시작 →</a>
       </div>
       <div class="hero-panel">
         <strong>피해자 편에서 먼저 정리합니다.</strong>
@@ -1377,6 +1415,55 @@
     </div>
     <div class="hero-right">
       <img class="justice" src="justice.png" onerror="this.onerror=function(){this.onerror=null;this.src='justice.svg'};this.src='justice.jpg'" alt="정의의 여신과 저울">
+    </div>
+  </section>
+
+  <section class="quickstart" id="quickstart">
+    <div class="qs-inner">
+      <h2>지금 무슨 일이 있으셨나요?</h2>
+      <p class="qs-sub">해당하는 항목을 누르면 양식이 자동으로 채워지고 적절한 탭이 열립니다. 정확히 모르겠으면 <b>"잘 모르겠어요"</b> 누르세요.</p>
+      <div class="qs-grid">
+        <button type="button" class="qs-card" data-qs-type="인터넷사기">
+          <div class="qs-emoji">💸</div>
+          <strong>돈 떼였어요</strong>
+          <span>중고거래·대여금·전세·코인·보이스피싱·다단계</span>
+        </button>
+        <button type="button" class="qs-card" data-qs-type="텔레그램스토킹">
+          <div class="qs-emoji">📱</div>
+          <strong>온라인에서 괴롭힘 당해요</strong>
+          <span>텔레그램·DM·신상유포·스토킹·통매음</span>
+        </button>
+        <button type="button" class="qs-card" data-qs-type="명예훼손·모욕">
+          <div class="qs-emoji">🔥</div>
+          <strong>명예가 훼손됐어요</strong>
+          <span>허위사실·악플·모욕·SNS·게시판</span>
+        </button>
+        <button type="button" class="qs-card" data-qs-type="부당해고">
+          <div class="qs-emoji">💼</div>
+          <strong>회사에서 부당하게 당했어요</strong>
+          <span>해고·임금체불·괴롭힘·성희롱</span>
+        </button>
+        <button type="button" class="qs-card" data-qs-type="폭행·상해">
+          <div class="qs-emoji">🚨</div>
+          <strong>폭행·상해 당했어요</strong>
+          <span>맞음·다침·CCTV·진단서</span>
+        </button>
+        <button type="button" class="qs-card" data-qs-type="성폭력">
+          <div class="qs-emoji">🛡</div>
+          <strong>성폭력 피해</strong>
+          <span>강제추행·강간·디지털성범죄·해바라기센터 연계</span>
+        </button>
+        <button type="button" class="qs-card" data-qs-type="전세사기">
+          <div class="qs-emoji">🏠</div>
+          <strong>전세 보증금 못 받아요</strong>
+          <span>임대인 잠적·임차권등기·HUG·특별법</span>
+        </button>
+        <button type="button" class="qs-card" data-qs-type="기타법률">
+          <div class="qs-emoji">❓</div>
+          <strong>잘 모르겠어요</strong>
+          <span>일단 다 적어두면 자동 분류</span>
+        </button>
+      </div>
     </div>
   </section>
 
@@ -1421,7 +1508,25 @@
               </label>
               <div class="evidence-list" id="evidenceList"></div>
               <div class="ai-row">
-                <p class="ai-hint">🤖 <b>Claude AI로 사실관계·증거 자동 정리</b> (선택). API 키는 본인 브라우저(localStorage)에만 저장되고 외부 서버로 전송되지 않습니다. 키 발급은 <a href="https://console.anthropic.com/settings/keys" target="_blank" rel="noopener">console.anthropic.com → Settings → API Keys</a>.</p>
+                <p class="ai-hint">🤖 <b>Claude AI로 사실관계·증거 자동 정리</b> (선택). API 키는 본인 브라우저(localStorage)에만 저장되고 외부 서버로 전송되지 않습니다.</p>
+                <details class="api-guide">
+                  <summary>🔑 처음이면 클릭 — Claude API 키 5초 발급 가이드</summary>
+                  <div class="ag-body">
+                    <ol>
+                      <li><b>1.</b> <a href="https://console.anthropic.com" target="_blank" rel="noopener">console.anthropic.com</a> 접속 → <b>Google로 로그인</b> (가입 3초)</li>
+                      <li><b>2.</b> 왼쪽 메뉴에서 <b>Settings → API Keys</b> 클릭</li>
+                      <li><b>3.</b> <b>Create Key</b> 버튼 → 이름 아무거나 입력 (예: "법률단")</li>
+                      <li><b>4.</b> 화면에 뜬 키(<code>sk-ant-…</code>로 시작) 복사 <em>(이 화면을 닫으면 다시 못 봄!)</em></li>
+                      <li><b>5.</b> 아래 키 입력칸에 붙여넣기 → <b>키 저장</b> 클릭</li>
+                    </ol>
+                    <div class="ag-cost">
+                      💰 <b>비용</b> — Anthropic은 결제수단 등록 + 최소 $5(약 7천원) 충전이 필요합니다. 분석 1회당 약 100~300원 정도 소모. 신규 가입 시 무료 크레딧을 받는 경우도 있어요. 충전 안 해도 사이트의 OCR·PDF 자동 추출은 그대로 작동합니다.
+                    </div>
+                    <div class="ag-warn">
+                      ⚠ 키는 본인 PC 브라우저에만 저장됩니다. 다른 사람에게 보여주거나 공용 PC에 저장하지 마세요. 키가 유출되면 즉시 console에서 <b>Revoke</b> 클릭.
+                    </div>
+                  </div>
+                </details>
                 <div class="ai-controls">
                   <input type="password" id="aiKey" placeholder="sk-ant-... (없으면 비워두세요)" autocomplete="off" spellcheck="false">
                   <button class="btn" id="aiKeySave" type="button">키 저장</button>
@@ -4716,6 +4821,36 @@
     renderVictimList();
     refreshShareLink();
     loadCollectiveFromHash();
+    // 빠른 시작 위저드 — 카드 클릭 시 죄명 자동 설정 + 앱으로 스크롤 + 적절한 탭 열기
+    document.querySelectorAll(".qs-card").forEach(card => {
+      card.addEventListener("click", () => {
+        const t = card.dataset.qsType;
+        const targetChip = document.querySelector('.chip[data-type="' + t + '"]');
+        if (targetChip) {
+          targetChip.click();
+        } else {
+          state.caseType = t;
+          update();
+        }
+        // 적절한 결과 탭 열기 — 사기/명예훼손 류는 법률패키지, 텔레그램은 telegram, 성폭력은 counseling
+        let tab = "package";
+        if (t === "텔레그램스토킹") tab = "telegram";
+        else if (t === "성폭력") tab = "counseling";
+        else if (t === "부당해고") tab = "labor";
+        else if (t === "전세사기") tab = "jeonse";
+        else if (t === "기타법률") tab = "package";
+        if (typeof openTab === "function") openTab(tab);
+        // 앱 섹션 textarea로 스크롤 + 포커스
+        setTimeout(() => {
+          const app = document.getElementById("app");
+          if (app) app.scrollIntoView({ behavior: "smooth", block: "start" });
+          setTimeout(() => {
+            const ta = document.getElementById("story");
+            if (ta) ta.focus({ preventScroll: true });
+          }, 500);
+        }, 50);
+      });
+    });
     update();
 
     // ===== 자료 첨부 + AI 사실·증거 분석 =====
