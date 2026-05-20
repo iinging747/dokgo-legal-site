@@ -16,7 +16,7 @@
   <link rel="icon" type="image/png" sizes="192x192" href="icon-192.png">
   <link rel="icon" type="image/png" sizes="512x512" href="icon-512.png">
   <link rel="preconnect" href="https://cdn.jsdelivr.net" crossorigin>
-  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/variable/pretendardvariable.min.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@400;500;600;700;900&display=swap">
   <style>
     :root {
       color-scheme: light;
@@ -32,8 +32,8 @@
       --gold: #a88642;
       --green: #2f6b4f;
       --shadow: 0 24px 70px rgba(34, 32, 29, .16);
-      --serif: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, sans-serif;
-      --sans: "Pretendard Variable", "Pretendard", "Apple SD Gothic Neo", "Noto Sans KR", "Malgun Gothic", -apple-system, "Segoe UI", sans-serif;
+      --serif: "Noto Serif KR", "Nanum Myeongjo", "Batang", "AppleMyungjo", Georgia, serif;
+      --sans: "Noto Serif KR", "Nanum Myeongjo", "Batang", "AppleMyungjo", Georgia, serif;
     }
 
     body.dark {
@@ -125,6 +125,23 @@
       font-size: 12px;
       font-weight: 800;
       text-transform: uppercase;
+    }
+
+    .nav-links a,
+    .nav-links button {
+      color: inherit;
+      font: inherit;
+      font-weight: 800;
+      text-transform: uppercase;
+      text-decoration: none;
+      background: transparent;
+      border: 0;
+      padding: 0;
+      cursor: pointer;
+    }
+
+    .nav-links button {
+      color: var(--wine);
     }
 
     .hotline {
@@ -289,8 +306,10 @@
     }
 
     .section {
-      padding: 74px clamp(18px, 10vw, 180px);
+      padding: clamp(96px, 9vw, 140px) clamp(18px, 10vw, 180px);
       background: var(--white);
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 96px;
     }
 
     .intro {
@@ -323,8 +342,10 @@
     }
 
     .app-section {
-      padding: 72px clamp(18px, 6vw, 92px);
+      padding: clamp(96px, 9vw, 144px) clamp(18px, 6vw, 92px);
       background: #eeece8;
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 96px;
     }
 
     .app-head {
@@ -396,6 +417,7 @@
       box-shadow: var(--shadow);
       border-radius: 10px;
       overflow: hidden;
+      max-width: 100%;
     }
 
     .panel.result-panel {
@@ -419,6 +441,127 @@
       display: grid;
       gap: 18px;
       padding: 20px;
+    }
+
+    .victim-guide {
+      padding: 16px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--wine);
+      border-radius: 10px;
+      background: var(--soft);
+      line-height: 1.65;
+      color: var(--muted);
+      font-size: 13.5px;
+    }
+
+    .victim-guide strong {
+      display: block;
+      margin-bottom: 6px;
+      color: var(--ink);
+      font-size: 15px;
+    }
+
+    .wizard-steps {
+      display: grid;
+      gap: 12px;
+    }
+
+    .wizard-step {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--white);
+      overflow: hidden;
+    }
+
+    .wizard-head {
+      width: 100%;
+      min-height: 62px;
+      padding: 12px 14px;
+      display: grid;
+      grid-template-columns: auto 1fr auto;
+      gap: 10px;
+      align-items: center;
+      text-align: left;
+      background: transparent;
+      color: var(--ink);
+      border-bottom: 1px solid transparent;
+    }
+
+    .wizard-step.active .wizard-head {
+      border-bottom-color: var(--line);
+      background: rgba(142, 25, 24, .04);
+    }
+
+    .wizard-num {
+      width: 32px;
+      height: 32px;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      border-radius: 50%;
+      background: var(--wine);
+      color: #fff;
+      font-weight: 900;
+      font-size: 13px;
+    }
+
+    .wizard-title {
+      display: grid;
+      gap: 2px;
+    }
+
+    .wizard-title b {
+      font-size: 15px;
+      color: var(--ink);
+    }
+
+    .wizard-title span {
+      font-size: 12.5px;
+      line-height: 1.45;
+      color: var(--muted);
+    }
+
+    .wizard-toggle {
+      color: var(--muted);
+      font-size: 12px;
+      font-weight: 900;
+    }
+
+    .wizard-body {
+      display: none;
+      gap: 14px;
+      padding: 16px;
+      max-width: 100%;
+      overflow: hidden;
+    }
+
+    .wizard-step.active .wizard-body {
+      display: grid;
+    }
+
+    .wizard-actions {
+      display: flex;
+      gap: 8px;
+      flex-wrap: wrap;
+      justify-content: flex-end;
+      padding-top: 4px;
+    }
+
+    .wizard-note {
+      padding: 12px 14px;
+      border-radius: 8px;
+      background: var(--soft);
+      color: var(--muted);
+      font-size: 13px;
+      line-height: 1.6;
+    }
+
+    body.dark .wizard-step {
+      background: #211f1d;
+    }
+
+    body.dark .wizard-step.active .wizard-head {
+      background: rgba(182, 51, 51, .09);
     }
 
     label {
@@ -462,6 +605,61 @@
       color: #9a9288;
     }
 
+    .story-label {
+      gap: 12px;
+      padding: 14px;
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      background: var(--white);
+      box-shadow: 0 10px 28px rgba(31, 28, 25, .05);
+    }
+
+    .story-label .story-heading {
+      display: flex;
+      align-items: flex-end;
+      justify-content: space-between;
+      gap: 12px;
+      color: var(--ink);
+      font-size: 17px;
+      font-weight: 900;
+    }
+
+    .story-label .story-heading span {
+      color: var(--muted);
+      font-size: 12.5px;
+      font-weight: 500;
+      line-height: 1.45;
+      text-align: right;
+    }
+
+    textarea#story {
+      min-height: 430px;
+      padding: 20px;
+      border-radius: 12px;
+      font-size: 16px;
+      line-height: 1.78;
+      background: #fffdfa;
+    }
+
+    textarea#story:focus {
+      box-shadow: 0 0 0 4px rgba(142, 25, 24, .12), inset 0 0 0 1px rgba(142, 25, 24, .18);
+    }
+
+    .story-actions {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      flex-wrap: wrap;
+      margin-top: -8px;
+      color: var(--muted);
+      font-size: 12.5px;
+      line-height: 1.45;
+    }
+
+    .story-actions .btn {
+      flex: 0 0 auto;
+    }
+
     .fields {
       display: grid;
       grid-template-columns: 1fr 1fr;
@@ -469,13 +667,39 @@
     }
 
     .fields.three {
-      grid-template-columns: repeat(3, 1fr);
+      grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
+    }
+
+    .fields > *,
+    .fields input,
+    .fields select {
+      min-width: 0;
     }
 
     .chips {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(118px, 1fr));
       gap: 8px;
+    }
+
+    .chips.collapsed .chip:nth-of-type(n+19) {
+      display: none;
+    }
+
+    .chip-toggle-row {
+      display: flex;
+      justify-content: center;
+      margin-top: 10px;
+    }
+
+    .chip-toggle {
+      min-height: 38px;
+      padding: 0 16px;
+      border-radius: 999px;
+      border: 1px solid var(--line);
+      background: var(--white);
+      color: var(--wine);
+      font-weight: 900;
     }
 
     .chip {
@@ -952,7 +1176,7 @@
     }
 
     .contact {
-      padding: 88px clamp(18px, 12vw, 220px);
+      padding: clamp(104px, 10vw, 156px) clamp(18px, 12vw, 220px);
       background:
         linear-gradient(90deg, rgba(238,236,232,.9), rgba(238,236,232,.74)),
         linear-gradient(180deg, #ddd8cf, #f4f2ee);
@@ -960,6 +1184,8 @@
       grid-template-columns: .9fr 1.1fr;
       gap: clamp(28px, 6vw, 88px);
       align-items: center;
+      border-top: 1px solid var(--line);
+      scroll-margin-top: 96px;
     }
 
     .scale {
@@ -993,7 +1219,7 @@
     @media (max-width: 1080px) {
       .nav { position: static; background: #f8f6f2; height: auto; padding: 16px; }
       body.dark .nav { background: #211f1d; }
-      .nav-links { display: none; }
+      .nav-links { display: flex; order: 3; width: 100%; gap: 12px; flex-wrap: wrap; font-size: 11.5px; }
       .hero {
         flex-direction: column;
         gap: 24px;
@@ -1044,8 +1270,12 @@
       .justice { max-width: 220px; opacity: .92; }
       .hero-panel { padding: 14px 16px; }
       .hero-panel strong { font-size: 18px; }
+      .guide-modal { padding: 10px; align-items: flex-start; }
+      .guide-card { max-height: calc(100vh - 20px); padding: 18px 14px; }
+      .guide-actions .btn { flex: 1; }
       .quick-jump, .module-grid, .footer { grid-template-columns: 1fr; }
       .read-guide { grid-template-columns: 1fr; }
+      .evidence-tools { grid-template-columns: 1fr; }
       .chips { grid-template-columns: repeat(2, minmax(0, 1fr)); }
       .chip {
         min-height: 36px;
@@ -1055,11 +1285,16 @@
         line-height: 1.25;
       }
       .quick-jump .btn { min-height: 42px; }
-      .section, .app-section, .contact { padding: 42px 12px; }
+      .section, .app-section, .contact { padding: 64px 12px; scroll-margin-top: 18px; }
       .app-head { gap: 10px; margin-bottom: 12px; }
       .app-head h2 { font-size: clamp(30px, 10vw, 40px); }
       .read-step { padding: 12px; }
       .form, .view { padding: 14px; }
+      .wizard-head { grid-template-columns: auto 1fr; }
+      .wizard-toggle { grid-column: 2; }
+      .wizard-body { padding: 13px; }
+      .wizard-actions { justify-content: stretch; }
+      .wizard-actions .btn { flex: 1; }
       .panel-head {
         padding: 14px;
         align-items: start;
@@ -1148,6 +1383,72 @@
     .evidence-zone .ev-cta { margin: 0 0 4px; font-weight: 700; color: var(--wine); font-size: 15px; }
     .evidence-zone .ev-hint { margin: 0; font-size: 13px; color: var(--muted); }
     body.dark .evidence-zone:hover { border-color: var(--wine); }
+    .evidence-tools { display: grid; grid-template-columns: minmax(0, 1.1fr) minmax(260px, .9fr); gap: 12px; margin-top: 12px; }
+    .evidence-paste {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--white);
+      padding: 12px;
+    }
+    .evidence-paste:focus-within { border-color: var(--wine); box-shadow: 0 0 0 3px rgba(142,25,24,.09); }
+    .evidence-paste h5 { margin: 0 0 7px; font-size: 13px; color: var(--ink); }
+    .evidence-paste textarea {
+      width: 100%;
+      min-height: 112px;
+      resize: vertical;
+      border: 1px solid var(--line);
+      border-radius: 8px;
+      padding: 10px 12px;
+      background: var(--soft);
+      color: var(--ink);
+      font-family: var(--sans);
+      line-height: 1.55;
+      box-sizing: border-box;
+    }
+    .evidence-paste .paste-actions { display: flex; align-items: center; justify-content: space-between; gap: 10px; margin-top: 9px; flex-wrap: wrap; }
+    .evidence-paste .paste-hint { margin: 0; font-size: 12px; color: var(--muted); line-height: 1.45; }
+    .evidence-help {
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      background: var(--soft);
+      padding: 12px;
+      font-size: 12.5px;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+    .evidence-help strong { display: block; color: var(--ink); margin-bottom: 5px; }
+    .evidence-help ul { margin: 0; padding-left: 18px; }
+    .time-capture {
+      margin-top: 12px;
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--wine);
+      border-radius: 12px;
+      background: var(--white);
+      padding: 12px;
+      display: grid;
+      gap: 9px;
+    }
+    .time-capture strong { color: var(--ink); }
+    .time-capture .clock-line {
+      font-size: clamp(18px, 3vw, 26px);
+      color: var(--wine);
+      font-weight: 900;
+      font-variant-numeric: tabular-nums;
+    }
+    .time-capture p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .time-capture .time-actions { display: flex; gap: 8px; flex-wrap: wrap; }
+    .private-vault {
+      border: 1px solid var(--line);
+      border-left: 4px solid var(--green);
+      border-radius: 12px;
+      background: var(--white);
+      padding: 14px;
+      display: grid;
+      gap: 10px;
+    }
+    .private-vault strong { color: var(--ink); }
+    .private-vault p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .vault-actions { display: flex; gap: 8px; flex-wrap: wrap; }
     .evidence-list { display: grid; gap: 10px; margin-top: 12px; }
     .evidence-item { background: var(--white); border: 1px solid var(--line); border-radius: 10px; padding: 12px 14px; }
     .evidence-item h5 { margin: 0 0 6px; font-size: 13px; display: flex; justify-content: space-between; gap: 8px; align-items: center; }
@@ -1162,6 +1463,48 @@
     .ai-row .ai-controls { display: flex; gap: 8px; flex-wrap: wrap; }
     .ai-row .ai-controls input { flex: 1; min-width: 220px; padding: 10px 12px; }
     .ai-row .ai-controls .btn { white-space: nowrap; }
+    .no-api-box {
+      border: 1px solid rgba(47,107,79,.35);
+      border-left: 4px solid var(--green);
+      border-radius: 12px;
+      background: rgba(47,107,79,.06);
+      padding: 12px;
+      display: grid;
+      gap: 8px;
+    }
+    .no-api-box strong { color: var(--green); }
+    .no-api-box p { margin: 0; color: var(--muted); font-size: 12.5px; line-height: 1.55; }
+    .guide-modal {
+      position: fixed;
+      inset: 0;
+      z-index: 10000;
+      display: none;
+      align-items: center;
+      justify-content: center;
+      padding: 18px;
+      background: rgba(0,0,0,.56);
+    }
+    .guide-modal.show { display: flex; }
+    .guide-card {
+      width: min(760px, 100%);
+      max-height: min(86vh, 780px);
+      overflow: auto;
+      background: var(--white);
+      color: var(--ink);
+      border: 1px solid var(--line);
+      border-radius: 14px;
+      box-shadow: 0 28px 90px rgba(0,0,0,.35);
+      padding: clamp(20px, 4vw, 34px);
+    }
+    .guide-card h2 { margin: 0 0 12px; font-size: clamp(24px, 4vw, 36px); color: var(--wine-dark); }
+    .guide-card .guide-lead { white-space: pre-line; color: var(--muted); line-height: 1.75; margin: 0 0 18px; }
+    .guide-steps { display: grid; gap: 10px; counter-reset: gstep; margin: 18px 0; }
+    .guide-section-title { margin: 18px 0 8px; padding-top: 12px; border-top: 1px solid var(--line); font-size: 15px; color: var(--wine-dark); font-weight: 900; }
+    .guide-step { border: 1px solid var(--line); border-left: 4px solid var(--wine); border-radius: 10px; padding: 12px 14px; counter-increment: gstep; background: var(--paper); }
+    .guide-step b::before { content: counter(gstep) ". "; color: var(--wine); }
+    .guide-step b { display: block; margin-bottom: 4px; color: var(--ink); }
+    .guide-step span { color: var(--muted); font-size: 13px; line-height: 1.55; }
+    .guide-actions { display: flex; gap: 8px; flex-wrap: wrap; justify-content: flex-end; margin-top: 18px; }
     .ai-result { display: none; margin-top: 8px; padding: 14px; background: var(--soft); border-left: 4px solid var(--wine); border-radius: 8px; }
     .ai-result.show { display: block; }
     .ai-result h5 { margin: 0 0 8px; font-size: 14px; color: var(--wine-dark); }
@@ -1293,8 +1636,41 @@
     .panic-btn { position: fixed; top: 12px; right: 12px; z-index: 9999; width: 44px; height: 44px; border-radius: 50%; background: #c00; color: #fff; border: 2px solid #800; font-size: 18px; cursor: pointer; box-shadow: 0 4px 12px rgba(192,0,0,.4); transition: all .15s; }
     .panic-btn:hover { background: #ff2222; transform: scale(1.08); }
     .panic-btn.armed { background: #ff0000; animation: panicPulse .3s infinite; }
+    .panic-help {
+      position: fixed;
+      top: 17px;
+      right: 62px;
+      z-index: 9998;
+      max-width: 172px;
+      padding: 5px 8px;
+      border: 1px solid rgba(142,25,24,.14);
+      border-radius: 999px;
+      background: rgba(255,253,249,.72);
+      color: rgba(95,17,17,.74);
+      box-shadow: 0 5px 16px rgba(34,32,29,.08);
+      font-size: 10.5px;
+      line-height: 1.25;
+      opacity: .58;
+      transform: translateX(6px);
+      transition: opacity .15s, transform .15s, background .15s;
+      pointer-events: none;
+      white-space: nowrap;
+    }
+    .panic-btn:hover + .panic-help,
+    .panic-btn:focus + .panic-help,
+    .panic-btn.armed + .panic-help {
+      opacity: .98;
+      transform: translateX(0);
+      background: rgba(255,253,249,.95);
+      white-space: normal;
+      max-width: 210px;
+    }
+    body.dark .panic-help { background: rgba(34,32,29,.48); color: rgba(255,245,235,.72); }
+    body.dark .panic-btn:hover + .panic-help,
+    body.dark .panic-btn:focus + .panic-help,
+    body.dark .panic-btn.armed + .panic-help { background: rgba(34,32,29,.94); color: #fff4ea; }
     @keyframes panicPulse { 0%,100% { box-shadow: 0 0 0 0 rgba(255,0,0,.7); } 50% { box-shadow: 0 0 0 12px rgba(255,0,0,0); } }
-    @media (max-width: 720px) { .panic-btn { top: 8px; right: 8px; width: 38px; height: 38px; font-size: 16px; } }
+    @media (max-width: 720px) { .panic-btn { top: 8px; right: 8px; width: 38px; height: 38px; font-size: 16px; } .panic-help { top: 12px; right: 52px; max-width: 130px; font-size: 9.5px; padding: 4px 7px; } .panic-btn:hover + .panic-help, .panic-btn:focus + .panic-help, .panic-btn.armed + .panic-help { max-width: 180px; } }
 
     /* 무고죄 추측 표현 경고 */
     .perjury-warn { display: none; background: rgba(204,0,0,.1); border-left: 4px solid #c00; padding: 10px 14px; margin: 8px 0; border-radius: 0 8px 8px 0; font-size: 13px; line-height: 1.55; color: var(--wine-dark); }
@@ -1475,7 +1851,7 @@
     .sim-check input[type=checkbox] { accent-color: var(--wine); width: 16px; height: 16px; cursor: pointer; }
 
     /* 빠른 시작 위저드 (첫 화면 단순화) */
-    .quickstart { background: linear-gradient(180deg, #f8f6f1 0%, #ede9e2 100%); padding: 56px clamp(20px, 6vw, 100px); }
+    .quickstart { background: linear-gradient(180deg, #f8f6f1 0%, #ede9e2 100%); padding: clamp(88px, 8vw, 128px) clamp(20px, 6vw, 100px); border-top: 1px solid var(--line); scroll-margin-top: 96px; }
     body.dark .quickstart { background: linear-gradient(180deg, #1a1917 0%, #232220 100%); }
     .quickstart .qs-inner { max-width: 1100px; margin: 0 auto; }
     .quickstart h2 { font-family: var(--serif); font-size: clamp(28px, 4vw, 44px); margin: 0 0 8px; color: var(--ink); }
@@ -1489,7 +1865,7 @@
     .qs-card span { font-size: 12.5px; color: var(--muted); line-height: 1.5; }
     body.dark .qs-card { background: var(--white); }
     @media (max-width: 720px) {
-      .quickstart { padding: 36px 14px; }
+      .quickstart { padding: 56px 14px; }
       .qs-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; }
       .qs-card { padding: 16px 14px; }
       .qs-card .qs-emoji { font-size: 30px; }
@@ -1511,6 +1887,12 @@
     .api-guide .ag-body .ag-cost { background: rgba(168,134,66,.12); border-left: 3px solid var(--gold); padding: 8px 12px; margin: 10px 0; font-size: 12.5px; border-radius: 0 6px 6px 0; }
     .api-guide .ag-body .ag-warn { background: rgba(142,25,24,.08); border-left: 3px solid var(--wine); padding: 8px 12px; margin: 6px 0; font-size: 12.5px; border-radius: 0 6px 6px 0; }
     .api-guide .ag-body a { color: var(--wine); font-weight: 700; text-decoration: underline; }
+    .api-security { border-color: rgba(47,107,79,.35); background: rgba(47,107,79,.06); }
+    .api-security summary { color: var(--green); }
+    .api-security .ag-body { border-top-color: rgba(47,107,79,.28); }
+    .api-security ul { margin: 8px 0 0; padding-left: 18px; }
+    .api-security li { margin: 5px 0; }
+    .api-security .security-warn { margin: 10px 0 0; padding: 9px 11px; border-left: 3px solid var(--wine); background: rgba(142,25,24,.08); border-radius: 0 6px 6px 0; }
 
     /* 집단고소 박스 */
     .collective-box { background: var(--white); border: 1px solid var(--line); border-radius: 12px; padding: 16px 18px; }
@@ -1640,7 +2022,12 @@
       .form > label { font-size: 13.5px; }
       .fields { gap: 10px; }
       .fields.three, .fields.two { grid-template-columns: 1fr; }
-      textarea#story { min-height: 220px; font-size: 15px; }
+      .story-label { padding: 12px; }
+      .story-label .story-heading { display: grid; gap: 5px; font-size: 16px; }
+      .story-label .story-heading span { text-align: left; font-size: 12px; }
+      textarea#story { min-height: 360px; font-size: 15.5px; padding: 16px; }
+      .story-actions { display: grid; gap: 6px; }
+      .story-actions .btn { width: 100%; }
       .person-block .person-body { padding: 6px 14px 14px; }
     }
 
@@ -1767,6 +2154,7 @@
       <span>LEGAL ARMORY</span>
     </a>
     <nav class="nav-links" aria-label="주요 메뉴">
+      <button type="button" id="guideMenuBtn">사용법</button>
       <a href="#about">개요</a>
       <a href="#app">작성도구</a>
       <a href="#labor">노동구제</a>
@@ -1778,7 +2166,41 @@
     </div>
     <button class="theme-toggle" id="themeToggle">다크 모드</button>
   </header>
-  <button class="panic-btn" id="panicBtn" type="button" title="긴급 탈출 — 더블 클릭하면 모든 흔적 즉시 삭제 + 구글로 이동">🚨</button>
+  <button class="panic-btn" id="panicBtn" type="button" aria-describedby="panicHelp" title="긴급 탈출 — 두 번 누르면 로컬 기록 삭제 후 구글로 이동">🚨</button>
+  <div class="panic-help" id="panicHelp"><b>두 번</b> 누르면 구글로 이동</div>
+  <div class="guide-modal" id="guideModal" role="dialog" aria-modal="true" aria-labelledby="guideTitle">
+    <div class="guide-card">
+      <h2 id="guideTitle">처음 오셨다면 여기부터 보세요</h2>
+      <p class="guide-lead">이 사이트는 법률을 잘 모르는 분도 순서대로 따라가도록 만든 피해자용 정리 도구입니다.
+어려운 말 몰라도 됩니다.
+아래 순서대로 누르고, 적고, 첨부하고, 결과를 보면 됩니다.
+
+감정은 당신 편에 두고,
+문서는 차갑게 갑니다.</p>
+      <div class="guide-section-title">A. 이 사이트 사용하는 순서</div>
+      <div class="guide-steps">
+        <div class="guide-step"><b>화면의 큰 카드 중 하나를 누릅니다</b><span>돈을 못 받았으면 “돈 떼였어요”, 맞았으면 “폭행·상해”, 회사 문제면 “회사에서 부당하게 당했어요”를 누르세요. 모르겠으면 “잘 모르겠어요”를 누르면 됩니다.</span></div>
+        <div class="guide-step"><b>피해사실 칸에 말하듯 적습니다</b><span>글을 잘 쓰려고 하지 마세요. “언제, 어디서, 누가, 무엇을 했는지, 내가 어떤 피해를 봤는지”만 떠오르는 대로 적으면 됩니다.</span></div>
+        <div class="guide-step"><b>증거를 넣습니다</b><span>상처 사진, 진단서, 112 신고내역, CCTV 위치, 카톡·문자·DM·URL을 첨부하거나 붙여넣습니다. 파일 첨부가 어렵다면 글자로 복사해서 붙여넣어도 됩니다.</span></div>
+        <div class="guide-step"><b>“API 없이 내 사건 정리하기”를 누릅니다</b><span>API 키가 없어도 됩니다. 이 브라우저 안에서 법률 후보, 고소절차, 증거목록, CCTV 확보 방법, 고소장 초안을 정리합니다.</span></div>
+        <div class="guide-step"><b>결과는 이 순서로 봅니다</b><span>법률매칭 → 고소절차 → 증거 효력 → 제출묶음 → 고소장 → 상담 브리프 순서로 보면 됩니다.</span></div>
+      </div>
+      <div class="guide-section-title">B. 실제로 고소할 때 순서</div>
+      <div class="guide-steps">
+        <div class="guide-step"><b>증거부터 보전합니다</b><span>사진, 진단서, 대화 캡처, URL, CCTV 위치, 112 신고기록을 먼저 저장합니다. CCTV는 빨리 지워질 수 있으니 가장 먼저 요청합니다.</span></div>
+        <div class="guide-step"><b>고소장을 작성합니다</b><span>이 사이트의 “고소장” 탭에서 초안을 만들고, “제출묶음” 탭에서 증거목록을 같이 준비합니다.</span></div>
+        <div class="guide-step"><b>경찰서 또는 ECRM에 접수합니다</b><span>오프라인 사건은 관할 경찰서, 온라인 사건은 경찰서 또는 사이버범죄 신고시스템(ECRM)으로 접수합니다. 접수 후 사건번호를 꼭 받습니다.</span></div>
+        <div class="guide-step"><b>피해자 조사를 받습니다</b><span>조사에서는 화내기보다 시간순으로 짧게 말합니다. 모르면 “기억나지 않습니다”라고 하고, 증거번호를 같이 말합니다.</span></div>
+        <div class="guide-step"><b>추가 증거를 계속 제출합니다</b><span>상대가 추가로 연락하거나 글을 올리면 바로 캡처하고 사건번호로 추가 제출합니다. 이것이 반복성·가중요소가 될 수 있습니다.</span></div>
+        <div class="guide-step"><b>불송치가 나오면 이의신청을 검토합니다</b><span>결과가 마음에 들지 않으면 기한을 놓치지 말고 이의신청, 항고, 민사청구를 따로 검토합니다.</span></div>
+        <div class="guide-step"><b>위험할 때는 오른쪽 비상등을 두 번 누릅니다</b><span>화면 오른쪽 빨간 비상등을 두 번 누르면 이 브라우저의 임시 기록을 지우고 구글 화면으로 이동합니다.</span></div>
+      </div>
+      <div class="guide-actions">
+        <button class="btn" id="guideCloseBtn" type="button">닫기</button>
+        <button class="btn primary" id="guideStartBtn" type="button">순서대로 시작하기</button>
+      </div>
+    </div>
+  </div>
 
   <section class="hero" id="top">
     <div class="hero-left">
@@ -1827,6 +2249,11 @@
           <div class="qs-emoji">🚨</div>
           <strong>폭행·상해 당했어요</strong>
           <span>맞음·다침·CCTV·진단서</span>
+        </button>
+        <button type="button" class="qs-card" data-qs-type="오프라인폭행도주">
+          <div class="qs-emoji">📍</div>
+          <strong>실제 사례 테스트: 폭행·도주</strong>
+          <span>시비·강제 인치·목/등 가격·112 신고·CCTV 확보</span>
         </button>
         <button type="button" class="qs-card" data-qs-type="성폭력">
           <div class="qs-emoji">🛡</div>
@@ -1887,10 +2314,38 @@
           <div class="form">
             <div class="evidence" aria-label="자료 첨부 및 AI 분석">
               <label class="evidence-zone" id="evidenceZone" for="evidenceInput">
-                <input type="file" id="evidenceInput" multiple accept="image/*,application/pdf,.txt,.md,.log">
+                <input type="file" id="evidenceInput" multiple accept="image/*,application/pdf,text/*,.txt,.md,.log,.csv,.json,.html,.htm,.srt,.vtt,.doc,.docx,.hwp,.hwpx,.xlsx,.xls,.ppt,.pptx,audio/*,video/*">
                 <p class="ev-cta">📎 증거 자료 첨부 (사진·PDF·텍스트)</p>
                 <p class="ev-hint">파일을 끌어다 놓거나 여기를 클릭. 모든 처리는 본인 브라우저 안에서만 수행됩니다.</p>
               </label>
+              <div class="evidence-tools" id="evidencePasteZone">
+                <div class="evidence-paste">
+                  <h5>붙여넣기 증거함</h5>
+                  <textarea id="evidencePasteText" placeholder="카톡, 문자, DM, 댓글, 게시글 내용을 그대로 붙여넣으세요. 캡처 이미지는 이 박스에 커서를 둔 뒤 Ctrl+V 하면 증거 목록에 들어갑니다."></textarea>
+                  <div class="paste-actions">
+                    <p class="paste-hint">이미지 캡처, 긴 대화 원문, URL, 계좌내역 텍스트를 바로 모을 수 있습니다.</p>
+                    <button class="btn small" id="evidencePasteAdd" type="button">붙여넣은 내용 증거로 추가</button>
+                  </div>
+                </div>
+                <div class="evidence-help">
+                  <strong>유연한 첨부 가이드</strong>
+                  <ul>
+                    <li>이미지 캡처는 파일 선택, 드래그, Ctrl+V 모두 가능</li>
+                    <li>PDF·TXT·CSV·JSON·HTML은 텍스트 추출 시도</li>
+                    <li>녹취·영상·문서 원본은 파일명과 보관 사실을 증거 목록에 기록</li>
+                  </ul>
+                </div>
+              </div>
+              <div class="time-capture">
+                <strong>현재 시각 캡처 도장</strong>
+                <div class="clock-line" id="captureClock">시간 불러오는 중</div>
+                <p>게시물·DM·텔레그램·게임채팅을 캡처할 때 이 시각과 주소창, 작성자 ID, 게시물 시간이 함께 보이게 찍으세요. 삭제 대비 증거의 기준시각으로 씁니다.</p>
+              <div class="time-actions">
+                <button class="btn small" id="copyCaptureTime" type="button">현재 시각 복사</button>
+                <button class="btn small" id="addCaptureTimeEvidence" type="button">증거목록에 시간기록 추가</button>
+                <button class="btn small" id="buildEvidencePackageBtn" type="button">제출묶음 만들기</button>
+              </div>
+            </div>
               <div class="evidence-list" id="evidenceList"></div>
               <div class="kakao-zone">
                 <h5>카톡 대화록 통째 입력 — 4단계 사실관계 자동 재구성</h5>
@@ -1899,7 +2354,12 @@
                 <div class="kakao-result" id="kakaoResult" style="display:none"></div>
               </div>
               <div class="ai-row">
-                <p class="ai-hint">AI 자동 정리 (선택) — Claude·ChatGPT·Gemini 중 본인이 쓰는 것 선택. 키는 본인 브라우저에만 저장되고 외부 서버로 안 갑니다.</p>
+                <div class="no-api-box">
+                  <strong>API 키 없이 바로 정리</strong>
+                  <p>기본 문서 생성은 외부 AI 없이 이 브라우저에서 처리합니다. 사건 유형, 피해사실, 증거목록을 바탕으로 법률 매칭·고소절차·CCTV 확보·고소장 초안을 바로 보여줍니다.</p>
+                  <button class="btn primary" id="localAnalyzeBtn" type="button">API 없이 내 사건 정리하기</button>
+                </div>
+                <p class="ai-hint">AI 자동 정리 (선택) — Claude·ChatGPT·Gemini 중 본인이 쓰는 것 선택. 키는 우리 서버에 저장되지 않고, 분석 버튼을 누를 때 선택한 AI 제공자 API로만 직접 전송됩니다.</p>
                 <div class="ai-provider-row">
                   <select id="aiProvider" title="AI 제공자 선택">
                     <option value="claude">Claude (Anthropic)</option>
@@ -1907,12 +2367,24 @@
                     <option value="gemini">Gemini (Google)</option>
                   </select>
                   <label class="mask-toggle" title="세션 종료(브라우저 닫기) 시 키 자동 삭제 — 공용/타인 PC에서 안전">
-                    <input type="checkbox" id="aiKeyVolatile"> 세션만 (자동 삭제)
+                    <input type="checkbox" id="aiKeyVolatile" checked> 세션만 (자동 삭제)
                   </label>
                 </div>
                 <details class="api-guide" id="apiGuide">
                   <summary>처음이면 클릭 — API 키 5초 발급 가이드</summary>
                   <div class="ag-body" id="apiGuideBody"></div>
+                </details>
+                <details class="api-guide api-security" open>
+                  <summary>보안정책 — API 키와 사건내용은 어떻게 처리되나요?</summary>
+                  <div class="ag-body">
+                    <ul>
+                      <li><b>자체 서버 저장 없음</b>: 이 프로토타입은 별도 회원가입 서버나 자체 API 키 저장 서버를 두지 않습니다.</li>
+                      <li><b>키 저장 위치</b>: “세션만”을 켜면 브라우저를 닫을 때 지워지는 sessionStorage에 저장합니다. 끄면 이 브라우저의 localStorage에만 저장됩니다.</li>
+                      <li><b>전송 시점</b>: “AI로 사실·증거 정리” 버튼을 누를 때만 선택한 제공자(OpenAI/Anthropic/Google) API로 키와 입력 내용이 직접 전송됩니다.</li>
+                      <li><b>공용 PC 금지</b>: PC방, 회사 공용기기, 타인 기기에서는 “세션만”을 켜거나 API 키를 입력하지 않는 것을 권장합니다.</li>
+                    </ul>
+                    <div class="security-warn">민감한 주민번호, 계좌 비밀번호, 가족 신상, 원본 성범죄 촬영물처럼 불필요한 개인정보는 AI 분석 전에 지우고 넣으세요.</div>
+                  </div>
                 </details>
                 <div class="ai-controls">
                   <input type="password" id="aiKey" placeholder="제공자 선택 후 키 붙여넣기 (없으면 비워두세요 — OCR/PDF는 작동)" autocomplete="off" spellcheck="false">
@@ -1929,9 +2401,13 @@
               </div>
             </div>
 
-            <label>있는 그대로 적기 <span style="font-weight:400;font-size:12px;color:var(--muted);margin-left:6px">— 욕설·분노·날것 표현 모두 OK. 양식·고소장에는 자동으로 정제되어 들어갑니다.</span>
+            <label class="story-label"><div class="story-heading">있는 그대로 적기 <span>욕설·분노·날것 표현 모두 OK. 양식·고소장에는 자동으로 정제되어 들어갑니다.</span></div>
               <textarea id="story" placeholder="예: 회사가 갑자기 내일부터 나오지 말라고 했습니다. 해고 사유도 제대로 설명하지 않았고 서면 통지도 없었습니다. 30일 전에 예고한 적도 없고 해고예고수당도 못 받았습니다. 근로계약서, 급여명세서, 카톡 지시, 출퇴근 기록은 있습니다.&#10;&#10;(욕이든 분노든 다 적어도 됩니다. 본인 정리 먼저, 정제는 자동.)"></textarea>
             </label>
+            <div class="story-actions">
+              <button class="btn small" id="legalToneBtn" type="button">고소장 말투로 정제하기</button>
+              <span>피해자 분노 표현은 차분하게 바꾸고, 상대방이 한 욕설·폭언은 원문 그대로 둡니다.</span>
+            </div>
             <div class="perjury-warn" id="perjuryWarn"></div>
             <details class="person-block" id="cleanPreviewBlock" style="margin: 4px 0 8px;">
               <summary>🧹 양식에 들어갈 정제 미리보기 (욕설·분노 자동 제거 + 법률 중립 표현)</summary>
@@ -1948,7 +2424,7 @@
 
             <div class="category-note" id="categoryNote">부당해고 모드: 해고일, 해고 사유, 서면통지, 계속 근로 의사, 사직 강요 여부를 먼저 잡습니다.</div>
 
-          <div class="chips" aria-label="사건 유형">
+          <div class="chips collapsed" aria-label="사건 유형">
               <button class="chip active" data-type="부당해고">부당해고</button>
               <button class="chip" data-type="해고예고수당">해고예고수당</button>
               <button class="chip" data-type="임금체불">임금체불</button>
@@ -1958,6 +2434,7 @@
               <button class="chip" data-type="전세사기">전세사기</button>
               <button class="chip" data-type="코인사기">코인사기</button>
               <button class="chip" data-type="폭행·상해">폭행·상해</button>
+              <button class="chip priority" data-type="오프라인폭행도주">오프라인 폭행·도주</button>
               <button class="chip" data-type="협박·스토킹">협박·스토킹</button>
               <button class="chip priority" data-type="텔레그램스토킹">텔레그램 스토킹</button>
               <button class="chip" data-type="명예훼손·모욕">명예훼손·모욕</button>
@@ -2002,7 +2479,34 @@
               <button class="chip" data-type="양육비미지급">양육비 미지급</button>
               <button class="chip" data-type="상속분쟁">상속분쟁</button>
               <button class="chip" data-type="반려동물피해">반려동물 피해</button>
+              <button class="chip" data-type="퇴직금미지급">퇴직금 미지급</button>
+              <button class="chip" data-type="연차수당미지급">연차수당 미지급</button>
+              <button class="chip" data-type="최저임금위반">최저임금 위반</button>
+              <button class="chip" data-type="불법추심">불법추심</button>
+              <button class="chip" data-type="보증채무">보증채무</button>
+              <button class="chip" data-type="투자사기">투자사기</button>
+              <button class="chip" data-type="주식리딩방">주식 리딩방</button>
+              <button class="chip" data-type="해킹·계정도용">해킹·계정도용</button>
+              <button class="chip" data-type="랜섬웨어">랜섬웨어</button>
+              <button class="chip" data-type="온라인협박">온라인 협박</button>
+              <button class="chip" data-type="미성년자그루밍">미성년자 그루밍</button>
+              <button class="chip" data-type="아동청소년성범죄">아동·청소년 성범죄</button>
+              <button class="chip" data-type="리벤지포르노">리벤지 포르노</button>
+              <button class="chip" data-type="장애인학대">장애인 학대</button>
+              <button class="chip" data-type="임대차수리비">임대차 수리비</button>
+              <button class="chip" data-type="권리금분쟁">권리금 분쟁</button>
+              <button class="chip" data-type="공사대금">공사대금 미지급</button>
+              <button class="chip" data-type="프랜차이즈분쟁">프랜차이즈 분쟁</button>
+              <button class="chip" data-type="스토어리뷰테러">스토어 리뷰테러</button>
+              <button class="chip" data-type="여행환불">여행·숙박 환불</button>
+              <button class="chip" data-type="학원환불">학원·강의 환불</button>
+              <button class="chip" data-type="택배분실">택배 분실·파손</button>
+              <button class="chip" data-type="병원비손해배상">치료비·손해배상</button>
+              <button class="chip" data-type="게임시비">게임에서 시비·괴롭힘</button>
               <button class="chip priority" data-type="기타법률">기타/직접입력</button>
+            </div>
+            <div class="chip-toggle-row">
+              <button class="chip-toggle" id="chipToggleBtn" type="button" aria-expanded="false">전체 피해 유형 펼치기</button>
             </div>
 
             <div class="quick-jump" aria-label="결과 바로가기">
@@ -2091,6 +2595,19 @@
             </div>
             <p class="person-foot">⚠ 모든 정보는 본인 브라우저(localStorage)에만 저장되며, 어떤 서버로도 전송되지 않습니다. 다른 PC에서는 다시 입력해야 합니다.</p>
           </details>
+          <div class="private-vault">
+            <strong>내 사건 기록함 (이 브라우저에만 저장)</strong>
+            <p>퍼블릭 사이트에 접속해도 이 기록은 서버에 올라가지 않습니다. 지금 쓰는 브라우저의 localStorage에만 남고, 다른 사람·다른 기기에서는 보이지 않습니다.</p>
+            <div class="vault-actions">
+              <button class="btn" id="caseSaveBtn" type="button">현재 사건 저장</button>
+              <button class="btn" id="caseLoadBtn" type="button">저장한 사건 불러오기</button>
+              <button class="btn" id="caseExportBtn" type="button">내 사건 파일로 저장</button>
+              <button class="btn" id="caseClearBtn" type="button">내 사건 기록 삭제</button>
+            </div>
+          <p id="caseVaultStatus">저장된 사건은 이 컴퓨터/브라우저 안에서만 보입니다.</p>
+          </div>
+          <button class="btn" id="realCaseBtn" type="button">실제 사례 테스트 넣기</button>
+          <button class="btn" id="guideOpenBtn" type="button">사용 순서 다시 보기</button>
           <button class="btn primary" id="sampleBtn">선택 항목 샘플 넣기</button>
         </div>
       </article>
@@ -2190,6 +2707,7 @@
           <button class="tab" data-tab="package" data-cat="legal">법률패키지</button>
           <button class="tab" data-tab="collective" data-cat="team">집단고소</button>
           <button class="tab" data-tab="evidence-check" data-cat="case">증거 효력</button>
+          <button class="tab" data-tab="evidence-package" data-cat="docs">제출묶음</button>
           <button class="tab" data-tab="settlement" data-cat="case">합의금</button>
           <button class="tab" data-tab="timeline" data-cat="team">타임라인</button>
           <button class="tab" data-tab="sim" data-cat="team">현장 시뮬레이터</button>
@@ -2277,6 +2795,17 @@
               <div class="law-links">
                 <a href="https://www.sexoffender.go.kr" target="_blank" rel="noopener">성범죄자 알림e 공식 사이트 열기</a>
                 <a href="https://www.law.go.kr/lsSc.do?query=%EC%84%B1%ED%8F%AD%EB%A0%A5%EC%B2%98%EB%B2%8C%EB%B2%95" target="_blank" rel="noopener">성폭력처벌법 검색</a>
+              </div>
+            </div>
+            <div class="card">
+              <strong>피해자 공식 연결 사이트</strong>
+              <p>사적 보복이 아니라 공식기관 절차로 압박해야 오래 갑니다. 사건 유형에 맞는 기관을 바로 열어 확인하세요.</p>
+              <div class="law-links">
+                <a href="https://ecrm.police.go.kr" target="_blank" rel="noopener">경찰청 사이버범죄 신고시스템</a>
+                <a href="https://d4u.stop.or.kr" target="_blank" rel="noopener">디지털성범죄 피해자지원센터</a>
+                <a href="https://www.klac.or.kr" target="_blank" rel="noopener">대한법률구조공단</a>
+                <a href="https://www.moel.go.kr" target="_blank" rel="noopener">고용노동부</a>
+                <a href="https://www.kca.go.kr" target="_blank" rel="noopener">한국소비자원</a>
               </div>
             </div>
             <div class="card green">
@@ -2606,6 +3135,24 @@
             </div>
             <div class="procedure-steps" id="procedureSteps"></div>
             <div class="card gold">
+              <strong>CCTV·현장 증거 확보 루트</strong>
+              <p>장소를 적으면 어디에 요청해야 하는지, 어떤 문장으로 보존 요청해야 하는지 정리합니다. CCTV는 보통 7~30일 안에 지워지므로 오늘 바로 움직이는 게 좋습니다.</p>
+              <div class="fields two">
+                <label>범행 장소 또는 동선
+                  <input id="cctvPlace" placeholder="예: 강남역 11번 출구 앞 편의점, 병원 주차장, 아파트 엘리베이터">
+                </label>
+                <label>발생 시간대
+                  <input id="cctvTime" placeholder="예: 2026-05-20 18:30~19:10">
+                </label>
+              </div>
+              <button class="btn primary" id="cctvPlanBtn" type="button">CCTV 확보 방법 만들기</button>
+              <div class="brief" id="cctvPlanResult">장소와 시간대를 넣으면 현장·관리주체·경찰 요청 문구가 나옵니다.</div>
+            </div>
+            <div class="card green">
+              <strong>API 없이 쓰는 방법</strong>
+              <p>API 키가 없어도 사건 유형 선택, 피해사실 입력, 증거 붙여넣기, 시간기록, 고소절차, CCTV 확보 가이드는 전부 브라우저 안에서 작동합니다. AI 분석만 선택 기능입니다.</p>
+            </div>
+            <div class="card gold">
               <strong>⚠ 경찰서에서 "단순 상담입니다" 라며 미루면</strong>
               <p>"<b>단순 상담이 아니라 고소장 접수를 요청드립니다.</b> 부족한 부분은 보완 요구로 주시면 보완하겠습니다. <b>접수 여부와 사건번호, 담당 부서</b>를 확인 부탁드립니다." — 이 한 줄을 그대로. 접수 거부는 위법(검찰사건사무규칙 제3조).</p>
             </div>
@@ -2617,6 +3164,20 @@
                 <a href="https://www.kics.go.kr" target="_blank" rel="noopener">형사사법포털 KICS</a>
                 <a href="https://www.police.go.kr" target="_blank" rel="noopener">경찰청 (관할 경찰서 검색)</a>
               </div>
+            </div>
+            <div class="card green">
+              <strong>진단서·상처사진·괴롭힘 자료 PDF 묶음 순서</strong>
+              <p>감정은 피해자 편에 두되, 제출자료는 차분하고 보기 좋게 묶습니다. 경찰·변호사가 바로 읽을 수 있게 아래 순서로 정리하세요.</p>
+              <ol>
+                <li><b>1쪽 사건 요약</b>: 누가, 언제, 어디서, 무엇을 했는지 5문장 이내.</li>
+                <li><b>상해·진단 기록</b>: 진단서, 진료확인서, 치료비 영수증, 약 처방전.</li>
+                <li><b>상처 사진</b>: 전체 사진 1장, 가까운 사진 1장, 촬영일시가 보이는 화면 캡처.</li>
+                <li><b>괴롭힘 원문</b>: 가해자가 한 욕설·협박·모욕은 정제하지 말고 원문 그대로. 피해자의 욕설과 분노 표현만 문서용 문장으로 정리.</li>
+                <li><b>CCTV 확보표</b>: 장소명, 카메라 위치, 보존 요청한 사람, 요청 시각, 담당자 연락처.</li>
+                <li><b>112·사건번호</b>: 신고시각, 출동 지구대, 사건접수번호, 담당수사관.</li>
+                <li><b>목격자·제3자 자료</b>: 동행자 진술, “이거 너 얘기 아니냐” 메시지, 현장 목격자 연락처.</li>
+              </ol>
+              <p class="small">PDF는 원본을 편집하지 말고 사본으로 만드세요. 원본 사진·캡처·녹취는 별도 폴더에 그대로 보관해야 합니다.</p>
             </div>
             <div class="brief" id="procedureBrief"></div>
           </div>
@@ -2905,6 +3466,35 @@
               <p>파일을 올리면 브라우저에서 직접 해시값을 계산. 고소장 부록에 "증거 무결성 목록"으로 첨부 — 위·변조 의혹 차단.</p>
               <input type="file" id="hashFile" multiple style="margin:8px 0;font-size:13px">
               <div id="hashList" class="collective-hint">파일 선택 시 SHA-256 해시 자동 표시.</div>
+            </div>
+          </div>
+        </section>
+
+        <section class="view" data-view="evidence-package">
+          <div class="cards">
+            <div class="card red">
+              <strong>제출용 증거묶음 자동 정리</strong>
+              <p>첨부·붙여넣기한 자료를 일자순으로 정리해 증거번호, 파일명, 설명, 입증목적까지 한 번에 묶습니다. PDF 버튼을 누르면 현재 표를 제출용으로 출력할 수 있습니다.</p>
+            </div>
+            <div class="card gold">
+              <strong>피해자가 덜 번거롭게 내는 순서</strong>
+              <ol>
+                <li>증거 자료 첨부함에 사진·진단서·캡처·PDF·대화록을 넣습니다.</li>
+                <li>각 파일명이나 내용 안의 날짜를 보고 앱이 일자를 추정합니다.</li>
+                <li>부족한 설명은 표에서 보고 피해사실 칸에 한 줄만 보충합니다.</li>
+                <li>아래 표를 PDF로 출력하거나 복사해서 고소장 별지에 붙입니다.</li>
+              </ol>
+            </div>
+            <div class="result-toolbar">
+              <button type="button" id="refreshEvidencePackage">증거묶음 새로고침</button>
+              <button type="button" id="printEvidencePackage">제출묶음 PDF</button>
+              <button type="button" id="copyEvidencePackage">증거목록 복사</button>
+            </div>
+            <div class="document" id="evidencePackageDoc">
+              <h3>증거자료 제출목록</h3>
+              <p><b>사건 유형</b>: <span id="epCaseType">-</span></p>
+              <p><b>작성 기준시각</b>: <span id="epStamp">-</span></p>
+              <div id="evidencePackageBody" class="brief">아직 첨부된 증거가 없습니다. 사진, 진단서, 캡처, 대화록을 먼저 넣어주세요.</div>
             </div>
           </div>
         </section>
@@ -3277,7 +3867,7 @@
       },
       "전세사기": {
         story: "전세계약 당시 임대인과 중개사가 안전한 집이라고 했고 보증금 1억 2천만원을 보냈습니다. 전입신고와 확정일자는 했고 지금도 거주 중입니다. 만기가 다가오는데 임대인이 보증금을 못 돌려준다고 하거나 연락을 피하고, 등기부를 다시 보니 선순위 권리와 체납 문제가 있었습니다. 임대차계약서, 등기부등본, 확정일자, 전입신고, 송금내역, 중개인 설명 녹취, 계약해지 문자 캡처가 있습니다.",
-        opponent: "임대인 김OO",
+        opponent: "성명불상 임대인",
         damage: "보증금 120,000,000원",
         platform: "오프라인/직장",
         stage: "내용증명 발송"
@@ -3291,14 +3881,14 @@
       },
       "폭행·상해": {
         story: "술집 앞에서 상대방이 먼저 밀치고 얼굴을 때렸습니다. 병원에서 전치 2주 진단을 받았고 치료비가 나왔습니다. 사건 직후 사진, 상해진단서, 112 신고내역, 주변 CCTV 위치, 목격자 연락처가 있습니다.",
-        opponent: "김OO",
+        opponent: "성명불상 상대방",
         damage: "치료비 및 위자료",
         platform: "오프라인/직장",
         stage: "고소장 작성"
       },
       "협박·스토킹": {
         story: "헤어진 뒤 상대가 계속 전화와 DM을 보내고 집 앞에 찾아왔습니다. 답하지 않으면 직장에 찾아가 망신 주겠다고 했고 무서워서 경찰에 신고했습니다. 통화기록, DM 캡처, 집 앞 사진, 신고내역, 차단 후 다른 계정으로 연락한 기록이 있습니다.",
-        opponent: "전 연인 박OO",
+        opponent: "성명불상 전 연인",
         damage: "반복 협박·스토킹 피해",
         platform: "인스타그램",
         stage: "고소장 작성"
@@ -3340,28 +3930,28 @@
       },
       "절도·손괴": {
         story: "상대방이 제 자전거를 가져갔고 돌려달라고 하자 모른다고 했습니다. 나중에 CCTV에서 가져가는 장면을 확인했고 자전거 일부가 파손된 상태로 발견됐습니다. 구매영수증, CCTV 위치, 파손 사진, 수리견적서가 있습니다.",
-        opponent: "김OO",
+        opponent: "성명불상 상대방",
         damage: "자전거 및 수리비 650,000원",
         platform: "오프라인/직장",
         stage: "고소장 작성"
       },
       "대여금분쟁": {
         story: "상대가 급하다고 해서 현금과 코인을 빌려줬고, 카톡으로 언제까지 갚겠다고 여러 번 말했습니다. 차용증은 없지만 송금내역, 거래소 출금내역, 지갑주소, TXID, 갚겠다는 메시지, 일부 변제 내역이 있습니다. 형사 고소는 증거부족 불송치가 나왔지만 결정서에 돈을 빌린 사실 자체는 인정된다는 취지의 문장이 있습니다.",
-        opponent: "이OO",
+        opponent: "성명불상 채무자",
         damage: "5,000,000원 상당",
         platform: "가상자산 거래소",
         stage: "채권추심/강제집행"
       },
       "성희롱": {
         story: "직장 상사가 회식과 업무 중에 반복적으로 성적인 농담을 하고 제 외모와 몸에 대해 말했습니다. 불쾌하다고 했지만 계속됐고, 이후 업무에서 불이익을 주는 것 같습니다. 카톡, 녹취 일부, 회식 참석자, 업무 배제 메시지가 있습니다.",
-        opponent: "직장 상사 박OO",
+        opponent: "성명불상 직장 상사",
         damage: "직장 내 성희롱 및 인사상 불이익",
         platform: "오프라인/직장",
         stage: "고소장 작성"
       },
       "성폭력": {
         story: "상대방이 동의 없이 제 몸을 만졌고 저는 즉시 거부했습니다. 사건 이후 너무 힘들어 상담을 받았고, 당시 주고받은 메시지와 CCTV가 있을 만한 장소, 목격자 정보가 있습니다. 해바라기센터나 피해자 국선변호사 지원도 같이 알고 싶습니다.",
-        opponent: "김OO",
+        opponent: "성명불상 상대방",
         damage: "성폭력 피해",
         platform: "오프라인/직장",
         stage: "고소장 작성"
@@ -3416,6 +4006,16 @@
     const repeatPattern = document.querySelector("#repeatPattern");
     const repeatCheckBtn = document.querySelector("#repeatCheckBtn");
     const repeatCheckResult = document.querySelector("#repeatCheckResult");
+
+    Object.assign(samples, {
+      "오프라인폭행도주": {
+        story: "피해자 3명이 상업시설에서 나오던 중 성명불상 여성이 피해자A에게 어깨를 부딪혔다며 사과를 요구했습니다. 피해자B는 상황을 진정시키려고 대신 두 번 사과했지만 상대 여성은 받아들이지 않았고, 성명불상 남성은 피해자B를 붙잡아 가게 밖으로 강제로 끌어냈습니다. 밖에서도 상대 여성은 계속 사과를 요구하며 피해자B에게 수차례 돌진했고, 이를 막던 피해자C는 팔에 멍이 들었습니다. 상대 여성은 피해자B의 머리채와 목덜미를 잡고 목과 등 부위를 여러 차례 때렸습니다. 이후 상대 여성과 상대 남성은 빠르게 현장을 벗어나려 했고, 피해자C가 112에 신고하면서 따라갔습니다. 경찰이 도착한 뒤에도 상대 여성은 욕설을 했고, 이후 지구대에서 진술서를 작성했습니다. 확보해야 할 증거는 상업시설 내부·외부 CCTV, 인근 상가 CCTV, 도로 방범 CCTV, 차량 블랙박스, 112 신고기록, 사건접수번호, 피해자B 목·등 상처 사진, 피해자C 팔 멍 사진, 병원 진단서, 동행자 진술입니다.",
+        opponent: "성명불상 여성 및 남성 일행",
+        damage: "목·등 가격 / 팔 멍 / 폭언 / 도주 시도",
+        platform: "오프라인/직장",
+        stage: "고소장 작성"
+      }
+    });
 
     const taxonomyGroups = [
       { title: "형사 재산범죄", items: ["사기죄", "컴퓨터등사용사기", "횡령죄", "배임죄", "절도죄", "장물죄", "공갈죄", "강도죄", "손괴죄", "점유이탈물횡령"] },
@@ -3598,6 +4198,59 @@
       }
     };
 
+    Object.assign(categoryMeta, {
+      "오프라인폭행도주": {
+        note: "오프라인 폭행·도주 모드: 상해진단서, CCTV, 112 신고기록, 현장 이탈 시도, 공동가담 여부를 한 번에 정리합니다.",
+        evidence: "상업시설 내부·외부 CCTV, 인근 상가 CCTV, 도로 방범 CCTV, 차량 블랙박스, 112 신고기록, 사건접수번호, 상처 사진, 병원 진단서, 일행 진술을 모읍니다.",
+        law: ["형법 제257조 상해", "형법 제260조 폭행", "폭력행위 등 처벌에 관한 법률 공동폭행·공동상해 검토", "형법 제324조 강요 또는 제276조 체포·감금 검토", "형법 제311조 모욕 검토"]
+      },
+      "퇴직금미지급": {
+        note: "퇴직금 미지급 모드: 1년 이상 근무, 주 15시간 이상, 퇴사일, 평균임금, 미지급 기간을 먼저 봅니다.",
+        evidence: "근로계약서, 급여명세서, 입금내역, 퇴사일 자료, 출퇴근 기록, 사업주 미지급 답변을 모읍니다.",
+        law: ["근로자퇴직급여보장법", "고용노동부 진정", "지연이자 검토"]
+      },
+      "연차수당미지급": {
+        note: "연차수당 미지급 모드: 입사일, 퇴사일, 사용한 연차, 회사의 연차사용촉진 절차를 확인합니다.",
+        evidence: "근태기록, 급여명세서, 연차대장, 연차 사용 요청/거절 메시지, 퇴사 정산내역을 모읍니다.",
+        law: ["근로기준법 연차유급휴가", "미사용수당 청구", "노동청 진정"]
+      },
+      "최저임금위반": {
+        note: "최저임금 위반 모드: 실제 근로시간과 받은 돈을 나눠 시급을 계산하고 주휴수당 누락도 같이 봅니다.",
+        evidence: "근로시간표, 출퇴근 기록, 급여명세서, 계좌 입금내역, 업무지시 메시지를 모읍니다.",
+        law: ["최저임금법", "근로기준법 임금체불", "주휴수당 검토"]
+      },
+      "불법추심": {
+        note: "불법추심 모드: 야간 연락, 가족·직장 연락, 협박, 반복 독촉, 사칭 여부를 분리합니다.",
+        evidence: "통화녹음, 문자, 카톡, 연락 시간표, 가족/직장 연락 증거, 채권자 정보와 계약서를 모읍니다.",
+        law: ["채권의 공정한 추심에 관한 법률", "협박·공갈 검토", "금융감독원/경찰 신고"]
+      },
+      "해킹·계정도용": {
+        note: "해킹·계정도용 모드: 접속기록, 비밀번호 변경, 결제 피해, 사칭 게시물, 2차 피해를 우선 보전합니다.",
+        evidence: "로그인 알림, 접속 IP/기기, 비밀번호 변경 메일, 결제내역, 플랫폼 신고내역, 사칭 화면을 모읍니다.",
+        law: ["정보통신망법 침입", "컴퓨터등사용사기", "개인정보보호법 검토"]
+      },
+      "미성년자그루밍": {
+        note: "미성년자 그루밍 모드: 선물·비밀 요구·성적 대화·만남 유도·사진 요구를 시간순으로 정리합니다.",
+        evidence: "대화 원문, 계정 프로필, 선물/송금내역, 사진 요구 메시지, 보호자 상담기록을 모읍니다.",
+        law: ["아동·청소년성보호법", "성폭력처벌법", "긴급 보호·삭제지원"]
+      },
+      "리벤지포르노": {
+        note: "리벤지 포르노 모드: 유포 여부보다 협박·보관·전송·게시 가능성을 즉시 차단하는 게 우선입니다.",
+        evidence: "협박 메시지, URL, 계정, 게시 시각, 원본 보유 정황, 삭제 요청 내역을 모읍니다.",
+        law: ["성폭력처벌법 촬영물 유포·협박", "디지털성범죄피해자지원센터", "경찰 고소"]
+      },
+      "스토어리뷰테러": {
+        note: "스토어 리뷰테러 모드: 허위 리뷰, 경쟁업체 정황, 반복 계정, 매출 피해를 업무방해·명예훼손 관점으로 봅니다.",
+        evidence: "리뷰 URL, 캡처시각, 주문 여부, 계정 패턴, 매출 감소 자료, 플랫폼 신고내역을 모읍니다.",
+        law: ["업무방해", "정보통신망법 명예훼손", "플랫폼 신고·손해배상"]
+      },
+      "게임시비": {
+        note: "게임에서 시비·괴롭힘 모드: 단순 감정싸움이 아니라 특정성, 공연성, 반복성, 성적 발언, 협박 여부를 나눠 봅니다.",
+        evidence: "게임명, 서버, 매치ID, 상대 닉네임, 채팅 로그, 리플레이, 캡처 시각, 같이 본 유저, 차단 후 귓속말 기록을 모읍니다.",
+        law: ["형법 모욕", "정보통신망법 명예훼손 검토", "성폭력처벌법 통매음 검토", "게임사 로그 보존 요청"]
+      }
+    });
+
     const legalRules = [
       { keys: ["해고", "부당해고", "사직서", "권고사직"], law: "근로기준법 제23조·제27조·제28조", action: "노동위원회 부당해고 구제신청", evidence: "해고통보, 서면통지, 사직 강요 정황, 출퇴근 기록" },
       { keys: ["해고예고", "30일", "예고수당"], law: "근로기준법 제26조", action: "해고예고수당 청구·노동청 진정", evidence: "해고 통보일, 마지막 근무일, 급여명세서" },
@@ -3700,9 +4353,22 @@
       let t = " " + text + " ";
       // 1) 욕설·비속어 제거 (한국어·영어 주요 표현)
       const profanity = /(씨\s*발|씨\s*바|시\s*발|시\s*바|ㅅㅂ|ㅆㅂ|개\s*새\s*끼|개\s*색\s*끼|개\s*새\s*기|개\s*색|ㄱㅅㄲ|좆|존\s*나|졸\s*라|병\s*신|븅\s*신|ㅂㅅ|미\s*친\s*놈|미\s*친\s*년|미\s*친\s*새\s*끼|새\s*끼들?|색\s*끼|색\s*기|지\s*랄|ㅈㄹ|엿\s*같이?|엿\s*먹|꺼\s*져|닥\s*쳐|뒤\s*져|뒤\s*지|호\s*로\s*새|개\s*같|fuck\w*|shit\w*|asshole|bitch|damn)/gi;
+      const preservedQuotes = [];
+      const keepEvidenceQuote = quote => {
+        const marker = `__DOK_QUOTE_${preservedQuotes.length}__`;
+        preservedQuotes.push(quote);
+        return marker;
+      };
+      t = t.replace(/([“"])([^“”"]*(?:씨\s*발|시\s*발|ㅅㅂ|ㅆㅂ|새\s*끼|병\s*신|지\s*랄|좆|fuck\w*|shit\w*|bitch|asshole)[^“”"]*)([”"])/gi, (_, open, quote, close) => {
+        return keepEvidenceQuote(`${open}${quote}${close}`);
+      });
+      t = t.replace(/((?:상대|상대방|가해자|피의자|그\s*사람|그\s*여성|그\s*남성|상대\s*여성|상대\s*남성)[^.!?\n]{0,80}(?:씨\s*발|시\s*발|ㅅㅂ|ㅆㅂ|개\s*새\s*끼|새\s*끼|병\s*신|지\s*랄|좆|fuck\w*|shit\w*|bitch|asshole)[^.!?\n]{0,80}(?:라고|이라고|라며|하며|했다|말했다|욕했다|폭언했다|소리쳤다)?)/gi, match => {
+        return keepEvidenceQuote(match);
+      });
       t = t.replace(profanity, "");
       // 2) 감정 강조어 → 법률 중립 표현
       t = t.replace(/(너무|진짜|정말|완전|매우|아주)\s*(너무|진짜|정말)?\s*화가?\s*나(서|고|는데|며|는다|네)?/g, "극심한 분노와 정신적 충격을 받았으며");
+      t = t.replace(/(너무|진짜|정말|완전|매우|아주)?\s*화가?\s*났(다|습니다|어요|으며|고)?/g, "극심한 분노와 정신적 충격을 받았으며");
       t = t.replace(/(죽이고|죽여\s*버리고|찢어\s*죽이고|쳐\s*죽이고)\s*싶/g, "극심한 정신적 충격을 받았");
       t = t.replace(/짜증\s*나(서|고|는데)?/g, "심한 스트레스를 받았으며");
       t = t.replace(/열\s*받(아서|고|는데)?/g, "극심한 분노를 느꼈으며");
@@ -3712,6 +4378,9 @@
       // 3) 다중 부호·공백 정리
       t = t.replace(/[!！]{1,}/g, ".").replace(/[?？]{2,}/g, "?");
       t = t.replace(/\.{3,}/g, ".").replace(/\s+([.,])/g, "$1").replace(/\s+/g, " ").trim();
+      preservedQuotes.forEach((quote, index) => {
+        t = t.replace(`__DOK_QUOTE_${index}__`, quote);
+      });
       // 4) 너무 짧으면 안내
       if (t.length < 6) return rawFacts();
       return t;
@@ -3767,14 +4436,29 @@
         story.value = `${item} 관련 피해입니다. 상대방이 어떤 행동을 했는지, 언제 어디서 발생했는지, 피해금액이나 피해내용이 무엇인지, 가진 증거가 무엇인지 정리하려고 합니다.`;
       }
       update();
-      showResult("match");
+      openWizardStep(2);
     }
 
     function matchedRules() {
       const text = `${state.caseType} ${stage.value} ${platform.value} ${rawFacts()}`;
-      const matches = legalRules.filter(rule => rule.keys.some(key => text.includes(key)));
+      const assaultOnlyTypes = ["폭행·상해", "오프라인폭행도주", "가정폭력", "데이트폭력", "학교폭력"];
+      const isAssaultOnly = assaultOnlyTypes.includes(state.caseType);
+      const assaultWords = /(폭행|상해|공동|CCTV|진단서|112|목격|도주|강요|체포|감금|모욕|협박|경찰|현장|상처|멍|머리채|목덜미)/;
+      const allowedForType = rule => {
+        if (!isAssaultOnly) return true;
+        const joined = `${rule.law || ""} ${rule.action || ""} ${rule.evidence || ""} ${(rule.keys || []).join(" ")}`;
+        return assaultWords.test(joined);
+      };
+      const matches = legalRules
+        .filter(allowedForType)
+        .filter(rule => rule.keys.some(key => String(key).length > 1 && text.includes(key)));
       const taxonomyMatches = Object.entries(taxonomyMeta)
-        .filter(([item]) => text.includes(item))
+        .filter(([item, meta]) => {
+          if (!text.includes(item)) return false;
+          if (!isAssaultOnly) return true;
+          const joined = `${meta.type || ""} ${(meta.crimes || []).join(" ")} ${(meta.procedures || []).join(" ")} ${(meta.evidence || []).join(" ")}`;
+          return assaultWords.test(`${item} ${joined}`);
+        })
         .map(([item, meta]) => ({
           law: meta.crimes.join(" · "),
           action: meta.procedures.join(" → "),
@@ -3967,9 +4651,13 @@
       const hits = aggravationRules.filter(rule => rule.keys.some(key => text.includes(key)));
       const base = hits.length ? hits : [{ title: "가중요소 추가 입력 필요", detail: "반복성, 다수 피해자, 미성년자, 보복협박, 조직성, 유포 위험, 상해 여부가 있으면 피해사실에 더 적어주세요." }];
       const repeated = /반복|상습|여러 번|계속|장기간|다수|여러 명|피해자들|조직|공모|협박|맞고소|공갈|도용|복제|판매/i.test(text);
+      const extraCrimes = expandedCriminalCandidates(text);
       document.querySelector("#aggravationBrief").textContent = [
         "[상습성·경합범·긴급 체크 결과]",
         ...base.map((item, index) => `${index + 1}. ${item.title}\n   ${item.detail}`),
+        "",
+        "[형법·특별법 추가 검토 후보]",
+        ...extraCrimes.map((item, index) => `${index + 1}. ${item}`),
         "",
         "[추가 죄명·경합 구조 검토]",
         repeated
@@ -3984,6 +4672,28 @@
         "공식 정보 확인:",
         "성범죄자 신상정보는 성범죄자 알림e 등 법정 공개 범위 안에서만 확인합니다. 비공개 개인정보 추적이나 사적 유포는 하지 않습니다."
       ].join("\n");
+    }
+
+    function expandedCriminalCandidates(text) {
+      const bank = [
+        { keys: /폭행|맞|때렸|멍|상처|진단서|목덜미|머리채|밀침|가격|주먹|발길질/i, item: "형법 제257조 상해, 제260조 폭행, 폭력행위 등 처벌에 관한 법률상 공동폭행·공동상해 검토" },
+        { keys: /흉기|칼|유리병|위험한 물건|단체|여러 명|공동|둘이|떼로/i, item: "특수폭행·특수상해, 공동정범, 경합범 구조 검토" },
+        { keys: /끌고|붙잡|못 가게|감금|가둬|막아|강제로|협박해서 시킴/i, item: "형법 제276조 체포·감금, 제283조 협박, 제324조 강요 검토" },
+        { keys: /욕|시발|씨발|모욕|병신|년|새끼|공개|사람들 앞|경찰 앞/i, item: "형법 제311조 모욕, 정보통신망 이용 시 명예훼손·모욕 별도 검토" },
+        { keys: /허위|소문|유포|게시|댓글|카페|인스타|페북|디시|텔레그램|게임/i, item: "정보통신망법상 명예훼손, 형법상 명예훼손·모욕, 특정성·공연성·전파가능성 검토" },
+        { keys: /성희롱|성적|통매음|음란|추행|강제추행|몰카|불법촬영|딥페이크/i, item: "성폭력처벌법상 통신매체이용음란, 카메라등이용촬영, 형법상 강제추행 및 보호조치 검토" },
+        { keys: /스토킹|계속 연락|차단했는데|따라|찾아옴|우회계정|반복 DM/i, item: "스토킹처벌법 위반, 긴급응급조치·잠정조치 3호 및 위반 시 별도 처벌 검토" },
+        { keys: /사기|속였|기망|돈|입금|송금|먹튀|환불|코인|투자|보이스피싱|중고/i, item: "형법 제347조 사기, 컴퓨터등사용사기, 공갈, 전자금융거래법, 피해액 합산 시 특경법 검토" },
+        { keys: /횡령|맡긴|보관|돌려주지|배임|회사 돈|대금/i, item: "형법상 횡령·배임, 민사상 부당이득·손해배상 병합 검토" },
+        { keys: /절도|훔|가져갔|분실물|점유이탈|파손|손괴|깨뜨/i, item: "형법상 절도, 점유이탈물횡령, 재물손괴 검토" },
+        { keys: /업무방해|리뷰테러|전화테러|허위신고|장사 방해|영업 방해/i, item: "형법 제314조 업무방해, 허위사실 유포·위계·위력 여부 검토" },
+        { keys: /문서|위조|도장|서명|계약서 조작|허위 서류|증거인멸/i, item: "사문서위조·위조사문서행사, 증거인멸, 위증 관련 검토" },
+        { keys: /개인정보|신상|전화번호|주소|주민번호|계정 해킹|비밀번호/i, item: "개인정보보호법, 정보통신망 침해, 계정도용·해킹 관련 죄명 검토" },
+        { keys: /경찰|공무원|출동|제지|욕설|밀침|방해/i, item: "경찰관 직무집행을 방해한 정황이 있으면 공무집행방해 별도 검토" }
+      ];
+      const hits = bank.filter(row => row.keys.test(text)).map(row => row.item);
+      hits.push("공통: 형법 제37조 경합범, 반복·다수피해·보복·증거인멸·도주 우려는 수사 필요성과 양형자료로 정리");
+      return Array.from(new Set(hits)).slice(0, 10);
     }
 
     function buildBrief() {
@@ -4107,6 +4817,102 @@
         "5. 현재 피해 요약",
         safeSummary()
       ].join("\n");
+    }
+
+    function initVictimWizard() {
+      const form = document.querySelector(".form");
+      if (!form || form.dataset.wizardReady === "1") return;
+      const evidenceBlock = form.querySelector(":scope > .evidence");
+      const storyLabel = story && story.closest("label");
+      const cleanPreview = document.querySelector("#cleanPreviewBlock");
+      const taxonomyBlock = form.querySelector(":scope > .taxonomy");
+      const noteBlock = document.querySelector("#categoryNote");
+      const chipsBlock = form.querySelector(":scope > .chips");
+      const chipToggleBlock = form.querySelector(":scope > .chip-toggle-row");
+      const quickJumpBlock = form.querySelector(":scope > .quick-jump");
+      const fieldsBlock = form.querySelector(":scope > .fields.three");
+      const personBlock = document.querySelector("#personBlock");
+      const sampleButton = document.querySelector("#sampleBtn");
+
+      const guide = document.createElement("div");
+      guide.className = "victim-guide";
+      guide.innerHTML = "<strong>처음 쓰는 분은 이 순서만 따라오세요.</strong><br><b>사이트 사용 순서</b>: 1) 큰 카드 선택 → 2) 피해사실 말하듯 입력 → 3) 사진·진단서·캡처 첨부 → 4) <b>API 없이 내 사건 정리하기</b> 클릭 → 5) <b>법률매칭 → 고소절차 → 증거 효력 → 제출묶음 → 고소장 → 상담 브리프</b> 순서로 보기.<br><br><b>실제 고소 순서</b>: 증거보전 → 고소장 작성 → 경찰서/ECRM 접수 → 사건번호 확인 → 피해자 조사 → 추가증거 제출 → 불송치 시 이의신청 검토.<br><br><b>중요</b>: 피해자의 욕설과 분노는 문서용으로 차분하게 바꾸고, 상대방이 실제로 한 욕설·폭언은 증거라서 원문 그대로 남깁니다.<br><br><b>비상등 안내</b>: 화면 오른쪽 위 빨간 비상등을 두 번 누르면 이 브라우저의 임시 기록을 지우고 구글 화면으로 이동합니다.";
+
+      const shell = document.createElement("div");
+      shell.className = "wizard-steps";
+
+      function makeStep(number, title, desc, nodes, extraHtml) {
+        const step = document.createElement("section");
+        step.className = "wizard-step";
+        step.dataset.step = String(number);
+        const head = document.createElement("button");
+        head.type = "button";
+        head.className = "wizard-head";
+        head.innerHTML = `<span class="wizard-num">${number}</span><span class="wizard-title"><b>${title}</b><span>${desc}</span></span><span class="wizard-toggle">열기</span>`;
+        const body = document.createElement("div");
+        body.className = "wizard-body";
+        if (extraHtml) {
+          const note = document.createElement("div");
+          note.className = "wizard-note";
+          note.innerHTML = extraHtml;
+          body.appendChild(note);
+        }
+        nodes.filter(Boolean).forEach(node => body.appendChild(node));
+        const actions = document.createElement("div");
+        actions.className = "wizard-actions";
+        if (number > 1) {
+          const prev = document.createElement("button");
+          prev.type = "button";
+          prev.className = "btn";
+          prev.textContent = "이전";
+          prev.addEventListener("click", () => openWizardStep(number - 1));
+          actions.appendChild(prev);
+        }
+        if (number < 4) {
+          const next = document.createElement("button");
+          next.type = "button";
+          next.className = "btn primary";
+          next.textContent = "다음";
+          next.addEventListener("click", () => openWizardStep(number + 1));
+          actions.appendChild(next);
+        } else {
+          const result = document.createElement("button");
+          result.type = "button";
+          result.className = "btn primary";
+          result.textContent = "결과 확인";
+          result.addEventListener("click", () => showResult(defaultResultTab()));
+          actions.appendChild(result);
+        }
+        body.appendChild(actions);
+        head.addEventListener("click", () => openWizardStep(number));
+        step.appendChild(head);
+        step.appendChild(body);
+        return step;
+      }
+
+      shell.appendChild(makeStep(1, "사건 유형 고르기", "잘 몰라도 괜찮습니다. 제일 가까운 항목을 누르면 됩니다.", [noteBlock, chipsBlock, chipToggleBlock, taxonomyBlock], "처음부터 정확한 죄명을 알 필요 없습니다. 피해자가 겪은 상황을 기준으로 고르면 앱이 가능한 법률과 절차를 넓게 잡습니다."));
+      shell.appendChild(makeStep(2, "피해사실 적기", "욕설, 분노, 두서없는 말도 괜찮습니다. 서류에는 정제해서 넣습니다.", [storyLabel, cleanPreview, fieldsBlock, personBlock, sampleButton], "사직서, 합의, 삭제, 이사, 추가 연락처럼 되돌리기 어려운 행동은 앱이 먼저 경고하도록 설계했습니다."));
+      shell.appendChild(makeStep(3, "증거와 문서 정리", "API 키 없이도 기본 서류와 절차 안내가 만들어집니다. 외부 AI 분석은 선택입니다.", [evidenceBlock], "민감정보는 가능한 익명화하고, API 키는 필요한 사람만 고급 기능으로 사용하세요."));
+      shell.appendChild(makeStep(4, "결과로 넘어가기", "필요한 서류나 대응 탭만 골라서 봅니다.", [quickJumpBlock], "한 페이지에 모든 결과를 읽지 않아도 됩니다. 고소장, 내용증명, 고소절차, 상담 브리프처럼 필요한 것부터 열어보세요."));
+
+      form.prepend(shell);
+      form.prepend(guide);
+      form.dataset.wizardReady = "1";
+      openWizardStep(1, false);
+    }
+
+    function openWizardStep(stepNumber, shouldScroll = true) {
+      const steps = document.querySelectorAll(".wizard-step");
+      steps.forEach(step => {
+        const active = Number(step.dataset.step) === stepNumber;
+        step.classList.toggle("active", active);
+        const toggle = step.querySelector(".wizard-toggle");
+        if (toggle) toggle.textContent = active ? "접기" : "열기";
+      });
+      if (shouldScroll) {
+        const activeStep = document.querySelector(`.wizard-step[data-step="${stepNumber}"]`);
+        if (activeStep) activeStep.scrollIntoView({ behavior: "smooth", block: "start" });
+      }
     }
 
     function buildIpBrief() {
@@ -4331,6 +5137,11 @@
     function escHtml(s) {
       return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
     }
+    function evidenceTimestamp() {
+      const d = new Date();
+      const pad = n => String(n).padStart(2, "0");
+      return `${d.getFullYear()}-${pad(d.getMonth() + 1)}-${pad(d.getDate())} ${pad(d.getHours())}:${pad(d.getMinutes())}:${pad(d.getSeconds())}`;
+    }
     function formatKoreanDate(iso) {
       if (!iso) iso = new Date().toISOString().slice(0,10);
       const m = /^(\d{4})-(\d{2})-(\d{2})/.exec(iso);
@@ -4440,6 +5251,13 @@
         urgent: "피고소인의 폭력은 고소인의 신체와 정신을 직접 침해한 행위입니다. 단순 우발이 아닌 사전 의도·반복성·위험한 물건 사용·취약 피해자 표적 등 가중요소를 면밀히 살펴주시기 바랍니다.",
         loopholes: ["<b>'정당방위' 주장</b>: 시간·장소·도구·선제공격 여부로 객관 검증.", "<b>'쌍방폭행' 몰아가기</b>: 진단서·CCTV·목격자로 가해·피해 명확화.", "<b>합의 강요</b>: 합의 종용 자체가 2차 가해."],
         notice: "발신인은 귀하로부터 ㅇㅇ년 ㅇㅇ월 ㅇㅇ일 폭행·상해를 당하였으며 진단서·CCTV·목격자 진술 등 명백한 증거를 확보하였습니다. 7일 이내 치료비·위자료 지급 및 진정한 사과·재발방지 서약 미이행 시 형사고소와 민사 손해배상을 즉시 진행합니다."
+      },
+      "오프라인폭행도주": {
+        crime: "형법 제257조 (상해) / 제260조 (폭행) / 공동폭행·공동상해 검토",
+        laws: ["형법 제257조 (상해)", "형법 제260조 (폭행)", "폭력행위 등 처벌에 관한 법률 제2조 제2항 (공동폭행·공동상해 검토)", "형법 제324조 (강요 검토)", "형법 제276조 (체포·감금 검토)", "형법 제311조 (모욕 검토)"],
+        urgent: "상업시설 입구에서 시작된 시비가 강제 인치, 신체 가격, 현장 이탈 시도로 이어진 사건입니다. CCTV와 112 신고기록이 삭제되기 전에 신속한 보존 요청이 필요합니다.",
+        loopholes: ["<b>'서로 싸웠다' 주장</b>: 피해자가 먼저 사과하며 진정하려 했다는 흐름과 CCTV로 방어.", "<b>'우발적 접촉' 주장</b>: 머리채·목덜미·목·등 가격, 반복 돌진, 도주 시도 정황을 분리.", "<b>'남성 일행은 말렸을 뿐' 주장</b>: 강제로 밖으로 끌어낸 행위와 폭행 전후 연결성을 확인."],
+        notice: "발신인은 귀하들의 행위로 인하여 신체적 피해와 정신적 피해를 입었습니다. 상업시설 내부·외부 CCTV, 인근 상가 CCTV, 112 신고기록, 진단서 및 목격자 진술을 확보하여 상해·폭행·공동폭행·강요 또는 체포감금·모욕 혐의로 고소를 진행할 예정입니다."
       },
       "협박·스토킹": {
         crime: "스토킹범죄의 처벌 등에 관한 법률 위반 / 형법 제283조 (협박)",
@@ -6247,7 +7065,7 @@ cn + " 드림";
           armed = true;
           btn.classList.add("armed");
           btn.textContent = "💥";
-          btn.title = "한 번 더 클릭하면 모든 데이터 삭제 + 구글로 이동";
+          btn.title = "한 번 더 누르면 로컬 기록 삭제 + 구글로 이동";
           timer = setTimeout(() => { armed = false; btn.classList.remove("armed"); btn.textContent = "🚨"; btn.title = "긴급 탈출 — 더블 클릭"; }, 2000);
           return;
         }
@@ -6717,7 +7535,7 @@ cn + " 드림";
       if (["부당해고", "해고예고수당", "임금체불"].includes(state.caseType)) return "labor";
       if (state.caseType === "텔레그램스토킹") return "telegram";
       if (state.caseType === "전세사기") return "jeonse";
-      if (["인터넷사기", "보이스피싱", "중고거래사기", "전세사기", "코인사기", "폭행·상해", "협박·스토킹", "명예훼손·모욕", "게임욕설·모욕", "통매음", "성희롱", "성폭력", "디지털성범죄", "절도·손괴", "업체분쟁", "표절·저작권"].includes(state.caseType)) return "match";
+      if (["인터넷사기", "보이스피싱", "중고거래사기", "전세사기", "코인사기", "폭행·상해", "오프라인폭행도주", "협박·스토킹", "명예훼손·모욕", "게임욕설·모욕", "게임시비", "통매음", "성희롱", "성폭력", "디지털성범죄", "절도·손괴", "업체분쟁", "표절·저작권"].includes(state.caseType)) return "match";
       if (state.caseType === "대여금분쟁") return "loan";
       if (state.caseType === "이커머스IP도용") return "ip";
       return "remedy";
@@ -6727,6 +7545,29 @@ cn + " 드림";
     document.querySelectorAll("[data-open-result]").forEach(button => {
       button.addEventListener("click", () => showResult(button.dataset.openResult));
     });
+    const localAnalyzeBtn = document.getElementById("localAnalyzeBtn");
+    if (localAnalyzeBtn) {
+      localAnalyzeBtn.addEventListener("click", () => {
+        if (!story.value.trim()) {
+          story.value = "피해사실을 여기에 그대로 적어주세요. 날짜, 장소, 상대방 행동, 피해 내용, 가진 증거를 생각나는 순서대로 쓰면 됩니다.";
+          story.dispatchEvent(new Event("input", { bubbles: true }));
+        }
+        update();
+        showResult(defaultResultTab());
+        localAnalyzeBtn.textContent = "API 없이 정리 완료";
+        setTimeout(() => { localAnalyzeBtn.textContent = "API 없이 내 사건 정리하기"; }, 1600);
+      });
+    }
+    const chipToggleBtn = document.getElementById("chipToggleBtn");
+    const chipsWrap = document.querySelector(".chips");
+    if (chipToggleBtn && chipsWrap) {
+      chipToggleBtn.addEventListener("click", () => {
+        const expanded = chipsWrap.classList.toggle("expanded");
+        chipsWrap.classList.toggle("collapsed", !expanded);
+        chipToggleBtn.setAttribute("aria-expanded", expanded ? "true" : "false");
+        chipToggleBtn.textContent = expanded ? "핵심 피해 유형만 보기" : "전체 피해 유형 펼치기";
+      });
+    }
     chips.forEach(chip => {
       chip.addEventListener("click", () => {
         chips.forEach(item => item.classList.remove("active"));
@@ -6734,19 +7575,48 @@ cn + " 드림";
         state.caseType = chip.dataset.type;
         state.taxonomyNote = "";
         update();
-        showResult(defaultResultTab());
+        openWizardStep(2);
       });
     });
 
-    document.querySelector("#sampleBtn").addEventListener("click", () => {
+    function applySample(type) {
+      if (type) {
+        state.caseType = type;
+        chips.forEach(chip => chip.classList.toggle("active", chip.dataset.type === state.caseType));
+      }
       const sample = samples[state.caseType] || samples["부당해고"];
       story.value = sample.story;
       opponent.value = sample.opponent;
       damage.value = sample.damage;
       platform.value = sample.platform;
       stage.value = sample.stage;
+      update();
+      openWizardStep(2);
       showResult(defaultResultTab());
-    });
+    }
+
+    document.querySelector("#sampleBtn").addEventListener("click", () => applySample());
+    const realCaseBtn = document.getElementById("realCaseBtn");
+    if (realCaseBtn) {
+      realCaseBtn.addEventListener("click", () => applySample("오프라인폭행도주"));
+    }
+
+    const legalToneBtn = document.getElementById("legalToneBtn");
+    if (legalToneBtn) {
+      legalToneBtn.addEventListener("click", () => {
+        const raw = story.value.trim();
+        if (!raw) {
+          alert("먼저 피해사실을 있는 그대로 적어주세요.");
+          story.focus();
+          return;
+        }
+        story.value = docFacts();
+        story.dispatchEvent(new Event("input", { bubbles: true }));
+        update();
+        legalToneBtn.textContent = "고소장 말투 정제 완료";
+        setTimeout(() => { legalToneBtn.textContent = "고소장 말투로 정제하기"; }, 1500);
+      });
+    }
 
     document.querySelector("#copyBtn").addEventListener("click", async () => {
       try {
@@ -6755,6 +7625,141 @@ cn + " 드림";
       } catch (error) {
         document.querySelector("#copyBtn").textContent = "직접 선택해서 복사";
       }
+    });
+
+    function updateCaptureClock() {
+      const el = document.getElementById("captureClock");
+      if (el) el.textContent = evidenceTimestamp() + " KST";
+    }
+    updateCaptureClock();
+    setInterval(updateCaptureClock, 1000);
+    const copyCaptureTime = document.getElementById("copyCaptureTime");
+    if (copyCaptureTime) {
+      copyCaptureTime.addEventListener("click", async () => {
+        const text = `캡처 기준시각: ${evidenceTimestamp()} KST / 캡처 화면에는 URL·작성자ID·게시시각·현재시각이 함께 보여야 함`;
+        try {
+          await navigator.clipboard.writeText(text);
+          copyCaptureTime.textContent = "복사 완료";
+          setTimeout(() => copyCaptureTime.textContent = "현재 시각 복사", 1400);
+        } catch (e) {
+          alert(text);
+        }
+      });
+    }
+    const addCaptureTimeEvidence = document.getElementById("addCaptureTimeEvidence");
+    if (addCaptureTimeEvidence) {
+      addCaptureTimeEvidence.addEventListener("click", () => {
+        const stamp = evidenceTimestamp();
+        const current = story.value.trim();
+        story.value = current + (current ? "\n\n" : "") + `[증거 캡처 기준시각] ${stamp} KST\n- 이 시각 기준으로 게시물/메시지/프로필/URL/채널 정보를 캡처함\n- 캡처 화면에 URL, 작성자 ID, 게시시각, 현재시각이 함께 보이도록 확보 예정`;
+        story.dispatchEvent(new Event("input", { bubbles: true }));
+      });
+    }
+
+    function buildCctvPlan(place, time) {
+      const p = place || "범행 장소";
+      const t = time || "발생 전후 30분 이상";
+      return [
+        "[CCTV 확보 계획]",
+        "장소: " + p,
+        "시간대: " + t,
+        "",
+        "1. 현장 즉시 확인",
+        "- 주변 30~50m를 한 바퀴 돌며 편의점, 카페, 음식점, 건물 출입구, 주차장, 엘리베이터, 버스정류장, 지하철 출입구, 횡단보도, 차량 블랙박스 가능 위치를 적습니다.",
+        "- 각 위치 사진을 찍고 카메라 방향이 사건 장소를 향하는지 메모합니다.",
+        "",
+        "2. 관리주체별 요청",
+        "- 상가/가게 CCTV: 점주 또는 관리자에게 \"수사기관 제출 예정이니 " + t + " 영상 보존만 부탁드립니다\"라고 요청합니다.",
+        "- 아파트/오피스텔: 관리사무소에 보존 요청서를 남기고 접수자 이름과 시간을 적습니다.",
+        "- 지하철/버스/도로: 경찰 고소장에 역명, 노선, 정류장, 차량번호, 진행방향을 써서 수사기관 조회를 요청합니다.",
+        "- 차량 블랙박스: 주변 주차 차량 번호와 위치만 기록하고 직접 열람 요구는 피합니다. 경찰에 보존·확인 요청합니다.",
+        "",
+        "3. 경찰에게 말할 문장",
+        "\"사건 장소는 " + p + "이고 시간대는 " + t + "입니다. CCTV가 통상 7~30일 내 삭제될 수 있어 신속한 보존 요청과 임의제출 또는 압수수색영장 검토를 부탁드립니다. 제가 확인한 카메라 위치 목록을 증거목록으로 제출하겠습니다.\"",
+        "",
+        "4. 주의",
+        "- 원본 영상을 개인에게 바로 달라고 강요하지 말고, 보존 요청과 경찰 제출 요청으로 갑니다.",
+        "- 영상이 없다는 답변도 캡처·녹음·메모로 남기세요. 나중에 증거보전 노력으로 중요합니다."
+      ].join("\n");
+    }
+    const cctvPlanBtn = document.getElementById("cctvPlanBtn");
+    if (cctvPlanBtn) {
+      cctvPlanBtn.addEventListener("click", () => {
+        const place = document.getElementById("cctvPlace")?.value.trim();
+        const time = document.getElementById("cctvTime")?.value.trim();
+        const out = document.getElementById("cctvPlanResult");
+        if (out) out.textContent = buildCctvPlan(place, time);
+      });
+    }
+
+    function caseVaultData() {
+      return {
+        savedAt: evidenceTimestamp(),
+        caseType: state.caseType,
+        story: story.value,
+        opponent: opponent.value,
+        damage: damage.value,
+        platform: platform.value,
+        stage: stage.value,
+        incidentDate: incidentDate.value,
+        decisionDate: decisionDate.value
+      };
+    }
+    function setVaultStatus(msg) {
+      const el = document.getElementById("caseVaultStatus");
+      if (el) el.textContent = msg;
+    }
+    function applyCaseVaultData(data) {
+      if (!data) return;
+      if (data.caseType) {
+        const chip = document.querySelector('.chip[data-type="' + data.caseType + '"]');
+        if (chip) chip.click();
+        else state.caseType = data.caseType;
+      }
+      story.value = data.story || "";
+      opponent.value = data.opponent || "";
+      damage.value = data.damage || "";
+      if (data.platform) platform.value = data.platform;
+      if (data.stage) stage.value = data.stage;
+      incidentDate.value = data.incidentDate || "";
+      decisionDate.value = data.decisionDate || "";
+      story.dispatchEvent(new Event("input", { bubbles: true }));
+      update();
+    }
+    const caseSaveBtn = document.getElementById("caseSaveBtn");
+    if (caseSaveBtn) caseSaveBtn.addEventListener("click", () => {
+      try {
+        localStorage.setItem("dok_private_case", JSON.stringify(caseVaultData()));
+        setVaultStatus("저장 완료: 이 브라우저에만 저장됐습니다. 다른 사람은 볼 수 없습니다.");
+      } catch (e) {
+        setVaultStatus("저장 실패: 브라우저 저장공간을 확인하세요.");
+      }
+    });
+    const caseLoadBtn = document.getElementById("caseLoadBtn");
+    if (caseLoadBtn) caseLoadBtn.addEventListener("click", () => {
+      try {
+        const raw = localStorage.getItem("dok_private_case");
+        if (!raw) { setVaultStatus("저장된 사건이 없습니다."); return; }
+        applyCaseVaultData(JSON.parse(raw));
+        setVaultStatus("불러오기 완료: 저장된 사건을 현재 화면에 채웠습니다.");
+      } catch (e) {
+        setVaultStatus("불러오기 실패: 저장 데이터가 손상됐을 수 있습니다.");
+      }
+    });
+    const caseClearBtn = document.getElementById("caseClearBtn");
+    if (caseClearBtn) caseClearBtn.addEventListener("click", () => {
+      localStorage.removeItem("dok_private_case");
+      setVaultStatus("내 사건 기록을 이 브라우저에서 삭제했습니다.");
+    });
+    const caseExportBtn = document.getElementById("caseExportBtn");
+    if (caseExportBtn) caseExportBtn.addEventListener("click", () => {
+      const blob = new Blob([JSON.stringify(caseVaultData(), null, 2)], { type: "application/json" });
+      const a = document.createElement("a");
+      a.href = URL.createObjectURL(blob);
+      a.download = "dokgo-private-case-" + evidenceTimestamp().replace(/[: ]/g, "-") + ".json";
+      a.click();
+      setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+      setVaultStatus("내 사건 파일을 저장했습니다. 파일은 본인이 보관해야 합니다.");
     });
 
     [story, opponent, damage, decisionDate, incidentDate].forEach(el => el.addEventListener("input", update));
@@ -6782,6 +7787,7 @@ cn + " 드림";
       themeToggle.textContent = "라이트 모드";
     }
     renderTaxonomy();
+    initVictimWizard();
     loadPersonalInfo();
     bindPersonalListeners();
     setupToolbar();
@@ -6855,12 +7861,148 @@ cn + " 드림";
           const app = document.getElementById("app");
           if (app) app.scrollIntoView({ behavior: "smooth", block: "start" });
           setTimeout(() => {
+            if (typeof openWizardStep === "function") openWizardStep(2, false);
             const ta = document.getElementById("story");
             if (ta) ta.focus({ preventScroll: true });
           }, 500);
         }, 50);
       });
     });
+    function openGuideModal(force) {
+      const modal = document.getElementById("guideModal");
+      if (!modal) return;
+      if (!force && localStorage.getItem("dok_guide_seen") === "1") return;
+      modal.classList.add("show");
+    }
+
+    function closeGuideModal() {
+      const modal = document.getElementById("guideModal");
+      if (!modal) return;
+      modal.classList.remove("show");
+      localStorage.setItem("dok_guide_seen", "1");
+    }
+
+    const guideCloseBtn = document.getElementById("guideCloseBtn");
+    const guideStartBtn = document.getElementById("guideStartBtn");
+    const guideOpenBtn = document.getElementById("guideOpenBtn");
+    const guideMenuBtn = document.getElementById("guideMenuBtn");
+    if (guideCloseBtn) guideCloseBtn.addEventListener("click", closeGuideModal);
+    if (guideOpenBtn) guideOpenBtn.addEventListener("click", () => openGuideModal(true));
+    if (guideMenuBtn) guideMenuBtn.addEventListener("click", () => openGuideModal(true));
+    if (guideStartBtn) {
+      guideStartBtn.addEventListener("click", () => {
+        closeGuideModal();
+        const quick = document.getElementById("quickstart");
+        if (quick) quick.scrollIntoView({ behavior: "smooth", block: "start" });
+      });
+    }
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") closeGuideModal();
+    });
+    setTimeout(() => openGuideModal(true), 250);
+
+    function evidencePackageEscape(value) {
+      return String(value == null ? "" : value).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
+    }
+
+    function inferEvidenceDate(ev) {
+      const text = `${ev.name || ""}\n${ev.text || ""}`;
+      const full = text.match(/(20\d{2})[-./년\s]+(0?[1-9]|1[0-2])[-./월\s]+(0?[1-9]|[12]\d|3[01])/);
+      if (full) {
+        const y = full[1], m = String(full[2]).padStart(2, "0"), d = String(full[3]).padStart(2, "0");
+        return `${y}-${m}-${d}`;
+      }
+      const compact = text.match(/(20\d{2})(0[1-9]|1[0-2])(0[1-9]|[12]\d|3[01])/);
+      if (compact) return `${compact[1]}-${compact[2]}-${compact[3]}`;
+      return ev.addedAt ? ev.addedAt.slice(0, 10) : "날짜 확인 필요";
+    }
+
+    function inferEvidenceKind(ev) {
+      const text = `${ev.name || ""} ${ev.type || ""} ${ev.text || ""}`;
+      if (/진단서|진료|상해|처방|영수증|병원/.test(text)) return "진단·치료기록";
+      if (/상처|멍|피해사진|폭행|목덜미|팔|등|목/.test(text) || /^image\//.test(ev.type || "")) return "사진·캡처";
+      if (/CCTV|방범|블랙박스|영상|동영상/.test(text) || /^video\//.test(ev.type || "")) return "영상·CCTV";
+      if (/112|신고|사건번호|지구대|경찰/.test(text)) return "신고·수사기록";
+      if (/카톡|문자|DM|텔레그램|댓글|게시글|URL|링크|게임채팅/.test(text)) return "대화·온라인 기록";
+      if (/녹취|통화|음성|m4a|mp3|wav/.test(text) || /^audio\//.test(ev.type || "")) return "녹취·음성";
+      if (/계좌|송금|입금|이체|영수증|거래/.test(text)) return "금전거래 자료";
+      return "기타 증거";
+    }
+
+    function inferEvidencePurpose(kind, ev) {
+      const text = `${ev.name || ""} ${ev.text || ""}`;
+      if (kind === "진단·치료기록") return "상해 발생, 치료 필요성, 치료비·위자료 산정";
+      if (kind === "사진·캡처") return "피해 상태, 게시물·대화 원문, 작성자·시각 확인";
+      if (kind === "영상·CCTV") return "행위자 동선, 폭행·도주·접촉 여부, 현장 상황 확인";
+      if (kind === "신고·수사기록") return "신고 시각, 출동 사실, 사건번호, 현장 대응 확인";
+      if (kind === "대화·온라인 기록") return "가해 발언 원문, 특정성·반복성·고의성 확인";
+      if (kind === "녹취·음성") return "본인 참여 대화의 발언 원문, 협박·인정 발언 확인";
+      if (kind === "금전거래 자료") return "송금·입금·피해금액·변제 약속 확인";
+      if (/욕|폭언|시발|씨발|협박/.test(text)) return "가해자 폭언·협박 원문 보존";
+      return "피해사실을 뒷받침하는 보조자료";
+    }
+
+    function evidencePackageRows() {
+      const items = Array.isArray(window.dokEvidenceList) ? window.dokEvidenceList : [];
+      return items.map((ev, index) => {
+        const kind = inferEvidenceKind(ev);
+        return {
+          no: `증${String(index + 1).padStart(2, "0")}`,
+          date: inferEvidenceDate(ev),
+          name: ev.name || `증거자료 ${index + 1}`,
+          kind,
+          purpose: inferEvidencePurpose(kind, ev),
+          note: ev.status === "error" ? "추출 실패: 원본 파일 별도 보관" : "원본 보관, 사본 제출"
+        };
+      }).sort((a, b) => String(a.date).localeCompare(String(b.date)));
+    }
+
+    function renderEvidencePackage() {
+      const body = document.getElementById("evidencePackageBody");
+      const stamp = document.getElementById("epStamp");
+      const type = document.getElementById("epCaseType");
+      if (!body) return;
+      const now = new Date().toLocaleString("ko-KR", { timeZone: "Asia/Seoul" });
+      if (stamp) stamp.textContent = `${now} KST`;
+      if (type) type.textContent = state.caseType || "미선택";
+      const rows = evidencePackageRows();
+      if (!rows.length) {
+        body.innerHTML = "아직 첨부된 증거가 없습니다. 사진, 진단서, 캡처, 대화록을 먼저 넣어주세요.";
+        return;
+      }
+      body.innerHTML = [
+        "<h4>1. 일자별 증거목록</h4>",
+        "<table><thead><tr><th>번호</th><th>일자</th><th>파일·자료명</th><th>분류</th><th>설명·입증목적</th><th>제출 메모</th></tr></thead><tbody>",
+        rows.map(row => `<tr><td><b>${row.no}</b></td><td>${evidencePackageEscape(row.date)}</td><td>${evidencePackageEscape(row.name)}</td><td>${evidencePackageEscape(row.kind)}</td><td>${evidencePackageEscape(row.purpose)}</td><td>${evidencePackageEscape(row.note)}</td></tr>`).join(""),
+        "</tbody></table>",
+        "<h4>2. 제출 폴더명 추천</h4>",
+        `<p><b>${evidencePackageEscape((state.caseType || "사건") + "_증거자료_" + new Date().toISOString().slice(0,10))}</b></p>`,
+        "<h4>3. PDF로 묶기 전 체크</h4>",
+        "<ul><li>원본 파일은 절대 편집하지 말고 별도 폴더에 보관합니다.</li><li>제출용 PDF에는 이 표, 사건요약 1쪽, 진단서·사진·대화·CCTV 요청기록 순서로 넣습니다.</li><li>가해자 욕설·폭언 원문은 정제하지 말고 그대로 둡니다.</li><li>피해자의 감정 표현은 문서에서는 차분한 사실 문장으로 바꿉니다.</li></ul>"
+      ].join("");
+    }
+
+    window.renderEvidencePackage = renderEvidencePackage;
+    const refreshEvidencePackage = document.getElementById("refreshEvidencePackage");
+    const printEvidencePackage = document.getElementById("printEvidencePackage");
+    const copyEvidencePackage = document.getElementById("copyEvidencePackage");
+    const buildEvidencePackageBtn = document.getElementById("buildEvidencePackageBtn");
+    if (refreshEvidencePackage) refreshEvidencePackage.addEventListener("click", renderEvidencePackage);
+    if (buildEvidencePackageBtn) buildEvidencePackageBtn.addEventListener("click", () => { renderEvidencePackage(); openTab("evidence-package"); });
+    if (printEvidencePackage) printEvidencePackage.addEventListener("click", () => {
+      renderEvidencePackage();
+      document.querySelectorAll(".view").forEach(v => v.classList.remove("print-active"));
+      const view = document.querySelector('.view[data-view="evidence-package"]');
+      if (view) view.classList.add("print-active");
+      setTimeout(() => window.print(), 80);
+    });
+    if (copyEvidencePackage) copyEvidencePackage.addEventListener("click", async () => {
+      const rows = evidencePackageRows();
+      const text = rows.map(r => `${r.no}\t${r.date}\t${r.name}\t${r.kind}\t${r.purpose}\t${r.note}`).join("\n");
+      try { await navigator.clipboard.writeText(text || "첨부된 증거가 없습니다."); alert("증거목록을 복사했습니다."); }
+      catch (e) { alert("복사에 실패했습니다. 표를 직접 선택해 복사해 주세요."); }
+    });
+
     update();
 
     // ===== 자료 첨부 + AI 사실·증거 분석 =====
@@ -6868,6 +8010,9 @@ cn + " 드림";
       const zone = document.getElementById("evidenceZone");
       const input = document.getElementById("evidenceInput");
       const list = document.getElementById("evidenceList");
+      const pasteZone = document.getElementById("evidencePasteZone");
+      const pasteText = document.getElementById("evidencePasteText");
+      const pasteAdd = document.getElementById("evidencePasteAdd");
       const keyInput = document.getElementById("aiKey");
       const keySaveBtn = document.getElementById("aiKeySave");
       const analyzeBtn = document.getElementById("aiAnalyzeBtn");
@@ -6882,6 +8027,45 @@ cn + " 드림";
         return String(s == null ? "" : s).replace(/[&<>"']/g, c => ({"&":"&amp;","<":"&lt;",">":"&gt;","\"":"&quot;","'":"&#39;"}[c]));
       }
 
+      function evidenceStamp() {
+        const d = new Date();
+        const pad = n => String(n).padStart(2, "0");
+        return d.getFullYear() + "-" + pad(d.getMonth() + 1) + "-" + pad(d.getDate()) + " " + pad(d.getHours()) + ":" + pad(d.getMinutes());
+      }
+
+      function addTextEvidence(name, text, source) {
+        const clean = String(text || "").trim();
+        if (!clean) return false;
+        items.push({
+          name: name || ("붙여넣기 증거 " + (items.length + 1)),
+          type: "text/plain",
+          text: (source ? "[" + source + "]\n" : "") + clean,
+          status: "done",
+          progress: "추가 완료",
+          addedAt: new Date().toISOString()
+        });
+        render();
+        return true;
+      }
+
+      function isTextLikeFile(file) {
+        const name = (file.name || "").toLowerCase();
+        return /^text\//.test(file.type || "") || /\.(txt|md|log|csv|json|html?|xml|srt|vtt)$/i.test(name);
+      }
+
+      function storedOnlyText(file) {
+        const size = file.size ? Math.round(file.size / 1024) + "KB" : "크기 확인 안 됨";
+        return [
+          "[원본 파일 보관 항목]",
+          "파일명: " + (file.name || "이름 없는 파일"),
+          "형식: " + (file.type || "브라우저가 형식을 알려주지 않음"),
+          "크기: " + size,
+          "추가시각: " + evidenceStamp(),
+          "",
+          "이 파일은 브라우저에서 바로 텍스트 추출하기 어려운 형식입니다. 원본 파일을 삭제하지 말고, 고소장/상담 브리프에는 파일명과 제출 목적을 증거목록으로 남기세요."
+        ].join("\n");
+      }
+
       function render() {
         list.innerHTML = "";
         items.forEach((ev) => {
@@ -6893,6 +8077,7 @@ cn + " 드림";
           div.innerHTML = "<h5><span>" + escapeHtml(ev.name) + "</span><span class=\"ev-badge " + cls + "\">" + escapeHtml(label) + "</span></h5><pre>" + escapeHtml(body) + "</pre>";
           list.appendChild(div);
         });
+        if (typeof window.renderEvidencePackage === "function") window.renderEvidencePackage();
       }
 
       async function ocrImage(file, ev) {
@@ -6930,7 +8115,7 @@ cn + " 드림";
 
       async function handleFiles(files) {
         for (const file of Array.from(files)) {
-          const ev = { name: file.name, type: file.type, text: "", status: "busy", progress: "처리 중…" };
+          const ev = { name: file.name, type: file.type, text: "", status: "busy", progress: "처리 중…", addedAt: new Date().toISOString() };
           items.push(ev);
           render();
           try {
@@ -6938,8 +8123,10 @@ cn + " 드림";
               ev.text = await ocrImage(file, ev);
             } else if (file.type === "application/pdf" || /\.pdf$/i.test(file.name)) {
               ev.text = await extractPdf(file);
-            } else {
+            } else if (isTextLikeFile(file)) {
               ev.text = await file.text();
+            } else {
+              ev.text = storedOnlyText(file);
             }
             if (!ev.text) ev.text = "(추출된 텍스트 없음)";
             ev.status = "done";
@@ -6960,6 +8147,42 @@ cn + " 드림";
         if (e.dataTransfer && e.dataTransfer.files) handleFiles(e.dataTransfer.files);
       });
       input.addEventListener("change", (e) => handleFiles(e.target.files));
+
+      if (pasteAdd && pasteText) {
+        pasteAdd.addEventListener("click", () => {
+          const ok = addTextEvidence("붙여넣은 피해사실·대화 " + evidenceStamp(), pasteText.value, "직접 붙여넣기");
+          if (ok) pasteText.value = "";
+          else alert("먼저 카톡, 문자, DM, URL, 계좌내역 같은 내용을 붙여넣어 주세요.");
+        });
+      }
+
+      if (pasteZone) {
+        pasteZone.addEventListener("paste", (e) => {
+          const cd = e.clipboardData;
+          if (!cd) return;
+          const files = Array.from(cd.files || []);
+          const itemFiles = Array.from(cd.items || [])
+            .filter(item => item.kind === "file")
+            .map((item, idx) => {
+              const f = item.getAsFile();
+              if (!f) return null;
+              const ext = f.type && f.type.includes("png") ? "png" : f.type && f.type.includes("jpeg") ? "jpg" : "bin";
+              return f.name ? f : new File([f], "clipboard-evidence-" + evidenceStamp().replace(/[: ]/g, "-") + "-" + (idx + 1) + "." + ext, { type: f.type || "application/octet-stream" });
+            })
+            .filter(Boolean);
+          const mergedFiles = files.length ? files : itemFiles;
+          if (mergedFiles.length) {
+            e.preventDefault();
+            handleFiles(mergedFiles);
+            return;
+          }
+          const text = cd.getData("text/plain");
+          if (text && e.target !== pasteText) {
+            e.preventDefault();
+            addTextEvidence("클립보드 텍스트 " + evidenceStamp(), text, "클립보드");
+          }
+        });
+      }
 
       // 기존 단일키(dokAiKey)는 claude 마이그레이션
       try {
