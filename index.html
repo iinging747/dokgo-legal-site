@@ -4399,7 +4399,153 @@
 
     // 법적 문서용 — 정제만 (이름·금액 보존)
     function docFacts() {
-      return cleanForDoc(rawFacts());
+      return legalizeFacts(rawFacts());
+    }
+
+    function splitFactSentences(text) {
+      return String(text || "")
+        .replace(/\s+/g, " ")
+        .replace(/\s+(그리고|그래서|그 과정에서|이후|그 뒤|그러자|하지만)\s+/g, ". $1 ")
+        .split(/(?<=[.!?。])\s+|(?<=함)\s+|(?<=했음)\s+|(?<=맞음)\s+|(?<=당함)\s+|(?<=요구함)\s+/)
+        .map(s => s.trim())
+        .map(s => s.replace(/^[.·,\s]+|[.·,\s]+$/g, ""))
+        .filter(Boolean)
+        .filter((s, index, arr) => arr.findIndex(other => other.replace(/\s/g, "") === s.replace(/\s/g, "")) === index)
+        .slice(0, 16);
+    }
+
+    function toLegalSentence(sentence) {
+      let s = String(sentence || "").trim();
+      s = s.replace(/사과함(?=$|[. ])/g, "사과하였습니다");
+      s = s.replace(/([가-힣])함(?=$|[. ])/g, "$1하였습니다");
+      s = s.replace(/함\./g, "하였습니다.");
+      s = s.replace(/했음\./g, "하였습니다.");
+      s = s.replace(/당함\./g, "당하였습니다.");
+      s = s.replace(/맞음\./g, "가격당하였습니다.");
+      s = s.replace(/사과함/g, "사과하였습니다");
+      s = s.replace(/친적\s*없다고/g, "접촉한 사실이 없다고");
+      s = s.replace(/친\s*적\s*없다고/g, "접촉한 사실이 없다고");
+      s = s.replace(/욕을 시작하며/g, "욕설 및 폭언을 하며");
+      s = s.replace(/화를 냄/g, "흥분한 태도로 항의하였습니다");
+      s = s.replace(/맞음/g, "가격당하였습니다");
+      s = s.replace(/팔을 맞았습니다/g, "팔 부위를 가격당하였습니다");
+      s = s.replace(/친구/g, "동행자");
+      s = s.replace(/여자인 동행자/g, "동행 여성");
+      s = s.replace(/남자인 동행자/g, "동행 남성");
+      s = s.replace(/가해자가/g, "피고소인이");
+      s = s.replace(/가해자와/g, "피고소인과");
+      s = s.replace(/가해자에게/g, "피고소인에게");
+      s = s.replace(/가해자를/g, "피고소인을");
+      s = s.replace(/가해자/g, "피고소인");
+      s = s.replace(/그 여자/g, "상대 여성");
+      s = s.replace(/그 남자/g, "상대 남성");
+      s = s.replace(/반말과 욕/g, "반말 및 욕설");
+      s = s.replace(/고개 숙여가며/g, "정중하게");
+      s = s.replace(/정중하게 정중히/g, "정중히");
+      s = s.replace(/욕설설/g, "욕설");
+      if (!/[.다요]$/.test(s)) s += "습니다";
+      s = s.replace(/습니다다$/g, "습니다").replace(/다습니다$/g, "습니다");
+      s = s.replace(/하였습니다습니다$/g, "하였습니다");
+      return s;
+    }
+
+    function favorableVictimPoints(text) {
+      const points = [];
+      if (/사과|정중|진정|말렸|말리다|제지|막/.test(text)) points.push("고소인 측은 사건을 확대하려 한 것이 아니라, 사과·제지·진정 시도를 통해 상황을 완화하려 한 정황이 있습니다.");
+      if (/친적없|접촉.*없|부딪힌.*적.*없|먼저.*안|먼저.*하지/.test(text)) points.push("고소인 측은 최초 시비의 원인이 된 접촉 또는 선제 공격 사실을 부인하고 있으므로, 이 부분은 CCTV와 목격자 진술로 확인할 필요가 있습니다.");
+      if (/달려들|위협|반말|욕|폭언|시발|씨발|화.?냄|소리/.test(text)) points.push("피고소인은 반말·욕설·위협적 접근 등으로 갈등을 확대시킨 정황이 있으므로, 단순 말다툼이 아니라 가해 행위의 경위로 정리할 필요가 있습니다.");
+      if (/맞|가격|멍|상처|통증|진단|병원|팔|목|등|머리/.test(text)) points.push("고소인 측에는 신체 피해가 발생하였으므로, 상처 사진·진단서·치료내역을 통해 폭행을 넘어 상해 성립 여부까지 검토할 필요가 있습니다.");
+      if (/112|신고|경찰|지구대/.test(text)) points.push("사건 직후 112 신고 또는 경찰 출동이 있었다면, 이는 피해자가 현장에서 즉시 피해를 호소한 정황으로서 진술 신빙성을 보강할 수 있습니다.");
+      if (/도주|도망|빠른 걸음|현장.*이탈|떠나/.test(text)) points.push("피고소인이 현장을 이탈하려 한 정황이 있다면 신원확보 필요성, 도주 우려, 사건 직후 태도를 설명하는 사정으로 정리할 수 있습니다.");
+      return points.length ? points : ["고소인에게 유리한 정황은 추후 증거와 함께 보강합니다. 특히 먼저 공격하지 않았다는 점, 피해 직후의 신고·진료·사진 기록, 목격자 진술이 중요합니다."];
+    }
+
+    function adverseDefensePoints(text) {
+      const points = [];
+      if (/쌍방|말다툼|사과|먼저|부딪|접촉|술집|술/.test(text)) points.push("피고소인이 '쌍방 다툼' 또는 '우발적 말다툼'이라고 주장할 수 있으므로, 고소인 측의 사과·제지·회피 시도와 피고소인의 선제적 유형력 행사를 구분하여 기재합니다.");
+      if (/맞|가격|멍|상처|통증|진단|병원/.test(text)) points.push("상해 정도를 축소하는 반박에 대비하여, 사건 직후 사진과 진료기록의 촬영·발급 일시를 함께 제출합니다.");
+      if (/목격|친구|동행|일행/.test(text)) points.push("동행자 진술은 이해관계가 있다는 반박을 받을 수 있으므로, 가능하면 현장 CCTV, 제3자 목격자, 112 신고기록으로 보강합니다.");
+      return points.length ? points : ["상대방 반박 가능성은 조사 단계에서 구체화될 수 있으므로, 추측 대신 증거로 확인 가능한 사실만 기재합니다."];
+    }
+
+    function factTitleForSentence(sentence) {
+      if (/사과|진정|말렸|제지|막/.test(sentence)) return "고소인 측의 진정·제지 시도";
+      if (/욕|폭언|반말|소리|화/.test(sentence)) return "피고소인의 폭언·위협적 언동";
+      if (/맞|가격|폭행|상처|멍|통증|팔|목|등|머리/.test(sentence)) return "신체 접촉 및 피해 발생";
+      if (/112|신고|경찰|지구대/.test(sentence)) return "신고 및 사후 조치";
+      if (/돈|입금|송금|계좌|환불|대여/.test(sentence)) return "금전 교부 및 반환 문제";
+      if (/카톡|문자|DM|텔레그램|댓글|게시글|게임/.test(sentence)) return "온라인 기록 및 대화 내용";
+      return "사건 경위";
+    }
+
+    function buildDetailedTimeline(sentences) {
+      if (!sentences.length) return "1) 피해자는 사건 경위를 시간순으로 정리 중이며, 구체적인 사실관계는 보유 증거와 대조하여 보완할 예정입니다.";
+      return sentences.map((s, i) => `${i + 1}) [${factTitleForSentence(s)}] ${s}`).join("\n");
+    }
+
+    function evidenceHintsForFacts(text) {
+      const hints = [];
+      if (/폭행|상해|맞|가격|멍|팔|목|등|머리|밀치|신체/.test(text)) hints.push("상처 사진, 상해진단서, 치료비 영수증");
+      if (/CCTV|술집|가게|상가|길|도로|현장|입구|밖/.test(text)) hints.push("사건 장소 내부·외부 CCTV, 인근 상가 CCTV, 도로 방범 CCTV");
+      if (/112|경찰|지구대|신고/.test(text)) hints.push("112 신고내역, 사건접수번호, 출동 경찰관 확인자료");
+      if (/욕|반말|폭언|모욕|시발|씨발/.test(text)) hints.push("욕설·폭언 원문, 당시 현장에 있던 목격자 진술");
+      if (/카톡|문자|DM|텔레그램|댓글|게시글|게임/.test(text)) hints.push("대화 캡처, URL, 작성자 ID, 작성시각이 보이는 화면");
+      if (/돈|입금|송금|계좌|대여|빌려|사기|환불/.test(text)) hints.push("송금내역, 계좌정보, 변제 약속 메시지, 독촉 기록");
+      return hints.length ? hints : ["피해사실을 뒷받침하는 사진, 대화, 녹취, 목격자 진술, 신고기록"];
+    }
+
+    function legalIssueForFacts(text) {
+      if (/폭행|상해|맞|가격|멍|팔|목|등|머리|밀치|신체/.test(text)) {
+        return "위 사실관계는 피고소인의 유형력 행사 및 그로 인한 신체 피해가 문제되는 사안으로서, 형법상 폭행죄 및 상해죄 성립 여부, 2인 이상이 관여한 경우 공동폭행·공동상해 여부, 강제로 이동시키거나 제지한 정황이 있는 경우 강요 또는 체포·감금 성립 여부를 함께 검토할 필요가 있습니다.";
+      }
+      if (/욕|모욕|명예|게시|댓글|허위|유포|게임/.test(text)) {
+        return "위 사실관계는 피해자를 특정할 수 있는 상태에서 모욕적 표현 또는 허위·비방성 표현이 전달되었는지가 핵심이며, 공연성·특정성·전파가능성 및 온라인 플랫폼의 로그 보존 여부를 중심으로 검토할 필요가 있습니다.";
+      }
+      if (/돈|입금|송금|계좌|사기|환불|대여|빌려/.test(text)) {
+        return "위 사실관계는 상대방이 처음부터 변제 또는 이행 의사 없이 금원을 교부받았는지, 이후 연락 회피·허위 설명·추가 입금 요구 등 기망 정황이 있었는지가 핵심입니다. 형사상 사기죄와 별도로 민사상 반환청구 또는 지급명령 가능성도 검토할 필요가 있습니다.";
+      }
+      return "위 사실관계는 입력된 사건 유형에 따라 형사책임, 민사상 손해배상, 행정기관 신고 또는 긴급 보호조치가 병행될 수 있는 사안입니다. 구체적인 죄명은 보유 증거와 상대방 특정 가능성을 함께 확인하여 판단할 필요가 있습니다.";
+    }
+
+    function legalizeFacts(text) {
+      const original = String(text || "").trim();
+      const cleaned = cleanForDoc(original);
+      const sentences = splitFactSentences(cleaned).map(toLegalSentence);
+      const dt = incidentDate.value || decisionDate.value;
+      const dateStr = dt ? formatKoreanDate(dt) : "구체적인 일시는 추후 증거자료로 특정 예정";
+      const place = getPerson("pPlace") || platform.value || "사건 발생 장소";
+      const opp = opponent.value.trim() || "성명불상 피고소인";
+      const damageText = damage.value.trim() || "신체적·정신적 피해";
+      const evidence = evidenceHintsForFacts(original).join(", ");
+      const coreFacts = buildDetailedTimeline(sentences);
+      const favorable = favorableVictimPoints(original).map((p, i) => `${i + 1}) ${p}`).join("\n");
+      const defenses = adverseDefensePoints(original).map((p, i) => `${i + 1}) ${p}`).join("\n");
+
+      return [
+        "1. 사건 발생 경위",
+        `고소인은 ${dateStr} ${place}에서 ${opp}의 행위로 인하여 피해를 입었습니다. 아래 내용은 고소인이 직접 경험한 사실관계를 수사기관 제출용 문장으로 정리한 것입니다.`,
+        "",
+        "2. 구체적 사실관계",
+        coreFacts,
+        "",
+        "3. 피해자에게 유리하게 정리해야 할 핵심 정황",
+        favorable,
+        "",
+        "4. 피해 내용",
+        `위 행위로 인하여 고소인은 ${damageText}를 입었고, 사건 이후 불안감·수치심·통증 등 일상생활상 피해를 겪었습니다. 상해 또는 치료가 필요한 경우 진단서, 치료내역, 상처 사진을 통해 피해 정도를 보강할 예정입니다.`,
+        "",
+        "5. 증거 및 보강자료",
+        `현재 확보 또는 확보 예정인 자료는 ${evidence}입니다. 각 증거는 발생 일시, 작성자 또는 촬영자, 원본 보관 여부, 입증하려는 사실을 증거목록에 번호별로 정리하여 제출할 예정입니다.`,
+        "",
+        "6. 상대방 예상 반박 및 차단 포인트",
+        defenses,
+        "",
+        "7. 법적 쟁점",
+        legalIssueForFacts(original),
+        "",
+        "8. 요청 취지",
+        "고소인은 피고소인의 행위가 단순한 다툼이나 우발적 감정 표현으로 축소되지 않도록, 사건 당시의 경위와 이후 피해, 증거자료를 종합하여 엄정한 수사와 필요한 보호조치를 요청합니다."
+      ].join("\n");
     }
 
     function renderTaxonomy() {

@@ -1,7 +1,7 @@
 // 독고다이 법률단 — Service Worker
 // 캐시 전략: app shell은 cache-first, CDN은 stale-while-revalidate, API는 항상 네트워크
 
-const CACHE_VERSION = "dokgo-v4-20260521";
+const CACHE_VERSION = "dokgo-v5-20260521-021500";
 const CORE = [
   "./",
   "./index.html",
